@@ -1,0 +1,3 @@
+venv
+install dependencies
+creeate req's via "pip3 freeze > req.txt files"
