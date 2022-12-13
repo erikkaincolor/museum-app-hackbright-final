@@ -30,4 +30,6 @@ from model import Patron, CollectionFave, ArtFave, RelatedSoundFave, MuseumFave,
 
 # as a patron i want to favorite any 4: collections, art, r sound, Museum
 
-
+#need help
+#real-world movie data to populate the movies table before 
+#randomly generating fake users and ratings.
