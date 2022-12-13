@@ -13,6 +13,6 @@ app = Flask(__name__)
 if __name__ == "__main__":
     from model import connect_to_db
 
-    connect_to_db(app, "cats") ############### ADD DB NAME
+    connect_to_db(app, "muse") ############### ADD DB NAME
 
     app.run(debug=True, host="0.0.0.0")
