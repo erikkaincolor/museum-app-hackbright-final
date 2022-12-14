@@ -19,11 +19,12 @@ class Patron(db.Model): #ONE
     #these are missing the "secondary" key
     collection_fave = db.relationship('Collection', secondary= 'collection_faves', backref='patron', lazy=True)
     art_fave = db.relationship('ArtObject', secondary= 'art_faves', backref='patron', lazy=True)
-    related_sound_faves = db.relationship('RelatedSound', secondary='related_sound_faves', backref='patron', lazy=True)
+    related_sound_fave = db.relationship('RelatedSound', secondary='related_sound_faves', backref='patron', lazy=True)
     museum_fave = db.relationship('Museum', secondary= 'museum_faves', backref='patron', lazy=True)
+    
     # collection_fave = db.relationship('CollectionFave', backref='patron', lazy=True)
     # art_fave = db.relationship('ArtFave', backref='patron', lazy=True)
-    # related_sound_faves = db.relationship('RelatedSoundFave', backref='patron', lazy=True)
+    # related_sound_fave = db.relationship('RelatedSoundFave', backref='patron', lazy=True)
     # museum_fave = db.relationship('MuseumFave', backref='patron', lazy=True)
    
     def __repr__(self):
@@ -94,7 +95,7 @@ class Collection(db.Model): #ONE
 
     #magic variables that belong to both, but are stored in parent
     art_object = db.relationship('ArtObject', backref='collection', lazy=True) ###
-    museum = db.relationship('Museum', backref='collection', lazy=True) ###
+    # museum = db.relationship('Museum', uselist=False, backref='collection', lazy=True) #uselist key bc this relationship is 1:1
 
     #magic variables that belong to both, but are stored in parent
     related_sound=db.relationship("RelatedSound", secondary="collections_sounds", backref='collection')
@@ -111,11 +112,11 @@ class RelatedSound(db.Model):
     medium = db.Column(db.String(20), nullable=False) 
     sound_name = db.Column(db.Text, nullable=True) 
     description = db.Column(db.Text, nullable=False)
-    genre = db.Column(db.String(20), nullable=True, default="...no genre, just *vibes*!")
+    genre = db.Column(db.Text, nullable=True, default="...no genre, just *vibes*!")
 
     #FK to museum
     mus_id = db.Column(db.Integer, db.ForeignKey('museums.id'), nullable=False)
-
+    #^^^when creating in stance, put 'museum=instance i made'
 
     def __repr__(self):
             """Show info about realated sounds."""
@@ -132,9 +133,6 @@ class CollectionSound(db.Model):
     collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False)  
     related_sound_id = db.Column(db.Integer, db.ForeignKey('related_sounds.id'), nullable=False) 
     
-    #magic variables
-    #these are missing the "secondary" key
-
 
 
 
@@ -178,9 +176,9 @@ class Museum(db.Model):
     state = db.Column(db.String(20), nullable=False) 
     country = db.Column(db.String(30), nullable=False)
 
-    #FK to collections
-    collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False)  
-    
+    #FK to collections-not doing this anymore!
+    # collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False)  
+
     #magic variables
     related_sound=db.relationship("RelatedSound", backref='museum')
 
@@ -202,16 +200,30 @@ def connect_to_db(app, db_name="postgresql:///muse"):
 
 if __name__ == "__main__":
     from server import app
-    import os ######
-    os.system("dropdb muse --if-exists") ######
-    os.system("createdb muse") ######
     with app.app_context():
         connect_to_db(app)
   
-    db.create_all()
-    
-    # db.session.add_all([patron1, c1, c2, patron2])
-    # db.session.commit()
 
-    #connect_to_db(app, "muse") <---this is what demo had, but didnt work for me
+#these below are in seed file already
+    # db.create_all() 
+    # connect_to_db(app, "muse") #<---this is what demo had, but didnt work for me
     # connect_to_db(app) 
+
+    # patron=Patron(uname='e', fname='ee', lname='p', email='test@test.com', pword='1234') 
+    # patron1=Patron(uname='er', fname='ew', lname='p', email='test@test.com', pword='12349') 
+    
+    # c1 = Collection(coll_category="paint",name="paintings",description="words go here",curator="someone")
+    # c2 = Collection(coll_category="drawing",name="paintings by e",description="words go here too",curator="someone else")
+
+    # m1=Museum(name='Houston Museum of African American Culture', city='Houston', state='TX', country='USA') #removed 'collection=c1'
+    # m2=Museum(name='Museum of Fine Arts', city='Houston', state='TX', country='USA')
+
+    # sound1=RelatedSound(medium="podcast", sound_name="7th chapel",  description="gold foil walls", museum=m1) #add m3, m2
+    # sound2=RelatedSound(medium="song", sound_name="Luka Doncic speaks on...",  description="yellow tinted scene", museum=m1) #add m3, m2
+
+    # a1=ArtObject(artist="M Angelo", title="7th chapel", medium="paint", description="gold foil walls", collection=c1) #add c3, c2
+    # a2=ArtObject(artist="Calder", title="Homerun", medium="sculpture", description="oil on cieling", collection=c2) #add c3, c2
+
+    # instances=[patron, patron1, c1, c2, a1, a2, m1, m2]
+    # db.session.add_all(instances) 
+    # db.session.commit()
