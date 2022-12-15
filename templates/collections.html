@@ -1,1 +1,18 @@
-hi
+{% extends 'base.html' %}
+{% block title %}Collections{% endblock %}
+
+{% block content %}
+
+  <h2>Collections</h2>
+  <p>I'm a paragraph!</p>
+  Hi {{ name }}!
+{% if compliments %}
+  You're so:
+  <ul>
+    {% for compliment in compliments %}
+      <li>{{ compliment }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% endblock %}
