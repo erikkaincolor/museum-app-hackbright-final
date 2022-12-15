@@ -32,6 +32,10 @@ def view_collection(coll_category,name,description, curator):
     collection = Collection(coll_category,name,description, curator)
     return collection
 
+#c1 = model.Collection(coll_category="paint",name="paintings",description="words go here",curator="someone")
+def get_collection_by_id(collection_id):
+    return Collection.query.get(collection_id)
+
 def view_art(artist, title, medium, description, collection):
 # QUERY
 # as any of these people i want to view art (in collections), filterable, toggable

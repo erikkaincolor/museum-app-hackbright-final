@@ -123,13 +123,19 @@ def index7():
 
 
 #Individual Collection Page: HOW DO I GET TO WORK
-# @app.route('/<int: collection_id>', methods = ['GET', 'POST'])
-# def index8():
-# 	"""Collection content that patron selected!"""
-# 	# thing=request.forms.get('key')
-# 	# that=request.args.get('key')
-# 	return render_template('view-collection.html')
+# @app.route('/<int: collection_id>', methods = ['GET', 'POST']) #/c1 pr /1
 
+@app.route('/collection/<int:collection_id>') #/c1 pr /1 ALSO need to pass it in as a parameter to the view func
+def index8(collection_id=1): #it eing the url also passes it to the function
+    """Collection content that patron selected!"""
+    collection= crud.get_collection_by_id(int(collection_id))
+    return render_template('view-collection.html', something=collection)
+	
+    
+    
+    # thing=request.forms.get('key')
+	# that=request.args.get('key')
+    #use crud and collection id 
 
 
 
