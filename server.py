@@ -43,97 +43,104 @@ def index():
 
 
 # #Login:
-# @app.route('/login', methods = ['GET', 'POST'])
-# def index1():
-# 	"""Patron Log-in"""
-# 	thing=request.forms.get('key')
-# 	that=request.args.get('key')
-# 	return render_template('login.html', var=thing)
-# 	#return redirect('login.html', var=thing)  #<——redirect to homepage if no login
+@app.route('/login')
+def login():
+	"""Patron Log-in"""
+	# thing=request.forms.get('key')
+	# that=request.args.get('key')
+	return render_template('login.html')
+
+#Two functions in server.py for any route that involves data entry.  For example, the login page:
+@app.route('/login', methods = ['POST'])
+def login_data():
+	"""Server request for login info from client"""
+	# username=request.forms.get('uname')
+    # password=request.forms.get('pword')
+	# that=request.args.get('key')
+	return redirect('/')  #<——redirect to homepage if no login
+	# return redirect('/', username=username, password=password)  #<——redirect to homepage if no login
 
 
 
 
 
-# #User Profile:
+# #User Profile: DOESNT WORK/i wonder if this should work like collection id/INT or as a argument/VAR
 # @app.route('/profile', methods = ['GET', 'POST'])
 # def index3():
 # 	"""Favorites (art, audio guide tours, related sounds, museums)"""
-# 	thing=request.forms.get('key')
-# 	that=request.args.get('key')
-# 	return redirect('user-profile.html', var=thing) #<——redirect to homepage!
+# 	# thing=request.forms.get('key')
+# 	# that=request.args.get('key')
+# 	return redirect('user-profile.html') #<——redirect to homepage!
 
 
 
 
 
-# #Resources:
-# @app.route('/resources', methods = ['GET', 'POST'])
-# def func_name():
+#Resources: DOESNT WORK
+# @app.route('/resources')
+# def name():
 # 	"""Proposal for audio guide standardization + Research Links"""
-# 	thing=request.forms.get('key')
-# 	that=request.args.get('key')
-# 	return render_template('resources.html', var=thing) #<——possible redirect to mockup
+# 	return render_template('resources.html') #<——possible redirect to mockup
 
 
 
 
 
-# #Mockup:
+# #Mockup: DOESNT WORK
 # @app.route('/near-future-study', methods = ['GET', 'POST'])
 # def index5():
 # 	"""Mockup of Related Sounds Repo"""
-# 	thing=request.forms.get('key')
-# 	that=request.args.get('key')
-# 	return render_template('mockup.html', var=thing)
+# 	# thing=request.forms.get('key')
+# 	# that=request.args.get('key')
+# 	return render_template('mockup.html')
 
 
 
 
 
 # #Museum List:
-# @app.route('/museumdirectory', methods = ['GET', 'POST'])
-# def index6():
-# 	"""describe"""
-# 	thing=request.forms.get('key')
-# 	that=request.args.get('key')
-# 	return render_template('museums.html', var=thing)
+@app.route('/museumdirectory', methods = ['GET', 'POST'])
+def index6():
+	"""describe"""
+	# thing=request.forms.get('key')
+	# that=request.args.get('key')
+	return render_template('museums.html')
 
 
 
 
 
 # #Collections:
-# @app.route('/collections', methods = ['GET', 'POST'])
-# def index7():
-# 	"""curated collections for site + accompanying related sounds"""
-# 	thing=request.forms.get('key')
-# 	that=request.args.get('key')
-# 	return render_template('collections.html', var=thing)
+@app.route('/collections', methods = ['GET', 'POST'])
+def index7():
+	"""curated collections for site + accompanying related sounds"""
+	# thing=request.forms.get('key')
+	# that=request.args.get('key')
+	return render_template('collections.html')
 
 
 
 
 
-# #Individual Collection Page:
+#Individual Collection Page: HOW DO I GET TO WORK
 # @app.route('/<int: collection_id>', methods = ['GET', 'POST'])
 # def index8():
 # 	"""Collection content that patron selected!"""
-# 	thing=request.forms.get('key')
-# 	that=request.args.get('key')
-# 	return render_template('view-collection.html', var=thing)
+# 	# thing=request.forms.get('key')
+# 	# that=request.args.get('key')
+# 	return render_template('view-collection.html')
 
 
 
 
 
-# #In-Person Audio Guide Tour:
-# @app.route('/audio-guide', methods = ['GET', 'POST'])
-# def index9():
-# 	"""MOBILE: Museum-specific audio tours, Museum-specific solo visit playlists"""
-# 	thing=request.forms.get('key')
-# 	that=request.args.get('key')
-# 	return render_template('guide.html', var=thing)
+#In-Person Audio Guide Tour:
+@app.route('/audio-guide', methods = ['GET', 'POST'])
+def index9():
+	"""MOBILE: Museum-specific audio tours, Museum-specific solo visit playlists"""
+	# thing=request.forms.get('key')
+	# that=request.args.get('key')
+	return render_template('guide.html')
 
 
 

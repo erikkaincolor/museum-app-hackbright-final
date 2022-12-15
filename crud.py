@@ -19,6 +19,8 @@ def create_user(email, pword):
     user=Patron(email, pword)
     #uname='e', fname='ee', lname='p',
     return user
+# def create_patron(uname, fname, lname, email, pword):
+#     return model.Patron(uname=uname, fname=fname, email=email, pword=pword)
 
 # def login(email, pword):
 # # as a patron i want to login
