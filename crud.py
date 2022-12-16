@@ -7,7 +7,7 @@
 # updating data, 
 # and deleting data.
 
-from model import Patron, CollectionFave, ArtFave, RelatedSoundFave, MuseumFave, Collection, RelatedSound, CollectionSound, ArtObject, Museum, connect_to_db
+from model import Patron, CollectionFave, ArtFave, RelatedSoundFave, MuseumFave, Collection, RelatedSound, CollectionSound, ArtObject, Museum, connect_to_db, db
 
 #create all tables in db 
 
@@ -34,7 +34,10 @@ def view_collection(coll_category,name,description, curator):
 
 #c1 = model.Collection(coll_category="paint",name="paintings",description="words go here",curator="someone")
 def get_collection_by_id(collection_id):
-    return Collection.query.get(collection_id)
+    result=Collection.query.get(collection_id)
+    db.session.add(result)
+    db.session.commit()
+    return result
 
 def view_art(artist, title, medium, description, collection):
 # QUERY

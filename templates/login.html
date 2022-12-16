@@ -4,6 +4,14 @@
 {% block content %}
 
   <h2>Login Page</h2>
-  <p>I'm a paragraph!</p>
+  <p><form action="/login" method="POST">
+    <label>Username:</label>
+    <input type="text" name="username">
+  
+    <label>Password:</label>
+    <input type="text" name="password">
+  
+    <input type="submit">
+  </form></p>
 
 {% endblock %}
