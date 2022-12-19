@@ -11,28 +11,22 @@ class Patron(db.Model): #ONE
     uname = db.Column(db.String(20), nullable=False, unique=True) 
     fname = db.Column(db.String(20), nullable=False) 
     lname = db.Column(db.String(20), nullable=False)
-    email = db.Column(db.String(20), nullable=False)
+    email = db.Column(db.String(40), nullable=False)
     pword = db.Column(db.String(10), nullable=False) 
     
 
     #magic variables
     #these are missing the "secondary" key
-    collection_fave = db.relationship('Collection', secondary= 'collection_faves', backref='patron', lazy=True)
-    art_fave = db.relationship('ArtObject', secondary= 'art_faves', backref='patron', lazy=True)
-    related_sound_fave = db.relationship('RelatedSound', secondary='related_sound_faves', backref='patron', lazy=True)
-    museum_fave = db.relationship('Museum', secondary= 'museum_faves', backref='patron', lazy=True)
+    # collection_fave = db.relationship('Collection', secondary= 'collection_faves', backref='patron', lazy=True)
+    # art_fave = db.relationship('ArtObject', secondary= 'art_faves', backref='patron', lazy=True)
+    # related_sound_fave = db.relationship('RelatedSound', secondary='related_sound_faves', backref='patron', lazy=True)
+    # museum_fave = db.relationship('Museum', secondary= 'museum_faves', backref='patron', lazy=True)
     
-    # collection_fave = db.relationship('CollectionFave', backref='patron', lazy=True)
-    # art_fave = db.relationship('ArtFave', backref='patron', lazy=True)
-    # related_sound_fave = db.relationship('RelatedSoundFave', backref='patron', lazy=True)
-    # museum_fave = db.relationship('MuseumFave', backref='patron', lazy=True)
-   
     def __repr__(self):
         """Show info about patrons."""
         return f"<Patron id={self.p_id} uname={self.uname} fname={self.fname} lname={self.lname} email={self.email} pword= sike!!!!>"
 
-#middle tables, no meaningful, needs secondary tag or 
-#association tables/arbitrary join tables ....secondary key tag in db.rela <----this one
+#join table
 class CollectionFave(db.Model): #MANY
     """Favorited collections."""
     __tablename__ = "collection_faves"
@@ -43,8 +37,7 @@ class CollectionFave(db.Model): #MANY
     patron_id = db.Column(db.Integer, db.ForeignKey('patrons.p_id'), nullable=False) 
     collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False) 
 
-    # favorite = db.relationship('Patron', backref='collectionfave', lazy=True)
-
+#join table
 class ArtFave(db.Model): #MANY
     """Favorited art object."""
     __tablename__ = "art_faves"
@@ -55,8 +48,7 @@ class ArtFave(db.Model): #MANY
     patron_id = db.Column(db.Integer, db.ForeignKey('patrons.p_id'), nullable=False)  
     art_id = db.Column(db.Integer, db.ForeignKey('art_objects.id'), nullable=False) 
 
-    # favorite = db.relationship('Patron', backref='artfave', lazy=True)
-
+#join table
 class RelatedSoundFave(db.Model): #MANY
     """Favorited sounds."""
     __tablename__ = "related_sound_faves"
@@ -67,8 +59,7 @@ class RelatedSoundFave(db.Model): #MANY
     patron_id = db.Column(db.Integer, db.ForeignKey('patrons.p_id'), nullable=False)  
     related_sound_id = db.Column(db.Integer, db.ForeignKey('related_sounds.id'), nullable=False) 
    
-    # favorite = db.relationship('Patron', backref='relatedsoundfave', lazy=True)
-
+#join table
 class MuseumFave(db.Model): #MANY
     """Favorited museums."""
     __tablename__ = "museum_faves"
@@ -77,10 +68,7 @@ class MuseumFave(db.Model): #MANY
     
     #FK to patron and museum
     patron_id = db.Column(db.Integer, db.ForeignKey('patrons.p_id'), nullable=False)  
-    museum_fave_id = db.Column(db.Integer, db.ForeignKey('museums.id'), nullable=False) 
-  
-    # favorite = db.relationship('Patron', backref='museumfave', lazy=True)
-
+    museum_id = db.Column(db.Integer, db.ForeignKey('museums.id'), nullable=False) 
 
 
 
@@ -99,31 +87,31 @@ class Collection(db.Model): #ONE
     description = db.Column(db.Text, nullable=True)
     curator = db.Column(db.String(30), nullable=False) 
     era = db.Column(db.String(30), nullable=True)
-    num_items = db.Column(db.Integer, nullable=True)
+    # num_items = db.Column(db.Integer, nullable=True) #will be 3 automatically
 
-    #magic variables that belong to both, but are stored in parent
-    art_object = db.relationship('ArtObject', backref='collection', lazy=True) ###
-    # museum = db.relationship('Museum', uselist=False, backref='collection', lazy=True) #uselist key bc this relationship is 1:1
+    # #magic variables that belong to both, but are stored in parent
+    # art_object = db.relationship('ArtObject', backref='collection', lazy=True) ###
+    # # museum = db.relationship('Museum', uselist=False, backref='collection', lazy=True) #uselist key bc this relationship is 1:1
 
-    #magic variables that belong to both, but are stored in parent
-    related_sound=db.relationship("RelatedSound", secondary="collections_sounds", backref='collection')
+    # #magic variables that belong to both, but are stored in parent
+    # related_sound=db.relationship("RelatedSound", secondary="collections_sounds", backref='collection')
 
     def __repr__(self):
         """Show info about art collection."""
-        return f"<Collection id={self.id} name={self.name} curator={self.curator} era={self.era} num_items= {self.num_items}>"  
+        return f"<Collection id={self.id} name={self.name} curator={self.curator} era={self.era}>"  
 
 class RelatedSound(db.Model):
     """Collection of related sounds"""
     __tablename__ = "related_sounds"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    medium = db.Column(db.String(20), nullable=False) 
+    medium = db.Column(db.String(50), nullable=False) 
     sound_name = db.Column(db.Text, nullable=True) 
     description = db.Column(db.Text, nullable=False)
     genre = db.Column(db.Text, nullable=True, default="...no genre, just *vibes*!")
 
     #FK to museum
-    mus_id = db.Column(db.Integer, db.ForeignKey('museums.id'), nullable=False)
+    museum_id = db.Column(db.Integer, db.ForeignKey('museums.id'), nullable=False)
     #^^^when creating in stance, put 'museum=instance i made'
 
     def __repr__(self):
@@ -156,9 +144,9 @@ class ArtObject(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     artist = db.Column(db.String(30), nullable=False)
     title = db.Column(db.Text, nullable=False, unique=True) 
-    medium = db.Column(db.String(20), nullable=False)
+    medium = db.Column(db.String(50), nullable=False)
     description = db.Column(db.Text, nullable=False, default="...the description for this piece is beyond words!")
-    era = db.Column(db.String(20), nullable=True)
+    era = db.Column(db.String(30), nullable=True)
     
     #FK to collection
     collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False)  
@@ -185,10 +173,10 @@ class Museum(db.Model):
     country = db.Column(db.String(30), nullable=False)
 
     #FK to collections-not doing this anymore!
-    # collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False)  
+    collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False)  
 
     #magic variables
-    related_sound=db.relationship("RelatedSound", backref='museum')
+    #related_sound=db.relationship("RelatedSound", backref='museum')
 
     def __repr__(self):
         """Show info about museum."""
@@ -235,3 +223,18 @@ if __name__ == "__main__":
     # instances=[patron, patron1, c1, c2, a1, a2, m1, m2]
     # db.session.add_all(instances) 
     # db.session.commit()
+
+
+
+
+
+
+
+
+    #magic variables for patron class
+    #these are missing the "secondary" key
+    # collection_fave = db.relationship('CollectionFave', backref='patron', lazy=True)
+    # art_fave = db.relationship('ArtFave', backref='patron', lazy=True)
+    # related_sound_fave = db.relationship('RelatedSoundFave', backref='patron', lazy=True)
+    # museum_fave = db.relationship('MuseumFave', backref='patron', lazy=True)
+   

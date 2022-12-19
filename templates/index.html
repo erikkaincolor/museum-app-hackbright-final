@@ -1,15 +1,19 @@
 {% extends 'base.html' %}
 
-{% block title %}Museum Audio App Home{% endblock %}
+{% block title %}Home{% endblock %}
 
-{% block body %}
+{% block content %}
   <h1>Welcome!</h1>
 
+  <h2>Museum Audio App Homepage</h2>
   <h2>Navigation</h2>
   <ul>
+    <li><a href="/login">Login here</a></li>
+    <!-- <li><a href="/patron/<patron_id>">View user profile</a></li> -->
     <!-- <li><a href="/patron/<patron_id>">View patron info</a></li> -->
-    <li><a href="/museumdirectory">View all museums</a></li>
+    <!-- <li><a href="/museumdirectory">View all museums</a></li>
     <li><a href="/collections">View all collections</a></li>
-    <li><a href="/audio-guide">View all audio guides</a></li>
+    <li><a href="/audio-guide">View all audio guides</a></li> -->
   </ul>
+
 {% endblock %}

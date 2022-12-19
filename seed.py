@@ -1,10 +1,8 @@
 """Script to seed database."""
-#With an ORM, your model classes (who inherited from the Flask Model class) 
-# have built-in functions for selection.
 
 import os
-#import json #use when i import museum data
-from random import choice
+#import json 
+#from random import choice
 import crud
 import model
 import server
@@ -15,106 +13,115 @@ os.system(f'createdb muse')
 model.connect_to_db(server.app)
 model.db.create_all()
 
-#[x]    append 4 types of faves onto patron     4
-#[x]    append multiple arts onto 1 collection   1
-#[x]    append multiple sounds onto 1 collection via magic var   1
-#[x]    append multiple sounds onto museum                       1
-#[x]    append 1 collection onto 1 museum        1
-
-#=8 relationships, most bidirectional
-
-#[x]    create patron, museum, art, collection and sound classes        5
-
-#other:
-#(4) faves tables are auto generated        :)
-#collection sounds table is auto generated  :)
-
-######################################################################
-
 #create empty collection!
-coll_in_db=[]
-for n in range(10):
-    coll_category=f'category{n}'
-    name=f'nameofartwork{n}'
-    description=f'description{n}'
-    curator=f'curator{n}'
-    era=f'era{n}'
-    num_items=int(n) ##########may be invalid
-    
-    db_collection=crud.create_collection(coll_category, name, description, curator, era, num_items)
-    coll_in_db.append(db_collection)
-model.db.session.add_all(coll_in_db)
-
+c1 = crud.create_collection("women","Awesome Black Radical Women, 1965–85","Women of color found themselves collaborating with and occasionally opposing the predominantly white, middle-class women who were primarily in charge of setting the tone, goals, and strategies for the battle for gender parity in the US during the second wave of feminism in the 1970s.","E. Polk", "Spiral, Black Arts Movement")
+c2 = crud.create_collection("photography","Darkroom: Black and White Photos See the Light of Day","Photos of Black people from all over the diaspora, up close and in black and white.","E. Polk", "Contemporary")
+c3 = crud.create_collection("mixed media","Contemporaries in Color","This collection displays African-Americna Art in the form of paint, mixed media and depicts people in natural state.","E. Polk", "THE BLACK ARTS MOVEMENT")
+c4 = crud.create_collection("screenprint","Dip, Roll, and Print: Cleveland Bellow, American, 1946-2009","Cleveland Bellow portrayed Black musicians and activists in his graphic prints, as well as regular people like the young child in Untitled who is holding his hands behind his head. This piece subsequently became a billboard in Oakland, California as part of the national trend of public Black art.", "E. Polk", "Black Arts Movement")
+collections=[c1, c2, c3, c4]
+model.db.session.add_all(collections)
+model.db.session.commit()  
 
 #create artobject! later feed data in via api!
-#trouble connecting bc forign key
-art_objects_in_db=[]
-for n in range(10):
-    artist=f'artistis{n}'
-    title=f'titleofartwork{n}'
-    medium=f'mediumis{n}'
-    description=f'description{n}'
-    era=f'description{n}'
-    col_id=n+1 #not clean #FK
-    
-    db_art_object=crud.create_art_object(artist, title, medium, description, era, col_id) #db_collection[n][0]
-    art_objects_in_db.append(db_art_object)
-model.db.session.add_all(art_objects_in_db)
+a1=crud.create_art_object("Barbara Jones-Hogu", "Nation Time", "print", "Barbara Jones-Hogu (American, 1938-2017). Nation Time, ca. 1970. Color screenprint, sheet: 22 1/2 x 30 in. (57.2 x 76.2 cm). Brooklyn Museum, Gift of R.M. Atwater, Anna Wolfrom Dove, Alice Fiebiger, Joseph Fiebiger, Belle Campbell Harriss, and Emma L. Hyde, by exchange, Designated Purchase Fund, Mary Smith Dorward Fund, Dick S. Ramsay Fund, and Carll H. de Silver Fund, 2012.80.25. artist or artist's estate (Photo: Brooklyn Museum, 2012.80.25_PS4.jpg) ","Black Arts Movement", collection_id=c1.id) #add c3, c2
+a2=crud.create_art_object("Dindga McCannon", "Empress Akweke", "paint", " Dindga McCannon (American, born 1947). Empress Akweke, 1975. Acrylic on canvas, 35 7/8 × 31 15/16 × 13/16 in. (91.1 × 81.1 × 2.1 cm). Brooklyn Museum, Gift of R.M. Atwater, Anna Wolfrom Dove, Alice Fiebiger, Joseph Fiebiger, Belle Campbell Harriss, and Emma L. Hyde, by exchange, Designated Purchase Fund, Mary Smith Dorward Fund, Dick S. Ramsay Fund, and Carll H. de Silver Fund, 2012.80.31. artist or artist's estate (Photo: Brooklyn Museum, 2012.80.31_PS9.jpg) ","Black Arts Movement", collection_id=c1.id) #add c3, c2
+a3=crud.create_art_object("Betye Saar", "Liberation of Aunt Jemima: Cocktail", "glass, paper, textile, metal", "Betye Saar (American, born 1926). Liberation of Aunt Jemima: Cocktail, 1973. Glass, paper, textile, metal, Overall: 12 1/2 × 5 3/4 in. (31.8 × 14.6 cm). Brooklyn Museum, Purchased with funds given by Elizabeth A. Sackler, gift of the Contemporary Art Committee, and William K. Jacobs, Jr. Fund, 2017.17. © artist or artist's estate (Photo: , 2017.17_front_PS11.jpg) ","Black Arts Movement", collection_id=c1.id) #add c3, c2
 
+a4=crud.create_art_object("Tony Gleaton", "Black Girl, White Flower, Belize, Central America", "photograph", " Tony Gleaton (American, 1948-2015). Black Girl, White Flower, Belize, Central America, 1992. Gelatin silver photograph, image: 15 3/4 x 14 3/4 in. (40 x 37.5 cm). Brooklyn Museum, Gift of Helen Griffith in memory of Seymour Griffith, 1997.134. © artist or artist's estate (Photo: Brooklyn Museum, 1997.134_transp5713.jpg) ","Contemporary Art Movement", collection_id=c2.id) #add c3, c2
+a5=crud.create_art_object("Tony Gleaton", "Un Hija de Jesus, Guatemala, Latin America, (Daughter of Jesus)", "photograph", " Tony Gleaton (American, 1948-2015). Un Hija de Jesus, Guatemala, Latin America, (Daughter of Jesus), 1992. Gelatin silver photograph, image: 15 3/4 x 14 3/4 in. (40.0 x 37.5 cm). Brooklyn Museum, Purchased with funds given by Karen B. Cohen and Jan Staller, 1997.50. artist or artist's estate (Photo: Brooklyn Museum, 1997.50_bw.jpg)", "Contemporary Art Movement",collection_id=c2.id) #add c3, c2
+a6=crud.create_art_object("Sarah A. Friedman", "Untitled, Brooklyn, New York", "photograph", "Sarah A. Friedman (American). Untitled, Brooklyn, New York. Chromogenic photograph, Image: 19 1/2 x 15 1/2 in. (49.5 x 39.4 cm). Brooklyn Museum, Gift of the artist, 2001.110.2. Creative Commons-BY (Photo: Brooklyn Museum, 2001.110.2_bw.jpg) ","Contemporary Art Movement", collection_id=c2.id) #add c3, c2
 
+a7=crud.create_art_object("Nelson Stevens", "Uhuru", "print", "Nelson Stevens (American, born 1938). Uhuru, 1971. Screenprint on paper, Sheet: 40 x 30 in. (101.6 x 76.2 cm). Brooklyn Museum, Gift of R.M. Atwater, Anna Wolfrom Dove, Alice Fiebiger, Joseph Fiebiger, Belle Campbell Harriss, and Emma L. Hyde, by exchange, Designated Purchase Fund, Mary Smith Dorward Fund, Dick S. Ramsay Fund, and Carll H. de Silver Fund, 2012.80.41. artist or artist's estate (Photo: Brooklyn Museum, 2012.80.41_PS6.jpg) ","Black Arts Movement",collection_id=c3.id) #add c3, c2
+a8=crud.create_art_object("Marie Johnson Calloway", "The Winner", "print", "Marie Johnson Calloway (American, 1920 - 2018). The Winner, 1971. Mixed media (acrylic, fabric) on wood, 60 x 30 in. (152.4 x 76.2 cm). Brooklyn Museum, Gift of R.M. Atwater, Anna Wolfrom Dove, Alice Fiebiger, Joseph Fiebiger, Belle Campbell Harriss, and Emma L. Hyde, by exchange, Designated Purchase Fund, Mary Smith Dorward Fund, Dick S. Ramsay Fund, and Carll H. de Silver Fund, 2012.80.19. artist or artist's estate (Photo: Brooklyn Museum, CUR.2012.80.19.jpg) ","Black Arts Movement", collection_id=c3.id) #add c3, c2
+a9=crud.create_art_object("Glenn Ligon", "[Untitled] (Crowd/The Fire Next Time)", "print", "The accumulation of crystals suggests the mass of participants in this historic event as viewed from above, while the juxtaposition of Baldwin’s words with the image of the march—separated by more than three decades—reminds us of the still-ongoing dialogue about race in America. Screenprint with coal crystals on paper, image: 12 × 18 1/8 in. (30.5 × 46 cm). Brooklyn Museum, Alfred T. White Fund, 2000.56. artist or artist's estate (Photo: Brooklyn Museum, 2000.56_transp5856.jpg)", "Contemporary Art Movement",collection_id=c3.id) #add c3, c2
+
+a10=crud.create_art_object("Cleveland Bellow", "George Jackson", "print", "Cleveland Bellow (American, 1946-2009). George Jackson, 1970. Screenprint on colored paper, Sheet: 23 1/2 x 17 1/2 in. (59.7 x 44.5 cm). Brooklyn Museum, Gift of R.M. Atwater, Anna Wolfrom Dove, Alice Fiebiger, Joseph Fiebiger, Belle Campbell Harriss, and Emma L. Hyde, by exchange, Designated Purchase Fund, Mary Smith Dorward Fund, Dick S. Ramsay Fund, and Carll H. de Silver Fund, 2012.80.8. © artist or artist's estate (Photo: Brooklyn Museum, 2012.80.8_PS4.jpg)", "Black Arts Movement",collection_id=c4.id) #add c3, c2
+a11=crud.create_art_object("Cleveland Bellow", "Untitled", "print", "Cleveland Bellow (American, 1946-2009). Untitled, 1968. Screenprint on paper, sheet: 19 1/2 x 15 1/4 in. (49.5 x 38.7 cm). Brooklyn Museum, Gift of R.M. Atwater, Anna Wolfrom Dove, Alice Fiebiger, Joseph Fiebiger, Belle Campbell Harriss, and Emma L. Hyde, by exchange, Designated Purchase Fund, Mary Smith Dorward Fund, Dick S. Ramsay Fund, and Carll H. de Silver Fund, 2012.80.6. © artist or artist's estate (Photo: Brooklyn Museum, 2012.80.6_PS4.jpg)", "Black Arts Movement",collection_id=c4.id) #add c3, c2
+a12=crud.create_art_object("Cleveland Bellow", "Duke", "print", "Cleveland Bellow (American, 1946-2009). Duke, 1968. Unique screenprint on two sheets of acrylic, Sheet: 28 x 22 in. (71.1 x 55.9 cm). Brooklyn Museum, Gift of R.M. Atwater, Anna Wolfrom Dove, Alice Fiebiger, Joseph Fiebiger, Belle Campbell Harriss, and Emma L. Hyde, by exchange, Designated Purchase Fund, Mary Smith Dorward Fund, Dick S. Ramsay Fund, and Carll H. de Silver Fund, 2012.80.7. artist or artist's estate (Photo: Brooklyn Museum, CUR.2012.80.7.jpg) ", "Black Arts Movement",collection_id=c4.id) #add c3, c2
+art_objects=[a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12]
+model.db.session.add_all(art_objects)
+model.db.session.commit() 
+
+#test last
 #put art into empty collection!
 # mini_coll=[]
 # for n in range(db_collection):
-#     coll_category=f'category{n}'
+#     f'category{n}'
 #     name=f'name of artwork{n}'
 #     description=f'description{n}'
-#     curator=f'creator{n}'
-#     era=f'era{n}'
+#     f'creator{n}'
+#     f'era{n}'
 #     num_items=f'num is {n}'
     
-#     filled_collection=crud.create_collection(coll_category, name, description, curator, era, num_items)
+#     filled_crud.create_collection(coll_category, name, description, curator, era, num_items)
 #     model.db.session.add(db_collection)
 
-
 #create museum! later feed data in csv->json
-museums_in_db=[]
-for n in range(10):
-    name=f'nameofmuseum{n}'
-    city=f'city{n}'
-    state=f'state{n}'
-    country=f'country{n}'
+# museums_in_db=[]
+# for n in range(10):
+#     name=f'nameofmuseum{n}'
+#     city=f'city{n}'
+#     state=f'state{n}'
+#     country=f'country{n}'
+#     collection_id=n+1 
 
-    db_museum=crud.create_museum(name, city, state, country)
-    museums_in_db.append(db_museum)
-model.db.session.add_all(museums_in_db)
+#     db_museum=crud.create_museum(name, city, state, country, collection_id)
+#     museums_in_db.append(db_museum)
+# model.db.session.add_all(museums_in_db)
+
+mus1=crud.create_museum('MUSEUM OF AFRICAN AMERICAN HISTORY AND CULTURE', 'Waco', 'TX', "USA",collection_id=c1.id) #NOT collection_id=c1
+mus2=crud.create_museum('HOUSTON MUSEUM OF AFRICAN AMERICAN CULTURE', 'Houston', 'TX', "USA", collection_id=c2.id )
+mus3=crud.create_museum('CALABOOSE AFRICAN AMERICAN HISTORY MUSEUM', 'San Marcos', 'TX', "USA", collection_id=c3.id)
+mus4=crud.create_museum('AFRICAN AMERICAN MUSEUM', 'Dallas', 'TX', "USA", collection_id=c4.id)
+museums=[mus1, mus2, mus3, mus4]
+model.db.session.add_all(museums)
+model.db.session.commit()  
+
 
 #create related sound! later feed data in via api!
-sounds_in_db=[]
-for n in range(10):
-    medium=f'mediumis{n}'
-    sound_name=f'soundnameis{n}'
-    description=f'description{n}'
-    genre=f'genre{n}'
-    mus_id=n+1 #FK
+# sounds_in_db=[]
+# for n in range(10):
+#     medium=f'mediumis{n}'
+#     sound_name=f'soundnameis{n}'
+#     description=f'description{n}'
+#     genre=f'genre{n}'
+#     museum_id=n+1 #FK <------
     
-    db_related_sound=crud.create_related_sound(medium, sound_name, description, genre, mus_id)
-    sounds_in_db.append(db_related_sound)
-model.db.session.add_all(sounds_in_db)
+#     db_related_sound=crud.create_related_sound(medium, sound_name, description, genre, museum_id)
+#     sounds_in_db.append(db_related_sound)
+# model.db.session.add_all(sounds_in_db)
+
 
 
 #create patron!
 patrons_in_db=[]
-for n in range(10): #goes through each 10x for 10 patrons! #should i use enumerate? for it to be a patron speciifc parse?
-    uname= f'user{n}'
-    fname= f'nameis{n}'
-    lname= f'lastnameis{n}'
-    email= f'user{n}@test.com'
-    pword= f'pwordis{n}'
+# for n in range(10): #goes through each 10x for 10 patrons! #should i use enumerate? for it to be a patron speciifc parse?
+#     uname= f'user{n}'
+#     fname= f'nameis{n}'
+#     lname= f'lastnameis{n}'
+#     email= f'user{n}@test.com'
+#     pword= f'pwordis{n}'
     
-    db_patron=crud.create_patron(uname, fname, lname, email, pword)
-    patrons_in_db.append(db_patron)
-    model.db.session.add_all(patrons_in_db)
+#     db_patron=crud.create_patron(uname, fname, lname, email, pword)
+#     patrons_in_db.append(db_patron)
+#     model.db.session.add_all(patrons_in_db)
 
+p1=crud.create_patron("erikkaincolor", "Erikka", "Polk", "erikkaincolor@gmail.com", "1234")
+p2=crud.create_patron("artistsmus3", "Glenn", "Ligon", "glennlig0n@gmail.com", "4321")
+p3=crud.create_patron("solangel", "Solange", "Knowles", "solange@gmail.com", "abcd")
+
+patrons=[p1, p2, p3]
+model.db.session.add_all(patrons)
+model.db.session.commit()  
+
+
+
+
+
+
+
+
+    #test last----most difficulty
     #will produce over 200 entries for 10 patrons, 20 faves per patron, 5 faves in 4 categories
     #create patron art faves
     # for _ in range(5):
@@ -190,50 +197,15 @@ model.db.session.commit() #this commit is even for the gluing favorites to each 
 
 
 
-
-
-# # patrons....patrons will be fake
-# patron=model.Patron(uname='e', fname='ee', lname='p', email='test@test.com', pword='1234')
-# patron1=model.Patron(uname='t', fname='er', lname='o', email='test1@test.com', pword='104')
-# patron2=model.Patron(uname='ty', fname='eri', lname='oe', email='test2@test.com', pword='109')
-# patron3=model.Patron(uname='tyk', fname='erik', lname='oeg', email='test3@test.com', pword='1090')
-
-# c1 = model.Collection(coll_category="paint",name="paintings",description="words go here",curator="someone")
-# c2 = model.Collection(coll_category="drawing",name="paintings by e",description="words go here too",curator="someone else")
-# c3 = model.Collection(coll_category="sculpture",name="paintings by r",description="words go here as well",curator="monet")
-# c4 = model.Collection(coll_category="print",name="rawr xd",description="words....", curator="picasso")
-
-# #museums...real data will come from csv file i turn into json and feed into db
-# #on the data side, figure out how to add a coloumn that reps the colections and figure out how to sort diff 
-# #collections into museums! there will be musuem collections and curated virtual collections not found irl
-
-# m1=model.Museum(name='Houston Museum of African American Culture', city='Houston', state='TX', country='USA') #removed 'collection=c1'
-# m2=model.Museum(name='Museum of Fine Arts', city='Houston', state='TX', country='USA')
-# m3=model.Museum(name='Chicago Contemporary', city='Chicago', state='IL', country='USA')  #add c3, c2
-# m4=model.Museum(name='Kinder and Nacny Rich Contemporary Arts Museum', city='Houston', state='TX', country='USA')  #add c3, c2
-# m5=model.Museum(name='MoMA', city='NYC', state='NY', country='USA') #add c3, c2
-
-# #related sounds-cloudinary API-filled w/ audio museum gives me or spotify embed, fake data to test first
-# sound1=model.RelatedSound(medium="podcast", sound_name="7th chapel",  description="gold foil walls", museum=m1) #add m3, m2
-# sound2=model.RelatedSound(medium="song", sound_name="Luka Doncic speaks on...",  description="yellow tinted scene", museum=m1) #add m3, m2
-# sound3=model.RelatedSound(medium="playlist", sound_name="Words from the curator",  description="Spaghetti", museum=m1) #add m3, m2
-# sound4=model.RelatedSound(medium="commentary", sound_name="At Last",  description="baloons", genre="n/a", museum=m1) #add m3, m2
-
-# #art objects...having trouble-API, fake data to test first
-# a1=model.ArtObject(artist="M Angelo", title="7th chapel", medium="paint", description="gold foil walls", collection=c1) #add c3, c2
-# a2=model.ArtObject(artist="Calder", title="Homerun", medium="sculpture", description="oil on cieling", collection=c2) #add c3, c2
-# a3=model.ArtObject(artist="Hurston", title="Home Sweet Home", medium="print", description="modest", collection=c1) #add c3, c2
-# a4=model.ArtObject(artist="Ligon", title="Love is", medium="paint", description="beautiful", collection=c2) #add c3, c2
-# a5=model.ArtObject(artist="Basquiat", title="Untitled", medium="paint", description="wow", collection=c3) #add c3, c2
+#related sounds-cloudinary API-filled w/ audio museum gives me or spotify embed, fake data to test first
+# sound1=model.RelatedSound("podcast", sound_name="7th chapel",  "gold foil walls", museum=m1) #add m3, m2
+# sound2=model.RelatedSound("song", sound_name="Luka Doncic speaks on...",  "yellow tinted scene", museum=m1) #add m3, m2
+# sound3=model.RelatedSound("playlist", sound_name="Words from the curator",  "Spaghetti", museum=m1) #add m3, m2
+# sound4=model.RelatedSound("commentary", sound_name="At Last",  "baloons", genre="n/a", museum=m1) #add m3, m2
 
 # #(4) favorites tables' business:
 # #adding faves to different patrons
 # #my 4 faves mapping tables automatically generate records/rows from appending instances of art, museum, rs, and collection to patrons!
-
-# #leave these alone as far as the instance list is 
-# # concerned...bc these are not db.session.add
-# # ONLY need the db.session.commit() on these additions
-# patron.collection_fave.append(c1) 
 
 # i want to glue a fave to each patron syntacitically. by id FK
 # create relational instance objects via magic variables in a non-function way?
@@ -285,31 +257,3 @@ model.db.session.commit() #this commit is even for the gluing favorites to each 
 # c3.art_object.append(a2)
 # c4.art_object.append(a1)
 # c4.art_object.append(a3)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# ####################################
-# #2.0
-# #museum's business:
-# #add 1 collection onto 1 museum        
-# # c1.museum.append(m1) #1 for 1! might need an if statement to prevent multiples
-# # c2.museum.append(m2) #collection id shows up on museum table..i need the 
-# # c3.museum.append(m3) #refresh last to see changes, uselist
-# # c4.museum.append(m4)
-
-

@@ -9,13 +9,8 @@ from jinja2 import StrictUndefined #<-----used where?
 
 app = Flask(__name__)
 # app.jinja_env.undefined = jinja2.StrictUndefined
+app.secret_key = 'RANDOM SECRET KEY' #key doesnt matter it just needs one
 
-# Route design : route name = entity+ Id, + (if possible) action
-# in template: Jinja2 forloops, each forloop will be thing i want to display 
-
-#REMINDERS:
-#Two functions in server.py for any route that involves data entry.  For example, the login page.
-#call crud functions in server view functions.
 
 ################################################################################################
 
@@ -58,15 +53,13 @@ app = Flask(__name__)
 # 1     # http://10.0.90:5000/                      # Landing page
 @app.route('/')
 def index():
-	"""Displays content of the week and maybe embedded news or the like app page directory"""
-	return render_template('index.html')
+    """Displays content of the week and maybe embedded news or the like app page directory"""
+
+    return render_template('index.html')
+#has navigation to patron profile, museum list, collection list, audio guide list    
+    
     # thing=request.forms.get('key')
 # 	# that=request.args.get('key')
-# @app.route('/search', methods=['GET'])
-#     """ Render the Search page """
-#     def search():
-#         causes=crud.get_all_causes()
-#         return render_template('search.html', causes=causes)
 
 
 
@@ -86,30 +79,35 @@ def index():
 
 
 
-# 2     # http://10.0.90:5000/login                 # Users can log in with their account credentials
-# @app.route('/login')
-# def login():
-# 	"""Patron Log-in"""
-# 	return render_template('login.html')
+#2     # http://10.0.90:5000/login                 # Users can log in with their account credentials
+@app.route('/login')
+def view_login():
+	"""Patron Log-in, has form on this page....only logged in patrons can favorite items"""
+	return render_template('login.html')
 
 
-# @app.route('/login',methods=['POST'])
-# def login_prompt():
-#     """Server request for login info from client"""
-#     username = request.form['username']
-#     password = request.form['password']
+@app.route('/login',methods=['POST'])
+def login_prompt():
+    """Server request for login info from client"""
+    username = request.form['username']
+    password = request.form['password']
+    #need the db trip explained here...form validation
 
-#     if password == '1234':
-#         session['current_user'] = username
-#         flash(f'Logged in as {username}')
-#         return redirect('/')
+    patron=crud.patron_uname_lookup(username) #<---patron obj, i now can access its attr
 
-#     else:
-#         flash('Wrong password!')
-#         return redirect('/login')
+    if password == patron.pword: #if no patron id is in session, they need to get logged in 
+        #password of patron w/ specific login is checked against twhat the db has for it
+        session['patron_id'] = patron.p_id #logged in or not depends on where session is globally/locally
+        flash(f'Logged in as {username}')
+        return redirect('/profile')
+    #the session is like an identifier...my gmail vs someone elses
+
+    else:
+        flash('Wrong password! Try again please.')
+        return redirect('/login')
 	
 
-
+        # session['current_user'] = username, for where i want it to show up again
 
 
 
@@ -282,16 +280,11 @@ def index():
 
 
 # 8     # http://10.0.90:5000/collections           # View a list of all collections
-@app.route('/collections')
-def view_collections():
-    """as a patron i want to view a list of all Collections""" 
-    collections = crud.get_collection()
-    return render_template('collections.html', thing_i_want_to_view =collections)
-
-
-
-
-
+# @app.route('/collections')
+# def view_collections():
+#     """as a patron i want to view a list of all Collections""" 
+#     collections = crud.get_collection()
+#     return render_template('collections.html', thing_i_want_to_view =collections)
 
 
 
@@ -402,53 +395,14 @@ def view_collections():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 if __name__ == "__main__":
     from model import connect_to_db
 
-    connect_to_db(app, "muse") 
+    # connect_to_db(app, "muse") 
+    connect_to_db(app)
 
     app.run(debug=True, host="0.0.0.0") #change when depolying FIX ME
 
 
 
 
-
-################################################################################################
-
-#2.0
-#    6     # http://10.0.90:5000/resources               <---doesnt work, one button with mockup on it
-#    7     #     /near-future-study                      <---click evt takes you to pdf page... itll be a static page not a rendered one
-
-############################################################################
-#2.0
-#Resources: DOESNT WORK
-# @app.route('/resources')
-# def name():
-# 	"""Proposal for audio guide standardization + Research Links"""
-# 	return render_template('resources.html') #<——possible redirect to mockup
-
-# #Mockup: DOESNT WORK
-# @app.route('/near-future-study', methods = ['GET', 'POST'])
-# def index5():
-# 	"""Mockup of Related Sounds Repo"""
-# 	# thing=request.forms.get('key')
-# 	# that=request.args.get('key')
-# 	return render_template('mockup.html')
-
-
-########### 2.0
-    # View the details of one art object-maybe....or fave-ing collection will do
-    # View the details of one collection-maybe....or list will do
-    # Users can create an account with an email and password - LATER
