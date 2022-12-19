@@ -43,6 +43,8 @@ class CollectionFave(db.Model): #MANY
     patron_id = db.Column(db.Integer, db.ForeignKey('patrons.p_id'), nullable=False) 
     collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False) 
 
+    # favorite = db.relationship('Patron', backref='collectionfave', lazy=True)
+
 class ArtFave(db.Model): #MANY
     """Favorited art object."""
     __tablename__ = "art_faves"
@@ -52,6 +54,8 @@ class ArtFave(db.Model): #MANY
     #FK to patron and art object
     patron_id = db.Column(db.Integer, db.ForeignKey('patrons.p_id'), nullable=False)  
     art_id = db.Column(db.Integer, db.ForeignKey('art_objects.id'), nullable=False) 
+
+    # favorite = db.relationship('Patron', backref='artfave', lazy=True)
 
 class RelatedSoundFave(db.Model): #MANY
     """Favorited sounds."""
@@ -63,6 +67,8 @@ class RelatedSoundFave(db.Model): #MANY
     patron_id = db.Column(db.Integer, db.ForeignKey('patrons.p_id'), nullable=False)  
     related_sound_id = db.Column(db.Integer, db.ForeignKey('related_sounds.id'), nullable=False) 
    
+    # favorite = db.relationship('Patron', backref='relatedsoundfave', lazy=True)
+
 class MuseumFave(db.Model): #MANY
     """Favorited museums."""
     __tablename__ = "museum_faves"
@@ -73,6 +79,8 @@ class MuseumFave(db.Model): #MANY
     patron_id = db.Column(db.Integer, db.ForeignKey('patrons.p_id'), nullable=False)  
     museum_fave_id = db.Column(db.Integer, db.ForeignKey('museums.id'), nullable=False) 
   
+    # favorite = db.relationship('Patron', backref='museumfave', lazy=True)
+
 
 
 

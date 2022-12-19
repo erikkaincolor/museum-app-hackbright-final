@@ -6,13 +6,19 @@
   <h2>Collections</h2>
   <p>I'm a paragraph!</p>
   Hi {{ name }}!
-{% if compliments %}
-  You're so:
+
+  
+<form action="/login">   <!-- change -->
+    <label for="collections">Collections</label>
+{% if thing_i_want_to_view %}
   <ul>
-    {% for compliment in compliments %}
-      <li>{{ compliment }}</li>
+    {% for collection in thing_i_want_to_view %}
+      <li>{{ collection }}</li>
     {% endfor %}
   </ul>
 {% endif %}
+</form>
+
+
 
 {% endblock %}

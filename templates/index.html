@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>This is the index/homepage page</title>
-</head>
-<body>
-    <h1>HELLO!</h1>
-    <form action="/greet">
-        What's your name?
-        <input type="text" name="person">
-        <input type="submit">
-      </form>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Museum Audio App Home{% endblock %}
+
+{% block body %}
+  <h1>Welcome!</h1>
+
+  <h2>Navigation</h2>
+  <ul>
+    <!-- <li><a href="/patron/<patron_id>">View patron info</a></li> -->
+    <li><a href="/museumdirectory">View all museums</a></li>
+    <li><a href="/collections">View all collections</a></li>
+    <li><a href="/audio-guide">View all audio guides</a></li>
+  </ul>
+{% endblock %}
