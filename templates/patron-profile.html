@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Patron Profile{% endblock %}
+
+{% block content %}
+    <h1>Patron Profile</h1>
+  <h2>Hi, {{username}}!</h2>
+  <h2>{{session['username']}}</h2>
+  <p>I'm a paragraph!</p>
+
+{% endblock %}
