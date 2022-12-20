@@ -183,9 +183,11 @@ def create_museum(name, city, state, country, collection_id):
 
 
 ##########CRUD FOR SERVER
-# def get_collection():
+# def view_collections():
 #     """I will gather all collection data""" 
-#     #creating a collection query object that holds all 
+# #     colllections_list=Collection.query.all()
+    
+# #creating a collection query object that holds all 
 #     # collections that ill for loop through in jinja once i pass it into view func
 #     return Collection.query.all()
 
@@ -197,7 +199,9 @@ def create_museum(name, city, state, country, collection_id):
 
 # def get_collection_by_id(collection_id):
 #     """as a patron i want to view more info about a indiviual Collection""" 
-#     result=Collection.query.get(collection_id)
+# #       art_in_collection=ArtObject.query.filter_by(ArtObject.collection_id==???)
+    
+# result=Collection.query.get(collection_id)
 #     db.session.add(result)
 #     db.session.commit()
 #     return result
@@ -210,6 +214,7 @@ def create_museum(name, city, state, country, collection_id):
 # def view_art(artist, title, medium, description, collection):
 #     """as a patron i want to view more info about a indiviual Collection's 4-5 art objects"""
 # # QUERY
+#       art_in_collection=ArtObject.query.filter_by(ArtObject.collection_id==???)
 # # as any of these people i want to view art (in collections), filterable, toggable
 #     art=ArtObject(artist, title, medium, description, collection) #add c3, c2
 #     return art
@@ -253,19 +258,13 @@ def create_museum(name, city, state, country, collection_id):
 # # updating data, 
 # # and deleting data.
 
-# #create all tables in db 
-# # (Step2: the R in CRUD) 
-# # querying is getting us multiple objects/instances and whatever data using 
-# # sqlalchemy via python3
-
-
 
 #either say .first or .all to get either one or all <----collection 
 #.get would get it by key <---refer to cats demo lecture
 #patron= Patron.query.get(patron_id) <---looking up by PK only bc its special, doesnt really translate to unames unique constraint
 
-def patron_id_lookup(patron_id): #in order to call,  id have to know id
-    patron=Patron.query.filter_by(id=patron_id).first()
+def patron_id_lookup(p_id): #in order to call,  id have to know id
+    patron=Patron.query.filter(Patron.p_id==p_id).first()
     return patron
 
 def patron_uname_lookup(uname):
@@ -273,6 +272,9 @@ def patron_uname_lookup(uname):
     patron = Patron.query.filter(Patron.uname == uname).first()
     return patron
 
+# def patron_info(uname):
+#     patron = Patron.query.filter(Patron.uname == uname).first()
+#     return patron
 #get_uname function
 
 
@@ -298,7 +300,8 @@ def patron_uname_lookup(uname):
 # def view_museums(name, city, state, country):
 # # QUERY
 # # as an art observer i want to view a list of museums and select them and view more
-#     museum=Museum(name, city, state, country) #removed 'collection=c1'
+#     museum_list=Museum.query.all()
+#       museum=Museum(name, city, state, country) #removed 'collection=c1'
 #     return museum
 
 # def view_museums(id):
@@ -309,7 +312,8 @@ def patron_uname_lookup(uname):
 # def view_related_sounds(medium, sound_name, description, museum):
 # ## QUERY
 # # as an art observer i want to see a list of r sounds and hear them
-#     sound=RelatedSound(medium, sound_name, description, museum) #add m3, m2
+#     sounds_list=RelatedSound.query.all()
+#       sound=RelatedSound(medium, sound_name, description, museum) #add m3, m2
 #     return sound
 
 

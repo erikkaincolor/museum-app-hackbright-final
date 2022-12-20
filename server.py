@@ -93,17 +93,17 @@ def login_prompt():
     password = request.form['password']
     #need the db trip explained here...form validation
 
-    patron=crud.patron_uname_lookup(username) #<---patron obj, i now can access its attr
+    patron=crud.patron_uname_lookup(username) #<---this takes form input to db....makes the function return a patron obj, i now can access its attr
 
     if password == patron.pword: #if no patron id is in session, they need to get logged in 
         #password of patron w/ specific login is checked against twhat the db has for it
         session['patron_id'] = patron.p_id #logged in or not depends on where session is globally/locally
-        flash(f'Logged in as {username}')
-        return redirect('/profile')
+        flash(f'Logged in as {username}') #<---doesnt work
+        return redirect('/profile/<int:p_id>')
     #the session is like an identifier...my gmail vs someone elses
 
     else:
-        flash('Wrong password! Try again please.')
+        flash('Wrong password! Try again please.') #<---doesnt work
         return redirect('/login')
 	
 
@@ -144,6 +144,7 @@ def login_prompt():
 #         flash('Wrong password!')
 #         return redirect('/login')
 
+#include username identity sessions
 
 
 
@@ -173,13 +174,18 @@ def login_prompt():
 
 # 3     # http://10.0.90:5000/patron/p1             # View the details of one patron (a.k.a. the user’s profile page)
 
-# #User Profile: DOESNT WORK/i wonder if this should work like collection id/INT or as a argument/VAR
-# @app.route('/profile/<patron-id>', methods = ['GET', 'POST'])
-# def view_patron_page():
-# 	"""shows name and info"""
-# 	# thing=request.forms.get('key')
-# 	# that=request.args.get('key')
-# 	return render_template('user-profile.html') 
+#User Profile: DOESNT WORK/i wonder if this should work like collection id/INT or as a argument/VAR
+@app.route('/profile/<int:p_id>', methods = ['GET', 'POST'])
+def view_patron_page(p_id):
+    """shows name and info"""
+    patron=crud.patron_id_lookup(p_id) #.first() fetched this record object via id
+    session['patron-id'] = patron.p_id #this for telling the profil page its a user
+    username = request.cookies['username']
+    print(patron)
+    return render_template('patron-profile.html', patron=patron, username=username) 
+    # return redirect('/profile/{patron.p_id}', patron=patron, username=username) 
+    # return redirect('/profile/<int:p_id>', patron=patron, username=username) 
+
 
 # #Individual Patrons faves Page: HOW DO I GET TO WORK
 # @app.route('/profile/<patron-id>/art-fave/<art_fave_id>', methods = ['GET', 'POST'])
