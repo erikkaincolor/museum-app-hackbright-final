@@ -8,14 +8,19 @@
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="/static/css/styles.css">
 </head>
-<body>{% block content %}
+<body>{# Display flash messages, if any, for all pages #}
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class='flashes'>
+        {% for message in messages %}<li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    {% block content %}
   <h1>Header 1</h1>
   BODY CONTENT GOES HERE
-  <ul>
-    {% for message in get_flashed_messages () %}
-    <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
+
   <!-- Bootstrap JavaScript Bundle with Popper (a Bootstrap dependency for popovers) -->
   {% endblock %}<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
   <footer>Erikka Polk's Hackbright Engineering Final Project! 2022</footer>

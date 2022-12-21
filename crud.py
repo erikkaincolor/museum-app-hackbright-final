@@ -47,13 +47,11 @@ def create_patron(uname, fname, lname, email, pword): #DONE
 
 def patron_id_lookup(p_id): #DONE #in order to call,  id have to know id
     """get patron by id"""
-    patron=Patron.query.filter(Patron.p_id==p_id).first()
-    return patron
+    return Patron.query.get(p_id)
 
 def patron_uname_lookup(uname): #DONE #in order to call,  id have to know uname
     """get patron by uname"""
-    patron = Patron.query.filter(Patron.uname == uname).first()
-    return patron
+    return Patron.query.filter(Patron.uname == uname).first()
 
 
 
@@ -131,9 +129,9 @@ def get_museums(): #DONE
     """read all museum data..collections that ill for loop through in jinja once i pass it into view func""" 
     return Museum.query.all()
     
-def get_museum_by_id(museum_id): #DONE
+def get_museum_by_id(id): #DONE
     """read all museum data..collections that ill for loop through in jinja once i pass it into view func""" 
-    return Museum.query.get(museum_id)
+    return Museum.query.get(id)
     
 
 

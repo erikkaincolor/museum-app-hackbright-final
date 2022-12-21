@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}Patron Profile{% endblock %}
+{% block title %}{{ patron.uname }}'s Profile{% endblock %}
 
 {% block content %}
-    <h1>Patron Profile</h1>
-  <h2>Hi, {{ username }}!</h2>
-  <h2>{{ session['username'] }}</h2>
+    <h1>{{ patron.uname }}'s Profile</h1>
+  <h2>Hi, {{ patron.uname }}!</h2>
+  <h2>{{ patron.uname }}</h2>
   <p>I'm a paragraph!</p>
 
 {% endblock %}

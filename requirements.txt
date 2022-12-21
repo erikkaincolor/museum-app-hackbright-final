@@ -19,3 +19,20 @@ MarkupSafe==2.0.1
 psycopg2-binary==2.9.1
 SQLAlchemy==1.4.23
 Werkzeug==2.0.1
+
+
+#  <!-- <ul>
+#     {% for message in get_flashed_messages () %}
+#     <li>{{ message }}</li>
+#     {% endfor %}
+#     </ul> -->
+
+#   {% with messages = get_flashed_messages() %}
+#   {% if messages %}
+#     <ul class=flashes>
+#     {% for message in messages %}
+#       <li>{{ message }}</li>
+#     {% endfor %}
+#     </ul>
+#   {% endif %}
+# {% endwith %}
