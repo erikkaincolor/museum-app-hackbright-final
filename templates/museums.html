@@ -5,12 +5,15 @@
 
   <h2>Museum List</h2>
   <p>I'm a paragraph!</p>
-  Hi {{ name }}!
-{% if compliments %}
+  Hi user!
+{% if museums %}
   You're so:
   <ul>
-    {% for compliment in compliments %}
-      <li>{{ compliment }}</li>
+    {% for museum in museums %}
+      <li><a href="/museumdirectory/{{museum.id}}">
+        {{ museum.name }}, {{ museum.state }}, {{ museum.country }}
+    </a>
+    <br><br></li>
     {% endfor %}
   </ul>
 {% endif %}

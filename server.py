@@ -7,7 +7,7 @@ from jinja2 import StrictUndefined #setting to make it throw errors for undefine
 #import requests <----is this diff from flask request object?
 
 app = Flask(__name__)
-app.jinja_env.undefined = jinja2.StrictUndefined
+app.jinja_env.undefined=StrictUndefined
 app.secret_key = 'RANDOM SECRET KEY' #key doesnt matter it just needs one
 
 ################################################################################################
@@ -102,16 +102,16 @@ def login_prompt():
         # session['current_user'] = username, for where i want it to show up again
 
 #User Profile: DOESNT WORK/i wonder if this should work like collection id/INT or as a argument/VAR
-@app.route('/profile/<int:p_id>', methods = ['GET', 'POST'])
-def view_patron_page(p_id):
-    """shows name and info"""
-    patron=crud.patron_id_lookup(p_id) #.first() fetched this record object via id
-    session['patron-id'] = patron.p_id #this for telling the profil page its a user
-    username = request.cookies['username']
-    print(patron)
-    return render_template('patron-profile.html', patron=patron, username=username) 
-    # return redirect('/profile/{patron.p_id}', patron=patron, username=username) 
-    # return redirect('/profile/<int:p_id>', patron=patron, username=username) 
+# @app.route('/profile/<int:p_id>', methods = ['GET', 'POST'])
+# def view_patron_page(p_id):
+#     """shows name and info"""
+#     patron=crud.patron_id_lookup(p_id) #.first() fetched this record object via id
+#     session['patron-id'] = patron.p_id #this for telling the profil page its a user
+#     username = request.cookies['username']
+#     print(patron)
+#     return render_template('patron-profile.html', patron=patron, username=username) 
+#     # return redirect('/profile/{patron.p_id}', patron=patron, username=username) 
+#     # return redirect('/profile/<int:p_id>', patron=patron, username=username) 
 
 
 
@@ -140,7 +140,7 @@ def view_patron_page(p_id):
 # # def view_patrons_coll_fave():
 # # def view_patrons_museum_fave():
 # # def view_patrons_related_sounds_fave():
-
+#filtering?
 
 
 
@@ -157,16 +157,23 @@ def view_patron_page(p_id):
 #                                                                                                          #
 ############################################################################################################
 
-# @app.route('/museumdirectory', methods = ['GET', 'POST'])
-# def view_museum():
-# 	"""view museum table list with static header"""
-#   collections = crud.get_collection()
-#   return render_template('museums.html', thing_i_want_to_view =collections)
+@app.route('/museumdirectory', methods = ['GET', 'POST'])
+def view_museums():
+    """view museum table list with static header"""
+    museums = crud.get_museums()
+    return render_template('museums.html', museums=museums)
 
-# @app.route('/museumdirectory/museum-<int: museum_id>', methods = ['GET', 'POST'])
-# def lone_museum():
-# 	"""individual museum page"""
-# 	return redirect('/museumdirectory/museum-3')
+@app.route('/museumdirectory/<museum_id>')
+def lone_museum(museum_id):
+    """individual museum page"""
+    museum=crud.get_museum_by_id(museum_id)
+    return render_template('museum-details.html', museum=museum)
+
+
+
+
+
+
 
 
 
@@ -187,18 +194,21 @@ def view_patron_page(p_id):
 
  #use crud and collection id 
 
-# @app.route('/collections')
-# def view_collections():
-#     """as a patron i want to view a list of all Collections""" 
-#     collections = crud.get_collection()
-#     return render_template('collections.html', thing_i_want_to_view =collections)
+@app.route('/collections', methods = ['GET', 'POST'])
+def view_collections():
+    """view collections table list""" 
+    collections = crud.get_collections()
+    return render_template('collections.html', collections =collections)
 
-# @app.route('/<int: collection_id>', methods = ['GET', 'POST']) #/c1 pr /1
-# def lone_collection(collection_id): #it eing the url also passes it to the function
-#     """Collection content that patron selected!"""
-#     collection_id= crud.get_collection_by_id(int(collection_id))
-#     collection=collection_id.first()
-#     return redirect('/collections/collection-3')
+
+
+@app.route('/collections/<collection_id>') #/c1 pr /1
+def lone_collection(collection_id): #it eing the url also passes it to the function
+    """Collection content that patron selected!"""
+    collection= crud.get_collection_id(collection_id)
+    return render_template('collection-details.html', collection=collection)
+
+
 
 # @app.route('/collections/collection-<int: collection_id>/art-object-<art_object_id>') #/c1 pr /1 ALSO need to pass it in as a parameter to the view func
 # def lone_collection_art(art_object_id): #it being the url also passes it to the function
@@ -223,11 +233,11 @@ def view_patron_page(p_id):
 #                                   /audio-guide/1                                                         #
 ############################################################################################################
 
-# @app.route('/audio-guide', methods = ['GET', 'POST'])
+# @app.route('/audio-guides', methods = ['GET', 'POST'])
 # def view_audio_guides():
-# 	"""MOBILE IN PERSON XP: Museum-specific audio tours, Museum-specific solo visit playlists"""
-    # collections = crud.get_collection()
-    # return render_template('guide.html', thing_i_want_to_view =collections)
+# 	"""MOBILE IN PERSON XP: view audio guides list"""
+    # sounds = crud.get_collection()
+    # return render_template('guide.html', sounds=sounds)
 
 # #Individual Audio Guide Page: 
 # #@app.route('/<int: related_sound_id>', methods = ['GET', 'POST']) #/sound1

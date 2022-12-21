@@ -165,7 +165,7 @@ class ArtObject(db.Model):
 class Museum(db.Model): 
     """Pinacotheca"""
     __tablename__ = "museums"
-
+    
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.Text, nullable=False, unique=True)
     city = db.Column(db.String(20), nullable=False) #nullable=false==required=true

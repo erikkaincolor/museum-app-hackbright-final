@@ -3,21 +3,24 @@
 
 {% block content %}
 
-  <h2>Collections</h2>
+  <h2>Collections List</h2>
   <p>I'm a paragraph!</p>
-  Hi {{ name }}!
-
-  
-<form action="/login">   <!-- change -->
-    <label for="collections">Collections</label>
-{% if thing_i_want_to_view %}
+  Hi user!
+{% if collections %}
+  You're so:
   <ul>
-    {% for collection in thing_i_want_to_view %}
-      <li>{{ collection }}</li>
+    {% for collection in collections %}
+      <li>
+        <a href="/collections/{{collection.id}}">
+            {{ collection.name }}, {{ collection.coll_category }}, {{ collection.curator }}, {{ collection.era }}
+        </a>
+        <br><br>
+
+      </li>
+
     {% endfor %}
   </ul>
 {% endif %}
-</form>
 
 
 

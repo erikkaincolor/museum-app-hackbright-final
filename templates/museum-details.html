@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ museum.name }} - Details{% endblock %}
+
+{% block body %}
+<h1>{{ museum.name }}</h1>
+<h2>Located in: {{ museum.city }}, {{ museum.state }}, {{ museum.country }}</h2>
+<p>
+    hey!
+</p>
+
+<!-- <img src="{{ movie.poster_path }}"> change -->
+{% endblock %}
