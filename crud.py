@@ -25,6 +25,7 @@ def create_patron(uname, fname, lname, email, pword): #DONE
     return patron
     #patron=model.Patron(uname='e', fname='ee', lname='p', email='test@test.com', pword='1234')
 
+
 ############################################################################################################
 #                                                                                                          #
 #                                       PATRONS-CRUD FOR SERVER                                            #
@@ -49,12 +50,19 @@ def patron_id_lookup(p_id): #DONE #in order to call,  id have to know id
     """get patron by id"""
     return Patron.query.get(p_id)
 
+
 def patron_uname_lookup(uname): #DONE #in order to call,  id have to know uname
     """get patron by uname"""
     return Patron.query.filter(Patron.uname == uname).first()
 
+# def create_account(uname, pword):
+#     patron=Patron(uname=uname, pword=pword)
+#     return patron
 
-
+def create_account(uname, fname, lname, email, pword): #DONE
+    """create patron object 1x so seed can repeatedly"""
+    patron=Patron(uname=uname, fname=fname, lname=lname, email=email, pword=pword)
+    return patron
 
 
 
@@ -83,9 +91,9 @@ def get_collections(): #DONE
     """read all collection data..collections that ill for loop through in jinja once i pass it into view func""" 
     return Collection.query.all()
 
-def get_collection_id(collection_id): #DONE
+def get_collection_id(id): #DONE
     """read all collection data..collections that ill for loop through in jinja once i pass it into view func""" 
-    return Collection.query.get(collection_id)
+    return Collection.query.get(id)
 
 # CONNECT CollectionSound to collection
 # def marry_collection_sound(collection_id, related_sound_id):
@@ -100,8 +108,8 @@ def get_collection_id(collection_id): #DONE
 #   """as a patron i want to view more info about a indiviual Collection""" 
 #   art_in_collection=ArtObject.query.filter_by(ArtObject.collection_id==???)
 #   result=Collection.query.get(collection_id)
-#   db.session.add(result)
-#   db.session.commit()
+#   db.session.add(result) #will mess up atomicity
+#   db.session.commit() #will mess up atomicity
 #   return result
 
 

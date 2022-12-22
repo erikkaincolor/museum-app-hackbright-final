@@ -3,12 +3,15 @@
 from flask import (Flask, render_template, request, flash, session, redirect, jsonify)
 import crud
 from jinja2 import StrictUndefined #setting to make it throw errors for undefined variables
+from model import connect_to_db, db #so i can register users via db.session.add/commit
 #import os <-----may not need 
 #import requests <----is this diff from flask request object?
 
 app = Flask(__name__)
 app.jinja_env.undefined=StrictUndefined
-app.secret_key = 'RANDOM SECRET KEY' #key doesnt matter it just needs one
+app.secret_key = 'RANDOM SECRET KEY' #key doesnt matter it just needs one...for sites with
+# security concerns, make sure this isn't checked into a
+# public place like GitHub
 
 ################################################################################################
 #   -num- -done?-   -route-                
@@ -81,32 +84,59 @@ def view_login():
 @app.route('/login',methods=['POST'])
 def login_prompt():
     """Server request for login info from client"""
-    username = request.form['username']
-    password = request.form['password']
+    uname = request.form['username']
+    # session['username']= request.form['username']
+    pword = request.form['password']
 
-    patron=crud.patron_uname_lookup(username) #<---this takes form input to db....makes the function return a patron obj, i now can access its attr
+    patron=crud.patron_uname_lookup(uname) #<---this takes form input to db....makes the function return a patron obj, i now can access its attr
+    if patron:
+        if patron.pword==pword:
+            flash(f'Logged in as {uname}')
+            session['patron_id'] = patron.p_id #logged in or not depends on where session is globally/locally
+            return redirect(f"/profile/{patron.p_id}")
+        else:
+            flash("Wrong password, try again")
+            return redirect('/')
 
-    if password == patron.pword: #if no patron id is in session, they need to get logged in 
-        #password of patron w/ specific login is checked against twhat the db has for it
-        session['patron_id'] = patron.p_id #logged in or not depends on where session is globally/locally
-        flash(f'Logged in as {username}')#<---doesnt work
-        return redirect('/profile/<int:p_id>')
+
     #the session is like an identifier...my gmail vs someone elses
-
-    else:
-        flash(f'Wrong password! {username}, please try again.') #<---doesnt work
-        return redirect('/login')
 	
 
         # session['current_user'] = username, for where i want it to show up again
 
-@app.route('/profile/<int:p_id>')
+
+@app.route('/register',methods=['POST'])
+def register():
+    """Server request for registration info from client"""
+    uname = request.form['uname']
+    fname = request.form['fname']
+    email = request.form['email']
+    lname = request.form['lname']  
+    pword = request.form['pword']
+     
+    patron=crud.patron_uname_lookup(uname) 
+    if patron: #if uname iis not in db, create account
+        flash("A user with that username exists!")
+    # elif 
+    # patron.email in email: need a crud.get_user_by_email(email)
+    #     flash("A user with that username exists!")
+    # elif patron is False:
+    else:
+        new_user=crud.create_account(uname, fname, lname, email, pword)
+        db.session.add(new_user)
+        db.session.commit()
+        flash("Your account was created successfully and you can now log in.")
+    return redirect('/login')
+
+
+@app.route("/profile/<int:p_id>")
 def view_patron_page(p_id):
     """shows name and info"""
     patron=crud.patron_id_lookup(p_id) #.first() fetched this record object via id
-    # session['patron-id'] = patron.p_id #this for telling the profil page its a user
+    session['patron_id'] = patron.p_id #this for telling the profil page its a user
     # username = request.cookies['username']
-    return render_template('patron-profile.html', patron=patron) 
+    return render_template("patron-profile.html", patron=patron) 
+
 
 #if count of patron.art_Faves==0: render template 1, asks where are the faves or has a qoute or bob ross 
 #if count of any faves > 1: show the version of patron profil with faves and show faves!
@@ -175,12 +205,11 @@ def view_museums():
     museums = crud.get_museums()
     return render_template('museums.html', museums=museums)
 
-@app.route('/museumdirectory/<id>')
+@app.route('/museumdirectory/<int:id>')
 def lone_museum(id):
     """individual museum page"""
     museum=crud.get_museum_by_id(id)
-    return render_template('museum-details.html', museum=museum)
-
+    return render_template("museum-details.html", museum=museum)
 
 
 
@@ -212,12 +241,10 @@ def view_collections():
     collections = crud.get_collections()
     return render_template('collections.html', collections =collections)
 
-
-
-@app.route('/collections/<collection_id>') #/c1 pr /1
-def lone_collection(collection_id): #it eing the url also passes it to the function
+@app.route('/collections/<id>') #/c1 pr /1
+def lone_collection(id): #it eing the url also passes it to the function
     """Collection content that patron selected!"""
-    collection= crud.get_collection_id(collection_id)
+    collection= crud.get_collection_id(id)
     return render_template('collection-details.html', collection=collection)
 
 
@@ -268,6 +295,6 @@ def lone_collection(collection_id): #it eing the url also passes it to the funct
 
 
 if __name__ == "__main__":
-    from model import connect_to_db
+    # from model import connect_to_db
     connect_to_db(app)
     app.run(debug=True, host="0.0.0.0") #change when deploying FIX ME
