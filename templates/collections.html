@@ -2,25 +2,39 @@
 {% block title %}Collections{% endblock %}
 
 {% block content %}
-
-  <h2>Collections List</h2>
-  <p>I'm a paragraph!</p>
-  Hi user!
-{% if collections %}
-  You're so:
-  <ul>
-    {% for collection in collections %}
-      <li>
-        <a href="/collections/{{collection.id}}">
+    <div class="row">
+        <div class="col">
+        <h2>Collections List</h2>
+        <p>I'm a paragraph!</p>
+            Hi user!
+            {% if collections %}
+            You're so:
+        {% for collection in collections %}
+        <div class="list-group">
+        <a href="/collections/{{collection.id}}" class="list-group-item list-group-item-action active">
             {{ collection.name }}, {{ collection.coll_category }}, {{ collection.curator }}, {{ collection.era }}
         </a>
-        <br><br>
+        <br>
+        </div>
 
-      </li>
+        {% endfor %}
+        </div>
+    </div>
 
-    {% endfor %}
-  </ul>
-{% endif %}
+    <div class="row">
+
+        <p>row 2</p>
+        <div class="col">
+
+            <p>col1</p>
+        </div>
+        <div class="col">
+
+            <p>col2</p>
+        </div>
+
+    </div>
+    {% endif %}
 
 
 

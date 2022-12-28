@@ -1,4 +1,4 @@
-# "This is the server my web app runs on"
+"This is the server my web app runs on"
 
 from flask import (Flask, render_template, request, flash, session, redirect, jsonify)
 import crud
@@ -54,10 +54,10 @@ app.secret_key = 'RANDOM SECRET KEY' #key doesnt matter it just needs one...for 
 
 @app.route('/')
 def index():
-    """Displays content of the week and maybe embedded news or the like app page directory"""
+    """Displays content of the week and maybe embedded news or the like app page directory, navigation to patron profile, museum list, collection list, audio guide list"""
 
     return render_template('index.html')
-# html has navigation to patron profile, museum list, collection list, audio guide list    
+
 
 
 
@@ -81,7 +81,7 @@ def view_login():
 	return render_template('login.html')
 
 
-@app.route('/login',methods=['POST'])
+@app.route('/login',methods=['POST']) #uses form data, form from login.html routes here
 def login_prompt():
     """Server request for login info from client"""
     uname = request.form['username']
@@ -96,15 +96,13 @@ def login_prompt():
     else:
         flash("Wrong email or password, try again")
         return redirect('/')
-    #fix incorrect login taking yout o error page
+    #fix incorrect login taking you to error page
 
     #the session is like an identifier...my gmail vs someone elses
-	
-
-        # session['current_user'] = username, for where i want it to show up again
+	# session['current_user'] = username, for where i want it to show up again
 
 
-@app.route('/register',methods=['POST'])
+@app.route('/register',methods=['POST']) #uses form data, form from login.html routes here
 def register():
     """Server request for registration info from client"""
     uname = request.form['uname']
@@ -114,6 +112,7 @@ def register():
     pword = request.form['pword']
      
     patron=crud.patron_uname_lookup(uname) 
+
     if patron: #if uname iis not in db, create account
         flash("A user with that username exists!")
     # elif 
@@ -153,12 +152,9 @@ def add_m_fave(museum_id):
     response={1:"success"}
     current_users_uname=session.get("username") #checking session to see if username is in session in general 
     print(f"******************current_user:{current_users_uname}*****************")
-    # favorite_status=request.form.get("favorite_status")
-    # favorite=request.form.get("favorite") #just what the value put into that button click? this si why i want to do checkbox
     if current_users_uname is None:
         flash("You must log in to favorite a museum.")
-    # elif not favorite_status: #if theres no score, see if required or not
-    #     flash("Error: you didn't select a score for your rating.")
+        #find out the on-page replacement for this
     else:
         patron = crud.patron_uname_lookup(current_users_uname) #get patron that has uname to do id method retrieval
         print(f"*****************patron={patron}*****************")
@@ -273,7 +269,7 @@ def lone_museum(id):
 
  #use crud and collection id 
 
-@app.route('/collections', methods = ['GET', 'POST'])
+@app.route('/collections', methods = ['GET'])
 def view_collections():
     """view collections table list""" 
     collections = crud.get_collections()
