@@ -32,10 +32,20 @@ def create_patron(uname, fname, lname, email, pword): #DONE
 #                                                                                                          #
 ############################################################################################################
 
+# -create MuseumFave /museum crud function
+# -update MuseumFave /update-favoite, via ajax later
+# -add faves to patron profile /patron-profile/{patron.id}/favorite
+# -this form and button will show up on museum details, collection details and art object details
 
+# THIS IS CORRECT-DONT CHANGE
+def create_museum_fave(patron_id, museum_id):
+    """create a museum favorite..seed db side abd server side"""
+    museum_fave=MuseumFave(patron_id=patron_id, museum_id=museum_id)
+    return museum_fave
 
-
-
+# def update_museum_fave(old_favorite=True, patron_id):
+#     pass
+#     return 
 
 
 
@@ -169,6 +179,22 @@ def create_art_object(artist, title, medium, description, era, collection_id): #
 # def get_art(): #DONE
 #     """read all art object data..collections that ill for loop through in jinja once i pass it into view func""" 
 #     return ArtObject.query.all()
+
+#MFAH_ask for audo guide files...copyright? for student project...im a member.
+
+#w/o api-pre-loading
+#artobj via collectionid <----hardcode server
+
+#brooklyn_api:show images on front-end 
+
+#w/ api-NOT DOING THIS 
+# api would get new info thats not in dd, capture that data through 
+# hidden form{in hidden form, allow patron to select}, send to db, create new row in art 
+# object table....that would save coll id in there as an FK, and it would 
+# be called artob.collection_id...
+
+
+
 
 # CONNECT ArtObject to collection-MAY NOT NEED
 # def marry_collection_art_object():

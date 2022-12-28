@@ -85,19 +85,18 @@ def view_login():
 def login_prompt():
     """Server request for login info from client"""
     uname = request.form['username']
-    # session['username']= request.form['username']
+    session['username']= request.form['username'] #using later for favorites for logged in users
     pword = request.form['password']
 
     patron=crud.patron_uname_lookup(uname) #<---this takes form input to db....makes the function return a patron obj, i now can access its attr
-    if patron:
-        if patron.pword==pword:
-            flash(f'Logged in as {uname}')
-            session['patron_id'] = patron.p_id #logged in or not depends on where session is globally/locally
-            return redirect(f"/profile/{patron.p_id}")
-        else:
-            flash("Wrong password, try again")
-            return redirect('/')
-
+    if patron and patron.pword==pword:
+        flash(f'Logged in as {uname}')
+        session['patron_id'] = patron.p_id #logged in or not depends on where session is globally/locally
+        return redirect(f"/profile/{patron.p_id}")
+    else:
+        flash("Wrong email or password, try again")
+        return redirect('/')
+    #fix incorrect login taking yout o error page
 
     #the session is like an identifier...my gmail vs someone elses
 	
@@ -138,6 +137,66 @@ def view_patron_page(p_id):
     return render_template("patron-profile.html", patron=patron) 
 
 
+
+############################################################################################################
+#                                                                                                          #
+#                                           FAVORITES                                                      #
+#                                             TBD                                                          #
+#                                   /profile/patron1/art-fave-1                                            #
+#                                                                                                          #
+############################################################################################################
+
+@app.route("/museumdirectory/<int:museum_id>/museumfavorites", methods=["POST"]) #id is PK, museum_id is FK
+def add_m_fave(museum_id):
+    """create museum fave on museum deets page"""
+    print("******************HIIIIIII*****************")
+    response={1:"success"}
+    current_users_uname=session.get("username") #checking session to see if username is in session in general 
+    print(f"******************current_user:{current_users_uname}*****************")
+    # favorite_status=request.form.get("favorite_status")
+    # favorite=request.form.get("favorite") #just what the value put into that button click? this si why i want to do checkbox
+    if current_users_uname is None:
+        flash("You must log in to favorite a museum.")
+    # elif not favorite_status: #if theres no score, see if required or not
+    #     flash("Error: you didn't select a score for your rating.")
+    else:
+        patron = crud.patron_uname_lookup(current_users_uname) #get patron that has uname to do id method retrieval
+        print(f"*****************patron={patron}*****************")
+        museum_fave=crud.create_museum_fave(patron.p_id, museum_id)
+        print(f"*****************museumid_type={type(museum_id)}*****************")
+
+        db.session.add(museum_fave)
+        db.session.commit()
+    # return render_template("/museumdirectory/<museum_id>/museumfavorites")
+    return response
+
+
+
+
+
+
+
+
+
+
+#get fave by id FOR NOW....i want to avoid clicking to too many pages...
+#idealy it could be some sort of link type situation! art faves, collection faves, sounds and museums
+
+# #^^^do i need a view function per favorite category? or is this a click evt card situation?
+# # def view_patrons_art_fave():
+# # def view_patrons_coll_fave():
+# # def view_patrons_museum_fave():
+# # def view_patrons_related_sounds_fave():
+#filtering?
+
+# @app.route("/users/<user_id>/<rating_id>", methods=["POST"])
+# def show_ratings(user_id): #DONE, for server
+#     user=crud.get_user_by_id(user_id)####
+#     id=user.user_id
+#     answer=request.form("favorited")
+#     favorite=crud.add_fave(answer)
+#     #AJAX
+
 #if count of patron.art_Faves==0: render template 1, asks where are the faves or has a qoute or bob ross 
 #if count of any faves > 1: show the version of patron profil with faves and show faves!
 
@@ -164,27 +223,6 @@ def view_patron_page(p_id):
 #     """Favorite sounds"""
 # 	#some type of ajax that will fulfill a trip to db to get the fave and rerender result query on page"
 #     return redirect(f'patron-profile.html') 
-
-
-############################################################################################################
-#                                                                                                          #
-#                                           FAVORITES                                                      #
-#                                             TBD                                                          #
-#                                   /profile/patron1/art-fave-1                                            #
-#                                                                                                          #
-############################################################################################################
-
-#get fave by id FOR NOW....i want to avoid clicking to too many pages...
-#idealy it could be some sort of link type situation! art faves, collection faves, sounds and museums
-
-# #^^^do i need a view function per favorite category? or is this a click evt card situation?
-# # def view_patrons_art_fave():
-# # def view_patrons_coll_fave():
-# # def view_patrons_museum_fave():
-# # def view_patrons_related_sounds_fave():
-#filtering?
-
-
 
 
 
@@ -297,4 +335,33 @@ def lone_collection(id): #it eing the url also passes it to the function
 if __name__ == "__main__":
     # from model import connect_to_db
     connect_to_db(app)
-    app.run(debug=True, host="0.0.0.0") #change when deploying FIX ME
+    app.run(debug=True, host="0.0.0.0", port=5005) #change when deploying FIX ME
+
+
+
+
+    ###before i created a successful button w/ evt listener!!
+    # @app.route("/museumdirectory/<museum_id>/museumfavorites", methods=["POST"]) #id is PK, museum_id is FK
+# def add_m_fave(museum_id):
+#     """create museum fave on museum deets page"""
+#     current_users_uname=session.get("username")
+#     # favorite_status=request.form.get("favorite_status")
+#     # faves=[] #empty list that i can loop over in jinja2 elsewhere?
+#     #-----------> how to retrieve button click? <--------------------
+#     # favorite=request.form.get("favorite") #just what the value put into that button click? this si why i want to do checkbox
+#     if current_users_uname is None:
+#         flash("You must log in to favorite a museum.")
+#     # elif not favorite_status: #if theres no score, see if required or not
+#     #     flash("Error: you didn't select a score for your rating.")
+#     else:
+#         patron = crud.patron_uname_lookup(current_users_uname)
+        # museum_id=crud.get_museum_by_id(museum_id) #passed in from url
+#         museum_fave=crud.create_museum_fave(museum_id,patron.id)
+#         db.session.add(museum_fave)
+#         db.session.commit()
+
+#     # if favorite:
+#     #     faves.append(favorite)
+#     #     db.session.add(favorite)
+#     #     db.sesion.commit()
+#     # return render_template("/museumdirectory/<museum_id>/museumfavorites")
