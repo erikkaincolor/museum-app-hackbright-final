@@ -1,7 +1,6 @@
 "This file manipulates the data in the db, saves to it, and reads/queries it via execution functions"
 
 from model import Patron, CollectionFave, ArtFave, RelatedSoundFave, MuseumFave, Collection, RelatedSound, CollectionSound, ArtObject, Museum, connect_to_db, db
-
 #either say .first or .all to get either one or all <----collection 
 #.get would get it by key <---refer to cats demo lecture
 #patron= Patron.query.get(patron_id) <---looking up by PK only bc its special, doesnt really translate to unames unique constraint
@@ -39,13 +38,32 @@ def create_patron(uname, fname, lname, email, pword): #DONE
 
 # THIS IS CORRECT-DONT CHANGE
 def create_museum_fave(patron_id, museum_id):
-    """create a museum favorite..seed db side abd server side"""
+    """create a museum favorite..seed db side and server side"""
     museum_fave=MuseumFave(patron_id=patron_id, museum_id=museum_id)
     return museum_fave
 
+
+#havent shown proof they work for server:
+# def update_museum_fave(patron_id):
+#     #if museumfave exists for this patron already
+#     #delete all except one
+#     #if patron id in db matches the given one:
+#     multiples=[]
+#     if MuseumFave.query.filter(MuseumFave.patron_id == patron_id).one() is False: #if theres more than one
+#         multiples[1:].append(patron_id) #skip first occurance
+#         return multiples
+
+# def lookup_muse_fave_id(patron_id):
+#     return MuseumFave.query.get(patron_id)
+
+#not tested:
 # def update_museum_fave(old_favorite=True, patron_id):
 #     pass
 #     return 
+
+#maybe create a get museum_fave by patron_id to see if patronid is already attached to that particular museums id
+
+
 
 
 

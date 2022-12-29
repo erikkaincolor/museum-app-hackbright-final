@@ -144,7 +144,7 @@ def view_patron_page(p_id):
 #                                   /profile/patron1/art-fave-1                                            #
 #                                                                                                          #
 ############################################################################################################
-
+# this works prefectly fine as of 12/28...it just lets u favorite multiple times smh
 @app.route("/museumdirectory/<int:museum_id>/museumfavorites", methods=["POST"]) #id is PK, museum_id is FK
 def add_m_fave(museum_id):
     """create museum fave on museum deets page"""
@@ -156,6 +156,8 @@ def add_m_fave(museum_id):
         flash("You must log in to favorite a museum.")
         #find out the on-page replacement for this
     else:
+        #if looged in and not favorited
+        #if looged in and favortied, be able to unfavorite
         patron = crud.patron_uname_lookup(current_users_uname) #get patron that has uname to do id method retrieval
         print(f"*****************patron={patron}*****************")
         museum_fave=crud.create_museum_fave(patron.p_id, museum_id)
@@ -166,9 +168,37 @@ def add_m_fave(museum_id):
     # return render_template("/museumdirectory/<museum_id>/museumfavorites")
     return response
 
+#this version is a test to allow user to only favorite item 1x
+# #this is a test to see if favorite can be removed
 
-
-
+# @app.route("/museumdirectory/<int:museum_id>/museumfavorites", methods=["POST"]) #id is PK, museum_id is FK
+# def add_m_fave(museum_id):
+#     """create museum fave on museum deets page"""
+#     print("******************HIIIIIII*****************")
+#     response={1:"success"}
+#     current_users_uname=session.get("username") #checking session to see if username is in session in general 
+#     print(f"******************current_user:{current_users_uname}*****************")
+#     if current_users_uname is None:
+#         flash("You must log in to favorite a museum.")
+#         #find out the on-page replacement for this
+#     else:
+#         #if looged in and not favorited
+#         #if looged in and favortied, be able to unfavorite
+#         patron = crud.patron_uname_lookup(current_users_uname) #get patron that has uname to do id method retrieval
+#         print(f"*****************patron={patron}*****************")
+#         museum_fave=crud.create_museum_fave(patron.p_id, museum_id)
+#         print(f"*****************museumid_type={type(museum_id)}*****************")
+#         muse_fave= crud.lookup_muse_fave_id(patron.p_id)
+#         #CODE WORKS UNTIL HERE
+#         # if session['patron_id'] in muse_fave.patron_id:
+#         if session['patron_id'] in muse_fave.patron_id:
+#             print(f"FOUND") #IT PRINTED ;)
+#             #new new
+#             #look it up, verify its in there and delete
+#             db.session.delete(museum_fave[1:]) #essentially, delete all but first
+#             db.session.commit()
+#      # return render_template("/museumdirectory/<museum_id>/museumfavorites")
+#     return response
 
 
 
@@ -233,7 +263,7 @@ def add_m_fave(museum_id):
 #                                                                                                          #
 ############################################################################################################
 
-@app.route('/museumdirectory', methods = ['GET'])
+@app.route('/museumdirectory', methods = ['GET']) #removed post on 12/28
 def view_museums():
     """view museum table list with static header"""
     museums = crud.get_museums()

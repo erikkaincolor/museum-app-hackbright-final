@@ -9,21 +9,35 @@
         <!-- Your custom styles -->
         <link rel="stylesheet" href="/static/css/mystyles.css">
 </head>
-<body><div class="container">{# Display flash messages, if any, for all pages #}
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul class='flashes'>
-        {% for message in messages %}<li>{{ message }}</li>
-        {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
-    {% block content %}
-  <!-- Bootstrap JavaScript Bundle with Popper (a Bootstrap dependency for popovers) -->
-  {% endblock %}<script src="/static/js/bootstrap.bundle.min.js"></script>
-  <div class="row">
-  <footer>Erikka Polk's Hackbright Engineering Final Project! 2022</footer></div>
-{% block script %}</div>{% endblock %}
+
+<body>
+    <div class="container">
+        {# Display flash messages, if any, for all pages #}
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class='flashes'>
+            {% for message in messages %}<li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+
+
+
+
+
+        {% block content %}{% endblock %}
+
+
+
+
+        
+        <footer>Erikka Polk's Hackbright Engineering Final Project! 2022</footer>
+        {% block script %} 
+        <!-- Bootstrap JavaScript Bundle with Popper (a Bootstrap dependency for popovers) -->
+        <script src="/static/js/bootstrap.bundle.min.js"></script>
+        {% endblock %}
+    </div>
 </body>
 </html>
 
