@@ -3,14 +3,23 @@
 {% block title %}{{ patron.uname }}'s Profile{% endblock %}
 
 {% block content %}
+<div class="row">
+<div class="col">
     <h1>{{ patron.uname }}'s Profile</h1>
-  <h2>Hi, {{ patron.uname }}!</h2>
-  <h2>{{ patron.uname }}</h2>
-  <p>I'm a paragraph!</p>
+    <h2>Hi, {{ patron.uname }}!</h2>
+    <h2>{{ patron.uname }}</h2>
+    <p>I'm a paragraph!</p>
+</div>
+</div>
 
-  <ul>
+<div class="row">
+<div class="col">
+    <ul>
     <li><a href="/museumdirectory">View all museums</a></li>
     <li><a href="/collections">View all collections</a></li>
     <!--<li><a href="/audio-guide">View all audio guides</a></li> -->
-  </ul>
+    </ul>
+</div>
+</div>
+
 {% endblock %}

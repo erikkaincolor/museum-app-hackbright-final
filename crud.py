@@ -31,6 +31,11 @@ def create_patron(uname, fname, lname, email, pword): #DONE
 #                                                                                                          #
 ############################################################################################################
 
+#show faves on patron prodile:
+def get_m_fave_by_patron_id(patron_id):
+    return MuseumFave.query.get(patron_id)
+
+
 # -create MuseumFave /museum crud function
 # -update MuseumFave /update-favoite, via ajax later
 # -add faves to patron profile /patron-profile/{patron.id}/favorite
@@ -64,6 +69,12 @@ def create_museum_fave(patron_id, museum_id):
 #maybe create a get museum_fave by patron_id to see if patronid is already attached to that particular museums id
 
 
+
+#works as of 12/28:
+def create_collection_fave(patron_id, collection_id):
+    """create a museum favorite..seed db side and server side"""
+    collection_fave=CollectionFave(patron_id=patron_id, collection_id=collection_id)
+    return collection_fave
 
 
 

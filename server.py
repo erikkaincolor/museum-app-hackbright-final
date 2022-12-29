@@ -136,6 +136,16 @@ def view_patron_page(p_id):
     return render_template("patron-profile.html", patron=patron) 
 
 
+@app.route("/profile/<int:p_id>/patronfavorites", methods=["POST"]) #id is PK, museum_id is FK
+def add_m_fave_to_profile(patron_id):
+    """show fave on patron deets page"""
+    museumfave=crud.get_m_fave_by_patron_id(patron_id)
+    return render_template("patron-profile.html", fave=museumfave) 
+
+
+
+
+
 
 ############################################################################################################
 #                                                                                                          #
@@ -171,6 +181,9 @@ def add_m_fave(museum_id):
 #this version is a test to allow user to only favorite item 1x
 # #this is a test to see if favorite can be removed
 
+# need to consider before queue: id is PK, museum_id is FK, try adding a route and passing 
+# in patron_id as the fk to museumfave! itll be the view functions parameter
+
 # @app.route("/museumdirectory/<int:museum_id>/museumfavorites", methods=["POST"]) #id is PK, museum_id is FK
 # def add_m_fave(museum_id):
 #     """create museum fave on museum deets page"""
@@ -202,6 +215,39 @@ def add_m_fave(museum_id):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+@app.route("/collections/<int:collection_id>/collectionfavorites", methods=["POST"]) 
+def add_c_fave(collection_id):
+    """create collection fave on collection deets page"""
+    print("******************HIIIIIII*****************")
+    response={1:"success"}
+    current_users_uname=session.get("username") #checking session to see if username is in session in general 
+    print(f"******************current_user:{current_users_uname}*****************")
+    if current_users_uname is None:
+        flash("You must log in to favorite a museum.")
+        #find out the on-page replacement for this
+    else:
+        #if looged in and not favorited
+        #if looged in and favortied, be able to unfavorite
+        patron = crud.patron_uname_lookup(current_users_uname) #get patron that has uname to do id method retrieval
+        print(f"*****************patron={patron}*****************")
+        collection_fave=crud.create_collection_fave(patron.p_id, collection_id)
+        print(f"*****************museumid_type={type(collection_id)}*****************")
+
+        db.session.add(collection_fave)
+        db.session.commit()
+    # return render_template("/museumdirectory/<museum_id>/museumfavorites")
+    return response
 
 
 

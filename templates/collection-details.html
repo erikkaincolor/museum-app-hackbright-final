@@ -9,5 +9,12 @@
     HIIIIII
     {{ collection.description }}
 </p>
+<p>
+    <button value="{{collection.id}}">Add to favorites </button>
+    
+</p>
 
+{% endblock %}
+{% block script %}
+<script src="/static/js/collection_favorite.js"></script>  
 {% endblock %}
