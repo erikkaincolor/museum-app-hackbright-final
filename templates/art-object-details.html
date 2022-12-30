@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ collection.name }} - Details{% endblock %}
+
+{% block content %}
+<h1>Collection's Art Object #1:</h1>
+<h2>{{ collection.name }}</h2>
+<p>
+    Collection info
+    {{ collection.description }}
+</p>
+<p>
+    Art object 1 of 3 deets
+    {{ collection.description }}
+</p>
+<p>
+    <button value="{{art.id}}">Add to favorites </button>
+    
+</p>
+
+{% endblock %}
+{% block script %}
+<script src="/static/js/artobject_favorite.js"></script>  
+{% endblock %}

@@ -17,7 +17,26 @@ from model import Patron, CollectionFave, ArtFave, RelatedSoundFave, MuseumFave,
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ##########CRUD FOR SEEDING
+#works
 def create_patron(uname, fname, lname, email, pword): #DONE
     """create patron object 1x so seed can repeatedly"""
     patron=Patron(uname=uname, fname=fname, lname=lname, email=email, pword=pword)
@@ -31,22 +50,43 @@ def create_patron(uname, fname, lname, email, pword): #DONE
 #                                                                                                          #
 ############################################################################################################
 
-#show faves on patron prodile:
-def get_m_fave_by_patron_id(patron_id):
-    return MuseumFave.query.get(patron_id)
+#works
+def create_museum_fave(patron_id, museum_id): #fk's to museum faves
+    """create a museum favorite..seed db side and server side"""
+    museum_fave=MuseumFave(patron_id=patron_id, museum_id=museum_id)
+    return museum_fave
 
+
+#works
+def create_collection_fave(patron_id, collection_id): #fk's to collection faves
+    """create a museum favorite..seed db side and server side"""
+    collection_fave=CollectionFave(patron_id=patron_id, collection_id=collection_id)
+    return collection_fave
+
+#WIP/ create art object fave on collection deets page
+# def create_art_fave(patron_id, art_id): #fk's to art faves
+#     """create an art object favorite..seed db side and server side"""
+#     art_fave=ArtFave(patron_id=patron_id, art_id=art_id)
+#     return art_fave
+
+
+
+
+
+
+
+
+
+
+
+#WIP/show faves on patron prodile:
+# def get_m_fave_by_patron_id(patron_id):
+#     return MuseumFave.query.get(patron_id)
 
 # -create MuseumFave /museum crud function
 # -update MuseumFave /update-favoite, via ajax later
 # -add faves to patron profile /patron-profile/{patron.id}/favorite
 # -this form and button will show up on museum details, collection details and art object details
-
-# THIS IS CORRECT-DONT CHANGE
-def create_museum_fave(patron_id, museum_id):
-    """create a museum favorite..seed db side and server side"""
-    museum_fave=MuseumFave(patron_id=patron_id, museum_id=museum_id)
-    return museum_fave
-
 
 #havent shown proof they work for server:
 # def update_museum_fave(patron_id):
@@ -70,11 +110,27 @@ def create_museum_fave(patron_id, museum_id):
 
 
 
-#works as of 12/28:
-def create_collection_fave(patron_id, collection_id):
-    """create a museum favorite..seed db side and server side"""
-    collection_fave=CollectionFave(patron_id=patron_id, collection_id=collection_id)
-    return collection_fave
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -85,19 +141,22 @@ def create_collection_fave(patron_id, collection_id):
 #                                                                                                          #
 ############################################################################################################
 
+#works
 def patron_id_lookup(p_id): #DONE #in order to call,  id have to know id
     """get patron by id"""
     return Patron.query.get(p_id)
 
-
+#works
 def patron_uname_lookup(uname): #DONE #in order to call,  id have to know uname
     """get patron by uname"""
     return Patron.query.filter(Patron.uname == uname).first()
 
-# def create_account(uname, pword):
-#     patron=Patron(uname=uname, pword=pword)
-#     return patron
+#works
+def patron_email_lookup(email): #DONE #in order to call,  id have to know uname
+    """get patron by uname"""
+    return Patron.query.filter(Patron.email == email).first()
 
+#works
 def create_account(uname, fname, lname, email, pword): #DONE
     """create patron object 1x so seed can repeatedly"""
     patron=Patron(uname=uname, fname=fname, lname=lname, email=email, pword=pword)
@@ -111,8 +170,26 @@ def create_account(uname, fname, lname, email, pword): #DONE
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ##########CRUD FOR SEEDING
-# CREATE Collection, #DONE the logic will just be that the brooklyn museum let 4 museums borrow 3 art objects per colelction.
+
+#works
 def create_collection(coll_category, name, description, curator, era):
     """create collection object 1x so seed can repeatedly"""
     collection= Collection(coll_category=coll_category,name=name,description=description,curator=curator, era=era)
@@ -126,10 +203,12 @@ def create_collection(coll_category, name, description, curator, era):
 #                                                                                                          #
 ############################################################################################################
 
-def get_collections(): #DONE
+#works
+def get_collections(): 
     """read all collection data..collections that ill for loop through in jinja once i pass it into view func""" 
     return Collection.query.all()
 
+#works
 def get_collection_id(id): #DONE
     """read all collection data..collections that ill for loop through in jinja once i pass it into view func""" 
     return Collection.query.get(id)
@@ -159,7 +238,25 @@ def get_collection_id(id): #DONE
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ##########CRUD FOR SEEDING
+#works
 def create_museum(name, city, state, country, collection_id): #DONE
     """create museum object 1x so seed can repeatedly"""
     museum=Museum(name=name, city=city, state=state, country=country, collection_id=collection_id) #removed 'collection=c1'
@@ -172,11 +269,13 @@ def create_museum(name, city, state, country, collection_id): #DONE
 #                                                                                                          #
 ############################################################################################################
 
-def get_museums(): #DONE
+#works
+def get_museums():
     """read all museum data..collections that ill for loop through in jinja once i pass it into view func""" 
     return Museum.query.all()
     
-def get_museum_by_id(id): #DONE
+#works
+def get_museum_by_id(id):
     """read all museum data..collections that ill for loop through in jinja once i pass it into view func""" 
     return Museum.query.get(id)
     
@@ -192,7 +291,20 @@ def get_museum_by_id(id): #DONE
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 ##########CRUD FOR SEEDING
+#works
 def create_art_object(artist, title, medium, description, era, collection_id): #DONE
     """create art object 1x so seed can repeatedly"""
     art_obj=ArtObject(artist=artist, title=title, medium=medium, description=description, era=era, collection_id=collection_id) #add c3, c2
@@ -246,6 +358,25 @@ def create_art_object(artist, title, medium, description, era, collection_id): #
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ##########CRUD FOR SEEDING
 #def create_related_sound(medium, sound_name, description, genre, museum_id): #DONE
 # """create related_sound object 1x so seed can repeatedly"""# related_sound=RelatedSound(medium=medium, sound_name=sound_name,  description=description, genre=genre, museum_id=museum_id) #add m3, m2
@@ -273,6 +404,22 @@ def create_art_object(artist, title, medium, description, era, collection_id): #
 #   QUERY-#   """as a patron i want to view more info about a indiviual Collection's 4-5 related sounds"""
 #   sounds_list=RelatedSound.query.all()
 #   sound=RelatedSound(medium, sound_name, description, museum) #add m3, m2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

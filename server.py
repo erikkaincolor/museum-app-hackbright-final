@@ -2,48 +2,37 @@
 
 from flask import (Flask, render_template, request, flash, session, redirect, jsonify)
 import crud
-from jinja2 import StrictUndefined #setting to make it throw errors for undefined variables
-from model import connect_to_db, db #so i can register users via db.session.add/commit
+from jinja2 import StrictUndefined 
+from model import connect_to_db, db 
 #import os <-----may not need 
 #import requests <----is this diff from flask request object?
 
 app = Flask(__name__)
 app.jinja_env.undefined=StrictUndefined
-app.secret_key = 'RANDOM SECRET KEY' #key doesnt matter it just needs one...for sites with
-# security concerns, make sure this isn't checked into a
-# public place like GitHub
+app.secret_key = 'RANDOM SECRET KEY'
 
 ################################################################################################
 #   -num- -done?-   -route-                
-    # 1             # http://10.0.90:5000/                      # Landing page with buttons!
-    # 2             # http://10.0.90:5000/login                 # Users can log in with their account credentials
-    # 3             # http://10.0.90:5000/patron/p1             # View the details of one patron (a.k.a. the user’s profile page)
-    # 5             #     /profile/patron1/art-fave-1           # Users that have logged in can fave art objects, collections, museums and sounds....use cards, art_fave_id, coll_fave id, museum_fave_id, sound_fave_id  
-    # 6     x        # http://10.0.90:5000/museumdirectory       # View a list of all museums
-    # 7             #     /museumdirectory/museum-1             # Click evt allows u to view the details of one museum
-    # 8     x        # http://10.0.90:5000/collections           # View a list of all collections
-    # 9             #     /collections/1                        # Click evt allows u to view the details of one collection
-    # 10            #     /collections/1/artobject-1            # Click evt allows u to view the details of one art object 
-    # 11            #     /collections/collection-sounds1       # Click evt allows u to view the details of one sound
-    # 12    x        # http://10.0.90:5000/audio-guide           # View a list of all related sounds to a museum
-    # 13            #     /audio-guide/1                        # Click evt allows u to view the details of one sound              
+    # 1     x        # http://10.0.90:5000/                         # Landing page
+    # 2     x        # http://10.0.90:5000/login                    # Patron login
+    # 3     x        # http://10.0.90:5000/patron/<p_id>            # Patron profile page
+    # 4     x        # http://10.0.90:5000/register                 # Register now!
+    # 5              #     /profile/1/<*artfave* id>        x4      # Patron's fave art objects, collections, museums and sounds
+    # 6     x        # http://10.0.90:5000/museumdirectory          # View a list of all museums
+    # 7     x        #     /museumdirectory/<museum_id>             # View the details of one museum
+    # 8              #     /museumdirectory/<museum_id>/audio-guide # View sounds of one museum
+
+    # 9, 10        ****one route will direct users to sound deets! patrons coming from one museum deets og and those coming from audio guide list page
+
+    # 11    x        # http://10.0.90:5000/collections              # View a list of all collections
+    # 12    1/2      #     /collections/<collection_id>             # View the art objects of one collection
+    # 13    API      #     /collections/1/artobjects                # may be similar to register in that it displays art objects from api          
+    # 14             #     /collections/1/artobjects/<art_id>       # View the details of one art object in a collection
+    # 15     .25     #     /collections/collection-sounds1          # View the sounds of one collection
+    # 16             # http://10.0.90:5000/audio-guide              # View a list of all sounds <- a "list" for now
+    # **             #     /audio-guide/1                           # *****View the details of one sound****              
+    # 14    x
 ################################################################################################
-
-# - [x] Display entire collection table to screen in a list
-#     - [x] Display all sounds columns when clicked
-#     - [x] When clicked, display all art objects columns on individual collection page
-#     - [x] Return items=show_collection
-#     - [x] Show_collection=Collection.query.get all
-
-#GOAL 2, display museum list, make clickable, and related sound:
-# - [ ] Display entire museums table as a list on museums page, each is clickable
-#     - [ ] Display more info on individual related_sound record per selected museum
-
-#QTNA:
-#...is there a way to prepend 'art-fave' to the front of an id in a route?
-# #@app.route('/<int: related_sound_id>', methods = ['GET', 'POST']) #/sound1
-# @app.route('/audio-guide/related-sound<int: related_sound_id>', methods = ['GET', 'POST'])
-#...or some sort of sticky container with border that is scrollable?
 
 ############################################################################################################
 #                                                                                                          #
@@ -52,11 +41,16 @@ app.secret_key = 'RANDOM SECRET KEY' #key doesnt matter it just needs one...for 
 #                                                                                                          #
 ############################################################################################################
 
+#works
 @app.route('/')
 def index():
     """Displays content of the week and maybe embedded news or the like app page directory, navigation to patron profile, museum list, collection list, audio guide list"""
 
     return render_template('index.html')
+
+
+
+
 
 
 
@@ -75,33 +69,33 @@ def index():
 #                                                                                                          #
 ############################################################################################################
 
+#works
 @app.route('/login')
 def view_login():
 	"""Patron Log-in, has form on this page....only logged in patrons can favorite items"""
 	return render_template('login.html')
 
-
+#works
 @app.route('/login',methods=['POST']) #uses form data, form from login.html routes here
 def login_prompt():
     """Server request for login info from client"""
     uname = request.form['username']
-    session['username']= request.form['username'] #using later for favorites for logged in users
+    session['username']= request.form['username'] #####################
     pword = request.form['password']
 
-    patron=crud.patron_uname_lookup(uname) #<---this takes form input to db....makes the function return a patron obj, i now can access its attr
+    patron=crud.patron_uname_lookup(uname) #<---i now can access its attr
     if patron and patron.pword==pword:
         flash(f'Logged in as {uname}')
         session['patron_id'] = patron.p_id #logged in or not depends on where session is globally/locally
         return redirect(f"/profile/{patron.p_id}")
     else:
-        flash("Wrong email or password, try again")
-        return redirect('/')
-    #fix incorrect login taking you to error page
+        flash("Wrong username or password, try again")
+        return redirect('/login')
 
     #the session is like an identifier...my gmail vs someone elses
 	# session['current_user'] = username, for where i want it to show up again
 
-
+#works
 @app.route('/register',methods=['POST']) #uses form data, form from login.html routes here
 def register():
     """Server request for registration info from client"""
@@ -111,166 +105,43 @@ def register():
     lname = request.form['lname']  
     pword = request.form['pword']
      
-    patron=crud.patron_uname_lookup(uname) 
+    patron=crud.patron_uname_lookup(uname)
+    patron_obj2=crud.patron_email_lookup(email)
 
-    if patron: #if uname iis not in db, create account
-        flash("A user with that username exists!")
-    # elif 
-    # patron.email in email: need a crud.get_user_by_email(email)
-    #     flash("A user with that username exists!")
-    # elif patron is False:
-    else:
+    if patron: #if uname is in db, error
+        flash("A user with that username exists. Try again please.")
+    elif patron_obj2.email: #if email is in db, error
+        flash("A user with that email exists. Try again please.")
+    else: #if email or uname is not in db, create account
         new_user=crud.create_account(uname, fname, lname, email, pword)
         db.session.add(new_user)
         db.session.commit()
         flash("Your account was created successfully and you can now log in.")
     return redirect('/login')
 
-
-@app.route("/profile/<int:p_id>")
+#works
+@app.route("/profile/<p_id>") #works w/o "int:"
 def view_patron_page(p_id):
     """shows name and info"""
-    patron=crud.patron_id_lookup(p_id) #.first() fetched this record object via id
-    session['patron_id'] = patron.p_id #this for telling the profil page its a user
-    # username = request.cookies['username']
+    patron=crud.patron_id_lookup(p_id) 
+    session['patron_id'] = patron.p_id #this for telling the profile page its a user
+    # username = request.cookies['username'] ??????
     return render_template("patron-profile.html", patron=patron) 
 
-
-@app.route("/profile/<int:p_id>/patronfavorites", methods=["POST"]) #id is PK, museum_id is FK
+#WIP
+@app.route("/profile/<p_id>/patronfavorites", methods=["POST"]) #id is PK, museum_id is FK
 def add_m_fave_to_profile(patron_id):
     """show fave on patron deets page"""
     museumfave=crud.get_m_fave_by_patron_id(patron_id)
     return render_template("patron-profile.html", fave=museumfave) 
 
 
-
-
-
-
-############################################################################################################
-#                                                                                                          #
-#                                           FAVORITES                                                      #
-#                                             TBD                                                          #
-#                                   /profile/patron1/art-fave-1                                            #
-#                                                                                                          #
-############################################################################################################
-# this works prefectly fine as of 12/28...it just lets u favorite multiple times smh
-@app.route("/museumdirectory/<int:museum_id>/museumfavorites", methods=["POST"]) #id is PK, museum_id is FK
-def add_m_fave(museum_id):
-    """create museum fave on museum deets page"""
-    print("******************HIIIIIII*****************")
-    response={1:"success"}
-    current_users_uname=session.get("username") #checking session to see if username is in session in general 
-    print(f"******************current_user:{current_users_uname}*****************")
-    if current_users_uname is None:
-        flash("You must log in to favorite a museum.")
-        #find out the on-page replacement for this
-    else:
-        #if looged in and not favorited
-        #if looged in and favortied, be able to unfavorite
-        patron = crud.patron_uname_lookup(current_users_uname) #get patron that has uname to do id method retrieval
-        print(f"*****************patron={patron}*****************")
-        museum_fave=crud.create_museum_fave(patron.p_id, museum_id)
-        print(f"*****************museumid_type={type(museum_id)}*****************")
-
-        db.session.add(museum_fave)
-        db.session.commit()
-    # return render_template("/museumdirectory/<museum_id>/museumfavorites")
-    return response
-
-#this version is a test to allow user to only favorite item 1x
-# #this is a test to see if favorite can be removed
-
-# need to consider before queue: id is PK, museum_id is FK, try adding a route and passing 
-# in patron_id as the fk to museumfave! itll be the view functions parameter
-
-# @app.route("/museumdirectory/<int:museum_id>/museumfavorites", methods=["POST"]) #id is PK, museum_id is FK
-# def add_m_fave(museum_id):
-#     """create museum fave on museum deets page"""
-#     print("******************HIIIIIII*****************")
-#     response={1:"success"}
-#     current_users_uname=session.get("username") #checking session to see if username is in session in general 
-#     print(f"******************current_user:{current_users_uname}*****************")
-#     if current_users_uname is None:
-#         flash("You must log in to favorite a museum.")
-#         #find out the on-page replacement for this
-#     else:
-#         #if looged in and not favorited
-#         #if looged in and favortied, be able to unfavorite
-#         patron = crud.patron_uname_lookup(current_users_uname) #get patron that has uname to do id method retrieval
-#         print(f"*****************patron={patron}*****************")
-#         museum_fave=crud.create_museum_fave(patron.p_id, museum_id)
-#         print(f"*****************museumid_type={type(museum_id)}*****************")
-#         muse_fave= crud.lookup_muse_fave_id(patron.p_id)
-#         #CODE WORKS UNTIL HERE
-#         # if session['patron_id'] in muse_fave.patron_id:
-#         if session['patron_id'] in muse_fave.patron_id:
-#             print(f"FOUND") #IT PRINTED ;)
-#             #new new
-#             #look it up, verify its in there and delete
-#             db.session.delete(museum_fave[1:]) #essentially, delete all but first
-#             db.session.commit()
-#      # return render_template("/museumdirectory/<museum_id>/museumfavorites")
-#     return response
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@app.route("/collections/<int:collection_id>/collectionfavorites", methods=["POST"]) 
-def add_c_fave(collection_id):
-    """create collection fave on collection deets page"""
-    print("******************HIIIIIII*****************")
-    response={1:"success"}
-    current_users_uname=session.get("username") #checking session to see if username is in session in general 
-    print(f"******************current_user:{current_users_uname}*****************")
-    if current_users_uname is None:
-        flash("You must log in to favorite a museum.")
-        #find out the on-page replacement for this
-    else:
-        #if looged in and not favorited
-        #if looged in and favortied, be able to unfavorite
-        patron = crud.patron_uname_lookup(current_users_uname) #get patron that has uname to do id method retrieval
-        print(f"*****************patron={patron}*****************")
-        collection_fave=crud.create_collection_fave(patron.p_id, collection_id)
-        print(f"*****************museumid_type={type(collection_id)}*****************")
-
-        db.session.add(collection_fave)
-        db.session.commit()
-    # return render_template("/museumdirectory/<museum_id>/museumfavorites")
-    return response
-
-
-
-#get fave by id FOR NOW....i want to avoid clicking to too many pages...
-#idealy it could be some sort of link type situation! art faves, collection faves, sounds and museums
-
-# #^^^do i need a view function per favorite category? or is this a click evt card situation?
-# # def view_patrons_art_fave():
-# # def view_patrons_coll_fave():
-# # def view_patrons_museum_fave():
-# # def view_patrons_related_sounds_fave():
+# #^^^in html, implement these faves into maybe an aside menu or a click evt card situation?
+# # def add_art_fave():
+# # def add_coll_fave():
+# # def add_related_sounds_fave():
 #filtering?
 
-# @app.route("/users/<user_id>/<rating_id>", methods=["POST"])
-# def show_ratings(user_id): #DONE, for server
-#     user=crud.get_user_by_id(user_id)####
-#     id=user.user_id
-#     answer=request.form("favorited")
-#     favorite=crud.add_fave(answer)
-#     #AJAX
-
-#if count of patron.art_Faves==0: render template 1, asks where are the faves or has a qoute or bob ross 
-#if count of any faves > 1: show the version of patron profil with faves and show faves!
 
 # @app.route('/profile/<int:p_id>/art-fave/{ArtFave.patron_id}', methods = ['GET', 'POST'])
 # def view_patrons_art_fave():
@@ -301,6 +172,182 @@ def add_c_fave(collection_id):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+############################################################################################################
+#                                                                                                          #
+#                                           FAVORITES                                                      #
+#                                             TBD                                                          #
+#                                   /profile/patron1/art-fave-1                                            #
+#                                                                                                          #
+############################################################################################################
+
+#    session['patron_id'] = patron.p_id #this for telling the profile page its a user
+#    current_users_id=session.get("p_id") #id (not username) might be needed in view func for viewing favoriting
+#    would be helpful to be logged in and print sessions dict, so far, to terminal
+
+# need to consider before queue: id is PK, museum_id is FK, try adding a route and passing 
+# in patron_id as the fk to museumfave! itll be the view functions parameter
+
+#get fave by id FOR NOW....i want to avoid clicking to too many pages...
+#idealy it could be some sort of link type situation! art faves, collection faves, sounds and museums
+
+#below: google how to count rows in a table?
+#if count of patron.art_Faves==0: render template 1, asks where are the faves or has a qoute or bob ross 
+#if count of any faves > 1: show the version of patron profil with faves and show faves!
+
+#movie ratings app example:
+# @app.route("/users/<user_id>/<rating_id>", methods=["POST"])
+# def show_ratings(user_id): #DONE, for server
+#     user=crud.get_user_by_id(user_id)####
+#     id=user.user_id
+#     answer=request.form("favorited")
+#     favorite=crud.add_fave(answer)
+#     #AJAX
+
+
+
+
+
+
+
+# works...it just lets u favorite multiple times smh
+@app.route("/museumdirectory/<int:museum_id>/museumfavorites", methods=["POST"])
+def add_m_fave(museum_id):
+    """create museum fave on museum deets page"""
+    response={1:"success"}
+    current_users_uname=session.get("username") #username needed for favoriting
+    
+    if current_users_uname is None:
+        flash("You must log in to favorite a museum.")
+    else:
+        patron = crud.patron_uname_lookup(current_users_uname)
+        museum_fave=crud.create_museum_fave(patron.p_id, museum_id)
+        #figure out how to only do 1x HERE
+        #how to get data from client to only commit to db one time via view function python
+        db.session.add(museum_fave)
+        db.session.commit() #db.session.delete?
+    return response
+
+#this version below is a test to allow user to only favorite item 1x
+# do another test to see if favorite can be removed
+
+# @app.route("/museumdirectory/<int:museum_id>/museumfavorites", methods=["POST"]) #id is PK, museum_id is FK
+# def add_m_fave(museum_id):
+#     """create museum fave on museum deets page"""
+#     response={1:"success"}
+#     current_users_uname=session.get("username") #checking session to see if username is in session in general 
+#     if current_users_uname is None:
+#         flash("You must log in to favorite a museum.")
+#         #find out the on-page replacement for this
+#     else:
+#         #if looged in and not favorited
+#         #if looged in and favortied, be able to unfavorite
+#         patron = crud.patron_uname_lookup(current_users_uname) #get patron that has uname to do id method retrieval
+#         print(f"*****************patron={patron}*****************")
+#         museum_fave=crud.create_museum_fave(patron.p_id, museum_id)
+#         print(f"*****************museumid_type={type(museum_id)}*****************")
+#         muse_fave= crud.lookup_muse_fave_id(patron.p_id)
+#         #CODE WORKS UNTIL HERE
+#         # if session['patron_id'] in muse_fave.patron_id:
+#         if session['patron_id'] in muse_fave.patron_id:
+#             print(f"FOUND") #IT PRINTED ;)
+#             #new new
+#             #look it up, verify its in there and delete
+#             db.session.delete(museum_fave[1:]) #essentially, delete all but first
+#             db.session.commit()
+#      # return render_template("/museumdirectory/<museum_id>/museumfavorites")
+#     return response
+
+
+#works perfectly fine as of 12/28
+@app.route("/collections/<int:collection_id>/collectionfavorites", methods=["POST"]) 
+def add_c_fave(collection_id):
+    """create collection fave on collection deets page"""
+    response={1:"success"}
+    current_users_uname=session.get("username") 
+    if current_users_uname is None:
+        flash("You must log in to favorite a collection.")
+    else:
+        patron = crud.patron_uname_lookup(current_users_uname) 
+        collection_fave=crud.create_collection_fave(patron.p_id, collection_id)
+        db.session.add(collection_fave)
+        db.session.commit()
+    return response
+
+
+
+
+#WIP to be attended to after i get art objects to show up in collection!
+# @app.route("/collections/<int:collection_id>/artobject/<art_id>", methods=["POST"]) #id is PK, museum_id is FK
+# def add_art_fave(art_id):
+#     """create art object fave on art object deets page"""
+#     print("******************HIIIIIII*****************")
+#     response={1:"success"}
+#     current_users_uname=session.get("username") #checking session to see if username is in session in general 
+#     print(f"******************current_user:{current_users_uname}*****************")
+#     if current_users_uname is None:
+#         flash("You must log in to favorite an art piece.")
+#         #find out the on-page replacement for this
+#     else:
+#         #if looged in and not favorited
+#         #if looged in and favortied, be able to unfavorite
+#         patron = crud.patron_uname_lookup(current_users_uname) #get patron that has uname to do id method retrieval
+#         print(f"*****************patron={patron}*****************")
+#         art_fave=crud.create_art_fave(patron.p_id, art_id)
+#         print(f"*****************museumid_type={type(art_id)}*****************")
+#        #figure out how to only do 1x HERE
+#         db.session.add(art_fave)
+#         db.session.commit()
+#     # return render_template("/museumdirectory/<museum_id>/museumfavorites")
+#     return response
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ############################################################################################################
 #                                                                                                          #
 #                               MUSEUMS PAGE + detail page                                                 #
@@ -320,6 +367,20 @@ def lone_museum(id):
     """individual museum page"""
     museum=crud.get_museum_by_id(id)
     return render_template("museum-details.html", museum=museum)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -375,6 +436,26 @@ def lone_collection(id): #it eing the url also passes it to the function
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ############################################################################################################
 #                                                                                                          #
 #                               AUDIO GUIDE + detail page                                                  #
@@ -395,6 +476,25 @@ def lone_collection(id): #it eing the url also passes it to the function
 # 	return redirect('/audio-guide/related-sound/1')
 #   #or
 #   #return redirect('/audio-guide/related-sound1')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
