@@ -56,7 +56,6 @@ def create_museum_fave(patron_id, museum_id): #fk's to museum faves
     museum_fave=MuseumFave(patron_id=patron_id, museum_id=museum_id)
     return museum_fave
 
-
 #works
 def create_collection_fave(patron_id, collection_id): #fk's to collection faves
     """create a museum favorite..seed db side and server side"""
@@ -72,6 +71,11 @@ def create_collection_fave(patron_id, collection_id): #fk's to collection faves
 # WIP/show faves on patron profile:
 def get_m_fave_by_patron_id(patron_id):
     return MuseumFave.query.get(patron_id)
+
+
+#this goes     
+#create it, if stateement for if there: query it, 
+# if there then delete when clicked again
 
 
 
@@ -255,11 +259,19 @@ def get_collection_id(id): #DONE
 
 ##########CRUD FOR SEEDING
 #works
-def create_museum(name, city, state, country, collection_id): #DONE
+# def create_museum(name, city, state, country, collection_id): #DONE
+#     """create museum object 1x so seed can repeatedly"""
+#     museum=Museum(name=name, city=city, state=state, country=country, collection_id=collection_id) #removed 'collection=c1'
+#     return museum
+#     #m1=model.Museum(name='Houston Museum of African American Culture', city='Houston', state='TX', country='USA') #removed 'collection=c1'
+
+# would work if i was still pre-loading museum by hand w/o json
+def create_museum(name, street, city, state, zipcode, weburl):
     """create museum object 1x so seed can repeatedly"""
-    museum=Museum(name=name, city=city, state=state, country=country, collection_id=collection_id) #removed 'collection=c1'
+    museum=Museum(name=name, street=street, city=city, state=state, zipcode=zipcode, weburl=weburl) #removed 'collection=c1'
     return museum
     #m1=model.Museum(name='Houston Museum of African American Culture', city='Houston', state='TX', country='USA') #removed 'collection=c1'
+
 
 ############################################################################################################
 #                                                                                                          #

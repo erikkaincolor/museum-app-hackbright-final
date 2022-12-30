@@ -168,12 +168,15 @@ class Museum(db.Model):
     
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.Text, nullable=False, unique=True)
+    street = db.Column(db.Text, nullable=False) #NEW
     city = db.Column(db.String(20), nullable=False) #nullable=false==required=true
     state = db.Column(db.String(20), nullable=False) 
-    country = db.Column(db.String(30), nullable=False)
+    zipcode = db.Column(db.Integer, nullable=False) #NEW
+    weburl = db.Column(db.Text, nullable=False) #NEW
+
 
     #FK to collections-not doing this anymore!
-    collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False)  
+    # collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False)  
 
     #magic variables
     #related_sound=db.relationship("RelatedSound", backref='museum')

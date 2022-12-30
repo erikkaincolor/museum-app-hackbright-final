@@ -245,6 +245,7 @@ def add_m_fave(museum_id):
         museum_fave=crud.create_museum_fave(patron.p_id, museum_id)
         #figure out how to only do 1x HERE
         #how to get data from client to only commit to db one time via view function python
+        #how to limit it to one event click, or one evt click means add, another one means remove
         db.session.add(museum_fave)
         db.session.commit() #db.session.delete?
     return response

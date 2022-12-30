@@ -2,20 +2,31 @@
 {% block title %}Museum List{% endblock %}
 
 {% block content %}
-
-  <h2>Museum List</h2>
-  <p>I'm a paragraph!</p>
-  Hi user!
-{% if museums %}
-  You're so:
-  <ul>
-    {% for museum in museums %}
-      <li><a href="/museumdirectory/{{museum.id}}">
-        {{ museum.name }}, {{ museum.state }}, {{ museum.country }}
-    </a>
-    <br><br></li>
-    {% endfor %}
-  </ul>
+    <div class="row">
+        <div class="col">
+        <h2>Browse Black-American and African Museums in the U.S.</h2>
+        <p> To locate a museum and begin organizing your physical or virtual vacation, browse our database of Black museums.
+            <br><br>
+            The NAME IS TBD doesn't have a formal admissions agreement or reciprocal arrangement in place with any museums.
+            Some members offer free or heavily discounted entrance, while others do not and are not required to.
+            It is recommended to call the museum you intend to visit and ask.
+            <br><br>
+            Inaccurate details about a museum?
+            Reach out to our <a href="erikkaincolor+hackbrightapp@gmail.com">team</a>.
+            <br><br>
+            If you work for a member museum, you can edit information in the museum organizer part of you patron profile. <br>
+                {% if museums %}
+                {% for museum in museums %}
+                <div class="list-group">
+                <a href="/museumdirectory/{{museum.id}}" class="list-group-item list-group-item-action">
+                    {{ museum.name }} | {{ museum.state }}
+                </a>
+                <br>
+                </div>
+                {% endfor %}
+        </p>
+        </div>
+    </div>
 {% endif %}
 
 {% endblock %}

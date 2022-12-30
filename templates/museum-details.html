@@ -4,9 +4,10 @@
 
 {% block content %}
 <h1>{{ museum.name }}</h1>
-<h2>Located in: {{ museum.city }}, {{ museum.state }}, {{ museum.country }}</h2>
+<p>Located: {{ museum.street }}
+    {{ museum.city }}, {{ museum.state }}, {{ museum.zipcode }}</p>
 <p>
-    hey!                                             
+     <a href="{{museum.weburl}}">Website</a>                                            
 </p>
 <p>
     <button value="{{museum.id}}">Add to favorites </button>
