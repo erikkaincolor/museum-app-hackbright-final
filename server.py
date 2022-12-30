@@ -130,10 +130,11 @@ def view_patron_page(p_id):
 
 #WIP
 @app.route("/profile/<p_id>/patronfavorites", methods=["POST"]) #id is PK, museum_id is FK
-def add_m_fave_to_profile(patron_id):
+def add_m_fave_to_profile(p_id):
     """show fave on patron deets page"""
-    museumfave=crud.get_m_fave_by_patron_id(patron_id)
-    return render_template("patron-profile.html", fave=museumfave) 
+    museumfave=crud.get_m_fave_by_patron_id(p_id) #museumfave obj!
+    print(f"**************************THIS IS MY {museumfave.id}**********")
+    return render_template("patron-profile.html", museumfave=museumfave) 
 
 
 # #^^^in html, implement these faves into maybe an aside menu or a click evt card situation?

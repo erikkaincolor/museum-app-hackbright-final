@@ -69,6 +69,9 @@ def create_collection_fave(patron_id, collection_id): #fk's to collection faves
 #     art_fave=ArtFave(patron_id=patron_id, art_id=art_id)
 #     return art_fave
 
+# WIP/show faves on patron profile:
+def get_m_fave_by_patron_id(patron_id):
+    return MuseumFave.query.get(patron_id)
 
 
 
@@ -77,11 +80,6 @@ def create_collection_fave(patron_id, collection_id): #fk's to collection faves
 
 
 
-
-
-#WIP/show faves on patron prodile:
-# def get_m_fave_by_patron_id(patron_id):
-#     return MuseumFave.query.get(patron_id)
 
 # -create MuseumFave /museum crud function
 # -update MuseumFave /update-favoite, via ajax later
