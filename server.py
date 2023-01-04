@@ -3,7 +3,7 @@
 from flask import (Flask, render_template, request, flash, session, redirect, jsonify)
 import crud
 from jinja2 import StrictUndefined 
-from model import connect_to_db, db 
+from data.model import connect_to_db, db 
 #import os <-----may not need 
 #import requests <----is this diff from flask request object?
 
@@ -11,6 +11,7 @@ app = Flask(__name__)
 app.jinja_env.undefined=StrictUndefined
 app.secret_key = 'RANDOM SECRET KEY'
 
+#site map
 ################################################################################################
 #   -num- -done?-   -route-                
     # 1     x        # http://10.0.90:5000/                         # Landing page
@@ -89,11 +90,17 @@ def login_prompt():
         session['patron_id'] = patron.p_id #logged in or not depends on where session is globally/locally
         return redirect(f"/profile/{patron.p_id}")
     else:
-        flash("Wrong username or password, try again")
+        flash("Wrong username or password, try again or create an account.")
         return redirect('/login')
 
     #the session is like an identifier...my gmail vs someone elses
 	# session['current_user'] = username, for where i want it to show up again
+
+#works
+@app.route('/register')
+def view_registration():
+	"""Patron Registration, has form on this page....only logged in patrons can favorite items"""
+	return render_template('register.html')
 
 #works
 @app.route('/register',methods=['POST']) #uses form data, form from login.html routes here
@@ -128,10 +135,14 @@ def view_patron_page(p_id):
     # username = request.cookies['username'] ??????
     return render_template("patron-profile.html", patron=patron) 
 
-#WIP
-@app.route("/profile/<p_id>/patronfavorites", methods=["POST"]) #id is PK, museum_id is FK
-def add_m_fave_to_profile(p_id):
+#WIP-in places where im passing p_id via route, add session syntax to get it that way
+#NOT  @app.route("/profile/<p_id>/patronfavorites", methods=["POST"]) where public can see p_id
+@app.route("/profile/patronfavorites", methods=["POST"]) #id is PK, museum_id is FK
+def add_m_fave_to_profile(): #NOT def add_m_fave_to_profile(p_id):
     """show fave on patron deets page"""
+    if not "p_id" in session:
+        return redirect('/login')
+    p_id=session['patron_id'] #this is me retrieving the p_id via the dict.....put conditionals so its if-logged in
     museumfave=crud.get_m_fave_by_patron_id(p_id) #museumfave obj!
     print(f"**************************THIS IS MY {museumfave.id}**********")
     return render_template("patron-profile.html", museumfave=museumfave) 
