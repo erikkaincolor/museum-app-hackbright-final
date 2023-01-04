@@ -3,16 +3,30 @@
 {% block title %} {{ museum.name }} - Details{% endblock %}
 
 {% block content %}
-<h1>{{ museum.name }}</h1>
-<p>Located: {{ museum.street }}
-    {{ museum.city }}, {{ museum.state }}, {{ museum.zipcode }}</p>
-<p>
-     <a href="{{museum.weburl}}">Website</a>                                            
-</p>
-<p>
-    <button value="{{museum.id}}">Add to favorites </button>
-    
-</p>
+<div class="row">
+    <div class="col">
+        <h5>Navigation</h5>
+        <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/login">Login here</a></li>
+        <li><a href="/register">Create an account</a></li>
+        <li><a href="/collections">View all collections</a></li>
+        <li><a href="/museumdirectory">View all museums</a></li>
+        <!--<li><a href="/audio-guide">View all audio guides</a></li> -->
+        </ul>
+    </div>
+    </div>
+
+    <h1>{{ museum.name }}</h1>
+    <p>Located: {{ museum.street }}
+        {{ museum.city }}, {{ museum.state }}, {{ museum.zipcode }}</p>
+    <p>
+        <a href="{{museum.weburl}}">Website</a>                                            
+    </p>
+    <p>
+        <button value="{{museum.id}}">Add to favorites </button>
+        
+    </p>
 
 {% endblock %}
 {% block script %}

@@ -2,7 +2,20 @@
 {% block title %}Login Page{% endblock %}
 
 {% block content %}
-  <h2>Login Page</h2>
+<div class="row">
+    <div class="col">
+        <h5>Navigation</h5>
+        <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/register">Create an account</a></li>
+        <li><a href="/collections">View all collections</a></li>
+        <li><a href="/museumdirectory">View all museums</a></li>
+        <!--<li><a href="/audio-guide">View all audio guides</a></li> -->
+        </ul>
+    </div>
+    </div>
+
+  <h1>Login Page</h1>
   <p><form action="/login" method="POST">
     <label>Username:</label>
     <input type="text" name="username">
@@ -13,27 +26,5 @@
     <input type="submit" value="See Patron Profile">
   </form></p>
 
-  <label>Registration</label><h2>Create an account to save your faves!</h2>
-  <form action="/register" method="POST">
-    <p>
-        Username <input type="text" name="uname" required="required">
-        <label>Required</label></p>
-    <p>
-        First Name <input type="text" name="fname" required="required">
-        <label>Required</label></p>
-    <p>
-        Last Name <input type="text" name="lname" required="required">
-        <label>Required</label></p>
-    <p>
-      Email <input type="email" name="email" required="required">
-      <label>Required</label></p>
-
-    <p>
-      Password <input type="password" name="pword" required="required">
-      <label>Required</label></p>
-
-    <p>
-      <input type="submit" value="Create an account">
-    </p>
-  </form>
+  
 {% endblock %}

@@ -3,23 +3,39 @@
 
 {% block content %}
     <div class="row">
+    <div class="col">
+        <h5>Navigation</h5>
+        <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/login">Login here</a></li>
+        <li><a href="/register">Create an account</a></li>
+        <li><a href="/museumdirectory">View all museums</a></li>
+        <!--<li><a href="/audio-guide">View all audio guides</a></li> -->
+        </ul>
+    </div>
+    </div>
+    <div class="row">
         <div class="col">
-        <h2>Collections List</h2>
-        <p>I'm a paragraph!</p>
-            Hi user!
-            {% if collections %}
-            You're so:
-        {% for collection in collections %}
-        <div class="list-group">
-        <a href="/collections/{{collection.id}}" class="list-group-item list-group-item-action ">
-            {{ collection.name }}, {{ collection.coll_category }}, {{ collection.curator }}, {{ collection.era }}
-        </a>
-        <br>
+        <h1>Browse the Collections</h1>
+            <p>
+            THE NAME IS TBD's U.S. collections reflect the rich diversity of the natural and cultural world, as well as the shared heritage of Black Americans and Africans in the diaspora.
+            <br><br>These resources can be used by academics and researchers from all around the nation to advance our understanding of Black streams of consciousness and life. 
+            </p>
+                {% if collections %}
+                {% for collection in collections %}
+                <div class="list-group">
+                <a href="/collections/{{collection.id}}" class="list-group-item list-group-item-action ">
+                    {{ collection.name }}, {{ collection.coll_category }}, {{ collection.curator }}, {{ collection.era }}
+                </a>
+                <br>
+                
         </div>
 
         {% endfor %}
         </div>
     </div>
+
+    <br><br>
 
     <div class="row">
 
@@ -32,10 +48,6 @@
 
             <p>col2</p>
         </div>
-
-    </div>
     {% endif %}
-
-
-
+    </div><br>
 {% endblock %}

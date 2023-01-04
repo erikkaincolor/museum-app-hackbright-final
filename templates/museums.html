@@ -3,8 +3,20 @@
 
 {% block content %}
     <div class="row">
+    <div class="col">
+        <h5>Navigation</h5>
+        <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/login">Login here</a></li>
+        <li><a href="/register">Create an account</a></li>
+        <li><a href="/collections">View all collections</a></li>
+        <!--<li><a href="/audio-guide">View all audio guides</a></li> -->
+        </ul>
+    </div>
+    </div>
+    <div class="row">
         <div class="col">
-        <h2>Browse Black-American and African Museums in the U.S.</h2>
+        <h1>Browse Black-American and African Museums in the U.S.</h1>
         <p> To locate a museum and begin organizing your physical or virtual vacation, browse our database of Black museums.
             <br><br>
             The NAME IS TBD doesn't have a formal admissions agreement or reciprocal arrangement in place with any museums.
@@ -14,14 +26,14 @@
             Inaccurate details about a museum?
             Reach out to our <a href="erikkaincolor+hackbrightapp@gmail.com">team</a>.
             <br><br>
-            If you work for a member museum, you can edit information in the museum organizer part of you patron profile. <br>
+            If you work for a member museum, you can edit information in the museum organizer part of you patron profile. <br></p>
                 {% if museums %}
                 {% for museum in museums %}
                 <div class="list-group">
                 <a href="/museumdirectory/{{museum.id}}" class="list-group-item list-group-item-action">
                     {{ museum.name }} | {{ museum.state }}
                 </a>
-                <br>
+               
                 </div>
                 {% endfor %}
         </p>
