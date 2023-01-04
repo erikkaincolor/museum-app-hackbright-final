@@ -1,6 +1,6 @@
 "This file manipulates the data in the db, saves to it, and reads/queries it via execution functions"
 
-from model import Patron, CollectionFave, ArtFave, RelatedSoundFave, MuseumFave, Collection, RelatedSound, CollectionSound, ArtObject, Museum, connect_to_db, db
+from data.model import Patron, CollectionFave, ArtFave, RelatedSoundFave, MuseumFave, Collection, RelatedSound, CollectionSound, ArtObject, Museum, connect_to_db, db
 #either say .first or .all to get either one or all <----collection 
 #.get would get it by key <---refer to cats demo lecture
 #patron= Patron.query.get(patron_id) <---looking up by PK only bc its special, doesnt really translate to unames unique constraint
