@@ -8,7 +8,14 @@
         <link rel="stylesheet" href="/static/css/bootstrap.min.css">
         <!-- Your custom styles -->
         <link rel="stylesheet" href="/static/css/mystyles.css">
-</head>
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container">
+              <div class="navbar-header">
+                <span class="navbar-brand">Museum & Audio Web App</span>
+              </div>
+            </div>
+          </nav>
+    </head>
 
 <body>
     <div class="container">
@@ -22,7 +29,13 @@
         {% endif %}
         {% endwith %}
 
-
+        {# For demo purposes, show our sessions #}
+        {% if session %}
+        <fieldset>
+        <label>Flask Session</label>
+        {{ session }}
+        </fieldset>
+        {% endif %}
 
 
 
@@ -36,6 +49,7 @@
         {% block script %} 
         <!-- Bootstrap JavaScript Bundle with Popper (a Bootstrap dependency for popovers) -->
         <script src="/static/js/bootstrap.bundle.min.js"></script>
+        <script src="/static/js/alerts.js"></script>
         {% endblock %}
     </div>
 </body>
