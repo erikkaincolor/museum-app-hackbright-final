@@ -12,6 +12,21 @@ os.system(f'createdb muse')
 model.connect_to_db(server.app)
 model.db.create_all()
 
+
+
+
+# 1/5/23:
+        # SEED DB!
+# check that sounds saved successfully   -  WORKS                                 
+# check that art saved successfully         -  WORKS  
+# # check that art saved to collections successfully via FK  -  WORKS  
+        # UNCOMMENT ASSOC OBJS
+        # THEN run again!
+# check that sounds saved to collections successfully via crud func 
+        # UNCOMMENT ASSOC OBJS
+        # THEN run again!
+# check that sounds saved to museums successfully via fk    
+
 ############################################################################################################
 #                                                                                                          #
 #   COLLECTIONS                                                                                            #
@@ -27,16 +42,6 @@ collections=[c1, c2, c3, c4]
 model.db.session.add_all(collections)
 model.db.session.commit()  
 
-# add multiple rs onto 1 collection via magic var
-# multiple rs id's show up on 1 coll in collections_sounds table  
- 
-# c1.related_sound.append(sound1)   
-# c1.related_sound.append(sound2)  
-# c2.related_sound.append(sound1) 
-# c2.related_sound.append(sound4) 
-# c3.related_sound.append(sound3)  
-# c4.related_sound.append(sound4)  
-
 
 ############################################################################################################
 #                                                                                                          #
@@ -44,22 +49,27 @@ model.db.session.commit()
 #                                                                                                          #
 ############################################################################################################
 
+#created 1/5/23
 #create artobjects-later feed data in via Cloudinary API
-a1=crud.create_art_object("Barbara Jones-Hogu", "Nation Time", "print", "Barbara Jones-Hogu (American, 1938-2017). Nation Time, ca. 1970. Color screenprint, sheet: 22 1/2 x 30 in. (57.2 x 76.2 cm). Brooklyn Museum, Gift of R.M. Atwater, Anna Wolfrom Dove, Alice Fiebiger, Joseph Fiebiger, Belle Campbell Harriss, and Emma L. Hyde, by exchange, Designated Purchase Fund, Mary Smith Dorward Fund, Dick S. Ramsay Fund, and Carll H. de Silver Fund, 2012.80.25. artist or artist's estate (Photo: Brooklyn Museum, 2012.80.25_PS4.jpg) ","Black Arts Movement", collection_id=c1.id) #add c3, c2
-a2=crud.create_art_object("Dindga McCannon", "Empress Akweke", "paint", " Dindga McCannon (American, born 1947). Empress Akweke, 1975. Acrylic on canvas, 35 7/8 × 31 15/16 × 13/16 in. (91.1 × 81.1 × 2.1 cm). Brooklyn Museum, Gift of R.M. Atwater, Anna Wolfrom Dove, Alice Fiebiger, Joseph Fiebiger, Belle Campbell Harriss, and Emma L. Hyde, by exchange, Designated Purchase Fund, Mary Smith Dorward Fund, Dick S. Ramsay Fund, and Carll H. de Silver Fund, 2012.80.31. artist or artist's estate (Photo: Brooklyn Museum, 2012.80.31_PS9.jpg) ","Black Arts Movement", collection_id=c1.id) #add c3, c2
-a3=crud.create_art_object("Betye Saar", "Liberation of Aunt Jemima: Cocktail", "glass, paper, textile, metal", "Betye Saar (American, born 1926). Liberation of Aunt Jemima: Cocktail, 1973. Glass, paper, textile, metal, Overall: 12 1/2 × 5 3/4 in. (31.8 × 14.6 cm). Brooklyn Museum, Purchased with funds given by Elizabeth A. Sackler, gift of the Contemporary Art Committee, and William K. Jacobs, Jr. Fund, 2017.17. © artist or artist's estate (Photo: , 2017.17_front_PS11.jpg) ","Black Arts Movement", collection_id=c1.id) #add c3, c2
+#update images so copyrighted ones arent used! about 4/12 of em
+#collection is hardcoded via FK at end
 
-a4=crud.create_art_object("Tony Gleaton", "Black Girl, White Flower, Belize, Central America", "photograph", " Tony Gleaton (American, 1948-2015). Black Girl, White Flower, Belize, Central America, 1992. Gelatin silver photograph, image: 15 3/4 x 14 3/4 in. (40 x 37.5 cm). Brooklyn Museum, Gift of Helen Griffith in memory of Seymour Griffith, 1997.134. © artist or artist's estate (Photo: Brooklyn Museum, 1997.134_transp5713.jpg) ","Contemporary Art Movement", collection_id=c2.id) #add c3, c2
-a5=crud.create_art_object("Tony Gleaton", "Un Hija de Jesus, Guatemala, Latin America, (Daughter of Jesus)", "photograph", " Tony Gleaton (American, 1948-2015). Un Hija de Jesus, Guatemala, Latin America, (Daughter of Jesus), 1992. Gelatin silver photograph, image: 15 3/4 x 14 3/4 in. (40.0 x 37.5 cm). Brooklyn Museum, Purchased with funds given by Karen B. Cohen and Jan Staller, 1997.50. artist or artist's estate (Photo: Brooklyn Museum, 1997.50_bw.jpg)", "Contemporary Art Movement",collection_id=c2.id) #add c3, c2
-a6=crud.create_art_object("Sarah A. Friedman", "Untitled, Brooklyn, New York", "photograph", "Sarah A. Friedman (American). Untitled, Brooklyn, New York. Chromogenic photograph, Image: 19 1/2 x 15 1/2 in. (49.5 x 39.4 cm). Brooklyn Museum, Gift of the artist, 2001.110.2. Creative Commons-BY (Photo: Brooklyn Museum, 2001.110.2_bw.jpg) ","Contemporary Art Movement", collection_id=c2.id) #add c3, c2
+a1=crud.create_art_object("Barbara Jones-Hogu", "Nation Time", "print", "Barbara Jones-Hogu (American, 1938-2017). Nation Time, ca. 1970. Color screenprint, sheet: 22 1/2 x 30 in. (57.2 x 76.2 cm). Brooklyn Museum, Gift of R.M. Atwater, Anna Wolfrom Dove, Alice Fiebiger, Joseph Fiebiger, Belle Campbell Harriss, and Emma L. Hyde, by exchange, Designated Purchase Fund, Mary Smith Dorward Fund, Dick S. Ramsay Fund, and Carll H. de Silver Fund, 2012.80.25. artist or artist's estate (Photo: Brooklyn Museum, 2012.80.25_PS4.jpg) ","Black Arts Movement", "static/img/c1-Nation-Time-Barbara-Jones-Hogu .jpg", 1) #add c3, c2
+a2=crud.create_art_object("Dindga McCannon", "Empress Akweke", "paint", " Dindga McCannon (American, born 1947). Empress Akweke, 1975. Acrylic on canvas, 35 7/8 × 31 15/16 × 13/16 in. (91.1 × 81.1 × 2.1 cm). Brooklyn Museum, Gift of R.M. Atwater, Anna Wolfrom Dove, Alice Fiebiger, Joseph Fiebiger, Belle Campbell Harriss, and Emma L. Hyde, by exchange, Designated Purchase Fund, Mary Smith Dorward Fund, Dick S. Ramsay Fund, and Carll H. de Silver Fund, 2012.80.31. artist or artist's estate (Photo: Brooklyn Museum, 2012.80.31_PS9.jpg) ","Black Arts Movement", "static/img/c1-Nation-Time-Barbara-Jones-Hogu .jpg",1) #add c3, c2
+a3=crud.create_art_object("Betye Saar", "Liberation of Aunt Jemima: Cocktail", "glass, paper, textile, metal", "Betye Saar (American, born 1926). Liberation of Aunt Jemima: Cocktail, 1973. Glass, paper, textile, metal, Overall: 12 1/2 × 5 3/4 in. (31.8 × 14.6 cm). Brooklyn Museum, Purchased with funds given by Elizabeth A. Sackler, gift of the Contemporary Art Committee, and William K. Jacobs, Jr. Fund, 2017.17. © artist or artist's estate (Photo: , 2017.17_front_PS11.jpg) ","Black Arts Movement", "static/img/c1-Nation-Time-Barbara-Jones-Hogu .jpg",1) #add c3, c2
 
-a7=crud.create_art_object("Nelson Stevens", "Uhuru", "print", "Nelson Stevens (American, born 1938). Uhuru, 1971. Screenprint on paper, Sheet: 40 x 30 in. (101.6 x 76.2 cm). Brooklyn Museum, Gift of R.M. Atwater, Anna Wolfrom Dove, Alice Fiebiger, Joseph Fiebiger, Belle Campbell Harriss, and Emma L. Hyde, by exchange, Designated Purchase Fund, Mary Smith Dorward Fund, Dick S. Ramsay Fund, and Carll H. de Silver Fund, 2012.80.41. artist or artist's estate (Photo: Brooklyn Museum, 2012.80.41_PS6.jpg) ","Black Arts Movement",collection_id=c3.id) #add c3, c2
-a8=crud.create_art_object("Marie Johnson Calloway", "The Winner", "print", "Marie Johnson Calloway (American, 1920 - 2018). The Winner, 1971. Mixed media (acrylic, fabric) on wood, 60 x 30 in. (152.4 x 76.2 cm). Brooklyn Museum, Gift of R.M. Atwater, Anna Wolfrom Dove, Alice Fiebiger, Joseph Fiebiger, Belle Campbell Harriss, and Emma L. Hyde, by exchange, Designated Purchase Fund, Mary Smith Dorward Fund, Dick S. Ramsay Fund, and Carll H. de Silver Fund, 2012.80.19. artist or artist's estate (Photo: Brooklyn Museum, CUR.2012.80.19.jpg) ","Black Arts Movement", collection_id=c3.id) #add c3, c2
-a9=crud.create_art_object("Glenn Ligon", "[Untitled] (Crowd/The Fire Next Time)", "print", "The accumulation of crystals suggests the mass of participants in this historic event as viewed from above, while the juxtaposition of Baldwin’s words with the image of the march—separated by more than three decades—reminds us of the still-ongoing dialogue about race in America. Screenprint with coal crystals on paper, image: 12 × 18 1/8 in. (30.5 × 46 cm). Brooklyn Museum, Alfred T. White Fund, 2000.56. artist or artist's estate (Photo: Brooklyn Museum, 2000.56_transp5856.jpg)", "Contemporary Art Movement",collection_id=c3.id) #add c3, c2
+a4=crud.create_art_object("Tony Gleaton", "Black Girl, White Flower, Belize, Central America", "photograph", " Tony Gleaton (American, 1948-2015). Black Girl, White Flower, Belize, Central America, 1992. Gelatin silver photograph, image: 15 3/4 x 14 3/4 in. (40 x 37.5 cm). Brooklyn Museum, Gift of Helen Griffith in memory of Seymour Griffith, 1997.134. © artist or artist's estate (Photo: Brooklyn Museum, 1997.134_transp5713.jpg) ","Contemporary Art Movement", "static/img/c2-Glenn-Ligon-Crowd.jpg", 2) #add c3, c2
+a5=crud.create_art_object("Tony Gleaton", "Un Hija de Jesus, Guatemala, Latin America, (Daughter of Jesus)", "photograph", " Tony Gleaton (American, 1948-2015). Un Hija de Jesus, Guatemala, Latin America, (Daughter of Jesus), 1992. Gelatin silver photograph, image: 15 3/4 x 14 3/4 in. (40.0 x 37.5 cm). Brooklyn Museum, Purchased with funds given by Karen B. Cohen and Jan Staller, 1997.50. artist or artist's estate (Photo: Brooklyn Museum, 1997.50_bw.jpg)", "Contemporary Art Movement","static/img/c2-Glenn-Ligon-Crowd.jpg", 2) #add c3, c2
+a6=crud.create_art_object("Sarah A. Friedman", "Untitled, Brooklyn, New York", "photograph", "Sarah A. Friedman (American). Untitled, Brooklyn, New York. Chromogenic photograph, Image: 19 1/2 x 15 1/2 in. (49.5 x 39.4 cm). Brooklyn Museum, Gift of the artist, 2001.110.2. Creative Commons-BY (Photo: Brooklyn Museum, 2001.110.2_bw.jpg) ","Contemporary Art Movement", "/static/img/c2-Glenn-Ligon-Crowd.jpg",2) #add c3, c2 #removed collection_id=c2.id
 
-a10=crud.create_art_object("Cleveland Bellow", "George Jackson", "print", "Cleveland Bellow (American, 1946-2009). George Jackson, 1970. Screenprint on colored paper, Sheet: 23 1/2 x 17 1/2 in. (59.7 x 44.5 cm). Brooklyn Museum, Gift of R.M. Atwater, Anna Wolfrom Dove, Alice Fiebiger, Joseph Fiebiger, Belle Campbell Harriss, and Emma L. Hyde, by exchange, Designated Purchase Fund, Mary Smith Dorward Fund, Dick S. Ramsay Fund, and Carll H. de Silver Fund, 2012.80.8. © artist or artist's estate (Photo: Brooklyn Museum, 2012.80.8_PS4.jpg)", "Black Arts Movement",collection_id=c4.id) #add c3, c2
-a11=crud.create_art_object("Cleveland Bellow", "Untitled", "print", "Cleveland Bellow (American, 1946-2009). Untitled, 1968. Screenprint on paper, sheet: 19 1/2 x 15 1/4 in. (49.5 x 38.7 cm). Brooklyn Museum, Gift of R.M. Atwater, Anna Wolfrom Dove, Alice Fiebiger, Joseph Fiebiger, Belle Campbell Harriss, and Emma L. Hyde, by exchange, Designated Purchase Fund, Mary Smith Dorward Fund, Dick S. Ramsay Fund, and Carll H. de Silver Fund, 2012.80.6. © artist or artist's estate (Photo: Brooklyn Museum, 2012.80.6_PS4.jpg)", "Black Arts Movement",collection_id=c4.id) #add c3, c2
-a12=crud.create_art_object("Cleveland Bellow", "Duke", "print", "Cleveland Bellow (American, 1946-2009). Duke, 1968. Unique screenprint on two sheets of acrylic, Sheet: 28 x 22 in. (71.1 x 55.9 cm). Brooklyn Museum, Gift of R.M. Atwater, Anna Wolfrom Dove, Alice Fiebiger, Joseph Fiebiger, Belle Campbell Harriss, and Emma L. Hyde, by exchange, Designated Purchase Fund, Mary Smith Dorward Fund, Dick S. Ramsay Fund, and Carll H. de Silver Fund, 2012.80.7. artist or artist's estate (Photo: Brooklyn Museum, CUR.2012.80.7.jpg) ", "Black Arts Movement",collection_id=c4.id) #add c3, c2
+a7=crud.create_art_object("Nelson Stevens", "Uhuru", "print", "Nelson Stevens (American, born 1938). Uhuru, 1971. Screenprint on paper, Sheet: 40 x 30 in. (101.6 x 76.2 cm). Brooklyn Museum, Gift of R.M. Atwater, Anna Wolfrom Dove, Alice Fiebiger, Joseph Fiebiger, Belle Campbell Harriss, and Emma L. Hyde, by exchange, Designated Purchase Fund, Mary Smith Dorward Fund, Dick S. Ramsay Fund, and Carll H. de Silver Fund, 2012.80.41. artist or artist's estate (Photo: Brooklyn Museum, 2012.80.41_PS6.jpg) ","Black Arts Movement","static/img/c3-Sarah-A-Friedman-Untitled.jpg", 3) #add c3, c2
+a8=crud.create_art_object("Marie Johnson Calloway", "The Winner", "print", "Marie Johnson Calloway (American, 1920 - 2018). The Winner, 1971. Mixed media (acrylic, fabric) on wood, 60 x 30 in. (152.4 x 76.2 cm). Brooklyn Museum, Gift of R.M. Atwater, Anna Wolfrom Dove, Alice Fiebiger, Joseph Fiebiger, Belle Campbell Harriss, and Emma L. Hyde, by exchange, Designated Purchase Fund, Mary Smith Dorward Fund, Dick S. Ramsay Fund, and Carll H. de Silver Fund, 2012.80.19. artist or artist's estate (Photo: Brooklyn Museum, CUR.2012.80.19.jpg) ","Black Arts Movement","static/img/c3-Sarah-A-Friedman-Untitled.jpg", 3) #add c3, c2
+a9=crud.create_art_object("Glenn Ligon", "[Untitled] (Crowd/The Fire Next Time)", "print", "The accumulation of crystals suggests the mass of participants in this historic event as viewed from above, while the juxtaposition of Baldwin’s words with the image of the march—separated by more than three decades—reminds us of the still-ongoing dialogue about race in America. Screenprint with coal crystals on paper, image: 12 × 18 1/8 in. (30.5 × 46 cm). Brooklyn Museum, Alfred T. White Fund, 2000.56. artist or artist's estate (Photo: Brooklyn Museum, 2000.56_transp5856.jpg)", "Contemporary Art Movement","static/img/c3-Sarah-A-Friedman-Untitled.jpg", 3) #add c3, c2
+
+a10=crud.create_art_object("Cleveland Bellow", "George Jackson", "print", "Cleveland Bellow (American, 1946-2009). George Jackson, 1970. Screenprint on colored paper, Sheet: 23 1/2 x 17 1/2 in. (59.7 x 44.5 cm). Brooklyn Museum, Gift of R.M. Atwater, Anna Wolfrom Dove, Alice Fiebiger, Joseph Fiebiger, Belle Campbell Harriss, and Emma L. Hyde, by exchange, Designated Purchase Fund, Mary Smith Dorward Fund, Dick S. Ramsay Fund, and Carll H. de Silver Fund, 2012.80.8. © artist or artist's estate (Photo: Brooklyn Museum, 2012.80.8_PS4.jpg)", "Black Arts Movement", "static/img/c4-Cleveland-Bellow-George-Jackson.jpg", 4) #add c3, c2
+a11=crud.create_art_object("Cleveland Bellow", "Untitled", "print", "Cleveland Bellow (American, 1946-2009). Untitled, 1968. Screenprint on paper, sheet: 19 1/2 x 15 1/4 in. (49.5 x 38.7 cm). Brooklyn Museum, Gift of R.M. Atwater, Anna Wolfrom Dove, Alice Fiebiger, Joseph Fiebiger, Belle Campbell Harriss, and Emma L. Hyde, by exchange, Designated Purchase Fund, Mary Smith Dorward Fund, Dick S. Ramsay Fund, and Carll H. de Silver Fund, 2012.80.6. © artist or artist's estate (Photo: Brooklyn Museum, 2012.80.6_PS4.jpg)", "Black Arts Movement","static/img/c4-Cleveland-Bellow-George-Jackson.jpg", 4) #add c3, c2
+a12=crud.create_art_object("Cleveland Bellow", "Duke", "print", "Cleveland Bellow (American, 1946-2009). Duke, 1968. Unique screenprint on two sheets of acrylic, Sheet: 28 x 22 in. (71.1 x 55.9 cm). Brooklyn Museum, Gift of R.M. Atwater, Anna Wolfrom Dove, Alice Fiebiger, Joseph Fiebiger, Belle Campbell Harriss, and Emma L. Hyde, by exchange, Designated Purchase Fund, Mary Smith Dorward Fund, Dick S. Ramsay Fund, and Carll H. de Silver Fund, 2012.80.7. artist or artist's estate (Photo: Brooklyn Museum, CUR.2012.80.7.jpg) ", "Black Arts Movement", "static/img/c4-Cleveland-Bellow-George-Jackson.jpg",4) #add c3, c2
+
 art_objects=[a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12]
 model.db.session.add_all(art_objects)
 model.db.session.commit() 
@@ -90,41 +100,25 @@ for museum in aa_museum_data:
 model.db.session.add_all(museums_in_db)
 model.db.session.commit()  
 
-
-
-
-
-
-# add multiple rs onto museum, 1 museum, multiple sounds 
-# the museum id shows up on multiple art sounds   
-
-# m1.related_sound.append(sound1) 
-# m1.related_sound.append(sound2)    
-# m2.related_sound.append(sound1)  
-# m3.related_sound.append(sound1)   
-# m4.related_sound.append(sound1)   
-
 ############################################################################################################
 #                                                                                                          #
 #   RELATED SOUNDS                                                                                         #
 #                                                                                                          #
 ############################################################################################################
 
+#created 1/5/23
 #create related sound  later feed data in via api 
 
-#related sounds-cloudinary API-filled w/ audio museum gives me or spotify embed, fake data to test first
-# sound1=model.RelatedSound("podcast", sound_name="7th chapel",  "gold foil walls", museum=m1) #add m3, m2
-# sound2=model.RelatedSound("song", sound_name="Luka Doncic speaks on...",  "yellow tinted scene", museum=m1) #add m3, m2
-# sound3=model.RelatedSound("playlist", sound_name="Words from the curator",  "Spaghetti", museum=m1) #add m3, m2
-# sound4=model.RelatedSound("commentary", sound_name="At Last",  "baloons", genre="n/a", museum=m1) #add m3, m2
+#related sounds-2.0 version: audio museum gives me or spotify embed, fake data to show proof of concept
+#has musuem id hardcoded via fk
+sound1=crud.create_related_sound("podcast", "7th chapel",  "gold foil walls", "lively", 1) #add museums ids by hand
+sound2=crud.create_related_sound("song", "Luka Doncic speaks on...",  "yellow tinted scene", "jittery", 2) 
+sound3=crud.create_related_sound("playlist", "Words from the curator",  "Spaghetti", "novel", 3)
+sound4=crud.create_related_sound("commentary", "At Last",  "baloons", "n/a", 4) 
 
-#REPLACE MODEL. WITH THE CRUD FUNC
-# db_related_sound=crud.create_related_sound(medium, sound_name, description, genre, museum_id)
-
-
-# sounds_in_db=[sound1, sound2, sound3, sound4]
-# sounds_in_db.append(db_related_sound)
-# model.db.session.add_all(sounds_in_db)
+sounds_in_db=[sound1, sound2, sound3, sound4]
+model.db.session.add_all(sounds_in_db)
+model.db.session.commit() 
 
 ############################################################################################################
 #                                                                                                          #
@@ -142,4 +136,18 @@ model.db.session.add_all(patrons)
 model.db.session.commit()  
 
 
-               
+
+#at the end for order purposes
+# add multiple rs onto 1 collection via magic var
+# multiple rs id's show up on 1 coll in collections_sounds table  
+ 
+#edit later..rmbr sounds must be commited before i can append when seeding
+#via FK
+#via assoc table
+cs1= crud.create_collection_sound(1, 1)
+cs2= crud.create_collection_sound(2, 2)
+cs3= crud.create_collection_sound(3, 3)
+cs4= crud.create_collection_sound(4, 4)
+collection_sounds=[cs1, cs2, cs3, cs4]
+model.db.session.add_all(collection_sounds)
+model.db.session.commit()  
