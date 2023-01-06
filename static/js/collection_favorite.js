@@ -15,9 +15,9 @@
 let btn = document.querySelector("#addfave"); //for the add to faves btn
 
 btn.addEventListener("click", (evt)=>{
-    const collectionId=evt.target.value  
+    let collectionId = evt.target.value;
     fetch(`/collections/${collectionId}/collectionfavorites`, {method:"POST"})
-// camelCase for js vars from now on
+    // camelCase for js vars from now on
 })
 
 //logged-in + remove fave
