@@ -8,3 +8,12 @@ h5
 padding-top:30px;
 }
 
+/* delete fieldset l8r...this is to see my sessions */
+fieldset {
+    margin-top: 1em;
+    margin-bottom: 1em
+  }
+
+  fieldset label {
+    font-weight: bold;
+  }

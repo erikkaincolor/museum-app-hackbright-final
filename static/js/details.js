@@ -1,6 +1,7 @@
 "use strict"
 alert("connected!!!!!")
 
+
 //upon clicking on collection from collection list page, it should load all the art objects on page
 
 ///view museum faves on patron profile
@@ -20,12 +21,13 @@ alert("connected!!!!!")
 //     }
 
 document.querySelector('#ajax').addEventListener('click', ()=>{
-    fetch('/collections/<id>/art')
-        .then((response) => response.json())
+    fetch('/collections/${id}/${art}')
+        // .then((response) => response.json())
+        .then((response) => response.text())
         .then((result)=> {
         document.querySelector('#ajax-test').innerHTML = result;
         });
-});
+})
 
 
 // Qselect event target in html by id or class

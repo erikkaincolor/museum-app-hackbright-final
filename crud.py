@@ -19,22 +19,6 @@ from data.model import Patron, CollectionFave, ArtFave, RelatedSoundFave, Museum
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ##########CRUD FOR SEEDING
 #works
 def create_patron(uname, fname, lname, email, pword): #DONE
@@ -46,46 +30,58 @@ def create_patron(uname, fname, lname, email, pword): #DONE
 
 ############################################################################################################
 #                                                                                                          #
-#                                       PATRONS-CRUD FOR SERVER                                            #
+#                                       PATRON FAVES-CRUD FOR SERVER                                       #
 #                                                                                                          #
 ############################################################################################################
 
 #works
 def create_museum_fave(patron_id, museum_id): #fk's to museum faves
-    """create a museum favorite..seed db side and server side"""
-    museum_fave=MuseumFave(patron_id=patron_id, museum_id=museum_id)
-    return museum_fave
+    """create a museum favorite"""
+    return MuseumFave(patron_id=patron_id, museum_id=museum_id)
+
+# works
+def get_m_fave_by_id(id):
+    """for deleting from db and showing up on patrons profile"""
+    return MuseumFave.query.get(id)
 
 #works
 def create_collection_fave(patron_id, collection_id): #fk's to collection faves
     """create a museum favorite..seed db side and server side"""
-    collection_fave=CollectionFave(patron_id=patron_id, collection_id=collection_id)
-    return collection_fave
+    return CollectionFave(patron_id=patron_id, collection_id=collection_id)
 
-#WIP/ create art object fave on collection deets page
-# def create_art_fave(patron_id, art_id): #fk's to art faves
-#     """create an art object favorite..seed db side and server side"""
-#     art_fave=ArtFave(patron_id=patron_id, art_id=art_id)
-#     return art_fave
+#works
+def get_c_fave_by_id(id):
+    """for deleting from db and showing up on patrons profile"""
+    return CollectionFave.query.get(id)
 
-# WIP/show faves on patron profile:
-def get_m_fave_by_patron_id(patron_id):
-    return MuseumFave.query.get(patron_id)
+#------------------------------
 
+#WIP test when art renders
+def create_art_fave(patron_id, art_id): #fk's to collection faves
+    """create a museum favorite..seed db side and server side"""
+    return ArtFave(patron_id=patron_id, art_id=art_id)
 
-#this goes     
-#create it, if stateement for if there: query it, 
-# if there then delete when clicked again
-
-
-
+#WIP
+def get_a_fave_by_id(id):
+    """for deleting from db and showing up on patrons profile"""
+    return ArtFave.query.get(id)
 
 
+#WIP-test when page is setup!
+def create_sound_fave(patron_id, related_sound_id): #fk's to collection faves
+    """create a museum favorite..seed db side and server side"""
+    return RelatedSoundFave(patron_id=patron_id, related_sound_id=related_sound_id)
+
+#WIP
+def get_s_fave_by_id(id):
+    """for deleting from db and showing up on patrons profile"""
+    return RelatedSoundFave.query.get(id)
 
 
+# <button value="{{collection.id}}">Add to favorites </button> <br><br>
+#IS THIS WHERE I USE RELATIONSHIP??
 
 
-# -create MuseumFave /museum crud function
 # -update MuseumFave /update-favoite, via ajax later
 # -add faves to patron profile /patron-profile/{patron.id}/favorite
 # -this form and button will show up on museum details, collection details and art object details
@@ -99,34 +95,6 @@ def get_m_fave_by_patron_id(patron_id):
 #     if MuseumFave.query.filter(MuseumFave.patron_id == patron_id).one() is False: #if theres more than one
 #         multiples[1:].append(patron_id) #skip first occurance
 #         return multiples
-
-# def lookup_muse_fave_id(patron_id):
-#     return MuseumFave.query.get(patron_id)
-
-#not tested:
-# def update_museum_fave(old_favorite=True, patron_id):
-#     pass
-#     return 
-
-#maybe create a get museum_fave by patron_id to see if patronid is already attached to that particular museums id
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -186,18 +154,18 @@ def create_account(uname, fname, lname, email, pword): #DONE
 
 
 
-
-
-
 ##########CRUD FOR SEEDING
-
 #works
 def create_collection(coll_category, name, description, curator, era):
     """create collection object 1x so seed can repeatedly"""
     collection= Collection(coll_category=coll_category,name=name,description=description,curator=curator, era=era)
     return collection
-#in seed, will have 3 art obj each, create crud for that? or attach via hardcode
 
+#works
+def create_collection_sound(collection_id, related_sound_id): #fk's to collection faves
+    """create a collection sound..seed db side and server side"""
+    collection_sound=CollectionSound(collection_id=collection_id, related_sound_id=related_sound_id)
+    return collection_sound
 
 ############################################################################################################
 #                                                                                                          #
@@ -215,26 +183,6 @@ def get_collection_id(id): #DONE
     """read all collection data..collections that ill for loop through in jinja once i pass it into view func""" 
     return Collection.query.get(id)
 
-# CONNECT CollectionSound to collection
-# def marry_collection_sound(collection_id, related_sound_id):
-# """relationship object"""
-#     coll_sound=CollectionSound(collection_id=collection_id, related_sound_id=related_sound_id)
-#     return coll_sound  
-
-# #c1 = model.Collection(coll_category="paint",name="paintings",description="words go here",curator="someone")
-# #coll_category,name,description, curator
-
-#def get_collection_by_id(collection_id): 
-#   """as a patron i want to view more info about a indiviual Collection""" 
-#   art_in_collection=ArtObject.query.filter_by(ArtObject.collection_id==???)
-#   result=Collection.query.get(collection_id)
-#   db.session.add(result) #will mess up atomicity
-#   db.session.commit() #will mess up atomicity
-#   return result
-
-
-
-
 
 
 
@@ -258,20 +206,13 @@ def get_collection_id(id): #DONE
 
 
 ##########CRUD FOR SEEDING
-#works
-# def create_museum(name, city, state, country, collection_id): #DONE
-#     """create museum object 1x so seed can repeatedly"""
-#     museum=Museum(name=name, city=city, state=state, country=country, collection_id=collection_id) #removed 'collection=c1'
-#     return museum
-#     #m1=model.Museum(name='Houston Museum of African American Culture', city='Houston', state='TX', country='USA') #removed 'collection=c1'
 
-# would work if i was still pre-loading museum by hand w/o json
+# works
 def create_museum(name, street, city, state, zipcode, weburl):
     """create museum object 1x so seed can repeatedly"""
     museum=Museum(name=name, street=street, city=city, state=state, zipcode=zipcode, weburl=weburl) #removed 'collection=c1'
     return museum
     #m1=model.Museum(name='Houston Museum of African American Culture', city='Houston', state='TX', country='USA') #removed 'collection=c1'
-
 
 ############################################################################################################
 #                                                                                                          #
@@ -309,17 +250,12 @@ def get_museum_by_id(id):
 
 
 
-
-
-
-
 ##########CRUD FOR SEEDING
 #works
-def create_art_object(artist, title, medium, description, era, collection_id): #DONE
-    """create art object 1x so seed can repeatedly"""
-    art_obj=ArtObject(artist=artist, title=title, medium=medium, description=description, era=era, collection_id=collection_id) #add c3, c2
+def create_art_object(artist, title, medium, description, era, img_path, collection_id): #DONE
+    """create art object by hand"""
+    art_obj=ArtObject(artist=artist, title=title, medium=medium, description=description, era=era, img_path=img_path, collection_id=collection_id) #add c3, c2
     return art_obj
-# #these belong in seed and (3) are to be attached to (1) collection, so that i can attach a museum to the collection (logic: the museum i sleasing the collection)
 
 ############################################################################################################
 #                                                                                                          #
@@ -327,11 +263,29 @@ def create_art_object(artist, title, medium, description, era, collection_id): #
 #                                                                                                          #
 ############################################################################################################
 
-# def get_art(): #DONE
-#     """read all art object data..collections that ill for loop through in jinja once i pass it into view func""" 
-#     return ArtObject.query.all()
+#WIP
+def get_art_by_id(id):
+    """get ONE art obj by id""" 
+    return ArtObject.query.get(id)
 
-#MFAH_ask for audo guide files...copyright? for student project...im a member.
+#WIP/ create art object on collection deets page
+# def get_art_by_coll_id(collection_id): #collection_id is passed in via route
+#     """artobj via collectionid to show all """ 
+#     return ArtObject.query.filter(ArtObject.collection_id==collection_id).first()
+
+#works-delete later, for
+# def patron_uname_lookup(uname): #DONE #in order to call,  id have to know uname
+#     """get patron by uname"""
+#     return Patron.query.filter(Patron.uname == uname).first()
+
+#WIP
+# def get_art_by_coll_id(collection_id): #collection_id is passed in via route
+#     """multiple artobjs via collectionid to show all """ 
+#     return ArtObject(collection_id=collection_id)
+
+
+
+
 
 #w/o api-pre-loading
 #artobj via collectionid <----hardcode server
@@ -347,28 +301,6 @@ def create_art_object(artist, title, medium, description, era, collection_id): #
 
 
 
-# CONNECT ArtObject to collection-MAY NOT NEED
-# def marry_collection_art_object():
-# """relationship object"""
-#     c1.art_object.append(a2)
-#     return
-#     #c1.art_object.append(a2)
-
-#def get_art_by_id(art_id):
-#   pass
-#   return art_id
-#   art_in_collection=ArtObject.query.filter_by(ArtObject.collection_id==???)
-#   as any of these people i want to view art (in collections), filterable, toggable
-#   art=ArtObject(artist, title, medium, description, collection) #add c3, c2
-#   return art
-
-
-
-
-
-
-
-
 
 
 
@@ -388,9 +320,27 @@ def create_art_object(artist, title, medium, description, era, collection_id): #
 
 
 ##########CRUD FOR SEEDING
-#def create_related_sound(medium, sound_name, description, genre, museum_id): #DONE
-# """create related_sound object 1x so seed can repeatedly"""# related_sound=RelatedSound(medium=medium, sound_name=sound_name,  description=description, genre=genre, museum_id=museum_id) #add m3, m2
-#   return related_sound
+def create_related_sound(medium, sound_name, description, genre, museum_id): #DONE
+    """create related_sound object..by hand"""
+    related_sound=RelatedSound(medium=medium, sound_name=sound_name, description=description, genre=genre, museum_id=museum_id) #museum_id may need to be hardcoded, 1, 2, 3, 4
+    return related_sound
+
+# CONNECT sound to collection-#USE FKs
+#will show up on collection deets route and sound deets route
+
+#*********************************
+# FUNC STORED UNDER COLLECTION   *
+#*********************************
+
+# # CONNECT sound to museum -similar to faves assoc tables + their crud funcs
+#will show up on museum deets route and sound deets route
+
+# def marry_museum_rs():
+#     """relationship object creation"""
+#     m1.related_sound.append(sound2)    
+#     return 
+#     m1.related_sound.append(sound2)    
+#     c1.related_sound.append(sound2)  
 
 ############################################################################################################
 #                                                                                                          #
@@ -402,13 +352,6 @@ def create_art_object(artist, title, medium, description, era, collection_id): #
 #   """read all sound data..collections that ill for loop through in jinja once i pass it into view func""" 
 #   return RelatedSound.query.all()
 
-# CONNECT Related Sound for museum, -MAY NOT NEED
-#def marry_museum_rs():
-# """relationship object creation"""
-#   m1.related_sound.append(sound2)    
-#   return 
-#   m1.related_sound.append(sound2)    
-#   c1.related_sound.append(sound2)  
 
 # def details_related_sounds(medium, sound_name, description, museum):
 #   QUERY-#   """as a patron i want to view more info about a indiviual Collection's 4-5 related sounds"""
@@ -449,7 +392,7 @@ if __name__ == '__main__':
         connect_to_db(app)
 
 
-#FAVORTIES
+# hard-coding FAVORTIES to patrons for testing db
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #the relation is on patron and not the faves.....via backref...so idk if i can use it correctly
 # # CONNECT CollectionFave to patron
@@ -471,7 +414,6 @@ if __name__ == '__main__':
 
 #or
 
-#get help!
 # def get_art_object_fave(favorite):
 # # def summon_art_object_fave(art_obj, patron):
 #     # art_fave=ArtFave(patron_id=patron_id,art_id=art_id) #accidentally enlisted help of fk's
@@ -479,10 +421,6 @@ if __name__ == '__main__':
 #     #fave=ArtFave(art_obj=art_obj, patron=patron) #either patron and art fk's or art_fave relationship majic var 
 #     patron.art_fave.append(art_fave)
 #     return 
-
-# >>> rat= Rating(score=5, user=test user)
-# >>> movies[0]. ratings.append(rat)
-# >>> db. session. commit()
 
 #or
 
@@ -503,7 +441,6 @@ if __name__ == '__main__':
 
 #or 
 
-
 # # # # CONNECT RelatedSoundFave to patron 
 # def summon_sound_fave(patron_id, related_sound_id):
 # """relationship object"""
@@ -512,7 +449,6 @@ if __name__ == '__main__':
 # # # patron.related_sound_fave.append(sound1) 
 
 #or 
-
 
 # # # # CONNECT MuseumFave to patron
 # def summon_museum_fave(patron_id,  museum_fave_id):

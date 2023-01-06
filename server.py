@@ -16,7 +16,7 @@ app.secret_key = 'RANDOM SECRET KEY'
 #   -num- -done?-   -route-                
     # 1     x        # http://10.0.90:5000/                         # Landing page
     # 2     x        # http://10.0.90:5000/login                    # Patron login
-    # 3     x        # http://10.0.90:5000/patron/<p_id>            # Patron profile page
+    # 3     x        # http://10.0.90:5000/profile/                 # Patron profile page
     # 4     x        # http://10.0.90:5000/register                 # Register now!
     # 5              #     /profile/1/<*artfave* id>        x4      # Patron's fave art objects, collections, museums and sounds
     # 6     x        # http://10.0.90:5000/museumdirectory          # View a list of all museums
@@ -60,13 +60,12 @@ def index():
 
 
 
-
-
 ############################################################################################################
 #                                                                                                          #
 #                                      LOGIN + PATRON PROFILE                                              #
 #                                     http://10.0.90:5000/login                                            #
-#                                            /patron/p1                                                    #
+#                                            /profile                                                      #
+#                                            /login                                                        #
 #                                                                                                          #
 ############################################################################################################
 
@@ -80,79 +79,80 @@ def view_login():
 @app.route('/login',methods=['POST']) #uses form data, form from login.html routes here
 def login_prompt():
     """Server request for login info from client"""
-    uname = request.form['username']
-    session['username']= request.form['username'] #####################
-    pword = request.form['password']
 
-    patron=crud.patron_uname_lookup(uname) #<---i now can access its attr
+    uname = request.form['username'] #<---get uname from form
+    patron=crud.patron_uname_lookup(uname) #<---lookup uname...i now can access patron attr
+
+    session['username']= request.form['username'] #req sess obj from form
+    pword = request.form['password'] #
+    
+    
     if patron and patron.pword==pword:
         flash(f'Logged in as {uname}')
         session['patron_id'] = patron.p_id #logged in or not depends on where session is globally/locally
-        return redirect(f"/profile/{patron.p_id}")
+        return render_template("patron-profile.html", patron=patron)
     else:
         flash("Wrong username or password, try again or create an account.")
         return redirect('/login')
+        #might have to connect alert to button in form
 
-    #the session is like an identifier...my gmail vs someone elses
-	# session['current_user'] = username, for where i want it to show up again
-
-#works
-@app.route('/register')
-def view_registration():
-	"""Patron Registration, has form on this page....only logged in patrons can favorite items"""
-	return render_template('register.html')
+################################################################################################################
+################################################################################################################
 
 #works
-@app.route('/register',methods=['POST']) #uses form data, form from login.html routes here
-def register():
-    """Server request for registration info from client"""
-    uname = request.form['uname']
-    fname = request.form['fname']
-    email = request.form['email']
-    lname = request.form['lname']  
-    pword = request.form['pword']
-     
-    patron=crud.patron_uname_lookup(uname)
-    patron_obj2=crud.patron_email_lookup(email)
-
-    if patron: #if uname is in db, error
-        flash("A user with that username exists. Try again please.")
-    elif patron_obj2.email: #if email is in db, error
-        flash("A user with that email exists. Try again please.")
-    else: #if email or uname is not in db, create account
-        new_user=crud.create_account(uname, fname, lname, email, pword)
-        db.session.add(new_user)
-        db.session.commit()
-        flash("Your account was created successfully and you can now log in.")
-    return redirect('/login')
-
-#works
-@app.route("/profile/<p_id>") #works w/o "int:"
-def view_patron_page(p_id):
+@app.route("/profile") 
+def view_patron_page():
     """shows name and info"""
+    if not "p_id" in session:
+        return redirect('/login') #do flash message
+    p_id=session['patron_id'] #this is me retrieving the p_id via the dict.....put conditionals so its if-logged in
     patron=crud.patron_id_lookup(p_id) 
-    session['patron_id'] = patron.p_id #this for telling the profile page its a user
-    # username = request.cookies['username'] ??????
     return render_template("patron-profile.html", patron=patron) 
 
+################################################################################################################
+################################################################################################################
+
 #WIP-in places where im passing p_id via route, add session syntax to get it that way
-#NOT  @app.route("/profile/<p_id>/patronfavorites", methods=["POST"]) where public can see p_id
-@app.route("/profile/patronfavorites", methods=["POST"]) #id is PK, museum_id is FK
-def add_m_fave_to_profile(): #NOT def add_m_fave_to_profile(p_id):
-    """show fave on patron deets page"""
-    if not "p_id" in session:
-        return redirect('/login')
-    p_id=session['patron_id'] #this is me retrieving the p_id via the dict.....put conditionals so its if-logged in
-    museumfave=crud.get_m_fave_by_patron_id(p_id) #museumfave obj!
-    print(f"**************************THIS IS MY {museumfave.id}**********")
-    return render_template("patron-profile.html", museumfave=museumfave) 
+# possible querying an inner join with patron-p_id and artfaves patron_id 
+# on it in crud and using it here to display
+# @app.route('/profile//museum-fave/{MuseumFave.patron_id}', methods = ['GET', 'POST']) #for when i hardcoded the faves during testing
+
+# @app.route('/profile/museum-faves/', methods = ['GET', 'POST'])
+# def add_m_faves_to_profile(): #NOT def add_m_fave_to_profile(p_id):
+#     """show fave on patron deets page"""
+#     p_id=session['patron_id'] #this is me retrieving the p_id via the dict.....put conditionals so its if-logged in
+#     if not "p_id" in session:
+#         response={1: "nope!"}
+#         return response #to ajax req
+#     else:
+#         favorite= crud.get_m_fave_by_patron_id(p_id)
+#         return render_template("patron-profile.html", favorite=favorite) 
+#^^html needs a for loop to loop through faves...
+
+
+#movie ratings app example:
+# @app.route("/users/<user_id>/<rating_id>", methods=["POST"])
+# def show_ratings(user_id): #DONE, for server
+#     user=crud.get_user_by_id(user_id)####
+#     id=user.user_id
+#     answer=request.form("favorited")
+#     favorite=crud.add_fave(answer)
+#     #AJAX
+
+
+
+
 
 
 # #^^^in html, implement these faves into maybe an aside menu or a click evt card situation?
-# # def add_art_fave():
-# # def add_coll_fave():
-# # def add_related_sounds_fave():
 #filtering?
+
+#what i want my ajax to route to!
+#adam said use magic vars
+
+#to do:
+#in jinja2: {% for museum_fave of museum_faves %} 
+# i would need (in my server) museum_faves as a var that takes in result of a crud function querying patrons museum fave id
 
 
 # @app.route('/profile/<int:p_id>/art-fave/{ArtFave.patron_id}', methods = ['GET', 'POST'])
@@ -161,11 +161,6 @@ def add_m_fave_to_profile(): #NOT def add_m_fave_to_profile(p_id):
 # 	#some type of ajax that will fulfill a trip to db to get the fave and rerender result query on page"
 #     return redirect(f'patron-profile.html') 
 
-# @app.route('/profile/<int:p_id>/museum-fave/{MuseumFave.patron_id}', methods = ['GET', 'POST'])
-# def view_patrons_muse_fave():
-#     """Favorite museums"""
-#     #some type of ajax that will fulfill a trip to db to get the fave and rerender result query on page"
-#     return redirect(f'patron-profile.html') 
 
 # @app.route('/profile/<int:p_id>/collection-fave/{CollectionFave.patron_id}', methods = ['GET', 'POST'])
 # def view_patrons_collection_fave():
@@ -193,6 +188,44 @@ def add_m_fave_to_profile(): #NOT def add_m_fave_to_profile(p_id):
 
 
 
+############################################################################################################
+#                                                                                                          #
+#                                            REGISTER                                                      #
+#                                     http://10.0.90:5000/register                                         #
+#                                            /register                                                     #
+#                                                                                                          #
+############################################################################################################
+
+#works
+@app.route('/register')
+def view_registration():
+	"""Patron Registration, has form on this page....only logged in patrons can favorite items"""
+	return render_template('register.html')
+
+#works
+@app.route('/register',methods=['POST']) #uses form data, form from login.html routes here
+def register():
+    """Server request for registration info from client"""
+    uname = request.form['uname']
+    fname = request.form['fname']
+    email = request.form['email']
+    lname = request.form['lname']  
+    pword = request.form['pword']
+     
+    patron=crud.patron_uname_lookup(uname)
+    patron_obj2=crud.patron_email_lookup(email)
+
+    if patron: #if uname is in db, error
+        flash("A user with that username exists. Try again please.")
+    elif patron_obj2: #if email is in db, error
+        flash("A user with that email exists. Try again please.")
+    else: #if email or uname is not in db, create account
+        new_user=crud.create_account(uname, fname, lname, email, pword)
+        db.session.add(new_user)
+        db.session.commit()
+        # flash("Your account was created successfully and you can now log in.")
+    return redirect('/login')
+
 
 
 
@@ -209,7 +242,7 @@ def add_m_fave_to_profile(): #NOT def add_m_fave_to_profile(p_id):
 #                                                                                                          #
 #                                           FAVORITES                                                      #
 #                                             TBD                                                          #
-#                                   /profile/patron1/art-fave-1                                            #
+#                                       /profile/art-fave-1                                                #
 #                                                                                                          #
 ############################################################################################################
 
@@ -227,22 +260,8 @@ def add_m_fave_to_profile(): #NOT def add_m_fave_to_profile(p_id):
 #if count of patron.art_Faves==0: render template 1, asks where are the faves or has a qoute or bob ross 
 #if count of any faves > 1: show the version of patron profil with faves and show faves!
 
-#movie ratings app example:
-# @app.route("/users/<user_id>/<rating_id>", methods=["POST"])
-# def show_ratings(user_id): #DONE, for server
-#     user=crud.get_user_by_id(user_id)####
-#     id=user.user_id
-#     answer=request.form("favorited")
-#     favorite=crud.add_fave(answer)
-#     #AJAX
 
-
-
-
-
-
-
-# works...it just lets u favorite multiple times smh
+# works
 @app.route("/museumdirectory/<int:museum_id>/museumfavorites", methods=["POST"])
 def add_m_fave(museum_id):
     """create museum fave on museum deets page"""
@@ -261,38 +280,23 @@ def add_m_fave(museum_id):
         db.session.commit() #db.session.delete?
     return response
 
-#this version below is a test to allow user to only favorite item 1x
-# do another test to see if favorite can be removed
+#works
+@app.route("/museumdirectory/<int:museum_id>/removemuseumfavorites", methods=["POST"])
+def del_m_fave(museum_id):
+    """delete museum fave on museum deets page"""
+    response={1:"success"}
+    current_users_uname=session.get("username") #username needed for favoriting
+    
+    if current_users_uname is None:
+        flash("You must log in to remove a museum as favorite.")
+    else:
+        patron = crud.patron_uname_lookup(current_users_uname)
+        museum_fave=crud.get_m_fave_by_id(museum_id)
+        db.session.delete(museum_fave)
+        db.session.commit() 
+    return response
 
-# @app.route("/museumdirectory/<int:museum_id>/museumfavorites", methods=["POST"]) #id is PK, museum_id is FK
-# def add_m_fave(museum_id):
-#     """create museum fave on museum deets page"""
-#     response={1:"success"}
-#     current_users_uname=session.get("username") #checking session to see if username is in session in general 
-#     if current_users_uname is None:
-#         flash("You must log in to favorite a museum.")
-#         #find out the on-page replacement for this
-#     else:
-#         #if looged in and not favorited
-#         #if looged in and favortied, be able to unfavorite
-#         patron = crud.patron_uname_lookup(current_users_uname) #get patron that has uname to do id method retrieval
-#         print(f"*****************patron={patron}*****************")
-#         museum_fave=crud.create_museum_fave(patron.p_id, museum_id)
-#         print(f"*****************museumid_type={type(museum_id)}*****************")
-#         muse_fave= crud.lookup_muse_fave_id(patron.p_id)
-#         #CODE WORKS UNTIL HERE
-#         # if session['patron_id'] in muse_fave.patron_id:
-#         if session['patron_id'] in muse_fave.patron_id:
-#             print(f"FOUND") #IT PRINTED ;)
-#             #new new
-#             #look it up, verify its in there and delete
-#             db.session.delete(museum_fave[1:]) #essentially, delete all but first
-#             db.session.commit()
-#      # return render_template("/museumdirectory/<museum_id>/museumfavorites")
-#     return response
-
-
-#works perfectly fine as of 12/28
+#works
 @app.route("/collections/<int:collection_id>/collectionfavorites", methods=["POST"]) 
 def add_c_fave(collection_id):
     """create collection fave on collection deets page"""
@@ -307,7 +311,20 @@ def add_c_fave(collection_id):
         db.session.commit()
     return response
 
-
+#works
+@app.route("/collections/<int:collection_id>/removecollectionfavorites", methods=["POST"]) 
+def del_c_fave(collection_id):
+    """delete collection fave on collection deets page"""
+    response={1:"success"}
+    current_users_uname=session.get("username") 
+    if current_users_uname is None:
+        flash("You must log in to favorite a collection.")
+    else:
+        patron = crud.patron_uname_lookup(current_users_uname) 
+        collection_fave=crud.get_c_fave_by_id(collection_id)
+        db.session.delete(collection_fave)
+        db.session.commit()
+    return response
 
 
 #WIP to be attended to after i get art objects to show up in collection!
@@ -334,26 +351,17 @@ def add_c_fave(collection_id):
 #     # return render_template("/museumdirectory/<museum_id>/museumfavorites")
 #     return response
 
+# <div class="list-group">
+                
+#                     {{ arts.title }}, {{ arts.artist }} {{ arts.img_path}} 
+#             </div>
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#print(f"************THIS IS THE MUSEUM FAVE: {collection_fave}")
 
 
 
@@ -369,29 +377,25 @@ def add_c_fave(collection_id):
 #                                                                                                          #
 ############################################################################################################
 
+# works
 @app.route('/museumdirectory', methods = ['GET']) #removed post on 12/28
 def view_museums():
     """view museum table list with static header"""
     museums = crud.get_museums()
     return render_template('museums.html', museums=museums)
 
+# works
 @app.route('/museumdirectory/<int:id>')
 def lone_museum(id):
     """individual museum page"""
+    p_id=session['patron_id'] #this is me retrieving the p_id via the dict.....put conditionals so its if-logged in
     museum=crud.get_museum_by_id(id)
-    return render_template("museum-details.html", museum=museum)
-
-
-
-
-
-
-
-
-
-
-
-
+    #if not "p_id" in session:
+    if not p_id in session: #took away qoutes from p_id
+        # return redirect('/login') #do flash message
+        return render_template("museum-details.html", museum=museum)
+    else:
+        return render_template("museum-details.html", museum=museum)
 
 
 
@@ -417,25 +421,58 @@ def lone_museum(id):
 #                                                                                                          #
 ############################################################################################################
 
- #use crud and collection id 
-
+# works
 @app.route('/collections', methods = ['GET'])
 def view_collections():
     """view collections table list""" 
     collections = crud.get_collections()
     return render_template('collections.html', collections =collections)
 
+# works
 @app.route('/collections/<id>') #/c1 pr /1
-def lone_collection(id): #it eing the url also passes it to the function
-    """Collection content that patron selected!"""
+def lone_collection(id): #it being the url also passes it to the function
+    """Multiple Art Objects show up on Collection Details page"""
     collection= crud.get_collection_id(id)
+    # arts=crud.get_art_by_coll_id(id) #may need to query all , bc it needs to show all art
     return render_template('collection-details.html', collection=collection)
 
+        # <p>
+        #     {% if arts %}
+        #     {% for art in arts %}
+            
+        #     {% endfor %}
+        #     {% endif %}
+        # </p>
+
+# not yet showing art in collection deets
+@app.route('/collections/<id>/art')
+def art_in_collection(id):
+    """doesnt render a page, just shows art...may need fetch?"""
+    art=crud.get_art_by_id(id)
+    response=art.collection_id
+    print(f" **************RESPONSE IS:{response}********")
+    # return (jsonify(response.to_json))
+    return response
+
+# lets just try to replace one singular thing! via DOM manip.
+
+# @app.route('/collections/<id>/art')
+# def art_in_collection(id):
+#     """doesnt render a page, just shows art...may need fetch?"""
+#     collection= crud.get_collection_id(id)
+#     art=crud.get_art_by_coll_id(collection.id)
+#     response=art.title #send title as response #jsonify first
+#     print(f" **************RESPONSE IS:{response}********")
+#     # return (jsonify(response.to_json))
+#     return response
 
 
-# @app.route('/collections/collection-<int: collection_id>/art-object-<art_object_id>') #/c1 pr /1 ALSO need to pass it in as a parameter to the view func
+
+#this may use art query .get for one art piece
+# @app.route('/collections/<id>/art-object-<id>') #/c1 pr /1 ALSO need to pass it in as a parameter to the view func
 # def lone_collection_art(art_object_id): #it being the url also passes it to the function
-#     """Collection content that patron selected!"""
+#     """Art object from particular collection"""
+#     crud.get_art_by_id(id)
 #     return redirect('/collections/collection-1/art-object-23')
 
 # @app.route('/collections/collection-<int: collection_id>/art-object-<art_object_id>') #/c1 pr /1 ALSO need to pass it in as a parameter to the view func
@@ -443,19 +480,6 @@ def lone_collection(id): #it eing the url also passes it to the function
 #     """Collection content that patron selected!"""
 #     return redirect('/collections/collection-1/sound-42')  
 	
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -493,60 +517,7 @@ def lone_collection(id): #it eing the url also passes it to the function
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 if __name__ == "__main__":
     # from model import connect_to_db
     connect_to_db(app)
     app.run(debug=True, host="0.0.0.0", port=5005) #change when deploying FIX ME
-
-
-
-
-    ###before i created a successful button w/ evt listener!!
-    # @app.route("/museumdirectory/<museum_id>/museumfavorites", methods=["POST"]) #id is PK, museum_id is FK
-# def add_m_fave(museum_id):
-#     """create museum fave on museum deets page"""
-#     current_users_uname=session.get("username")
-#     # favorite_status=request.form.get("favorite_status")
-#     # faves=[] #empty list that i can loop over in jinja2 elsewhere?
-#     #-----------> how to retrieve button click? <--------------------
-#     # favorite=request.form.get("favorite") #just what the value put into that button click? this si why i want to do checkbox
-#     if current_users_uname is None:
-#         flash("You must log in to favorite a museum.")
-#     # elif not favorite_status: #if theres no score, see if required or not
-#     #     flash("Error: you didn't select a score for your rating.")
-#     else:
-#         patron = crud.patron_uname_lookup(current_users_uname)
-        # museum_id=crud.get_museum_by_id(museum_id) #passed in from url
-#         museum_fave=crud.create_museum_fave(museum_id,patron.id)
-#         db.session.add(museum_fave)
-#         db.session.commit()
-
-#     # if favorite:
-#     #     faves.append(favorite)
-#     #     db.session.add(favorite)
-#     #     db.sesion.commit()
-#     # return render_template("/museumdirectory/<museum_id>/museumfavorites")

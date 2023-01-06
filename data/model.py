@@ -3,6 +3,15 @@
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()              
 
+
+
+
+#############################################
+#                                           #                                                           
+# PATRON table + FAVES (4) assoc. tables    #                                                  
+#                                           #                                                           
+#############################################
+
 class Patron(db.Model): #ONE
     """Patrons. Museum frequenters. Art lovers. Curators. Students. Docents. Old People. Babies."""
     __tablename__ = "patrons"
@@ -22,6 +31,14 @@ class Patron(db.Model): #ONE
     # related_sound_fave = db.relationship('RelatedSound', secondary='related_sound_faves', backref='patron', lazy=True)
     # museum_fave = db.relationship('Museum', secondary= 'museum_faves', backref='patron', lazy=True)
     
+    #adam 1/5/23: it means that there isn't a relationship 
+    #need these for getting remove from db button to work along with crud func that utilizes em
+    # object on the other side of the relationship, i.e. not creating a backref='patrons'
+    collection_fave = db.relationship('Collection', secondary= 'collection_faves', lazy=True)
+    art_fave = db.relationship('ArtObject', secondary= 'art_faves', lazy=True)
+    related_sound_fave = db.relationship('RelatedSound', secondary='related_sound_faves', lazy=True)
+    museum_fave = db.relationship('Museum', secondary= 'museum_faves', lazy=True)
+
     def __repr__(self):
         """Show info about patrons."""
         return f"<Patron id={self.p_id} uname={self.uname} fname={self.fname} lname={self.lname} email={self.email} pword= sike!!!!>"
@@ -86,16 +103,18 @@ class MuseumFave(db.Model): #MANY
     museum_id = db.Column(db.Integer, db.ForeignKey('museums.id'), nullable=False) 
 
     #unique constraints-odd, but will prevent patrons from having multiple faves
-    #
     __table_args__ = (
         db.UniqueConstraint("patron_id", "museum_id", name="uc_museum_faves"), 
-
     )
 
-    #also ask again about relationship vars
 
 
 
+#############################################
+#                                           #                                                                    #
+#      COLLECTIONS table                    #                                                               #
+#                                           #                                                                    #
+#############################################
 
 
 class Collection(db.Model): #ONE
@@ -113,14 +132,21 @@ class Collection(db.Model): #ONE
     # #magic variables that belong to both, but are stored in parent
     # art_object = db.relationship('ArtObject', backref='collection', lazy=True) ###
     # # museum = db.relationship('Museum', uselist=False, backref='collection', lazy=True) #uselist key bc this relationship is 1:1
-
-    # #magic variables that belong to both, but are stored in parent
     # related_sound=db.relationship("RelatedSound", secondary="collections_sounds", backref='collection')
 
     def __repr__(self):
         """Show info about art collection."""
         return f"<Collection id={self.id} name={self.name} curator={self.curator} era={self.era}>"  
 
+
+
+
+
+#############################################
+#                                           #                                                                    #
+#  RELATED SOUNDS table + CollectionSounds  #                                                               #
+#                                           #                                                                    #
+#############################################
 class RelatedSound(db.Model):
     """Collection of related sounds"""
     __tablename__ = "related_sounds"
@@ -131,9 +157,8 @@ class RelatedSound(db.Model):
     description = db.Column(db.Text, nullable=False)
     genre = db.Column(db.Text, nullable=True, default="...no genre, just *vibes*!")
 
-    #FK to museum
+    #FK to museum-needs to shows up as last param in creation of relatedsound obj in crud func, hardcoded
     museum_id = db.Column(db.Integer, db.ForeignKey('museums.id'), nullable=False)
-    #^^^when creating in stance, put 'museum=instance i made'
 
     def __repr__(self):
             """Show info about realated sounds."""
@@ -146,9 +171,9 @@ class CollectionSound(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     
-    #FK to collection and related sound
-    collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False)  
-    related_sound_id = db.Column(db.Integer, db.ForeignKey('related_sounds.id'), nullable=False) 
+    #FK to collection-needs to shows up as last param in creation of art object crud func
+    collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False)  #not implemented
+    related_sound_id = db.Column(db.Integer, db.ForeignKey('related_sounds.id'), nullable=False)  #not implemented
     
     #unique constraints-odd, but will prevent patrons from having multiple faves..contains two cols
     __table_args__ = (
@@ -160,7 +185,11 @@ class CollectionSound(db.Model):
 
 
 
-
+#############################################
+#                                           #                                                                    #
+#      ART OBJECTS table                    #                                                               #
+#                                           #                                                                    #
+#############################################
 
 class ArtObject(db.Model): 
     """Patrons. Museum frequenters. Art lovers. Curators. Students. Docents. Old People. Babies."""
@@ -172,8 +201,9 @@ class ArtObject(db.Model):
     medium = db.Column(db.String(50), nullable=False)
     description = db.Column(db.Text, nullable=False, default="...the description for this piece is beyond words!")
     era = db.Column(db.String(30), nullable=True)
+    img_path = db.Column(db.String) #delete later depending on museum or cloudinary API
     
-    #FK to collection
+    #FK to collection-needs to shows up as last param in creation of art object crud func
     collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False)  
 
     def __repr__(self):
@@ -185,7 +215,11 @@ class ArtObject(db.Model):
 
 
 
-
+#############################################
+#                                           #                                                                    #
+#      MUSEUMS table                        #                                                               #
+#                                           #                                                                    #
+#############################################
 
 class Museum(db.Model): 
     """Pinacotheca"""
@@ -200,7 +234,8 @@ class Museum(db.Model):
     weburl = db.Column(db.Text, nullable=False) #NEW
 
 
-    #FK to collections-not doing this anymore!
+    #FK to collections-
+    # not doing this anymore! needed to figure out how ot make it optional given some are curated by webmaster and others are curated by museum and put online
     # collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False)  
 
     #magic variables
@@ -209,6 +244,17 @@ class Museum(db.Model):
     def __repr__(self):
         """Show info about museum."""
         return f"<Museum id={self.id} name={self.name} city={self.city} state={self.state} country={self.country}>"
+
+
+
+
+
+
+
+
+
+
+
 
 
 def connect_to_db(app, db_name="postgresql:///muse"): 
@@ -227,42 +273,10 @@ if __name__ == "__main__":
     with app.app_context():
         connect_to_db(app)
   
-
-#these below are in seed file already
-    # db.create_all() 
-    # connect_to_db(app, "muse") #<---this is what demo had, but didnt work for me
-    # connect_to_db(app) 
-
-    # patron=Patron(uname='e', fname='ee', lname='p', email='test@test.com', pword='1234') 
-    # patron1=Patron(uname='er', fname='ew', lname='p', email='test@test.com', pword='12349') 
-    
-    # c1 = Collection(coll_category="paint",name="paintings",description="words go here",curator="someone")
-    # c2 = Collection(coll_category="drawing",name="paintings by e",description="words go here too",curator="someone else")
-
-    # m1=Museum(name='Houston Museum of African American Culture', city='Houston', state='TX', country='USA') #removed 'collection=c1'
-    # m2=Museum(name='Museum of Fine Arts', city='Houston', state='TX', country='USA')
-
-    # sound1=RelatedSound(medium="podcast", sound_name="7th chapel",  description="gold foil walls", museum=m1) #add m3, m2
-    # sound2=RelatedSound(medium="song", sound_name="Luka Doncic speaks on...",  description="yellow tinted scene", museum=m1) #add m3, m2
-
-    # a1=ArtObject(artist="M Angelo", title="7th chapel", medium="paint", description="gold foil walls", collection=c1) #add c3, c2
-    # a2=ArtObject(artist="Calder", title="Homerun", medium="sculpture", description="oil on cieling", collection=c2) #add c3, c2
-
-    # instances=[patron, patron1, c1, c2, a1, a2, m1, m2]
-    # db.session.add_all(instances) 
-    # db.session.commit()
-
-
-
-
-
-
-
-
     #magic variables for patron class
     #these are missing the "secondary" key
+
     # collection_fave = db.relationship('CollectionFave', backref='patron', lazy=True)
     # art_fave = db.relationship('ArtFave', backref='patron', lazy=True)
     # related_sound_fave = db.relationship('RelatedSoundFave', backref='patron', lazy=True)
     # museum_fave = db.relationship('MuseumFave', backref='patron', lazy=True)
-   
