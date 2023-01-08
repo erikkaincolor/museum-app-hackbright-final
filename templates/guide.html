@@ -3,7 +3,41 @@
 
 {% block content %}
 
-  <h2>Mobile First Audio Guide</h2>
-  <p>I'm a paragraph!</p>
+    <div class="row">
+        <div class="col">
+        <h2>Mobile First Audio Guide</h2>
+            <p>I'm a paragraph!</p>
+            
+            <p>
+                {% if sounds %}
+                {% for sound in sounds %}
+                <div class="list-group">
+                <a href="/collections/{{collection.id}}" class="list-group-item list-group-item-action ">
+                    {{ collection.name }}, {{ collection.coll_category }}, {{ collection.curator }}, {{ collection.era }}
+                </a>
+                <br>
+                {% endfor %}
+                {% endif %}
+            </p>
+        </div>
 
+
+        </div>
+    </div>
+
+    <br><br>
+
+    <div class="row">
+
+        <p>row 2</p>
+        <div class="col">
+
+            <p>col1</p>
+        </div>
+        <div class="col">
+
+            <p>col2</p>
+        </div>
+    
+    </div><br>
 {% endblock %}

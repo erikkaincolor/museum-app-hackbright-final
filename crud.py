@@ -41,8 +41,16 @@ def create_museum_fave(patron_id, museum_id): #fk's to museum faves
 
 # works
 def get_m_fave_by_id(id):
-    """for deleting from db and showing up on patrons profile"""
+    """for deleting from db"""
     return MuseumFave.query.get(id)
+
+# WIP-is this corect?
+def get_m_fave_by_pid(p_id):
+    """get patrons museum fave id to showi up on patrons profile"""
+    # patron=Patron.query.get(p_id)
+    return MuseumFave.query.get(patron_id_lookup(p_id)) 
+    #^^returns Patron.query.get(p_id)
+
 
 #works
 def create_collection_fave(patron_id, collection_id): #fk's to collection faves
@@ -51,7 +59,7 @@ def create_collection_fave(patron_id, collection_id): #fk's to collection faves
 
 #works
 def get_c_fave_by_id(id):
-    """for deleting from db and showing up on patrons profile"""
+    """for deleting from db"""
     return CollectionFave.query.get(id)
 
 #------------------------------
@@ -63,7 +71,7 @@ def create_art_fave(patron_id, art_id): #fk's to collection faves
 
 #WIP
 def get_a_fave_by_id(id):
-    """for deleting from db and showing up on patrons profile"""
+    """for deleting from db"""
     return ArtFave.query.get(id)
 
 
@@ -74,7 +82,7 @@ def create_sound_fave(patron_id, related_sound_id): #fk's to collection faves
 
 #WIP
 def get_s_fave_by_id(id):
-    """for deleting from db and showing up on patrons profile"""
+    """for deleting from db"""
     return RelatedSoundFave.query.get(id)
 
 

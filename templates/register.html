@@ -1,20 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Login Page{% endblock %}
 
-{% block content %}
-    <div class="row">
-    <div class="col">
-        <h5>Navigation</h5>
-        <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/login">Already have an account?</a></li>
-        <li><a href="/collections">View all collections</a></li>
-        <li><a href="/museumdirectory">View all museums</a></li>
-        <!--<li><a href="/audio-guide">View all audio guides</a></li> -->
-        </ul>
-    </div>
-    </div>
-  
+{% block content %}  
   <h1>Create an account to save your faves!</h1><br>
   <label>Register here:</label>
   <form action="/register" method="POST">
@@ -37,6 +24,8 @@
 
     <p>
       <input type="submit" value="Create an account">
+
     </p>
   </form>
 {% endblock %}
+

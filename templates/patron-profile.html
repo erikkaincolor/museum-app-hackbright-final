@@ -3,6 +3,9 @@
 {% block title %}{{ patron.uname }}'s Profile{% endblock %}
 
 {% block content %}
+
+
+
 <div class="row">
 <div class="col">
     <h1>{{ patron.uname }}'s Profile</h1>
@@ -13,28 +16,191 @@
 </div>
 
 
-
-
-
 <div class="row">
     <div class="col">
     <h2>Favorites!</h2>
 
+<div id="museumfavecard" class="card" style="width: 18rem;">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Art</h5>
+      <ul>
+        <!-- yes, i passed patron object in from view function -->
+        {% for museumfave in patron.museum_fave %}
+        <li>
+            {{ museumfave.name }}:
+                <span class=fave_id_{{ museumfave.id }}> {{ museumfave.name }} </span>
+    
+            {% if session["username"] == patron.uname %}
+        
+            <p class="card-text"> Description: {{ museumfave.name }} </p>
+            <button class="btn btn-primary">Details</button>
+        {% endif %}
+        </li>
+        {% endfor %}
+        </ul>
+      
+ </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<div class="row"><div class="dds__tabs" data-dds="tabs">
+    <div class="dds__tabs__list-container">
+      <ul class="dds__tabs__list dds__tabs__list--overflow" role="tablist">
+        <li role="none">
+          <button id="tab-1-0" class="dds__tabs__tab" role="tab" aria-controls="tab-1-0-pane" aria-selected="true" tabindex="0">
+            <span class="dds__tabs__tab__label" title="Tab 0">Tab 1</span>
+          </button>
+        </li>
+        <li role="none">
+          <button id="tab-1-1" class="dds__tabs__tab" role="tab" aria-controls="tab-1-1-pane" aria-selected="false" tabindex="-1">
+            <span class="dds__tabs__tab__label" title="Tab 1">Tab 2</span>
+          </button>
+        </li>
+        <li role="none">
+          <button id="tab-1-2" class="dds__tabs__tab" role="tab" aria-controls="tab-1-2-pane" aria-selected="false" tabindex="-1">
+            <span class="dds__tabs__tab__label" title="Tab 2">Tab 3</span>
+          </button>
+        </li>
+        <li role="none">
+          <button id="tab-1-3" class="dds__tabs__tab" role="tab" aria-controls="tab-1-3-pane" aria-selected="false" tabindex="-1">
+            <span class="dds__tabs__tab__label" title="Tab 3">Tab 4</span>
+          </button>
+        </li>
+        <li role="none">
+          <button id="tab-1-4" class="dds__tabs__tab" role="tab" aria-controls="tab-1-4-pane" aria-selected="false" tabindex="-1">
+            <span class="dds__tabs__tab__label" title="Tab 4">Tab 5</span>
+          </button>
+        </li>
+        <li role="none">
+          <button id="tab-1-5" class="dds__tabs__tab" role="tab" aria-controls="tab-1-5-pane" aria-selected="false" tabindex="-1">
+            <span class="dds__tabs__tab__label" title="Tab 5">Tab 6</span>
+          </button>
+        </li>
+        <li role="none">
+          <button id="tab-1-6" class="dds__tabs__tab" role="tab" aria-controls="tab-1-6-pane" aria-selected="false" tabindex="-1">
+            <span class="dds__tabs__tab__label" title="Tab 6">Tab 7</span>
+          </button>
+        </li>
+      </ul>
     </div>
-</div>
+    <div class="dds__tabs__pane-container">
+      <div id="tab-1-0-pane" class="dds__tabs__pane" role="tabpanel" tabindex="0" aria-labelledby="tab-1-0" aria-hidden="false">
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi maxime magnam veritatis. Repellat, deserunt adipisci aspernatur
+          blanditiis reiciendis porro doloribus non sed vel optio, culpa dolor nisi impedit qui ipsum nobis est autem neque quod iusto iure.
+          Assumenda reiciendis temporibus sint, sequi, explicabo esse ducimus, soluta tenetur voluptas impedit quasi?
+        </p>
+        <p>
+          Maiores facilis beatae non quo, sequi sit eos quod dolorem accusantium optio odit saepe minima laboriosam enim nisi vel sint
+          assumenda nobis eveniet libero? Beatae quisquam deserunt a dolorem ab, hic ratione accusantium accusamus vitae, illo dolore, maxime
+          provident consequatur atque architecto laborum ullam velit maiores? Repellat commodi hic facilis?
+        </p>
+      </div>
+      <div id="tab-1-1-pane" class="dds__tabs__pane" role="tabpanel" tabindex="-1" aria-labelledby="tab-1-1" aria-hidden="true">
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta soluta exercitationem saepe a sint! Quas labore animi illo dolor
+          fuga saepe ad commodi nemo inventore laudantium culpa eaque est recusandae, tempora quasi, aperiam modi iusto sapiente aliquam
+          accusantium eveniet quo et rem fugiat. Corporis, nihil? Reprehenderit odio maxime consectetur saepe.
+        </p>
+      </div>
+      <div id="tab-1-2-pane" class="dds__tabs__pane" role="tabpanel" tabindex="-1" aria-labelledby="tab-1-2" aria-hidden="true">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur impedit iste rerum nemo aperiam eos veniam ad illo doloremque
+          alias mollitia deserunt excepturi aut iure libero, soluta magni quis beatae quos quasi expedita obcaecati voluptate molestias?
+          Vitae, velit? Ducimus, perferendis!
+        </p>
+        <p>
+          Cum beatae deleniti explicabo fugit rem voluptate? Quo necessitatibus, velit nemo perferendis cupiditate dolor aut veniam officia,
+          architecto at quaerat blanditiis itaque! Sunt, voluptates pariatur! Numquam sapiente illo quisquam. Commodi adipisci nobis
+          voluptatibus necessitatibus. Adipisci, reprehenderit? Natus animi vitae nobis.
+        </p>
+        <p>
+          Quibusdam debitis laborum dolorem atque eos ea, harum sequi perspiciatis aspernatur magnam incidunt nisi labore non reiciendis hic,
+          voluptatem veniam voluptatibus iusto nostrum! Aspernatur illum optio quidem eius modi itaque nemo voluptatum! Aut fuga atque
+          eligendi, nam asperiores quos nulla!
+        </p>
+      </div>
+      <div id="tab-1-3-pane" class="dds__tabs__pane" role="tabpanel" tabindex="-1" aria-labelledby="tab-1-3" aria-hidden="true">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae accusantium voluptate commodi reiciendis a temporibus excepturi hic,
+          officiis at? Qui inventore similique eveniet omnis unde, voluptas ipsa asperiores fugiat deleniti dolores ut vitae ratione soluta
+          consequatur vero esse consectetur ducimus distinctio iste quo minus deserunt eligendi autem! Libero excepturi facilis officiis.
+          Quidem itaque quaerat nulla debitis, quae culpa voluptate iusto possimus a deleniti, impedit magni earum blanditiis aliquid atque
+          illum tempora sequi! Sapiente consectetur pariatur repudiandae aut autem quasi dolor ullam. Non molestias nisi a optio voluptatum
+          incidunt fugit id, nam delectus, neque consequuntur, illum aspernatur totam harum et at.
+        </p>
+      </div>
+      <div id="tab-1-4-pane" class="dds__tabs__pane" role="tabpanel" tabindex="-1" aria-labelledby="tab-1-4" aria-hidden="true">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam cum placeat, voluptate eum quibusdam, impedit beatae quo, minima
+          praesentium consequuntur culpa quos iste fugit ut veniam facere? Velit vero, sint eligendi pariatur quas voluptatem modi minus
+          repudiandae ea tenetur atque consectetur quaerat voluptas labore nihil error repellendus impedit temporibus! Modi reiciendis
+          architecto ex cupiditate corporis quisquam itaque, totam rerum quod sequi, atque similique esse aliquam aliquid. Nam, asperiores
+          culpa dignissimos sunt vel doloribus, a error libero ut enim veritatis inventore?
+        </p>
+        <p>
+          Earum temporibus, porro, nemo quia quae dignissimos fugit ipsa delectus incidunt sint quidem voluptatem. Tenetur illum ratione
+          iusto. Quia reprehenderit asperiores rem molestiae dolore ex corporis quas officiis maxime cupiditate perferendis nulla, iste
+          praesentium natus! Mollitia quam, quo ipsam neque doloribus dolor quidem voluptatum illum voluptate inventore adipisci? Possimus
+          numquam esse, sequi maiores inventore cupiditate tempora itaque hic facere nulla nam alias reprehenderit fuga omnis quia beatae
+          expedita molestiae illo laborum quisquam aliquid nesciunt! Illum consequatur rem necessitatibus odit hic!
+        </p>
+        <p>
+          Eum accusamus neque, accusantium dolores vitae numquam, est minima necessitatibus, facilis ab fugiat? Veniam delectus aliquid fugiat
+          maiores facilis similique, reiciendis exercitationem unde ullam voluptate doloribus officia esse? Laborum at, facilis quo eligendi
+          neque quidem nemo labore vero, aperiam illo illum ducimus cupiditate assumenda sequi voluptate iure sapiente molestiae nisi sunt
+          dolore minus aliquid officia? Dolor quibusdam doloremque eaque molestias ullam nemo nihil eos voluptates labore soluta enim incidunt
+          itaque praesentium facere totam mollitia illo commodi, delectus quia accusantium animi?
+        </p>
+      </div>
+      <div id="tab-1-5-pane" class="dds__tabs__pane" role="tabpanel" tabindex="-1" aria-labelledby="tab-1-5" aria-hidden="true">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, repellendus, reiciendis accusamus nulla aliquid quidem amet est
+          recusandae id quia voluptates eius accusantium nihil neque illo esse eligendi hic! A temporibus, eum in assumenda labore tempore hic
+          consectetur! Ipsam doloribus, maxime dolor quod quidem expedita in voluptate, consequuntur inventore suscipit iste facilis explicabo
+          similique molestias est praesentium, reprehenderit accusantium! Incidunt sapiente repellendus voluptas eligendi ut provident fuga
+          possimus distinctio necessitatibus.
+        </p>
+        <p>
+          Quis enim reprehenderit ducimus quas ipsum quibusdam hic, vero laboriosam. Impedit quo doloremque maiores, quas, voluptatibus sed
+          aliquam necessitatibus iste ad culpa accusamus reprehenderit adipisci fuga? Doloribus sint ad et id numquam natus, voluptatem quos
+          aliquid at tenetur exercitationem. Expedita nulla consequuntur eveniet laudantium aperiam assumenda commodi sunt, repudiandae quos!
+          Iusto reprehenderit ratione magnam itaque, asperiores porro, blanditiis iste quis officiis repudiandae id optio rem ipsum,
+          praesentium laboriosam ad enim.
+        </p>
+      </div>
+      <div id="tab-1-6-pane" class="dds__tabs__pane" role="tabpanel" tabindex="-1" aria-labelledby="tab-1-6" aria-hidden="true">
+        <p>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim at, neque animi harum repellendus laboriosam similique ea, beatae,
+          modi ratione asperiores? Veniam consectetur natus porro?
+        </p>
+        <p>
+          Ullam, voluptatem! Tenetur consequatur exercitationem unde cupiditate reprehenderit praesentium, quo, nemo perferendis omnis
+          voluptatibus, possimus rem sequi. Ullam aliquid reprehenderit at voluptatum, pariatur nulla dignissimos.
+        </p>
+        <p>
+          Dolore nihil inventore esse beatae nulla obcaecati earum ab consequuntur consectetur. Illo facere iusto asperiores sunt a officia
+          autem doloribus optio ad laboriosam, animi porro.
+        </p>
+        <p>
+          Ad quasi quae architecto officiis expedita soluta commodi eaque saepe. Voluptatum, laborum perspiciatis natus magni dicta expedita!
+          Assumenda unde reprehenderit sapiente eum qui molestias doloremque!
+        </p>
+      </div>
+    </div>
+  </div>
+  </div>
 
+{% endblock %}
 
-
-
-<div class="row">
-<div class="col">
-    <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/museumdirectory">View all museums</a></li>
-    <li><a href="/collections">View all collections</a></li>
-    <!--<li><a href="/audio-guide">View all audio guides</a></li> -->
-    </ul>
-</div>
-</div>
-
+{% block script %}
+<script src="/static/js/details.js"></script>  
 {% endblock %}

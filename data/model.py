@@ -3,8 +3,7 @@
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()              
 
-
-
+#word of caution: everytime i change this...update dunder repr's too.
 
 #############################################
 #                                           #                                                           
@@ -130,9 +129,9 @@ class Collection(db.Model): #ONE
     # num_items = db.Column(db.Integer, nullable=True) #will be 3 automatically
 
     # #magic variables that belong to both, but are stored in parent
-    # art_object = db.relationship('ArtObject', backref='collection', lazy=True) ###
-    # # museum = db.relationship('Museum', uselist=False, backref='collection', lazy=True) #uselist key bc this relationship is 1:1
-    # related_sound=db.relationship("RelatedSound", secondary="collections_sounds", backref='collection')
+    art_object = db.relationship('ArtObject', backref='collection', lazy=True) ###
+    # museum = db.relationship('Museum', uselist=False, backref='collection', lazy=True) #uselist key bc this relationship is 1:1
+    related_sound=db.relationship("RelatedSound", secondary="collections_sounds", backref='collection')
 
     def __repr__(self):
         """Show info about art collection."""
@@ -239,11 +238,11 @@ class Museum(db.Model):
     # collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False)  
 
     #magic variables
-    #related_sound=db.relationship("RelatedSound", backref='museum')
+    related_sound=db.relationship("RelatedSound", backref='museum')
 
     def __repr__(self):
         """Show info about museum."""
-        return f"<Museum id={self.id} name={self.name} city={self.city} state={self.state} country={self.country}>"
+        return f"<Museum id={self.id} name={self.name} city={self.city} state={self.state}>"
 
 
 
@@ -269,7 +268,8 @@ def connect_to_db(app, db_name="postgresql:///muse"):
     db.init_app(app)   
 
 if __name__ == "__main__":
-    from server import app
+    from flask import Flask
+    app=Flask(__name__) #making a flask instance
     with app.app_context():
         connect_to_db(app)
   

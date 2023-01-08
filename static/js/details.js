@@ -20,14 +20,16 @@ alert("connected!!!!!")
 //     document.querySelector('#ajax-test').innerHTML = results;
 //     }
 
-document.querySelector('#ajax').addEventListener('click', ()=>{
-    fetch('/collections/${id}/${art}')
-        // .then((response) => response.json())
-        .then((response) => response.text())
-        .then((result)=> {
-        document.querySelector('#ajax-test').innerHTML = result;
-        });
-})
+
+//DIDNT WORK
+// document.querySelector('#ajax').addEventListener('click', ()=>{
+//     fetch('/collections/${id}/${art}')
+//         // .then((response) => response.json())
+//         .then((response) => response.text())
+//         .then((result)=> {
+//         document.querySelector('#ajax-test').innerHTML = result;
+//         });
+// })
 
 
 // Qselect event target in html by id or class
@@ -39,3 +41,16 @@ document.querySelector('#ajax').addEventListener('click', ()=>{
 //event type
 //anon func:
     //fetch the url of image
+
+
+///for tab1: museum faves on patron profile
+document.querySelector('#museumfavecard').addEventListener('click', () => {
+        // send a fetch request to the show-museum-fave route
+        fetch('/api/museum-faves')
+        .then((response) => {
+            if (not 'Must Login' == response) {		//<——js references the response being true or not in a conditional 
+                document.querySelector(`span.show-muse-fave_${museum.id}`).innerHTML = response; //<—need help
+            } else {
+                alert(‘Check out museums, sounds, art and collections to favorite!’);
+            });
+        });

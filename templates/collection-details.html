@@ -3,37 +3,59 @@
 {% block title %} {{ collection.name }} - Details{% endblock %}
 
 {% block content %}
+
+
     <div class="row">
-    <div class="col">
-        <h5>Navigation</h5>
-        <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/login">Login here</a></li>
-        <li><a href="/register">Create an account</a></li>
-        <li><a href="/collections">View all collections</a></li>
-        <li><a href="/museumdirectory">View all museums</a></li>
-        <!--<li><a href="/audio-guide">View all audio guides</a></li> -->
-        </ul>
-    </div>
+        <div class="col">
+        <h1>Individual Collection:</h1>
+        <h2>{{ collection.name }}</h2>
+                <p>
+                    {{ collection.description }}
+                </p>
+                <p>
+                    {% if session["patron_id"] %}
+                    <button id="addfave" value="{{collection.id}}">Add to favorites </button>
+                    <button id="removefave" value="{{collection.id}}">Remove as favorite </button>
+                    {% else %}
+                    <button id="login2addfave" value="{{collection.id}}">Add to favorites </button>{% endif %}
+                </p>
+                <p>
+                    this pages main feat needs to be to display all the assoc. art!! be it in cards etc...this will be where the API shines
+                </p>
+                <br>
+        </div>
     </div>
 
-<h1>Individual Collection:</h1>
-    <h2>{{ collection.name }}</h2>
-    <p>
-        HIIIIII
-        {{ collection.description }}
-    </p>
-    <p>
-        <button value="{{collection.id}}">Add to favorites </button>
-        
-    </p>
-    <p>
-        this pages main feat needs to be to display all the assoc. art!! be it in cards etc...this will be where the API shines
-    </p>
 
+
+
+
+
+
+    <div class="row"><h3>Art in Collection</h3></div>
+<div class="row">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Art</h5>
+          <p class="card-text"> This will be dynamic art object description</p>
+          <button class="btn btn-primary">Details</button>
+        </div>
+      </div><br>
+
+
+
+
+
+
+
+    <div class="row"><h3>Sounds in Collection</h3></div>
+    <div class="row">add audio from js in here or amplify.js</div>
+    <br><br>
 {% endblock %}
 
 {% block script %}
 <script src="/static/js/collection_favorite.js"></script>  
+<script src="/static/js/details.js"></script>  
 {% endblock %}
 
