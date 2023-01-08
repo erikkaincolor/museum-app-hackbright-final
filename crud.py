@@ -34,6 +34,7 @@ def create_patron(uname, fname, lname, email, pword): #DONE
 #                                                                                                          #
 ############################################################################################################
 
+#----------------------------museum faves
 #works
 def create_museum_fave(patron_id, museum_id): #fk's to museum faves
     """create a museum favorite"""
@@ -44,13 +45,12 @@ def get_m_fave_by_id(id):
     """for deleting from db"""
     return MuseumFave.query.get(id)
 
-# WIP-is this corect?
+# works
 def get_m_fave_by_pid(p_id):
-    """get patrons museum fave id to showi up on patrons profile"""
-    # patron=Patron.query.get(p_id)
+    """get patrons museum fave id to show up on patrons profile"""
     return MuseumFave.query.get(patron_id_lookup(p_id)) 
-    #^^returns Patron.query.get(p_id)
 
+#----------------------------collection faves
 
 #works
 def create_collection_fave(patron_id, collection_id): #fk's to collection faves
@@ -62,22 +62,33 @@ def get_c_fave_by_id(id):
     """for deleting from db"""
     return CollectionFave.query.get(id)
 
-#------------------------------
+#works
+def get_c_fave_by_pid(p_id):
+    """get patrons museum fave id to show up on patrons profile"""
+    return CollectionFave.query.get(patron_id_lookup(p_id)) 
 
-#WIP test when art renders
+#----------------------------art faves
+
+#WIP test when art renders-TESTING NOW
 def create_art_fave(patron_id, art_id): #fk's to collection faves
-    """create a museum favorite..seed db side and server side"""
+    """create a art favorite..seed db side and server side"""
     return ArtFave(patron_id=patron_id, art_id=art_id)
 
-#WIP
+#wip-TESTING NOW
 def get_a_fave_by_id(id):
     """for deleting from db"""
     return ArtFave.query.get(id)
 
+#wip
+def get_a_fave_by_pid(p_id):
+    """get patrons art fave id to show up on patrons profile"""
+    return ArtFave.query.get(patron_id_lookup(p_id)) 
+
+#----------------------------sound faves
 
 #WIP-test when page is setup!
 def create_sound_fave(patron_id, related_sound_id): #fk's to collection faves
-    """create a museum favorite..seed db side and server side"""
+    """create a sound favorite..seed db side and server side"""
     return RelatedSoundFave(patron_id=patron_id, related_sound_id=related_sound_id)
 
 #WIP
@@ -85,6 +96,9 @@ def get_s_fave_by_id(id):
     """for deleting from db"""
     return RelatedSoundFave.query.get(id)
 
+def get_s_fave_by_pid(p_id):
+    """get patrons sound fave id to show up on patrons profile"""
+    return RelatedSoundFave.query.get(patron_id_lookup(p_id)) 
 
 # <button value="{{collection.id}}">Add to favorites </button> <br><br>
 #IS THIS WHERE I USE RELATIONSHIP??
@@ -212,7 +226,6 @@ def get_collection_id(id): #DONE
 
 
 
-
 ##########CRUD FOR SEEDING
 
 # works
@@ -277,9 +290,9 @@ def get_art_by_id(id):
     return ArtObject.query.get(id)
 
 #WIP/ create art object on collection deets page
-# def get_art_by_coll_id(collection_id): #collection_id is passed in via route
-#     """artobj via collectionid to show all """ 
-#     return ArtObject.query.filter(ArtObject.collection_id==collection_id).first()
+def get_art_by_coll_id(collection_id): #collection_id is passed in via route
+    """artobj via collectionid to show all """ 
+    return ArtObject.query.filter(ArtObject.collection_id==collection_id).first()
 
 #works-delete later, for
 # def patron_uname_lookup(uname): #DONE #in order to call,  id have to know uname

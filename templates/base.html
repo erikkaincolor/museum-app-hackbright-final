@@ -9,50 +9,27 @@
         <!-- Your custom styles -->
         <link rel="stylesheet" href="/static/css/mystyles.css">
     </head>
-    A Black Museum & Audio Experience App
+    
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <!-- Navbar - cant get dropdown to work quite yet-->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"> Futureseum </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Pricing</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown link
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-          </ul>
+        <div class="collapse navbar-collapse navbar-nav" id="navbarNav">
+              <a class="nav-item nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-item nav-link" href="/login">Login</a>
+              <a class="nav-item nav-link" href="/profile">Profile</a>
+              <a class="nav-item nav-link" href="/register">Register</a>
+              <a class="nav-item nav-link" href="/collections">Collections</a>
+              <a class="nav-item nav-link" href="/museumdirectory">Museum Directory</a>
+              <a class="nav-item nav-link" href="/audio-guides">Audio Guides</a>
+              <a class="nav-item nav-link disabled" href="#">Coming Soon!</a>
         </div>
       </nav>
 
-
-
-
-
-
-
-
-
-
-
-
+<!-- delete before deployment -->
     {# For demo purposes, show our sessions #}
     {% if session %}
     <fieldset>
@@ -61,6 +38,7 @@
     </fieldset>
     {% endif %}
 
+    <!-- delete before deployment, there should be js alerts -->
     <div class="container">
         {# Display flash messages, if any, for all pages #}
         {% with messages = get_flashed_messages() %}

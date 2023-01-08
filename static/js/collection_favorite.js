@@ -27,3 +27,23 @@ btn2.addEventListener("click", (evt)=>{
     const collectionId=evt.target.value  
     fetch(`/collections/${collectionId}/removecollectionfavorites`, {method:"POST"}) //AJAX request to db
 })
+
+
+
+//////////////ART OBJ FAVES
+//logged-in + add fave
+let btn4 = document.querySelector("#addartfave"); //for the add to faves btn
+
+btn4.addEventListener("click", (evt)=>{
+    let artId = evt.target.value;
+    fetch(`/${artId}/artfave`, {method:"POST"})
+    // camelCase for js vars from now on
+})
+
+//logged-in + remove fave
+let btn5 = document.querySelector("#removeartfave"); //for the add to faves btn
+
+btn5.addEventListener("click", (evt)=>{
+    const artId=evt.target.value  
+    fetch(`/${artId}/removeartfave`, {method:"POST"}) //AJAX request to db
+})

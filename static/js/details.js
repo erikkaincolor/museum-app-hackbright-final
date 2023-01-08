@@ -1,5 +1,5 @@
 "use strict"
-alert("connected!!!!!")
+// alert("connected!!!!!")
 
 
 //upon clicking on collection from collection list page, it should load all the art objects on page
@@ -44,13 +44,20 @@ alert("connected!!!!!")
 
 
 ///for tab1: museum faves on patron profile
-document.querySelector('#museumfavecard').addEventListener('click', () => {
-        // send a fetch request to the show-museum-fave route
-        fetch('/api/museum-faves')
-        .then((response) => {
-            if (not 'Must Login' == response) {		//<——js references the response being true or not in a conditional 
-                document.querySelector(`span.show-muse-fave_${museum.id}`).innerHTML = response; //<—need help
-            } else {
-                alert(‘Check out museums, sounds, art and collections to favorite!’);
-            });
-        });
+// document.querySelector('#museumfavecard').addEventListener('click', () => {
+//         // send a fetch request to the show-museum-fave route
+//         fetch('/api/museum-faves')
+//         .then((response) => {
+//             if (not 'Must Login' == response) {		//<——js references the response being true or not in a conditional 
+//                 document.querySelector(`span.show-muse-fave_${museum.id}`).innerHTML = response; //<—need help
+//             } else {
+//                 alert(‘Check out museums, sounds, art and collections to favorite!’);
+//             });
+//         });
+
+
+
+// //dell tab click events
+// https://www.delldesignsystem.com/components/tabs/
+// const element = document.getElementById("#dell-tabs");
+// DDS.Tabs(element, { moreLabel: More });

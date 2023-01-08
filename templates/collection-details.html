@@ -7,8 +7,7 @@
 
     <div class="row">
         <div class="col">
-        <h1>Individual Collection:</h1>
-        <h2>{{ collection.name }}</h2>
+        <h1>{{ collection.name }}</h1>
                 <p>
                     {{ collection.description }}
                 </p>
@@ -29,20 +28,44 @@
 
 
 
-
-
-
-    <div class="row"><h3>Art in Collection</h3></div>
-<div class="row">
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Art</h5>
-          <p class="card-text"> This will be dynamic art object description</p>
-          <button class="btn btn-primary">Details</button>
+    <div class="row">
+        <div class="col">
+        <!-- start of collection faves -->
+        <h5>Art in Collection</h5>
+        <!-- yes, i passed collection object in from view function -->
+            {% for artincollection in collection.art_object %}
+            <div id="collectionfavecard" class="card" style="width:75%;float:justified">
+            <div class="card-body">
+              <h5 class="card-title"><i><span class=fave_id_{{ artincollection.id }}> {{ artincollection.title }} </span></i></h5>
+                <div>
+                <p><p>
+                        <img class="card-img-top" src="{{ artincollection.img_path}}" alt="Card image cap"><br>
+                        <!-- ^^might have some type of colored strip indicating what type it is? -->
+                        <!-- img could be inside or outside..if museum has color then -->
+                        
+                        <!-- would logged in an items favorited show anything? -->
+                        <p class="card-text">
+                            Art: {{ artincollection.artist }}, 
+                            <br>Curator: {{ artincollection.medium }}, 
+                            <br>Curator: {{ artincollection.description }}
+                            <br>Era: {{ artincollection.era }}
+                            </p>
+                    
+                </p></p>
+                <p>
+                    {% if session["patron_id"] %}
+                    <button id="addartfave" value="{{artincollection.id}}">Add to favorites </button>
+                    <button id="removeartfave" value="{{collection.art_object}}">Remove as favorite </button>
+                    {% else %}
+                    <button id="login2addfave" value="{{collection.art_object}}">Add to favorites </button>{% endif %}
+                </p>
+                </div>
+            </div>
+            </div>
+            {% endfor %}<br><br>
+            </div>
         </div>
-      </div><br>
-
+        <!-- end of collection faves -->
 
 
 
