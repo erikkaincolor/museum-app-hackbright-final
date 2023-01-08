@@ -75,7 +75,7 @@ def view_login():
 	return render_template('login.html')
 
 #works
-@app.route('/login',methods=['POST'])
+@app.route('/login',methods = ['POST'])
 def login_prompt():
     """form input on login.html is routed here, posting form data to db"""
     uname = request.form['username'] #<---get uname from form
@@ -125,7 +125,7 @@ def add_m_faves_to_profile():
         return response 
 
 #movie ratings app example:
-# @app.route("/users/<user_id>/<rating_id>", methods=["POST"])
+# @app.route("/users/<user_id>/<rating_id>", methods = ["POST"])
 # def show_ratings(user_id): #DONE, for server
 #     user=crud.get_user_by_id(user_id)####
 #     id=user.user_id
@@ -182,7 +182,7 @@ def view_registration():
 	return render_template('register.html')
 
 #works
-@app.route('/register',methods=['POST']) 
+@app.route('/register',methods = ['POST']) 
 def register():
     """Server request for registration info from client on registration.html page"""
     uname = request.form['uname'] #<---get uname from form
@@ -231,7 +231,7 @@ def register():
 #if count of any faves > 1: show the version of patron profil with faves and show faves!
 
 # works
-@app.route("/museumdirectory/<int:museum_id>/museumfavorites", methods=["POST"])
+@app.route("/museumdirectory/<int:museum_id>/museumfavorites", methods = ["POST"])
 def add_m_fave(museum_id):
     """add museum fave on museum deets page, posts button event 'answer' to db"""
     current_users_uname=session.get("username") #username needed for favoriting
@@ -247,7 +247,7 @@ def add_m_fave(museum_id):
     return response
 
 #works
-@app.route("/museumdirectory/<int:museum_id>/removemuseumfavorites", methods=["POST"])
+@app.route("/museumdirectory/<int:museum_id>/removemuseumfavorites", methods = ["POST"])
 def del_m_fave(museum_id):
     """delete museum fave on museum deets page, posts button event 'answer' to db"""
     response={1:"success"}
@@ -263,7 +263,7 @@ def del_m_fave(museum_id):
     return response
 
 #works
-@app.route("/collections/<int:collection_id>/collectionfavorites", methods=["POST"]) 
+@app.route("/collections/<int:collection_id>/collectionfavorites", methods = ["POST"]) 
 def add_c_fave(collection_id):
     """create collection fave on collection deets page, posts button event 'answer' to db"""
     response={1:"success"}
@@ -278,7 +278,7 @@ def add_c_fave(collection_id):
     return response
 
 #works
-@app.route("/collections/<int:collection_id>/removecollectionfavorites", methods=["POST"]) 
+@app.route("/collections/<int:collection_id>/removecollectionfavorites", methods = ["POST"]) 
 def del_c_fave(collection_id):
     """delete collection fave on collection deets page, posts button event 'answer' to db"""
     current_users_uname=session.get("username") 
@@ -292,33 +292,71 @@ def del_c_fave(collection_id):
     response={1:"success"}
     return response
 
-
+#to-do:
 #WIP to be attended to after i get art objects to show up in collection!
-# @app.route("/collections/<int:collection_id>/artobject/<art_id>", methods=["POST"]) #id is PK, museum_id is FK
-# def add_art_fave(art_id):
-#     """create art object fave on art object deets page"""
-#     response={1:"success"}
-#     current_users_uname=session.get("username") #checking session to see if username is in session in general 
+# #id is PK, museum_id is FK
+
+## wip # create sound fave, post
+# @app.route("/museumdirectory/<int:museum_id>/museumfavorites", methods = ["POST"])
+# def add_m_fave(museum_id):
+#     """add museum fave on museum deets page, posts button event 'answer' to db"""
+#     current_users_uname=session.get("username") #username needed for favoriting
+    
 #     if current_users_uname is None:
-#         flash("You must log in to favorite an art piece.")
-#         #find out the on-page replacement for this
+#         flash("You must log in to favorite a museum.")
 #     else:
-#         #if looged in and not favorited
-#         #if looged in and favortied, be able to unfavorite
-#         patron = crud.patron_uname_lookup(current_users_uname) #get patron that has uname to do id method retrieval
-#         art_fave=crud.create_art_fave(patron.p_id, art_id)
-#        #figure out how to only do 1x HERE
-#         db.session.add(art_fave)
-#         db.session.commit()
-#     # return render_template("/museumdirectory/<museum_id>/museumfavorites")
+#         patron = crud.patron_uname_lookup(current_users_uname) #create patron obj via uname lookup
+#         museum_fave=crud.create_museum_fave(patron.p_id, museum_id)  #create museum_fave obj
+#         db.session.add(museum_fave) #add ot to db
+#         db.session.commit() #save it forever
+#     response={1:"success"}
 #     return response
 
-# <div class="list-group">
-                
-#                     {{ arts.title }}, {{ arts.artist }} {{ arts.img_path}} 
-#             </div>
+## wip remove sound fave, post
+# @app.route("/museumdirectory/<int:museum_id>/removemuseumfavorites", methods = ["POST"])
+# def del_m_fave(museum_id):
+#     """delete museum fave on museum deets page, posts button event 'answer' to db"""
+#     response={1:"success"}
+#     current_users_uname=session.get("username") #username needed for favoriting
+    
+#     if current_users_uname is None:
+#         flash("You must log in to remove a museum as favorite.")
+#     else:
+#         # patron = crud.patron_uname_lookup(current_users_uname) #delete as soon as i test i dont need it 
+#         museum_fave=crud.get_m_fave_by_id(museum_id)
+#         db.session.delete(museum_fave)
+#         db.session.commit() 
+#     return response
 
+##wip # create art fave, post
+# @app.route("/collections/<int:collection_id>/collectionfavorites", methods = ["POST"]) 
+# def add_c_fave(collection_id):
+#     """create collection fave on collection deets page, posts button event 'answer' to db"""
+#     response={1:"success"}
+#     current_users_uname=session.get("username") 
+#     if current_users_uname is None:
+#         flash("You must log in to favorite a collection.")
+#     else:
+#         patron = crud.patron_uname_lookup(current_users_uname) 
+#         collection_fave=crud.create_collection_fave(patron.p_id, collection_id)
+#         db.session.add(collection_fave)
+#         db.session.commit()
+#     return response
 
+## wip remove art fave, post
+# @app.route("/collections/<int:collection_id>/removecollectionfavorites", methods = ["POST"]) 
+# def del_c_fave(collection_id):
+#     """delete collection fave on collection deets page, posts button event 'answer' to db"""
+#     current_users_uname=session.get("username") 
+#     if current_users_uname is None:
+#         flash("You must log in to favorite a collection.")
+#     else:
+#         # patron = crud.patron_uname_lookup(current_users_uname) 
+#         collection_fave=crud.get_c_fave_by_id(collection_id)
+#         db.session.delete(collection_fave)
+#         db.session.commit()
+#     response={1:"success"}
+#     return response
 
 
 
@@ -339,20 +377,20 @@ def del_c_fave(collection_id):
 ############################################################################################################
 
 # works
-@app.route('/museumdirectory', methods = ['GET'])
+@app.route('/museumdirectory')
 def view_museums():
     """view museum table list"""
     museums = crud.get_museums()
     return render_template('museums.html', museums=museums)
 
-# works
+# works, but double check
 @app.route('/museumdirectory/<id>')
 def lone_museum(id):
     """individual museum page"""
     museum=crud.get_museum_by_id(id)
     return render_template("museum-details.html", museum=museum)
 
-#
+
 
 
 
@@ -374,14 +412,14 @@ def lone_museum(id):
 ############################################################################################################
 
 # works
-@app.route('/collections', methods = ['GET'])
+@app.route('/collections')
 def view_collections():
     """view collections table list""" 
     collections = crud.get_collections()
     return render_template('collections.html', collections =collections)
 
 # works
-@app.route('/collections/<id>') #/c1 pr /1
+@app.route('/collections/<id>')
 def lone_collection(id): #it being the url also passes it to the function
     """Multiple Art Objects show up on Collection Details page"""
     collection= crud.get_collection_id(id)
@@ -397,8 +435,6 @@ def art_in_collection(id):
     # return (jsonify(response.to_json))
     return response
 
-# lets just try to replace one singular thing! via DOM manip.
-
 # @app.route('/collections/<id>/art')
 # def art_in_collection(id):
 #     """doesnt render a page, just shows art...may need fetch?"""
@@ -408,7 +444,9 @@ def art_in_collection(id):
 #     # return (jsonify(response.to_json))
 #     return response
 
-
+# <div class="list-group"> 
+#                     {{ arts.title }}, {{ arts.artist }} {{ arts.img_path}} 
+#             </div>
 
 #this may use art query .get for one art piece
 # @app.route('/collections/<id>/art-object-<id>') #/c1 pr /1 ALSO need to pass it in as a parameter to the view func
