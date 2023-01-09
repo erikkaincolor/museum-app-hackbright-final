@@ -12,8 +12,8 @@
                 {% if sounds %}
                 {% for sound in sounds %}
                 <div class="list-group">
-                <a href="/collections/{{collection.id}}" class="list-group-item list-group-item-action ">
-                    {{ collection.name }}, {{ collection.coll_category }}, {{ collection.curator }}, {{ collection.era }}
+                <a href="/audio-guides/{{sound.id}}" class="list-group-item list-group-item-action ">
+                    Name: {{ sound.sound_name }} <br> Medium: {{ sound.medium }}
                 </a>
                 <br>
                 {% endfor %}
@@ -23,7 +23,7 @@
 
 
         </div>
-    </div>
+   
 
     <br><br>
 

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ sound.name }} - Details{% endblock %}
+
+{% block content %}
+
+
+    <h1>{{ sound.name }}</h1>
+    <p>Medium: {{ sound.sound_name }}
+    <br>Medium: {{ sound.medium }}<br><br>Description: {{ sound.description }} <br>Genre: {{ sound.genre }}</p>
+    <p>                                         
+    </p>
+    <p>
+        <!-- <button id="addsoundfave" value="{{sound.id}}">Add to favorites </button> -->
+        <!-- <button id="removesoundfave" value="{{sound.id}}">Remove as favorite </button> -->
+    </p>
+
+{% endblock %}
+
+{% block script %}
+<!-- <script src="/static/js/sound_favorite.js"></script>   -->
+{% endblock %}
+
+<div class="row">
+    <div class="col">
+     
+    </div>
+    </div>

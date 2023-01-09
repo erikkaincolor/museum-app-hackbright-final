@@ -155,6 +155,7 @@ class RelatedSound(db.Model):
     sound_name = db.Column(db.Text, nullable=True) 
     description = db.Column(db.Text, nullable=False)
     genre = db.Column(db.Text, nullable=True, default="...no genre, just *vibes*!")
+    # weburl = db.Column(db.Text, nullable=True, default="https://audio.mfah.yourcultureconnect.com/e/afro-atlantic-histories/") #NEW
 
     #FK to museum-needs to shows up as last param in creation of relatedsound obj in crud func, hardcoded
     museum_id = db.Column(db.Integer, db.ForeignKey('museums.id'), nullable=False)
@@ -231,7 +232,6 @@ class Museum(db.Model):
     state = db.Column(db.String(20), nullable=False) 
     zipcode = db.Column(db.Integer, nullable=False) #NEW
     weburl = db.Column(db.Text, nullable=False) #NEW
-
 
     #FK to collections-
     # not doing this anymore! needed to figure out how ot make it optional given some are curated by webmaster and others are curated by museum and put online

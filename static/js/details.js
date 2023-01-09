@@ -61,3 +61,16 @@
 // https://www.delldesignsystem.com/components/tabs/
 // const element = document.getElementById("#dell-tabs");
 // DDS.Tabs(element, { moreLabel: More });
+
+
+
+// logout link click evt to logout user...will need a 
+// view function, POST method for logout route
+// for patron object via id and to give reponse to js event 
+
+let link = document.querySelector("#leave-museum"); //for the logout link
+
+link.addEventListener("click", (evt)=>{
+    const pId=evt.target.value  
+    fetch(`/${pId}/-----`, {method:"POST"}) //AJAX request to db
+})

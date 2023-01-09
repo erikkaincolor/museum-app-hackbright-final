@@ -4,7 +4,7 @@
 
 {% block content %}
 
-
+    <!-- collection detail info -->
     <div class="row">
         <div class="col">
         <h1>{{ collection.name }}</h1>
@@ -12,52 +12,39 @@
                     {{ collection.description }}
                 </p>
                 <p>
-                    {% if session["patron_id"] %}
                     <button id="addfave" value="{{collection.id}}">Add to favorites </button>
                     <button id="removefave" value="{{collection.id}}">Remove as favorite </button>
-                    {% else %}
-                    <button id="login2addfave" value="{{collection.id}}">Add to favorites </button>{% endif %}
                 </p>
-                <p>
-                    this pages main feat needs to be to display all the assoc. art!! be it in cards etc...this will be where the API shines
-                </p>
-                <br>
         </div>
     </div>
 
 
-
-
+    <!-- art in collection detail info -->
     <div class="row">
         <div class="col">
-        <!-- start of collection faves -->
+        <!-- start of art collection obj -->
         <h5>Art in Collection</h5>
-        <!-- yes, i passed collection object in from view function -->
+        <!-- yes, i passed collection object in from view function and using magic var -->
             {% for artincollection in collection.art_object %}
             <div id="collectionfavecard" class="card" style="width:75%;float:justified">
             <div class="card-body">
               <h5 class="card-title"><i><span class=fave_id_{{ artincollection.id }}> {{ artincollection.title }} </span></i></h5>
                 <div>
                 <p><p>
-                        <img class="card-img-top" src="{{ artincollection.img_path}}" alt="Card image cap"><br>
+                        <img class="card-img-top" src="{{ artincollection.img_path}}" alt="Card image cap" style="width:75%;float:justified"><br>
                         <!-- ^^might have some type of colored strip indicating what type it is? -->
                         <!-- img could be inside or outside..if museum has color then -->
-                        
-                        <!-- would logged in an items favorited show anything? -->
-                        <p class="card-text">
-                            Art: {{ artincollection.artist }}, 
-                            <br>Curator: {{ artincollection.medium }}, 
-                            <br>Curator: {{ artincollection.description }}
-                            <br>Era: {{ artincollection.era }}
+                            <p class="card-text">
+                            Artist: {{ artincollection.artist }} 
+                            <br><br>Medium: {{ artincollection.medium }} 
+                            <br><br>Description: {{ artincollection.description }}
+                            <br><br>Era: {{ artincollection.era }}
                             </p>
-                    
                 </p></p>
                 <p>
-                    {% if session["patron_id"] %}
-                    <button id="addartfave" value="{{artincollection.id}}">Add to favorites </button>
-                    <button id="removeartfave" value="{{collection.art_object}}">Remove as favorite </button>
-                    {% else %}
-                    <button id="login2addfave" value="{{collection.art_object}}">Add to favorites </button>{% endif %}
+                    <!-- need this button info to be from route that passes in art object-->
+                    <button id="addartfave" value="{{art.id}}">Add to favorites </button>
+                    <button id="removeartfave" value="{{art.id}}">Remove as favorite </button>
                 </p>
                 </div>
             </div>
@@ -65,20 +52,18 @@
             {% endfor %}<br><br>
             </div>
         </div>
-        <!-- end of collection faves -->
-
-
-
-
-
+        <!-- end of art in collection info -->
 
     <div class="row"><h3>Sounds in Collection</h3></div>
     <div class="row">add audio from js in here or amplify.js</div>
     <br><br>
-{% endblock %}
 
-{% block script %}
-<script src="/static/js/collection_favorite.js"></script>  
-<script src="/static/js/details.js"></script>  
-{% endblock %}
+    {% endblock %}
 
+    {% block script %}
+    <script src="/static/js/collection_favorite.js"></script>  
+    <script src="/static/js/artobject_favorite.js"></script>  
+    <script src="/static/js/details.js"></script>  
+    {% endblock %}
+
+    

@@ -12,19 +12,18 @@
 //     })
 // output:clicking on button shows us info
 
-let btn = document.querySelector("#addfave"); //for the add to faves btn
+//logged-in + add art fave
+let btn4 = document.querySelector("#addartfave"); //for the add to faves btn
 
-//logged-in + add fave
-btn.addEventListener("click", (evt)=>{
-    const artId=evt.target.value  
-    fetch('/collections/' + collectionId + '/' + artId + '/artfavorites', {method:"POST"})
-// camelCase for js vars from now on
+btn4.addEventListener("click", (evt)=>{
+    let artId = evt.target.value;
+    fetch(`/${artId}/artfave`, {method:"POST"})
 })
 
-//logged-in + remove fave
-let btn2 = document.querySelector("#removefave"); //for the add to faves btn
+//logged-in + remove art fave
+let btn5 = document.querySelector("#removeartfave"); //for the add to faves btn
 
-btn2.addEventListener("click", (evt)=>{
+btn5.addEventListener("click", (evt)=>{
     const artId=evt.target.value  
-    fetch('/collections/' + collectionId + '/' + artId + '/removeartfavorites', {method:"POST"}) //AJAX request to db
+    fetch(`/${artId}/removeartfave`, {method:"POST"}) //AJAX request to db
 })

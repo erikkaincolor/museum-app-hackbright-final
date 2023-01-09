@@ -23,8 +23,7 @@ from data.model import Patron, CollectionFave, ArtFave, RelatedSoundFave, Museum
 #works
 def create_patron(uname, fname, lname, email, pword): #DONE
     """create patron object 1x so seed can repeatedly"""
-    patron=Patron(uname=uname, fname=fname, lname=lname, email=email, pword=pword)
-    return patron
+    return Patron(uname=uname, fname=fname, lname=lname, email=email, pword=pword)
     #patron=model.Patron(uname='e', fname='ee', lname='p', email='test@test.com', pword='1234')
 
 
@@ -69,12 +68,12 @@ def get_c_fave_by_pid(p_id):
 
 #----------------------------art faves
 
-#WIP test when art renders-TESTING NOW
+#works
 def create_art_fave(patron_id, art_id): #fk's to collection faves
     """create a art favorite..seed db side and server side"""
     return ArtFave(patron_id=patron_id, art_id=art_id)
 
-#wip-TESTING NOW
+#works
 def get_a_fave_by_id(id):
     """for deleting from db"""
     return ArtFave.query.get(id)
@@ -96,6 +95,7 @@ def get_s_fave_by_id(id):
     """for deleting from db"""
     return RelatedSoundFave.query.get(id)
 
+#wip
 def get_s_fave_by_pid(p_id):
     """get patrons sound fave id to show up on patrons profile"""
     return RelatedSoundFave.query.get(patron_id_lookup(p_id)) 
@@ -151,8 +151,7 @@ def patron_email_lookup(email): #DONE #in order to call,  id have to know uname
 #works
 def create_account(uname, fname, lname, email, pword): #DONE
     """create patron object 1x so seed can repeatedly"""
-    patron=Patron(uname=uname, fname=fname, lname=lname, email=email, pword=pword)
-    return patron
+    return Patron(uname=uname, fname=fname, lname=lname, email=email, pword=pword)
 
 
 
@@ -180,19 +179,17 @@ def create_account(uname, fname, lname, email, pword): #DONE
 #works
 def create_collection(coll_category, name, description, curator, era):
     """create collection object 1x so seed can repeatedly"""
-    collection= Collection(coll_category=coll_category,name=name,description=description,curator=curator, era=era)
-    return collection
+    return Collection(coll_category=coll_category,name=name,description=description,curator=curator, era=era)
 
 #works
 def create_collection_sound(collection_id, related_sound_id): #fk's to collection faves
     """create a collection sound..seed db side and server side"""
-    collection_sound=CollectionSound(collection_id=collection_id, related_sound_id=related_sound_id)
-    return collection_sound
+    return CollectionSound(collection_id=collection_id, related_sound_id=related_sound_id)
 
 ############################################################################################################
 #                                                                                                          #
 #                                   COLLECTIONS-CRUD FOR SERVER                                            #
-#                                                                                                          #
+#                                         + ART OBJ                                                                 #
 ############################################################################################################
 
 #works
@@ -205,9 +202,24 @@ def get_collection_id(id): #DONE
     """read all collection data..collections that ill for loop through in jinja once i pass it into view func""" 
     return Collection.query.get(id)
 
+############################################################################################################
 
+#works
+def get_art_by_coll_id(collection_id): #collection_id is passed in via route
+    """artobj via collectionid to show all for lone_collection func""" 
+    return ArtObject.query.filter(ArtObject.collection_id==collection_id).first()
 
+############################################################################################################
 
+# #wip
+# def get_related_sounds(): #DONE
+#   """read all sound data..collections that ill for loop through in jinja once i pass it into view func""" 
+#   return RelatedSound.query.all()
+
+#wip
+def get_sound_by_coll_id(collection_id):
+    """as a patron i want to view more info about a indiviual Collection's 4-5 related sounds"""
+    return RelatedSound.query.filter(RelatedSound.collection_id==collection_id).first()
 
 
 
@@ -231,8 +243,7 @@ def get_collection_id(id): #DONE
 # works
 def create_museum(name, street, city, state, zipcode, weburl):
     """create museum object 1x so seed can repeatedly"""
-    museum=Museum(name=name, street=street, city=city, state=state, zipcode=zipcode, weburl=weburl) #removed 'collection=c1'
-    return museum
+    return Museum(name=name, street=street, city=city, state=state, zipcode=zipcode, weburl=weburl) #removed 'collection=c1'
     #m1=model.Museum(name='Houston Museum of African American Culture', city='Houston', state='TX', country='USA') #removed 'collection=c1'
 
 ############################################################################################################
@@ -275,38 +286,13 @@ def get_museum_by_id(id):
 #works
 def create_art_object(artist, title, medium, description, era, img_path, collection_id): #DONE
     """create art object by hand"""
-    art_obj=ArtObject(artist=artist, title=title, medium=medium, description=description, era=era, img_path=img_path, collection_id=collection_id) #add c3, c2
-    return art_obj
+    return ArtObject(artist=artist, title=title, medium=medium, description=description, era=era, img_path=img_path, collection_id=collection_id) #add c3, c2
 
 ############################################################################################################
 #                                                                                                          #
 #                                       ART OBJECT=CRUD FOR SERVER                                         #
 #                                                                                                          #
 ############################################################################################################
-
-#WIP
-def get_art_by_id(id):
-    """get ONE art obj by id""" 
-    return ArtObject.query.get(id)
-
-#WIP/ create art object on collection deets page
-def get_art_by_coll_id(collection_id): #collection_id is passed in via route
-    """artobj via collectionid to show all """ 
-    return ArtObject.query.filter(ArtObject.collection_id==collection_id).first()
-
-#works-delete later, for
-# def patron_uname_lookup(uname): #DONE #in order to call,  id have to know uname
-#     """get patron by uname"""
-#     return Patron.query.filter(Patron.uname == uname).first()
-
-#WIP
-# def get_art_by_coll_id(collection_id): #collection_id is passed in via route
-#     """multiple artobjs via collectionid to show all """ 
-#     return ArtObject(collection_id=collection_id)
-
-
-
-
 
 #w/o api-pre-loading
 #artobj via collectionid <----hardcode server
@@ -343,42 +329,24 @@ def get_art_by_coll_id(collection_id): #collection_id is passed in via route
 ##########CRUD FOR SEEDING
 def create_related_sound(medium, sound_name, description, genre, museum_id): #DONE
     """create related_sound object..by hand"""
-    related_sound=RelatedSound(medium=medium, sound_name=sound_name, description=description, genre=genre, museum_id=museum_id) #museum_id may need to be hardcoded, 1, 2, 3, 4
-    return related_sound
+    return RelatedSound(medium=medium, sound_name=sound_name, description=description, genre=genre, museum_id=museum_id) 
 
-# CONNECT sound to collection-#USE FKs
-#will show up on collection deets route and sound deets route
-
-#*********************************
-# FUNC STORED UNDER COLLECTION   *
-#*********************************
-
-# # CONNECT sound to museum -similar to faves assoc tables + their crud funcs
-#will show up on museum deets route and sound deets route
-
-# def marry_museum_rs():
-#     """relationship object creation"""
-#     m1.related_sound.append(sound2)    
-#     return 
-#     m1.related_sound.append(sound2)    
-#     c1.related_sound.append(sound2)  
-
-############################################################################################################
+###########################################################################################################
 #                                                                                                          #
 #                                       RELATED SOUNDS-CRUD FOR SERVER                                     #
 #                                                                                                          #
 ############################################################################################################
 
-# def get_related_sounds(): #DONE
-#   """read all sound data..collections that ill for loop through in jinja once i pass it into view func""" 
-#   return RelatedSound.query.all()
-
-
-# def details_related_sounds(medium, sound_name, description, museum):
-#   QUERY-#   """as a patron i want to view more info about a indiviual Collection's 4-5 related sounds"""
-#   sounds_list=RelatedSound.query.all()
-#   sound=RelatedSound(medium, sound_name, description, museum) #add m3, m2
-
+#wip
+def get_sounds():
+    """read all museum data..collections that ill for loop through in jinja once i pass it into view func""" 
+    return RelatedSound.query.all()
+    
+#wip
+def get_sound_by_id(id):
+    """read all museum data..collections that ill for loop through in jinja once i pass it into view func""" 
+    return RelatedSound.query.get(id)
+    
 
 
 

@@ -1,9 +1,9 @@
 "use strict"
 // alert("connected!!!!!")
 
-let btn = document.querySelector("#addfave"); //for the add to faves btn
-let btn2 = document.querySelector("#removefave"); //for the add to faves btn
-let btn3 = document.querySelector("#login2addfave"); //for the add to faves btn
+let btn6 = document.querySelector("#addmusefave"); //for the add to faves btn
+let btn7 = document.querySelector("#removemusefave"); //for the add to faves btn
+// let btn3 = document.querySelector("#login2addfave"); //for the add to faves btn
 // https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById
 
 
@@ -12,17 +12,17 @@ let btn3 = document.querySelector("#login2addfave"); //for the add to faves btn
 //logged-in + add fave
 //works
 
-btn.addEventListener("click", (evt)=>{
+btn6.addEventListener("click", (evt)=>{
     const museumId=evt.target.value  
     
     fetch(`/museumdirectory/${museumId}/museumfavorites`, {method:"POST"}) 
     //fetch function parameters...this doesnt need a then or return promises in the relay
 // camelCase for js vars from now on
-});
+})
 
 //logged-in + remove fave....how to make js remove the fave on click? 
 //works
-btn2.addEventListener("click", (evt)=>{
+btn7.addEventListener("click", (evt)=>{
     const museumId=evt.target.value  
     fetch(`/museumdirectory/${museumId}/removemuseumfavorites`, {method:"POST"}) //AJAX request to db
 })

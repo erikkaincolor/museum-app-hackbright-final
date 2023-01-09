@@ -12,11 +12,8 @@
         <a href="{{museum.weburl}}">Website</a>                                            
     </p>
     <p>
-        {% if session["patron_id"] %}
-        <button id="addfave" value="{{museum.id}}">Add to favorites </button>
-        <button id="removefave" value="{{museum.id}}">Remove as favorite </button>
-        {% else %}
-        <button id="login2addfave" value="{{museum.id}}">Add to favorites </button>{% endif %}
+        <button id="addmusefave" value="{{museum.id}}">Add to favorites </button>
+        <button id="removemusefave" value="{{museum.id}}">Remove as favorite </button>
     </p>
 
 {% endblock %}
