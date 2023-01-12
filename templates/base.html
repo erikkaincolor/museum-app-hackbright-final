@@ -6,8 +6,14 @@
         <title>{% block title %}TITLE GOES HERE{% endblock %}</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+        <!-- Google Font API -->
+        <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,200&family=Khula:wght@300&family=Palanquin+Dark:wght@700&display=swap" rel="stylesheet">
+            <style>
+            @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,200&family=Khula:wght@300&family=Palanquin+Dark:wght@700&display=swap&effect=font-effect-outline');
+            </style> 
         <!-- Your custom styles -->
         <link rel="stylesheet" href="/static/css/mystyles.css">
+
         <!-- delete before deployment -->
         {# For demo purposes, show our sessions #}
         {# if session["patron_id"] ---if VAL stored in session is truthy #}
@@ -22,14 +28,14 @@
 <body>
     <!-- Navbar - cant get dropdown to work quite yet-->
     <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"> Futureseum </a>
+        <a class="navbar-brand" href="#"> HabitualBe </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse navbar-nav" id="navbarNav">
               <a class="nav-item nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-              <a class="nav-item nav-link" href="/collections">Collections</a>
-              <a class="nav-item nav-link" href="/museumdirectory">Museum Directory</a>
+              <a class="nav-item nav-link" href="/collections">The Collection</a>
+              <a class="nav-item nav-link" href="/museumdirectory">Museums</a>
               <a class="nav-item nav-link" href="/audio-guides">Audio Guides</a>
               {% if "patron_id" in session %}
               <a id="leave-museum" class="nav-item nav-link" href="{{ url_for('logout') }}" action="/logout">Logout</a>

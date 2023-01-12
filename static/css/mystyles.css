@@ -1,6 +1,7 @@
 h1 
 {
 padding-top:30px;
+font-family: 'Palanquin+Dark', serif;
 }
 
 h5 
@@ -8,6 +9,18 @@ h5
 padding-top:30px;
 }
 
+h2 {
+    font-family: 'Palanquin+Dark', sans-serif;
+    }
+
+p {
+    font-family: 'Khula', sans-serif;
+}
+
+a {
+    font-family: 'Kanit', sans-serif;
+}
+    
 /* delete fieldset l8r...this is to see my sessions */
 fieldset {
     margin-top: 1em;

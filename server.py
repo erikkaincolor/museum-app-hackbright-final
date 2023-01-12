@@ -89,13 +89,12 @@ def login_prompt():
 
     patron=crud.patron_uname_lookup(uname) #<---patron obj made via id lookup...i now can access patron attr
     if patron and patron.pword==pword:
-        flash(f'Logged in as {uname}')
         session['patron_id'] = patron.p_id #logged in user is found in db, and theyre info is now stored in this dict
         return redirect("/profile")
 
     else:
-        flash("Wrong username or password, try again or create an account.")
-        print(f"********************** NOT LOGGED IN **************************")
+        # flash("Wrong username or password, try again or create an account.")
+        #figure out how ot do in js w/o returning json? if possible
         return redirect('/login')
         #might have to connect alert to button in form
 
@@ -103,16 +102,13 @@ def login_prompt():
 @app.route('/logout')
 def logout():
     """click event link on base.html is routed here, posting response to db"""
-    current_user=session['patron_id'] #var is retrieving variable , id: 1, 2, 3
+    # current_user=session['patron_id'] #var is retrieving variable , id: 1, 2, 3
     if "patron_id" in session: #looking for particular key in dict-like ses obj as a string
-        # session.pop(current_user, None)
         session.clear()
-        # del session["patron_id"]
-        # del current_user
-        flash("You are logged out")
         return redirect(url_for('index'))
     else:
-        flash("You must login first")
+        # flash("You must login first")
+        #figure out how to write in js or as a bs alert
         return redirect(url_for('view_login'))
 ################################################################################################################
 ################################################################################################################
@@ -151,24 +147,6 @@ def view_patron_page():
 #                                          PATRON FAVORITES                                                #
 #                                                                                                          #
 ############################################################################################################
-
-#figure out how to log out and then test what page does when i try to add to fave
-
-#works, but see if it works when logged/in or out
-# @app.route('/api/museum-faves')
-# def add_m_faves_to_profile():
-#     """show museum fave on patron deets page"""
-#     p_id=session['patron_id'] #storing session data in a variable
-#     if not "patron_id" in session: #logged in or not depends on this session dict from login
-#     # if not "p_id" in session: #logged in or not depends on this session dict from login
-#         flash("Must log in first")
-#         response2={1: "nope"}
-#         return response2 #to ajax req
-#     else: #if theyre logged in
-#         #using magic relationship <3 variables below via crd func.
-#         crd.get_m_fave_by_pid(p_id) #<---museumfave obj made via p_id lookup...i now can access patron.museum_fave attr
-#         response={1: "success"}
-#         return response 
 
 #works
 @app.route('/api/museum-faves')
@@ -239,10 +217,12 @@ def register():
 
     #form validation:
     if patron: #if uname is in db, error
-        flash("A user with that username exists. Try again please.")
+        # flash("A user with that username exists. Try again please.")
+        # figure out bs or js equal
         return redirect('/register')
     elif patron_obj2: #if email is in db, error
-        flash("A user with that email exists. Try again please.")
+        # flash("A user with that email exists. Try again please.")
+        #^^
         return redirect('/register')
     else: #if email or uname is not in db, create account
         new_user=crud.create_account(uname, fname, lname, email, pword)
@@ -290,7 +270,7 @@ def del_m_fave(museum_id):
     current_users_uname=session.get("username") #username needed for favoriting
     
     if current_users_uname is None:
-        flash("You must log in to remove a museum as favorite.")
+        print("Not logged in")    
     else:
         museum_fave=crud.get_m_fave_delete(session["patron_id"], museum_id)
         db.session.delete(museum_fave)
@@ -306,8 +286,6 @@ def add_c_fave(collection_id):
     response={1:"success"}
     current_users_uname=session.get("username") 
     if current_users_uname is None:
-        # flash("You must log in to favorite a collection.")
-        #cant see this msg until page refresh
         return {"status": "FAIL"}
     else:
         patron = crud.patron_uname_lookup(current_users_uname) 
@@ -324,8 +302,7 @@ def del_c_fave(collection_id):
     current_users_uname=session.get("username") 
     response={1:"success"}
     if current_users_uname is None:
-        flash("You must log in to favorite a collection.")
-        #.then part of the fetch <--in js
+        print("Not logged in")
     else: #get by pid
         collection_fave=crud.get_c_fave_delete(session["patron_id"], collection_id)
         #session[key] <-keying into ses obj, session.key <--get value
@@ -358,7 +335,7 @@ def del_s_fave(sound_id):
     current_users_uname=session.get("username") #username needed for favoriting
     
     if current_users_uname is None:
-        flash("You must log in to remove a museum as favorite.")
+        print("Not logged in")    
     else:
         related_sound_fave=crud.get_s_fave_delete(session["patron_id"], sound_id)
         db.session.delete(related_sound_fave)
@@ -389,7 +366,7 @@ def del_a_fave(art_id):
     current_users_uname=session.get("username") 
     response={1:"success"}
     if current_users_uname is None:
-        flash("login")
+        print("Not logged in")    
     else:
         art_fave=crud.get_a_fave_delete(session["patron_id"], art_id)
         db.session.delete(art_fave)
