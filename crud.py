@@ -44,7 +44,7 @@ def get_m_fave_by_id(id):
     """for deleting from db"""
     return MuseumFave.query.get(id)
 
-# works
+# works and showing up on profile
 def get_m_fave_by_pid(p_id):
     """get patrons museum fave id to show up on patrons profile"""
     return MuseumFave.query.get(patron_id_lookup(p_id)) 
@@ -56,16 +56,20 @@ def create_collection_fave(patron_id, collection_id): #fk's to collection faves
     """create a museum favorite..seed db side and server side"""
     return CollectionFave(patron_id=patron_id, collection_id=collection_id)
 
-#works
-def get_c_fave_by_id(id):
-    """for deleting from db"""
-    return CollectionFave.query.get(id)
+#works-out of commission; needed more, wasnt enough
+# def get_c_fave_by_id(id):
+#     """for deleting from db"""
+#     return CollectionFave.query.get(id)
 
-#works
+#works and showing up on profile
 def get_c_fave_by_pid(p_id):
     """get patrons museum fave id to show up on patrons profile"""
     return CollectionFave.query.get(patron_id_lookup(p_id)) 
 
+#works and instructor approved; CHAINING
+def get_c_fave_delete(patron_id, collection_id):
+    """get collectionfave by patron id and collection id via CHAINING"""
+    return CollectionFave.query.filter(CollectionFave.patron_id==patron_id).filter(CollectionFave.collection_id==collection_id).first()
 #----------------------------art faves
 
 #works
@@ -78,46 +82,27 @@ def get_a_fave_by_id(id):
     """for deleting from db"""
     return ArtFave.query.get(id)
 
-#wip
+#wip and showing up on profile?
 def get_a_fave_by_pid(p_id):
     """get patrons art fave id to show up on patrons profile"""
     return ArtFave.query.get(patron_id_lookup(p_id)) 
 
 #----------------------------sound faves
 
-#WIP-test when page is setup!
+# works
 def create_sound_fave(patron_id, related_sound_id): #fk's to collection faves
     """create a sound favorite..seed db side and server side"""
     return RelatedSoundFave(patron_id=patron_id, related_sound_id=related_sound_id)
 
-#WIP
+# works
 def get_s_fave_by_id(id):
     """for deleting from db"""
     return RelatedSoundFave.query.get(id)
 
-#wip
+# wip and showing up on profile?
 def get_s_fave_by_pid(p_id):
     """get patrons sound fave id to show up on patrons profile"""
     return RelatedSoundFave.query.get(patron_id_lookup(p_id)) 
-
-# <button value="{{collection.id}}">Add to favorites </button> <br><br>
-#IS THIS WHERE I USE RELATIONSHIP??
-
-
-# -update MuseumFave /update-favoite, via ajax later
-# -add faves to patron profile /patron-profile/{patron.id}/favorite
-# -this form and button will show up on museum details, collection details and art object details
-
-#havent shown proof they work for server:
-# def update_museum_fave(patron_id):
-#     #if museumfave exists for this patron already
-#     #delete all except one
-#     #if patron id in db matches the given one:
-#     multiples=[]
-#     if MuseumFave.query.filter(MuseumFave.patron_id == patron_id).one() is False: #if theres more than one
-#         multiples[1:].append(patron_id) #skip first occurance
-#         return multiples
-
 
 
 
@@ -181,7 +166,7 @@ def create_collection(coll_category, name, description, curator, era):
     """create collection object 1x so seed can repeatedly"""
     return Collection(coll_category=coll_category,name=name,description=description,curator=curator, era=era)
 
-#works
+#works-hardcoded fk's
 def create_collection_sound(collection_id, related_sound_id): #fk's to collection faves
     """create a collection sound..seed db side and server side"""
     return CollectionSound(collection_id=collection_id, related_sound_id=related_sound_id)
@@ -204,28 +189,28 @@ def get_collection_id(id): #DONE
 
 ############################################################################################################
 
-#works
+#works-hardcoded fk's
 def get_art_by_coll_id(collection_id): #collection_id is passed in via route
     """artobj via collectionid to show all for lone_collection func""" 
     return ArtObject.query.filter(ArtObject.collection_id==collection_id).first()
 
 ############################################################################################################
 
-# #wip
-# def get_related_sounds(): #DONE
-#   """read all sound data..collections that ill for loop through in jinja once i pass it into view func""" 
-#   return RelatedSound.query.all()
-
-#wip
-def get_sound_by_coll_id(collection_id):
+# #wip-hardcoded fk's <----these are audio guides
+def get_sound_by_museum_id(museum_id):
     """as a patron i want to view more info about a indiviual Collection's 4-5 related sounds"""
-    return RelatedSound.query.filter(RelatedSound.collection_id==collection_id).first()
+    return RelatedSound.query.filter(RelatedSound.museum_id==museum_id).first()
 
+# #should be replaced by CollectionSound table
+# def get_sound_by_coll_id(museum_id):
+#     """as a patron i want to view more info about a indiviual Collection's 4-5 related sounds"""
+#     return CollectionSound.get()
 
+#this should get sounds for musem?
+#check for other magic vars in crud
+#Museum.query.filter(Museum.related_sound==sound_id).first()
 
-
-
-
+#have yet to query or .get the CollectionSound table fpr get_coll_sound(collection_id, related_sound_id)
 
 
 
@@ -239,7 +224,6 @@ def get_sound_by_coll_id(collection_id):
 
 
 ##########CRUD FOR SEEDING
-
 # works
 def create_museum(name, street, city, state, zipcode, weburl):
     """create museum object 1x so seed can repeatedly"""
@@ -327,9 +311,9 @@ def create_art_object(artist, title, medium, description, era, img_path, collect
 
 
 ##########CRUD FOR SEEDING
-def create_related_sound(medium, sound_name, description, genre, museum_id): #DONE
-    """create related_sound object..by hand"""
-    return RelatedSound(medium=medium, sound_name=sound_name, description=description, genre=genre, museum_id=museum_id) 
+def create_related_sound(medium, sound_name, description, genre, sound_source, museum_id): #DONE
+    """create related_sound object...by hand"""
+    return RelatedSound(medium=medium, sound_name=sound_name, description=description, genre=genre, sound_source=sound_source, museum_id=museum_id) 
 
 ###########################################################################################################
 #                                                                                                          #
@@ -337,14 +321,14 @@ def create_related_sound(medium, sound_name, description, genre, museum_id): #DO
 #                                                                                                          #
 ############################################################################################################
 
-#wip
+#works
 def get_sounds():
-    """read all museum data..collections that ill for loop through in jinja once i pass it into view func""" 
+    """read all sound data""" 
     return RelatedSound.query.all()
     
-#wip
+#works
 def get_sound_by_id(id):
-    """read all museum data..collections that ill for loop through in jinja once i pass it into view func""" 
+    """read all sound data""" 
     return RelatedSound.query.get(id)
     
 

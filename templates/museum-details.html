@@ -16,14 +16,57 @@
         <button id="removemusefave" value="{{museum.id}}">Remove as favorite </button>
     </p>
 
-{% endblock %}
-
-{% block script %}
-<script src="/static/js/museum_favorite.js"></script>  
-{% endblock %}
-
-<div class="row">
+ <!-- sound in museum detail info -->
+ <div class="row">
     <div class="col">
-     
+    <!-- start of sound in museum obj -->
+    <h5>Sounds in Museum</h5>
+    <!-- yes, i passed museum object in from view function and using magic var -->
+        {% for sound in museum.related_sound %}
+        <div id="museumfavecard" class="card" style="width:75%;float:justified">
+        <div class="card-body">
+            <h5 class="card-title"><i><span class=fave_id_{{ sound.id }}> {{ sound.sound_name }} </span></i></h5>
+            <div>
+            <p>
+                    <!-- ^^might have some type of colored strip indicating what type it is? -->
+                        <p class="card-text">
+                            <br>Medium: {{ sound.medium }} 
+                            <br>Era: {{ sound.genre }}
+                            <!-- <br><br>Description: {{ sound.description }} -->
+                            <!-- audio track -->
+                            <figure>
+                                <figcaption>Press Play</figcaption>
+                                <audio
+                                    controls
+                                    src="/static/audio/test-door-sound.mp3">
+                                        <a href="/static/audio/test-door-sound.mp3">
+                                            Download audio????
+                                        </a>
+                                </audio>
+                            </figure>
+                        </p>
+            </p>
+            <p>
+                <!-- need this button info to be from route that passes in art object-->
+                <button id="addartfave" value="{{sound.id}}">Add to favorites </button>
+                <button id="removeartfave" value="{{sound.id}}">Remove as favorite </button>
+            </p>
+            </div>
+        </div>
+        </div>
+        {% endfor %}<br><br>
+        </div>
     </div>
-    </div>
+    <!-- end of sound in museum info -->
+
+
+
+
+    {% endblock %}
+
+    {% block script %}
+    <script src="/static/js/museum_favorite.js"></script>  
+    {% endblock %}
+
+
+       

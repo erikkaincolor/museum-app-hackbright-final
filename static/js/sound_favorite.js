@@ -17,7 +17,7 @@ let btn8 = document.querySelector("#addsoundfave"); //for the add to faves btn
 
 btn8.addEventListener("click", (evt)=>{
     let soundId = evt.target.value;
-    fetch(`/${soundId}/fave`, {method:"POST"})
+    fetch(`/${soundId}/soundfavorites`, {method:"POST"})
 })
 
 //logged-in + remove art fave
@@ -25,5 +25,5 @@ let btn9 = document.querySelector("#removesoundfave"); //for the add to faves bt
 
 btn9.addEventListener("click", (evt)=>{
     const soundId=evt.target.value  
-    fetch(`/${soundId}/removesoundfave`, {method:"POST"}) //AJAX request to db
+    fetch(`/${soundId}/removesoundfavorites`, {method:"POST"}) //AJAX request to db
 })

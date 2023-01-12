@@ -68,9 +68,9 @@
 // view function, POST method for logout route
 // for patron object via id and to give reponse to js event 
 
-let link = document.querySelector("#leave-museum"); //for the logout link
+// let link = document.querySelector("#leave-museum"); //for the logout link
 
-link.addEventListener("click", (evt)=>{
-    const pId=evt.target.value  
-    fetch(`/${pId}/-----`, {method:"POST"}) //AJAX request to db
-})
+// link.addEventListener("click", (evt)=>{
+//     const pId=evt.target.value  
+//     fetch(`/${pId}/-----`, {method:"POST"}) //AJAX request to db
+// })

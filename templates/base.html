@@ -9,13 +9,14 @@
         <!-- Your custom styles -->
         <link rel="stylesheet" href="/static/css/mystyles.css">
         <!-- delete before deployment -->
-    {# For demo purposes, show our sessions #}
-    {% if session["patron_id"] %}
-    <fieldset>
-    <label>Flask Session</label>
-    {{ session }}
-    </fieldset>
-    {% endif %}
+        {# For demo purposes, show our sessions #}
+        {# if session["patron_id"] ---if VAL stored in session is truthy #}
+        {% if "patron_id" in session %} <!--if KEY in session-->
+        <fieldset>
+        <label>Flask Session</label>
+        {{ session }}
+        </fieldset>
+        {% endif %}
     </head>
     
 <body>
@@ -31,10 +32,8 @@
               <a class="nav-item nav-link" href="/museumdirectory">Museum Directory</a>
               <a class="nav-item nav-link" href="/audio-guides">Audio Guides</a>
               <a class="nav-item nav-link" href="/login">Login</a>
-              {% if session["patron_id"] %}
-              <a id="leave-museum" class="nav-item nav-link" href="/">Logout</a>
-              {% endif %}
-              {% if session["patron_id"] %}
+              {% if "patron_id" in session %}
+              <a id="leave-museum" class="nav-item nav-link" href="{{ url_for('logout') }}" action="/logout">Logout</a>
               <a class="nav-item nav-link" href="/profile">Profile</a>
               {% endif %}
               <a class="nav-item nav-link" href="/register">Register</a>

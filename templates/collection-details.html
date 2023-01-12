@@ -12,8 +12,13 @@
                     {{ collection.description }}
                 </p>
                 <p>
+                    {% if "patron_id" in session %}
                     <button id="addfave" value="{{collection.id}}">Add to favorites </button>
                     <button id="removefave" value="{{collection.id}}">Remove as favorite </button>
+                    
+                    
+
+                    {% endif %}
                 </p>
         </div>
     </div>
@@ -37,7 +42,7 @@
                             <p class="card-text">
                             Artist: {{ artincollection.artist }} 
                             <br><br>Medium: {{ artincollection.medium }} 
-                            <br><br>Description: {{ artincollection.description }}
+                            <!-- <br><br>Description: {{ artincollection.description }} -->
                             <br><br>Era: {{ artincollection.era }}
                             </p>
                 </p></p>
@@ -54,8 +59,50 @@
         </div>
         <!-- end of art in collection info -->
 
-    <div class="row"><h3>Sounds in Collection</h3></div>
-    <div class="row">add audio from js in here or amplify.js</div>
+    <!-- sound in collection detail info -->
+    <div class="row">
+        <div class="col">
+        <!-- start of sound in collection obj -->
+        <h5>Sounds in Collection</h5>
+        <!-- yes, i passed collection object in from view function and using magic var -->
+            {% for sound in collection.related_sound %}
+            <div id="collectionfavecard" class="card" style="width:75%;float:justified">
+            <div class="card-body">
+              <h5 class="card-title"><i><span class=fave_id_{{ sound.id }}> {{ sound.sound_name }} </span></i></h5>
+                <div>
+                <p>
+                        <!-- ^^might have some type of colored strip indicating what type it is? -->
+                            <p class="card-text">
+                                <br>Medium: {{ sound.medium }} 
+                                <br>Era: {{ sound.genre }}
+                                <!-- <br><br>Description: {{ sound.description }} -->
+                                <!-- audio track -->
+                                <figure>
+                                    <figcaption>Press Play</figcaption>
+                                    <audio
+                                        controls
+                                        src="{{ sound.sound_source}}">
+                                            <a href="{{ sound.sound_source}}">
+                                                Download audio????
+                                            </a>
+                                    </audio>
+                                </figure>
+                            </p>
+                </p>
+                <p>
+                    <!-- need this button info to be from route that passes in art object-->
+                    <button id="addartfave" value="{{art.id}}">Add to favorites </button>
+                    <button id="removeartfave" value="{{art.id}}">Remove as favorite </button>
+                </p>
+                </div>
+            </div>
+            </div>
+            {% endfor %}<br><br>
+            </div>
+        </div>
+        <!-- end of sound in collection info -->
+
+   
     <br><br>
 
     {% endblock %}

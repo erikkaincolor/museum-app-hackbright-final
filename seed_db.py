@@ -111,10 +111,10 @@ model.db.session.commit()
 
 #related sounds-2.0 version: audio museum gives me or spotify embed, fake data to show proof of concept
 #has musuem id hardcoded via fk
-sound1=crud.create_related_sound("podcast", "7th chapel",  "gold foil walls", "lively", 1) #add museums ids by hand
-sound2=crud.create_related_sound("song", "Luka Doncic speaks on...",  "yellow tinted scene", "jittery", 2) 
-sound3=crud.create_related_sound("playlist", "Words from the curator",  "Spaghetti", "novel", 3)
-sound4=crud.create_related_sound("commentary", "At Last",  "baloons", "n/a", 4) 
+sound1=crud.create_related_sound("podcast", "7th chapel",  "gold foil walls", "lively", "/static/audio/test-door-sound.mp3", 1) #add museums ids by hand
+sound2=crud.create_related_sound("song", "Luka Doncic speaks on...",  "yellow tinted scene", "jittery",  "/static/audio/test-door-sound.mp3", 2) 
+sound3=crud.create_related_sound("playlist", "Words from the curator",  "Spaghetti", "novel",  "/static/audio/test-door-sound.mp3", 3)
+sound4=crud.create_related_sound("commentary", "At Last",  "baloons", "n/a",  "/static/audio/test-door-sound.mp3",4) 
 
 sounds_in_db=[sound1, sound2, sound3, sound4]
 model.db.session.add_all(sounds_in_db)
@@ -142,7 +142,7 @@ model.db.session.commit()
 # multiple rs id's show up on 1 coll in collections_sounds table  
  
 #edit later..rmbr sounds must be commited before i can append when seeding
-#via FK
+#via FK-hardcoded
 #via assoc table
 cs1= crud.create_collection_sound(1, 1)
 cs2= crud.create_collection_sound(2, 2)

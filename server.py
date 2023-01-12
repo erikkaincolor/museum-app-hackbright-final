@@ -1,6 +1,6 @@
 "This is the server my web app runs on"
 
-from flask import (Flask, render_template, request, flash, session, redirect, jsonify)
+from flask import (Flask, render_template, request, flash, session, redirect, jsonify, url_for)
 import crud
 from jinja2 import StrictUndefined 
 from data.model import connect_to_db, db 
@@ -99,17 +99,21 @@ def login_prompt():
         return redirect('/login')
         #might have to connect alert to button in form
 
-#wip
-# @app.route('/logout')
-# def logout_prompt():
-#     """click event link on base.html is routed here, posting response to db"""
-#     current_user=session['patron_id']
-#     if "patron_id" in session:
-#         session.pop(current_user, None)
-#         response={1: "success"}
-#         return response 
-#         # return redirect("/")
-
+#works
+@app.route('/logout')
+def logout():
+    """click event link on base.html is routed here, posting response to db"""
+    current_user=session['patron_id'] #var is retrieving variable , id: 1, 2, 3
+    if "patron_id" in session: #looking for particular key in dict-like ses obj as a string
+        # session.pop(current_user, None)
+        session.clear()
+        # del session["patron_id"]
+        # del current_user
+        flash("You are logged out")
+        return redirect(url_for('index'))
+    else:
+        flash("You must login first")
+        return redirect(url_for('view_login'))
 ################################################################################################################
 ################################################################################################################
 
@@ -295,14 +299,16 @@ def del_m_fave(museum_id):
 
 #######################################################
 
-#works
+#works and instructor approved
 @app.route("/collections/<int:collection_id>/collectionfavorites", methods = ["POST"]) 
 def add_c_fave(collection_id):
     """create collection fave on collection deets page, posts button event 'answer' to db"""
     response={1:"success"}
     current_users_uname=session.get("username") 
     if current_users_uname is None:
-        flash("You must log in to favorite a collection.")
+        # flash("You must log in to favorite a collection.")
+        #cant see this msg until page refresh
+        return {"status": "FAIL"}
     else:
         patron = crud.patron_uname_lookup(current_users_uname) 
         collection_fave=crud.create_collection_fave(patron.p_id, collection_id)
@@ -310,51 +316,55 @@ def add_c_fave(collection_id):
         db.session.commit()
     return response
 
-#works
+#works and instructor approved
 @app.route("/collections/<int:collection_id>/removecollectionfavorites", methods = ["POST"]) 
 def del_c_fave(collection_id):
     """delete collection fave on collection deets page, posts button event 'answer' to db"""
+    print(f'******{collection_id}*********')
     current_users_uname=session.get("username") 
     response={1:"success"}
     if current_users_uname is None:
         flash("You must log in to favorite a collection.")
-    else:
-        collection_fave=crud.get_c_fave_by_id(collection_id)
+        #.then part of the fetch <--in js
+    else: #get by pid
+        collection_fave=crud.get_c_fave_delete(session["patron_id"], collection_id)
+        #session[key] <-keying into ses obj, session.key <--get value
         db.session.delete(collection_fave)
         db.session.commit()
     return response
 
 #######################################################
 
-## wip # create sound fave, post
-# @app.route("/museumdirectory/<int:museum_id>/soundfavorites", methods = ["POST"])
-# def add_s_fave(sound_id):
-#     """add msound fave on museum deets page, posts button event 'answer' to db"""
-#     current_users_uname=session.get("username") #username needed for favoriting
+# works
+@app.route("/<int:id>/soundfavorites", methods = ["POST"])
+def add_s_fave(id):
+    """add msound fave on museum deets page, posts button event 'answer' to db"""
+    current_users_uname=session.get("username") #username needed for favoriting
     
-#     if current_users_uname is None:
-#         flash("You must log in to favorite a museum.")
-#     else:
-#         museum_fave=crd.create_sound_fave(patron.p_id, related_sound_id)  #create museum_fave obj
-#         db.session.add(sound_fave) #add ot to db
-#         db.session.commit() #save it forever
-#     response={1:"success"}
-#     return response
+    if current_users_uname is None:
+        flash("You must log in to favorite a museum.")
+    else:
+        patron = crud.patron_uname_lookup(current_users_uname) #create patron obj via uname lookup
+        realted_sound_fave=crud.create_sound_fave(patron.p_id, id)  #create museum_fave obj
+        db.session.add(realted_sound_fave) #add ot to db
+        db.session.commit() #save it forever
+    response={1:"success"}
+    return response
 
-## wip remove sound fave, post
-# @app.route("/museumdirectory/<int:museum_id>/removesoundfavorites", methods = ["POST"])
-# def del_s_fave(museum_id):
-#     """delete sound fave on museum deets page, posts button event 'answer' to db"""
-#     response={1:"success"}
-#     current_users_uname=session.get("username") #username needed for favoriting
+# works
+@app.route("/<int:id>/removesoundfavorites", methods = ["POST"])
+def del_s_fave(id):
+    """delete sound fave on museum deets page, posts button event 'answer' to db"""
+    response={1:"success"}
+    current_users_uname=session.get("username") #username needed for favoriting
     
-#     if current_users_uname is None:
-#         flash("You must log in to remove a museum as favorite.")
-#     else:
-#         museum_fave=crd.get_s_fave_by_id(museum_id)
-#         db.session.delete(sound_fave)
-#         db.session.commit() 
-#     return response
+    if current_users_uname is None:
+        flash("You must log in to remove a museum as favorite.")
+    else:
+        related_sound_fave=crud.get_s_fave_by_id(id)
+        db.session.delete(related_sound_fave)
+        db.session.commit() 
+    return response
 
 ###############################################
 
@@ -417,23 +427,9 @@ def view_museums():
 def lone_museum(id):
     """individual museum page, use magic var art_object from collection class"""
     museum=crud.get_museum_by_id(id)
-    return render_template('museum-details.html', museum=museum)
+    sound=crud.get_sound_by_museum_id(id)
+    return render_template('museum-details.html', museum=museum, sound=sound)
 
-
-#wip-sounds on individual museums!
-# @app.route('/api/sound-faves')
-# def add_m_faves_to_profile():
-#     """show museum fave on patron deets page"""
-#     p_id=session['patron_id'] #storing session data in a variable
-#     if not "patron_id" in session: #logged in or not depends on this session dict from login
-#     # if not "p_id" in session: #logged in or not depends on this session dict from login
-#         response2={1: "nope"}
-#         return response2 #to ajax req
-#     else: #if theyre logged in
-#         #using magic relationship <3 variables below via crd func.
-#         crd.get_m_fave_by_pid(p_id) #<---museumfave obj made via p_id lookup...i now can access patron.museum_fave attr
-#         response={1: "success"}
-#         return response 
 
 
 
@@ -460,36 +456,15 @@ def view_collections():
     collections = crud.get_collections()
     return render_template('collections.html', collections =collections)
 
-# works! BUT add sound by collection id object and pass it in
+# works! 
 @app.route('/collections/<id>')
 def lone_collection(id): #it being the url also passes it to the function
     """Collection Details page"""
     collection= crud.get_collection_id(id)
-    sound=crud.get_sound_by_coll_id(id)
-    art=crud.get_art_by_coll_id(id)
-    return render_template('collection-details.html', collection=collection, art=art, sound=sound)
+    art=crud.get_art_by_coll_id(id) #may not even need bc theres a magic var for it
+    #sounds coming in via magic var
+    return render_template('collection-details.html', collection=collection, art=art)
 
-#wip-sound on indiviual collection!
-# @app.route('/api/sound-faves')
-# def add_m_faves_to_profile():
-#     """show museum fave on patron deets page"""
-#     p_id=session['patron_id'] #storing session data in a variable
-#     if not "patron_id" in session: #logged in or not depends on this session dict from login
-#     # if not "p_id" in session: #logged in or not depends on this session dict from login
-#         response2={1: "nope"}
-#         return response2 #to ajax req
-#     else: #if theyre logged in
-#         #using magic relationship <3 variables below via crd func.
-#         crd.get_m_fave_by_pid(p_id) #<---museumfave obj made via p_id lookup...i now can access patron.museum_fave attr
-#         response={1: "success"}
-#         return response 
-
-
-
-
-# <div class="list-group"> 
-#                     {{ arts.title }}, {{ arts.artist }} {{ arts.img_path}} 
-#             </div>
 
 
 
@@ -516,7 +491,7 @@ def view_audio_guides():
     return render_template('guide.html', sounds=sounds)
 
 #Individual Audio Guide Page: 
-@app.route('/audio-guides/<int:id>', methods =['POST']) #/sound1
+@app.route('/audio-guides/<int:id>') #/sound1
 def lone_audio_guide(id):
     """the audio tours...the playlists"""
     sound= crud.get_sound_by_id(id)

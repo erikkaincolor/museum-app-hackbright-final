@@ -130,7 +130,6 @@ class Collection(db.Model): #ONE
 
     # #magic variables that belong to both, but are stored in parent
     art_object = db.relationship('ArtObject', backref='collection', lazy=True) ###
-    # museum = db.relationship('Museum', uselist=False, backref='collection', lazy=True) #uselist key bc this relationship is 1:1
     related_sound=db.relationship("RelatedSound", secondary="collections_sounds", backref='collection')
 
     def __repr__(self):
@@ -156,6 +155,8 @@ class RelatedSound(db.Model):
     description = db.Column(db.Text, nullable=False)
     genre = db.Column(db.Text, nullable=True, default="...no genre, just *vibes*!")
     # weburl = db.Column(db.Text, nullable=True, default="https://audio.mfah.yourcultureconnect.com/e/afro-atlantic-histories/") #NEW
+    sound_source = db.Column(db.String, nullable=True) #delete later depending on museum or cloudinary API
+
 
     #FK to museum-needs to shows up as last param in creation of relatedsound obj in crud func, hardcoded
     museum_id = db.Column(db.Integer, db.ForeignKey('museums.id'), nullable=False)
@@ -232,10 +233,6 @@ class Museum(db.Model):
     state = db.Column(db.String(20), nullable=False) 
     zipcode = db.Column(db.Integer, nullable=False) #NEW
     weburl = db.Column(db.Text, nullable=False) #NEW
-
-    #FK to collections-
-    # not doing this anymore! needed to figure out how ot make it optional given some are curated by webmaster and others are curated by museum and put online
-    # collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False)  
 
     #magic variables
     related_sound=db.relationship("RelatedSound", backref='museum')

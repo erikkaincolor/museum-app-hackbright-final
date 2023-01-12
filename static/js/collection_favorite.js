@@ -22,6 +22,14 @@ let btn = document.querySelector("#addfave"); //for the add to faves btn
 btn.addEventListener("click", (evt)=>{
     let collectionId = evt.target.value;
     fetch(`/collections/${collectionId}/collectionfavorites`, {method:"POST"})
+    .then((response)=> response.json())
+    .then((result)=>{
+            //conditional;if result
+            if (result.status === "FAIL"){
+                alert("You must log in to favorite a collection.")
+            }
+        }
+    )
     // camelCase for js vars from now on
 })
 
@@ -30,6 +38,7 @@ let btn2 = document.querySelector("#removefave"); //for the add to faves btn
 
 btn2.addEventListener("click", (evt)=>{
     const collectionId=evt.target.value  
+    console.log(collectionId)
     fetch(`/collections/${collectionId}/removecollectionfavorites`, {method:"POST"}) //AJAX request to db
 })
 
