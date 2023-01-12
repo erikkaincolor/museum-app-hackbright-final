@@ -274,7 +274,7 @@ def add_m_fave(museum_id):
     current_users_uname=session.get("username") #username needed for favoriting
     response={1:"success"}
     if current_users_uname is None:
-        flash("You must log in to favorite a museum.")
+        return {"status":"FAIL"}
     else:
         patron = crud.patron_uname_lookup(current_users_uname) #create patron obj via uname lookup
         museum_fave=crud.create_museum_fave(patron.p_id, museum_id)  #create museum_fave obj
@@ -292,7 +292,7 @@ def del_m_fave(museum_id):
     if current_users_uname is None:
         flash("You must log in to remove a museum as favorite.")
     else:
-        museum_fave=crud.get_m_fave_by_id(museum_id)
+        museum_fave=crud.get_m_fave_delete(session["patron_id"], museum_id)
         db.session.delete(museum_fave)
         db.session.commit() 
     return response
@@ -336,24 +336,23 @@ def del_c_fave(collection_id):
 #######################################################
 
 # works
-@app.route("/<int:id>/soundfavorites", methods = ["POST"])
-def add_s_fave(id):
-    """add msound fave on museum deets page, posts button event 'answer' to db"""
-    current_users_uname=session.get("username") #username needed for favoriting
-    
+@app.route("/<int:sound_id>/soundfavorites", methods = ["POST"])
+def add_s_fave(sound_id):
+    """add sound fave on museum deets page, posts button event 'answer' to db"""
+    current_users_uname=session.get("username")
+    response={1:"success"}
     if current_users_uname is None:
-        flash("You must log in to favorite a museum.")
+        return {"status":"FAIL"}
     else:
         patron = crud.patron_uname_lookup(current_users_uname) #create patron obj via uname lookup
-        realted_sound_fave=crud.create_sound_fave(patron.p_id, id)  #create museum_fave obj
-        db.session.add(realted_sound_fave) #add ot to db
-        db.session.commit() #save it forever
-    response={1:"success"}
+        related_sound_fave=crud.create_sound_fave(patron.p_id, sound_id)  #create museum_fave obj
+        db.session.add(related_sound_fave) #add ot to db
+        db.session.commit() 
     return response
 
 # works
-@app.route("/<int:id>/removesoundfavorites", methods = ["POST"])
-def del_s_fave(id):
+@app.route("/<int:sound_id>/removesoundfavorites", methods = ["POST"])
+def del_s_fave(sound_id):
     """delete sound fave on museum deets page, posts button event 'answer' to db"""
     response={1:"success"}
     current_users_uname=session.get("username") #username needed for favoriting
@@ -361,7 +360,7 @@ def del_s_fave(id):
     if current_users_uname is None:
         flash("You must log in to remove a museum as favorite.")
     else:
-        related_sound_fave=crud.get_s_fave_by_id(id)
+        related_sound_fave=crud.get_s_fave_delete(session["patron_id"], sound_id)
         db.session.delete(related_sound_fave)
         db.session.commit() 
     return response
@@ -375,10 +374,10 @@ def add_a_fave(art_id):
     response={1:"success"}
     current_users_uname=session.get("username") 
     if current_users_uname is None:
-        flash("You must log in to favorite an art piece")
+        return {"status":"FAIL"} ##
     else:
         patron = crud.patron_uname_lookup(current_users_uname) 
-        art_fave=crud.create_art_fave(patron.p_id, art_id)
+        art_fave=crud.create_art_fave(patron.p_id, art_id) ##
         db.session.add(art_fave)
         db.session.commit()
     return response
@@ -390,9 +389,9 @@ def del_a_fave(art_id):
     current_users_uname=session.get("username") 
     response={1:"success"}
     if current_users_uname is None:
-        flash("You must log in to remove an art piece fave.")
+        flash("login")
     else:
-        art_fave=crud.get_a_fave_by_id(art_id)
+        art_fave=crud.get_a_fave_delete(session["patron_id"], art_id)
         db.session.delete(art_fave)
         db.session.commit()
     return response

@@ -18,6 +18,14 @@ let btn8 = document.querySelector("#addsoundfave"); //for the add to faves btn
 btn8.addEventListener("click", (evt)=>{
     let soundId = evt.target.value;
     fetch(`/${soundId}/soundfavorites`, {method:"POST"})
+    .then((response)=> response.json())
+    .then((result)=>{
+            //conditional;if result
+            if (result.status === "FAIL"){
+                alert("You must log in to favorite a collection.")
+            }
+        }
+    )
 })
 
 //logged-in + remove art fave

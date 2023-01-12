@@ -1,4 +1,8 @@
 "use strict"
+// THIS is the file i need a review on...test the ux w/ instructor 
+//during q
+
+
 // alert("connected!!!!!")
 
 // test:
@@ -19,7 +23,9 @@
 //logged-in + add collection fave
 let btn = document.querySelector("#addfave"); //for the add to faves btn
 
-btn.addEventListener("click", (evt)=>{
+const toDo = (evt)=>{
+    evt.preventDefault();
+    
     let collectionId = evt.target.value;
     fetch(`/collections/${collectionId}/collectionfavorites`, {method:"POST"})
     .then((response)=> response.json())
@@ -30,17 +36,50 @@ btn.addEventListener("click", (evt)=>{
             }
         }
     )
-    // camelCase for js vars from now on
-})
+};
 
-//logged-in + remove collection fave
+
+//logged-in + remove collection fave-APPROVED
 let btn2 = document.querySelector("#removefave"); //for the add to faves btn
 
-btn2.addEventListener("click", (evt)=>{
+const toDo2 = (evt)=>{
+    evt.preventDefault();
+
     const collectionId=evt.target.value  
-    console.log(collectionId)
+    // console.log(collectionId)
     fetch(`/collections/${collectionId}/removecollectionfavorites`, {method:"POST"}) //AJAX request to db
-})
+    alert("You must log in to remove a favorite a collection.")
+    //id have 2 logged in buttons and 1 logged out buttons
+};
+
+btn2.addEventListener("click", toDo2)
+
+//logged-in + add collection fave-APPROVED
+// btn.addEventListener("click", toDo);
+
+// let btn = document.querySelector("#addfave"); //for the add to faves btn
+
+// btn.addEventListener("click", (evt)=>{
+//     let collectionId = evt.target.value;
+//     fetch(`/collections/${collectionId}/collectionfavorites`, {method:"POST"})
+//     .then((response)=> response.json())
+//     .then((result)=>{
+//             //conditional;if result
+//             if (result.status === "FAIL"){
+//                 alert("You must log in to favorite a collection.")
+//             }
+//         }
+//     )
+// })
+
+//logged-in + remove collection fave-APPROVED
+// let btn2 = document.querySelector("#removefave"); //for the add to faves btn
+
+// btn2.addEventListener("click", (evt)=>{
+//     const collectionId=evt.target.value  
+//     // console.log(collectionId)
+//     fetch(`/collections/${collectionId}/removecollectionfavorites`, {method:"POST"}) //AJAX request to db
+// })
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////      ART OBJ FAVES

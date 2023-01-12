@@ -23,15 +23,9 @@ class Patron(db.Model): #ONE
     pword = db.Column(db.String(10), nullable=False) 
     
 
-    #magic variables-dont need rn, can use maybe later , maybe not
-    #these are missing the "secondary" key
-    # collection_fave = db.relationship('Collection', secondary= 'collection_faves', backref='patron', lazy=True)
-    # art_fave = db.relationship('ArtObject', secondary= 'art_faves', backref='patron', lazy=True)
-    # related_sound_fave = db.relationship('RelatedSound', secondary='related_sound_faves', backref='patron', lazy=True)
-    # museum_fave = db.relationship('Museum', secondary= 'museum_faves', backref='patron', lazy=True)
-    
+    #magic variables, these are missing the "secondary" key + backref    
     #adam 1/5/23: it means that there isn't a relationship 
-    #need these for getting remove from db button to work along with crud func that utilizes em
+    #need these for deets pages and dynamic jinja template looping
     # object on the other side of the relationship, i.e. not creating a backref='patrons'
     collection_fave = db.relationship('Collection', secondary= 'collection_faves', lazy=True)
     art_fave = db.relationship('ArtObject', secondary= 'art_faves', lazy=True)

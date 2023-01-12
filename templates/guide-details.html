@@ -11,8 +11,10 @@
     <p>                                         
     </p>
     <p>
+        {% if "patron_id" in session %}
         <button id="addsoundfave" value="{{sound.id}}">Add to favorites </button>
         <button id="removesoundfave" value="{{sound.id}}">Remove as favorite </button>
+        {% endif %}
     </p>
 
 {% endblock %}

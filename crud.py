@@ -39,15 +39,16 @@ def create_museum_fave(patron_id, museum_id): #fk's to museum faves
     """create a museum favorite"""
     return MuseumFave(patron_id=patron_id, museum_id=museum_id)
 
-# works
-def get_m_fave_by_id(id):
-    """for deleting from db"""
-    return MuseumFave.query.get(id)
 
 # works and showing up on profile
 def get_m_fave_by_pid(p_id):
     """get patrons museum fave id to show up on patrons profile"""
     return MuseumFave.query.get(patron_id_lookup(p_id)) 
+
+#wip; CHAINING
+def get_m_fave_delete(patron_id, museum_id):
+    """get collectionfave by patron id and collection id via CHAINING"""
+    return MuseumFave.query.filter(MuseumFave.patron_id==patron_id).filter(MuseumFave.museum_id==museum_id).first()
 
 #----------------------------collection faves
 
@@ -56,17 +57,12 @@ def create_collection_fave(patron_id, collection_id): #fk's to collection faves
     """create a museum favorite..seed db side and server side"""
     return CollectionFave(patron_id=patron_id, collection_id=collection_id)
 
-#works-out of commission; needed more, wasnt enough
-# def get_c_fave_by_id(id):
-#     """for deleting from db"""
-#     return CollectionFave.query.get(id)
-
 #works and showing up on profile
 def get_c_fave_by_pid(p_id):
     """get patrons museum fave id to show up on patrons profile"""
     return CollectionFave.query.get(patron_id_lookup(p_id)) 
 
-#works and instructor approved; CHAINING
+#works; CHAINING
 def get_c_fave_delete(patron_id, collection_id):
     """get collectionfave by patron id and collection id via CHAINING"""
     return CollectionFave.query.filter(CollectionFave.patron_id==patron_id).filter(CollectionFave.collection_id==collection_id).first()
@@ -78,15 +74,14 @@ def create_art_fave(patron_id, art_id): #fk's to collection faves
     return ArtFave(patron_id=patron_id, art_id=art_id)
 
 #works
-def get_a_fave_by_id(id):
-    """for deleting from db"""
-    return ArtFave.query.get(id)
-
-#wip and showing up on profile?
 def get_a_fave_by_pid(p_id):
     """get patrons art fave id to show up on patrons profile"""
     return ArtFave.query.get(patron_id_lookup(p_id)) 
 
+#works; CHAINING
+def get_a_fave_delete(patron_id, art_id):
+    """get artfave by patron id and art id via CHAINING"""
+    return ArtFave.query.filter(ArtFave.patron_id==patron_id).filter(ArtFave.art_id==art_id).first()
 #----------------------------sound faves
 
 # works
@@ -95,15 +90,14 @@ def create_sound_fave(patron_id, related_sound_id): #fk's to collection faves
     return RelatedSoundFave(patron_id=patron_id, related_sound_id=related_sound_id)
 
 # works
-def get_s_fave_by_id(id):
-    """for deleting from db"""
-    return RelatedSoundFave.query.get(id)
-
-# wip and showing up on profile?
 def get_s_fave_by_pid(p_id):
     """get patrons sound fave id to show up on patrons profile"""
     return RelatedSoundFave.query.get(patron_id_lookup(p_id)) 
 
+#works; CHAINING
+def get_s_fave_delete(patron_id, related_sound_id):
+    """get soundfave by patron id and sound id via CHAINING"""
+    return RelatedSoundFave.query.filter(RelatedSoundFave.patron_id==patron_id).filter(RelatedSoundFave.related_sound_id==related_sound_id).first()
 
 
 

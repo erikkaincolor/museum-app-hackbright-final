@@ -11,22 +11,25 @@ let btn7 = document.querySelector("#removemusefave"); //for the add to faves btn
 
 //logged-in + add fave
 //works
-
 btn6.addEventListener("click", (evt)=>{
     const museumId=evt.target.value  
-    
     fetch(`/museumdirectory/${museumId}/museumfavorites`, {method:"POST"}) 
-    //fetch function parameters...this doesnt need a then or return promises in the relay
-// camelCase for js vars from now on
+    .then((response)=> response.json())
+    .then((result)=>{
+            //conditional;if result
+            if (result.status === "FAIL"){
+                alert("You must log in to favorite a collection.")
+            }
+        }
+    )
 })
 
-//logged-in + remove fave....how to make js remove the fave on click? 
+//logged-in + remove fave
 //works
 btn7.addEventListener("click", (evt)=>{
     const museumId=evt.target.value  
     fetch(`/museumdirectory/${museumId}/removemuseumfavorites`, {method:"POST"}) //AJAX request to db
 })
-//needed to change route 
 
 
 

@@ -12,50 +12,59 @@
                     {{ collection.description }}
                 </p>
                 <p>
-                    {% if "patron_id" in session %}
+                    
                     <button id="addfave" value="{{collection.id}}">Add to favorites </button>
                     <button id="removefave" value="{{collection.id}}">Remove as favorite </button>
                     
                     
-
-                    {% endif %}
                 </p>
         </div>
     </div>
 
 
     <!-- art in collection detail info -->
+    <div class="container overflow-hidden text-center">
+
     <div class="row">
         <div class="col">
         <!-- start of art collection obj -->
         <h5>Art in Collection</h5>
         <!-- yes, i passed collection object in from view function and using magic var -->
             {% for artincollection in collection.art_object %}
-            <div id="collectionfavecard" class="card" style="width:75%;float:justified">
+            <div id="collectionfavecard" class="card" style="width:25rem;float:justified">
             <div class="card-body">
               <h5 class="card-title"><i><span class=fave_id_{{ artincollection.id }}> {{ artincollection.title }} </span></i></h5>
                 <div>
                 <p><p>
-                        <img class="card-img-top" src="{{ artincollection.img_path}}" alt="Card image cap" style="width:75%;float:justified"><br>
+                        <img class="card-img-top" src="{{ artincollection.img_path}}" alt="Card image cap" style="width:25%;float:justified"><br>
                         <!-- ^^might have some type of colored strip indicating what type it is? -->
                         <!-- img could be inside or outside..if museum has color then -->
                             <p class="card-text">
                             Artist: {{ artincollection.artist }} 
-                            <br><br>Medium: {{ artincollection.medium }} 
+                            <br>Medium: {{ artincollection.medium }} 
                             <!-- <br><br>Description: {{ artincollection.description }} -->
-                            <br><br>Era: {{ artincollection.era }}
+                            <br>Era: {{ artincollection.era }}
                             </p>
                 </p></p>
                 <p>
+                    {% if "patron_id" in session %}
                     <!-- need this button info to be from route that passes in art object-->
                     <button id="addartfave" value="{{art.id}}">Add to favorites </button>
                     <button id="removeartfave" value="{{art.id}}">Remove as favorite </button>
+
+                    {% elif "patron_id" not in session %}
+                        
+                        <button id="addartfave" disabled="True" value="{{art.id}}">Add to favorites </button>
+                        <button id="removeartfave" disabled="True" value="{{art.id}}">Remove as favorite </button>
+
+                    {% endif %}
                 </p>
                 </div>
             </div>
             </div>
-            {% endfor %}<br><br>
+            {% endfor %}
             </div>
+        </div>
         </div>
         <!-- end of art in collection info -->
 
@@ -90,9 +99,17 @@
                             </p>
                 </p>
                 <p>
+                    {% if "patron_id" in session %}
                     <!-- need this button info to be from route that passes in art object-->
                     <button id="addartfave" value="{{art.id}}">Add to favorites </button>
                     <button id="removeartfave" value="{{art.id}}">Remove as favorite </button>
+
+                    {% elif "patron_id" not in session %}
+                       
+                        <button id="addartfave" disabled="True" value="{{art.id}}">Add to favorites </button>
+                    <button id="removeartfave" disabled="True" value="{{art.id}}">Remove as favorite </button>
+                    
+                    {% endif %}
                 </p>
                 </div>
             </div>

@@ -31,13 +31,13 @@
               <a class="nav-item nav-link" href="/collections">Collections</a>
               <a class="nav-item nav-link" href="/museumdirectory">Museum Directory</a>
               <a class="nav-item nav-link" href="/audio-guides">Audio Guides</a>
-              <a class="nav-item nav-link" href="/login">Login</a>
               {% if "patron_id" in session %}
               <a id="leave-museum" class="nav-item nav-link" href="{{ url_for('logout') }}" action="/logout">Logout</a>
               <a class="nav-item nav-link" href="/profile">Profile</a>
-              {% endif %}
+              {% elif "patron_id" not in session %}
+              <a class="nav-item nav-link" href="/login">Login</a>
               <a class="nav-item nav-link" href="/register">Register</a>
-        
+              {% endif %}
               <a class="nav-item nav-link disabled" href="#">Coming Soon!</a>
         </div>
       </nav>
