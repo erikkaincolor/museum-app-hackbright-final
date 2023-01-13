@@ -12,15 +12,17 @@
                     {{ collection.description }}
                 </p>
                 <p>
+                    {%if "patron_id" not in session %}
+                    <button id="addfave" value="{{collection.id}}">Add to favorites </button>
                     
+                    {% else %}
                     <button id="addfave" value="{{collection.id}}">Add to favorites </button>
                     <button id="removefave" value="{{collection.id}}">Remove as favorite </button>
-                    
+                    {% endif %}
                     
                 </p>
         </div>
     </div>
-
 
     <!-- art in collection detail info -->
     <div class="container overflow-hidden text-center">
@@ -47,16 +49,13 @@
                             </p>
                 </p></p>
                 <p>
-                    {% if "patron_id" in session %}
+                    {% if "patron_id" not in session %}
                     <!-- need this button info to be from route that passes in art object-->
                     <button id="addartfave" value="{{art.id}}">Add to favorites </button>
+                    
+                    {% else %}
+                    <button id="addartfave" value="{{art.id}}">Add to favorites </button>
                     <button id="removeartfave" value="{{art.id}}">Remove as favorite </button>
-
-                    {% elif "patron_id" not in session %}
-                        
-                        <button id="addartfave" disabled="True" value="{{art.id}}">Add to favorites </button>
-                        <button id="removeartfave" disabled="True" value="{{art.id}}">Remove as favorite </button>
-
                     {% endif %}
                 </p>
                 </div>
@@ -99,15 +98,13 @@
                             </p>
                 </p>
                 <p>
-                    {% if "patron_id" in session %}
+                    {% if "patron_id" not in session %}
                     <!-- need this button info to be from route that passes in art object-->
-                    <button id="addartfave" value="{{art.id}}">Add to favorites </button>
-                    <button id="removeartfave" value="{{art.id}}">Remove as favorite </button>
+                    <button id="addsoundfave" value="{{sound.id}}">Add to favorites </button>
 
-                    {% elif "patron_id" not in session %}
-                       
-                        <button id="addartfave" disabled="True" value="{{art.id}}">Add to favorites </button>
-                    <button id="removeartfave" disabled="True" value="{{art.id}}">Remove as favorite </button>
+                    {% else %}
+                    <button id="addsoundfave" value="{{sound.id}}">Add to favorites </button>
+                    <button id="removesoundfave" value="{{sound.id}}">Remove as favorite </button>
                     
                     {% endif %}
                 </p>
@@ -118,16 +115,13 @@
             </div>
         </div>
         <!-- end of sound in collection info -->
-
    
     <br><br>
-
     {% endblock %}
 
     {% block script %}
     <script src="/static/js/collection_favorite.js"></script>  
     <script src="/static/js/artobject_favorite.js"></script>  
+    <script src="/static/js/sound_favorite.js"></script> 
     <script src="/static/js/details.js"></script>  
     {% endblock %}
-
-    

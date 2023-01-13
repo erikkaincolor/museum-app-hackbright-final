@@ -298,14 +298,12 @@ def add_c_fave(collection_id):
 @app.route("/collections/<int:collection_id>/removecollectionfavorites", methods = ["POST"]) 
 def del_c_fave(collection_id):
     """delete collection fave on collection deets page, posts button event 'answer' to db"""
-    print(f'******{collection_id}*********')
     current_users_uname=session.get("username") 
     response={1:"success"}
     if current_users_uname is None:
         print("Not logged in")
     else: #get by pid
         collection_fave=crud.get_c_fave_delete(session["patron_id"], collection_id)
-        #session[key] <-keying into ses obj, session.key <--get value
         db.session.delete(collection_fave)
         db.session.commit()
     return response
