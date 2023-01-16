@@ -102,13 +102,11 @@ def login_prompt():
 @app.route('/logout')
 def logout():
     """click event link on base.html is routed here, posting response to db"""
-    # current_user=session['patron_id'] #var is retrieving variable , id: 1, 2, 3
     if "patron_id" in session: #looking for particular key in dict-like ses obj as a string
         session.clear()
-        return redirect(url_for('index'))
-    else:
-        # flash("You must login first")
-        #figure out how to write in js or as a bs alert
+        # return redirect(url_for('index'))
+        return render_template("/logout-success.html")
+    else: #not needed of logged out users cant see logout button bc of html template
         return redirect(url_for('view_login'))
 ################################################################################################################
 ################################################################################################################
@@ -222,7 +220,6 @@ def register():
         return redirect('/register')
     elif patron_obj2: #if email is in db, error
         # flash("A user with that email exists. Try again please.")
-        #^^
         return redirect('/register')
     else: #if email or uname is not in db, create account
         new_user=crud.create_account(uname, fname, lname, email, pword)

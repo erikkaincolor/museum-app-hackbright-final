@@ -1,9 +1,63 @@
 "use strict"
 
+//alert("connected!!!!!")
+
+window.addEventListener("load", function(){
+    setTimeout(
+        function open(evt){
+            document.querySelector(".popup").style.display = "block";
+        },
+        5000
+    )
+});
+
+document.querySelector("#close").addEventListener("click", function(){
+    document.querySelector(".popup").style.display = "none";
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //login button, register button alerts dont work bc of redirects smh
-
-
-
 
 // function handleClickOnFaves(){
 //     alert("Must Login to Favorite");
@@ -18,14 +72,6 @@
 //     alert('Your account was created successfully and you can now log in.'); //how to display uname?
 // }
 // registerBtn.addEventListener("click", handleRegister);
-
-
-
-
-
-
-
-
 
 // put back in register.html:
 // <input type="submit" value="Create an account">

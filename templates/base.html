@@ -19,57 +19,37 @@
         <!-- Your custom styles -->
         <link rel="stylesheet" href="/static/css/mystyles.css">
 
-        <!-- delete before deployment -->
-        {# For demo purposes, show our sessions #}
-        {# if session["patron_id"] ---if VAL stored in session is truthy #}
-        {% if "patron_id" in session %} <!--if KEY in session-->
-        <fieldset>
-        <label>Flask Session</label>
-        {{ session }}
-        </fieldset>
-        {% endif %}
-            <!-- Navbar - cant get dropdown to work quite yet-->
-            <nav class="navbar sticky-top navbar-expand-lg navbar-light navbar-inner">
+        <!-- Navbar - cant get dropdown to work quite yet-->
+        <nav class="navbar sticky-top navbar-expand-lg navbar-light navbar-inner">
 
-                    <a class="navbar-brand" href="/"><img src="/static/img/hb_favicon/apple-touch-icon.png" alt="HabitualBe Logo" style="width:80px;padding-left: 15px;"></a>
+                <a class="navbar-brand" href="/"><img src="/static/img/hb-navbar-text.png" alt="HabitualBe Logo" style="width:300px;">
+                </a>
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse navbar-nav" id="navbarNav">
-                      <a class="nav-item nav-link hover-underline-animation" href="/">Home </a>
-                      <a class="nav-item nav-link hover-underline-animation" href="/collections">The Collection</a>
-                      <a class="nav-item nav-link hover-underline-animation" href="/museumdirectory">Museums</a>
-                      <a class="nav-item nav-link hover-underline-animation" href="/audio-guides">Audio Guides</a>
-                      {% if "patron_id" in session %}
-                      <a id="leave-museum" class="nav-item nav-link hover-underline-animation" href="{{ url_for('logout') }}" action="/logout">Logout</a>
-                      <a class="nav-item nav-link hover-underline-animation" href="/profile">Profile</a>
-                      {% elif "patron_id" not in session %}
-                      <a class="nav-item nav-link hover-underline-animation" href="/login">Login</a>
-                      <a class="nav-item nav-link hover-underline-animation" href="/register">Register</a>
-                      {% endif %}
-                      <a class="nav-item nav-link disabled" href="#">Coming Soon!</a>
-                </div>
-              </nav>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse navbar-nav" id="navbarNav">
+                <a class="nav-item nav-link hover-underline-animation" href="/">Home </a>
+                <a class="nav-item nav-link hover-underline-animation" href="/collections">The Collection</a>
+                <a class="nav-item nav-link hover-underline-animation" href="/museumdirectory">Museums</a>
+                <a class="nav-item nav-link hover-underline-animation" href="/audio-guides">Audio Guides</a>
+                {% if "patron_id" in session %}
+                <a id="leave-museum" class="nav-item nav-link hover-underline-animation" href="{{ url_for('logout') }}" action="/logout">Logout</a>
+                <a class="nav-item nav-link hover-underline-animation" href="/profile">Profile</a>
+                {% elif "patron_id" not in session %}
+                <a class="nav-item nav-link hover-underline-animation" href="/login">Login</a>
+                <a class="nav-item nav-link hover-underline-animation" href="/register">Register</a>
+                {% endif %}
+                <a class="nav-item nav-link disabled" href="#">Coming Soon!</a>
+            </div>
+            </nav>
     </head>
-    
 <body>
 
 
 
 
 
-    <!-- delete before deployment, there should be js alerts -->
-    <div class="container-fluid" style="background-color: #E5E5E5;" >
-        {# Display flash messages, if any, for all pages #}
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul class='flashes'>
-            {% for message in messages %}<li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-        {% endwith %}
    
        
 
@@ -81,7 +61,8 @@
 
 
 
-        <footer class="pb-5">
+        <footer class="pb-5 pt-5">
+            <img src="/static/img/hb_favicon/apple-touch-icon.png" alt="HabitualBe Logo" style="width:80px;padding-left: 15px;">
             Erikka Polk's Hackbright Engineering Final Project! 2022
 
 

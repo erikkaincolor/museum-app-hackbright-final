@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="bg-image4">
+    <div class="alert alert-success" role="alert">
+        You have been successfully logged out. After while!
+      </div>
+      
+    <div class="popup">
+    <!-- hidden audio track on autoplay-->
+    <button id="close">&times;</button>
+    <figure>
+        <p>The "Sugar Shack" painting is by Ernie Barnes. <br><br> It was reproduced by him (again) for the cover of Marvin Gaye's 1976 album<br><i>I Want You</i>. It's famously in the ending credits for the 70's sitcom <i>Good Times</i>. <br><br>It sold in May 2022 for <a href="https://deadline.com/2022/05/ernie-barnes-sugar-shack-painting-good-times-marvin-gaye-1235023123/">$15.3 million</a>.
+
+            <audio controls autoplay hidden
+            src="/static/audio/ernie-barnes-marvin-gaye-art.mp3">
+                <a href="/static/audio/ernie-barnes-marvin-gaye-art.mp3"></a>
+            </audio>
+
+            <br><i>Free audio courtesy of <a href="https://archive.org/details/02-come-live-with-me-angel_202012/01+-+I+Want+You.ogg"> archive.org</a>!</i></p>
+    </figure>
+    </div>
+</div>
+{% endblock %}
