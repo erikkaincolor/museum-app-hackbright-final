@@ -1,3 +1,12 @@
+
+/* des selector */
+/* overall background color to blend in with footer */
+div .container-fluid{
+    padding-left:30px;
+    
+}
+
+
 h1 
 {
 padding-top:30px;
@@ -5,28 +14,221 @@ font-family: 'Palanquin+Dark', serif;
 }
 
 h5 
-{
-padding-top:30px;
+{padding-top:30px;
+padding-left: 30px;
 }
 
-h2 {
-    font-family: 'Palanquin+Dark', sans-serif;
+h2 {font-family: 'Palanquin+Dark', sans-serif;
     }
 
-p {
-    font-family: 'Khula', sans-serif;
+p,a {font-family: 'Khula', sans-serif;
 }
 
-a {
-    font-family: 'Kanit', sans-serif;
+label {font-family: 'Kanit', sans-serif;
 }
-    
+
+footer {font-family: 'Palanquin+Dark', sans-serif;
+    padding-top: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* css animations for nav bar hover text underlining */
+.hover-underline-animation {
+    display: inline-block;
+    position: relative;
+    color: #252525;
+  }
+  
+.hover-underline-animation::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #252525;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+  
+  .hover-underline-animation:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* rounded outlined buttons across all pages */
+.btn-outline-primary, .btn-outline-primary:hover, .btn-outline-primary:active, .btn-outline-primary:visited {
+    border: 2px solid #7E8C12;
+    background-color: #E5E5E5;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color:#7E8C12 !important;
+}
+
+.btn-outline-secondary, .btn-outline-secondary:hover, .btn-outline-secondary:active, .btn-outline-secondary:visited {
+    border: 2px solid #252525; 
+    background-color: #E5E5E5;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color:#252525 !important;
+}
+
+.btn-outline-dark, .btn-outline-dark:hover, .btn-outline-dark:active, .btn-outline-dark:visited {
+    border: 2px solid #E5E5E5; 
+    background-color: #252525;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color:#E5E5E5 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* delete fieldset l8r...this is to see my sessions */
 fieldset {
     margin-top: 1em;
     margin-bottom: 1em
   }
 
-  fieldset label {
-    font-weight: bold;
-  }
+fieldset label {
+font-weight: bold;
+}
+  
+.navbar-inner{
+background-color: #E5E5E5;
+}
+
+.navbar-text{
+    color:#252525
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* background images for homepage, login and register */
+.bg-image1 {
+    display: flex;
+    justify-content: center; /* center horizontally */
+    align-items: center; /* center vertically */
+    background-image: url('/static/img/backgrounds/background-canvas.png'); 
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+}
+
+.bg-image2 {
+    display: flex;
+    justify-content: center; /* center horizontally */
+    align-items: center; /* center vertically */
+    background-image: url('/static/img/backgrounds/background-canvas2.png'); 
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+}
+
+.bg-image3 {
+    display: flex;
+    justify-content: center; /* center horizontally */
+    align-items: center; /* center vertically */
+    background-image: url('/static/img/backgrounds/background-barkley_1.png'); 
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /* for museum, collections, audio guides an dpatron profile card displays  */
+.art-card {
+    /* background-color:#000000; */
+    background-color: #E5E5E5;
+    box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42);    
+    }
+.audio-card {
+/* background-color:#000000; */
+background-color: #584827;
+box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42);    
+}
+
+.museum-card{
+/* background-color:#000000; */
+background-color: #C09B6F;
+box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42);    
+}
+
+.collection-card{
+    box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42);    
+    background-color: #252525;
+    }
+
+/* text only */
+.cc-card {
+    color:white;
+    }

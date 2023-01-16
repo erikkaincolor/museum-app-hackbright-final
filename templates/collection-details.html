@@ -33,7 +33,7 @@
         <h5>Art in Collection</h5>
         <!-- yes, i passed collection object in from view function and using magic var -->
             {% for artincollection in collection.art_object %}
-            <div id="collectionfavecard" class="card" style="width:25rem;float:justified">
+            <div id="collectionfavecard" class="card art-card" style="width:25rem;float:justified">
             <div class="card-body">
               <h5 class="card-title"><i><span class=fave_id_{{ artincollection.id }}> {{ artincollection.title }} </span></i></h5>
                 <div>
@@ -74,7 +74,7 @@
         <h5>Sounds in Collection</h5>
         <!-- yes, i passed collection object in from view function and using magic var -->
             {% for sound in collection.related_sound %}
-            <div id="collectionfavecard" class="card" style="width:75%;float:justified">
+            <div id="collectionfavecard" class="card audio-card" style="width:75%;float:justified">
             <div class="card-body">
               <h5 class="card-title"><i><span class=fave_id_{{ sound.id }}> {{ sound.sound_name }} </span></i></h5>
                 <div>
@@ -89,15 +89,17 @@
                                     <figcaption>Press Play</figcaption>
                                     <audio
                                         controls
-                                        src="https://open.spotify.com/track/63xdwScd1Ai1GigAwQxE8y?si=b046fabfda954843">
-                                            <a href="https://open.spotify.com/track/63xdwScd1Ai1GigAwQxE8y?si=b046fabfda954843">
-                                                Download audio????
+                                        src="{{ sound.sound_source}}">
+                                            <a href="{{ sound.sound_source}}">
+                                        
                                             </a>
                                     </audio>
                                 </figure>
                             </p>
                 </p>
                 <p>
+                    <a href="/audio-guides/{{sound.id}}" class="btn btn-info" role="button">Details</a>
+
                     {% if "patron_id" not in session %}
                     <!-- need this button info to be from route that passes in art object-->
                     <button id="addsoundfave" value="{{sound.id}}">Add to favorites </button>

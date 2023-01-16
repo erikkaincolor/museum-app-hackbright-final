@@ -2,20 +2,39 @@
 {% block title %}Login Page{% endblock %}
 
 {% block content %}
+<div class="bg-image1">
+    <p >
+        <form class="form-inline" action="/login" method="POST">
+            <br><br><br><br>
+            <div class="row">
+                <div class="col">
+                {# Username #}
+                    <div class="form-outline">
+                        <label class="form-label" for="PatronId">Patron ID</label>
+                    <input type="text" name="username" id="PatronId" class="form-control" />
+                    </div>
+                </div>
 
+                <div class="col">
+                    <div class="form-outline">    
+                    {# Password #}
+                    <label class="form-label" for="Password">Password</label>
+                    <input type="password" name="password" id="Password" class="form-control" />
+                    </div>
+                </div>
+                
+            </div>
+          <br>
+          <div class="text-center">
+            {# Submit button #}
+            <input type="submit" class="btn btn-outline-primary btn-block mb-4" value="Login">
+            
 
-  <h1>Login Page</h1>
-    <p>
-        <form action="/login" method="POST">
-        <label>Username:</label>
-        <input type="text" name="username">
-    
-        <label>Password:</label>
-        <input type="text" name="password">
-    
-        <input type="submit" value="See Patron Profile">
-        </form>
+            {# Register Link #}
+            
+              <p>Not a patron? <a href="/register">Register here. It's free!</a></p>
+            </div>
+          </form>
     </p>
-
-  
+</div>
 {% endblock %}

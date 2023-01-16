@@ -2,30 +2,57 @@
 {% block title %}Login Page{% endblock %}
 
 {% block content %}  
-  <h1>Create an account to save your faves!</h1><br>
-  <label>Register here:</label>
-  <form action="/register" method="POST">
-    <p>
-        Username <input type="text" name="uname" required="required">
-        <label>Required</label></p>
-    <p>
-        First Name <input type="text" name="fname" required="required">
-        <label>Required</label></p>
-    <p>
-        Last Name <input type="text" name="lname" required="required">
-        <label>Required</label></p>
-    <p>
-      Email <input type="email" name="email" required="required">
-      <label>Required</label></p>
 
-    <p>
-      Password <input type="password" name="pword" required="required">
-      <label>Required</label></p>
+    <div class="bg-image2" >
+        <div style="width:500px;height:500px;padding-top: 150px;">
+        <div class="row">
+            <div class="col">
+        <h1>Register to be a Patron</h1>  
+        <p>Already a patron? <a href="/login">Log-in here</a></p>
+        </div></div></div>
+        <div style="width:500px;height:500px;">
+        <p>
+            <form action="/register" method="POST">
+                <div class="row">
+                    <div class="col">
+                    {# Username #}
+                    <div class="form-outline">
+                    <input type="text" name="uname" required="required" id="PatronID" class="form-control form-control-sm" />
+                    <label class="form-label" for="PatronID">Patron ID</label>
 
-    <p>
-      <input type="submit" value="Create an account">
+                    {# Email #}
+                    <input type="email" name="email" required="required" id="Email" class="form-control form-control-sm" />
+                    <label class="form-label" for="Email">Email</label>
+                    </div>
 
-    </p>
-  </form>
+                    <div class="col">
+                    {# First Name #}
+                    <input type="text" name="fname" required="required" id="Firstname" class="form-control form-control-sm" />
+                    <label class="form-label" for="Firstname">First Name</label>
+
+
+                    {# Last Name #}
+                    <input type="text" name="lname" required="required" id="Lastname" class="form-control form-control-sm" />
+                    <label class="form-label" for="Lastname">Last Name</label>
+                        </div>
+
+                <div class="row">
+                    <div class="col">
+                    {# Password #}
+                    <input type="password" naem="pword" id="Password" class="form-control form-control-sm" />
+                    <label class="form-label" for="Password">Password</label>
+                    </div>
+
+                <div class="row">
+                    <div class="col text-center">
+                    {# Submit button #}
+                    <input type="submit" class="btn btn-outline-primary btn-block mb-4" value="Create an Account">
+                    </div>
+                    </div>
+
+            </form>
+        </p>
+    </div>
+</div>
 {% endblock %}
 

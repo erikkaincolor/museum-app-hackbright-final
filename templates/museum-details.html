@@ -4,7 +4,8 @@
 
 {% block content %}
 
-
+<div class="row">
+    <div class="col">
     <h1>{{ museum.name }}</h1>
     <p>Located: {{ museum.street }}
         {{ museum.city }}, {{ museum.state }}, {{ museum.zipcode }}</p>
@@ -13,13 +14,21 @@
     </p>
     <p>
         {% if "patron_id" not in session %}
-        <button id="addmusefave" value="{{museum.id}}">Add to favorites </button>
+        <button id="addmusefave" value="{{museum.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
 
         {% else %}
-        <button id="addmusefave" value="{{museum.id}}">Add to favorites </button>
-        <button id="removemusefave" value="{{museum.id}}">Remove as favorite </button>
+        <button id="addmusefave" value="{{museum.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
+        <button id="removemusefave" value="{{museum.id}}" class="btn btn-outline-primary btn-block mb-4">Remove as favorite </button>
         {% endif %}
     </p>
+ </div>
+</div>
+
+
+
+
+
+
 
  <!-- sound in museum detail info -->
  <div class="row">
@@ -28,7 +37,7 @@
     <h5>Sounds in Museum</h5>
     <!-- yes, i passed museum object in from view function and using magic var -->
         {% for sound in museum.related_sound %}
-        <div id="museumfavecard" class="card" style="width:75%;float:justified">
+        <div id="museumfavecard" class="card audio-card" style="width:75%;float:justified">
         <div class="card-body">
             <h5 class="card-title"><i><span class=fave_id_{{ sound.id }}> {{ sound.sound_name }} </span></i></h5>
             <div>
@@ -54,11 +63,11 @@
             <p>
                 {% if "patron_id" not in session %}
                 <!-- need this button info to be from route that passes in art object-->
-                <button id="addsoundfave" value="{sound.id}}">Add to favorites </button>
+                <button id="addsoundfave" value="{sound.id}}" class="btn btn-outline-dark btn-block mb-4">Add to favorites </button>
                 
                 { % else% }
-                <button id="addsoundfave" value="{{sound.id}}">Add to favorites </button>
-                <button id="removesoundfave" value="{{sound.id}}">Remove as favorite </button>
+                <button id="addsoundfave" value="{{sound.id}}" class="btn btn-outline-dark btn-block mb-4">Add to favorites </button>
+                <button id="removesoundfave" value="{{sound.id}}" class="btn btn-outline-dark btn-block mb-4">Remove as favorite </button>
                 {% endif %}
             </p>
             </div>

@@ -4,6 +4,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>{% block title %}TITLE GOES HERE{% endblock %}</title>
+        <!--Favicons-->
+        <link rel="apple-touch-icon" sizes="180x180" href="/static/img/hb_favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/static/img/hb_favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/static/img/hb_favicon/favicon-16x16.png">
+        <link rel="manifest" href="/static/img/hb_favicon/site.webmanifest">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="/static/css/bootstrap.min.css">
         <!-- Google Font API -->
@@ -23,35 +28,39 @@
         {{ session }}
         </fieldset>
         {% endif %}
+            <!-- Navbar - cant get dropdown to work quite yet-->
+            <nav class="navbar sticky-top navbar-expand-lg navbar-light navbar-inner">
+
+                    <a class="navbar-brand" href="/"><img src="/static/img/hb_favicon/apple-touch-icon.png" alt="HabitualBe Logo" style="width:80px;padding-left: 15px;"></a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse navbar-nav" id="navbarNav">
+                      <a class="nav-item nav-link hover-underline-animation" href="/">Home </a>
+                      <a class="nav-item nav-link hover-underline-animation" href="/collections">The Collection</a>
+                      <a class="nav-item nav-link hover-underline-animation" href="/museumdirectory">Museums</a>
+                      <a class="nav-item nav-link hover-underline-animation" href="/audio-guides">Audio Guides</a>
+                      {% if "patron_id" in session %}
+                      <a id="leave-museum" class="nav-item nav-link hover-underline-animation" href="{{ url_for('logout') }}" action="/logout">Logout</a>
+                      <a class="nav-item nav-link hover-underline-animation" href="/profile">Profile</a>
+                      {% elif "patron_id" not in session %}
+                      <a class="nav-item nav-link hover-underline-animation" href="/login">Login</a>
+                      <a class="nav-item nav-link hover-underline-animation" href="/register">Register</a>
+                      {% endif %}
+                      <a class="nav-item nav-link disabled" href="#">Coming Soon!</a>
+                </div>
+              </nav>
     </head>
     
 <body>
-    <!-- Navbar - cant get dropdown to work quite yet-->
-    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/"> HabitualBe </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse navbar-nav" id="navbarNav">
-              <a class="nav-item nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-              <a class="nav-item nav-link" href="/collections">The Collection</a>
-              <a class="nav-item nav-link" href="/museumdirectory">Museums</a>
-              <a class="nav-item nav-link" href="/audio-guides">Audio Guides</a>
-              {% if "patron_id" in session %}
-              <a id="leave-museum" class="nav-item nav-link" href="{{ url_for('logout') }}" action="/logout">Logout</a>
-              <a class="nav-item nav-link" href="/profile">Profile</a>
-              {% elif "patron_id" not in session %}
-              <a class="nav-item nav-link" href="/login">Login</a>
-              <a class="nav-item nav-link" href="/register">Register</a>
-              {% endif %}
-              <a class="nav-item nav-link disabled" href="#">Coming Soon!</a>
-        </div>
-      </nav>
+
+
 
 
 
     <!-- delete before deployment, there should be js alerts -->
-    <div class="container">
+    <div class="container-fluid" style="background-color: #E5E5E5;" >
         {# Display flash messages, if any, for all pages #}
         {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -61,7 +70,7 @@
             </ul>
         {% endif %}
         {% endwith %}
-
+   
        
 
 
@@ -71,14 +80,34 @@
 
 
 
-        
-        <footer>Erikka Polk's Hackbright Engineering Final Project! 2022</footer>
+
+        <footer class="pb-5">
+            Erikka Polk's Hackbright Engineering Final Project! 2022
+
+
+
+
+
+
+
+
+
+        </footer>
+    </div>
+
+
+
+
+
+
+
         {% block script %} 
         <!-- Bootstrap JavaScript Bundle with Popper (a Bootstrap dependency for popovers) -->
         <script src="/static/js/bootstrap.bundle.min.js"></script>
         <script src="/static/js/alerts.js"></script>
         {% endblock %}
-    </div>
+    
+
 </body>
 </html>
 

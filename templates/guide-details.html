@@ -11,12 +11,24 @@
     <p>                                         
     </p>
     <p>
-        {% if "patron_id" in session %}
-        <button id="addsoundfave" value="{{sound.id}}">Add to favorites </button>
-        <button id="removesoundfave" value="{{sound.id}}">Remove as favorite </button>
-        {% endif %}
-    </p>
+        {% if "patron_id" not in session %}
+        <button id="addsoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
 
+        {% else %}
+        <button id="addsoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
+        <button id="removesoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-4">Remove as favorite </button>
+        
+        {% endif %}
+    
+    <!-- audio track -->
+    <figure>
+        <figcaption>Press Play</figcaption>
+        <audio controls
+            src="{{ sound.sound_source}}">
+            <a href="{{ sound.sound_source}}"></a>
+        </audio>
+    </figure>
+</p>
 {% endblock %}
 
 {% block script %}
