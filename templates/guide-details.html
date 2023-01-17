@@ -3,7 +3,11 @@
 {% block title %} {{ sound.sound_name }} - Details{% endblock %}
 
 {% block content %}
-
+<head> <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/audio-guides">Audio Guides</a></li>
+    <li class="breadcrumb-item active">Audio Guide Details</li>
+  </ul> </head>
 
     <h1>{{ sound.sound_name }}</h1>
     <p>

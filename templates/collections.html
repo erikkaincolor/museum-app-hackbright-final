@@ -2,42 +2,46 @@
 {% block title %}Collections{% endblock %}
 
 {% block content %}
-
+<div class="bg-image5">
+   
     <div class="row">
         <div class="col">
-        <h1 class="font-effect-outline">The Collection</h1>
+            <h1>The Collection</h1>
             <p>
             HabitualBe's digital collections reflect the rich diversity of the natural and cultural world, as well as the shared heritage of Black Americans and Africans in the diaspora.
             <br><br>These resources can be used by academics and researchers from all around the nation to advance our understanding of Black streams of consciousness and life. 
             </p>
-            <p>
-                {% if collections %}
-                {% for collection in collections %}
-                <div class="list-group">
-                <a href="/collections/{{collection.id}}" class="list-group-item list-group-item-action ">
-                    {{ loop.index }}. {{ collection.name }}, {{ collection.coll_category }}, {{ collection.curator }}, {{ collection.era }}
-                </a>
-                <br>
-                {% endfor %}
-                {% endif %}
-            </p>
-            </div>
         </div>
     </div>
 
+   <!-- testing media objects -->
+   <div class="row pt-5">
     <br><br>
-
-    <div class="row">
-
-        <p>row 2</p>
-        <div class="col">
-
-            <p>col1</p>
+    {% if collections %}
+    {% for collection in collections %}
+    <div class="col">
+   <div class="media position-relative collection-card">
+    <img src="/static/img/backgrounds/background-pattern-tan.png" class="mr-3 w-100" alt="...">
+    <div class="media-body">
+      <h5 class="mt-0">Media with stretched link</h5>            
+      <a href="/collections/{{collection.id}}" class="stretched-link">{{ collection.name }}</a>
+    </div>
+    </div>
+    </div> 
+        {% endfor %}
+        {% endif %} 
         </div>
-        <div class="col">
+</div>
 
-            <p>col2</p>
-        </div>
-    
-    </div><br>
+
+
+
+
+
+
+
+
+
+
+
 {% endblock %}

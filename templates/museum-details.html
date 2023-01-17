@@ -3,7 +3,11 @@
 {% block title %} {{ museum.name }} - Details{% endblock %}
 
 {% block content %}
-
+<head> <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/museumdirectory">Museums</a></li>
+    <li class="breadcrumb-item active">Museum Details</li>
+  </ul> </head>
 <div class="row">
     <div class="col">
     <h1>{{ museum.name }}</h1>

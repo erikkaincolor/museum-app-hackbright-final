@@ -2,8 +2,8 @@
 {% block title %}Museum List{% endblock %}
 
 {% block content %}
-
-    <div class="row">
+<div class="bg-image6">
+    <div class="row overflow-auto">
         <div class="col">
         <h1>Partner Museums</h1>
         <p> Browse our list and locate a Black-American or African museum in the U.S.
@@ -18,19 +18,18 @@
             <br>If you work for a partner museum, you can edit information in the museum organizer part of your <a href="/profile">Patron Profile</a>
             .
             {% endif %}
-            <br></p>
+            <br>
+        </p>
                 {% if museums %}
-                
                 {% for museum in museums %}
                 <div class="list-group">
                 <a href="/museumdirectory/{{museum.id}}" class="list-group-item list-group-item-action px-3 border ripple">
-                    {{ loop.index }}. {{ museum.name }} | {{ museum.state }} 
-                </a>
+                    {{ loop.index }}. {{ museum.name }} | {{ museum.state }}</a>
                 </div>
                 {% endfor %}
         </p>
         </div>
-    </div>
-{% endif %}
-
+    
+{% endif %}</div>
+</div>
 {% endblock %}

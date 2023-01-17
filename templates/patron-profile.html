@@ -7,7 +7,7 @@
 
 
 <div class="row">
-<div class="col">
+<div class="col"><br><br>
     <h2>Hi, {{ patron.uname }}!</h2>
     <h2>Patron info:</h2>
     <p><br>
@@ -21,82 +21,120 @@
 </div>
 
 <div class="row">
-    <h2>Favorites</h2><br>
-    <div class="col-med-4">
-    <!-- start of museum faves -->
-    <h5>Favorite Museum</h5>
-<!-- using patron objects magic var -->
-    {% for museumfave in patron.museum_fave %}
-    <div id="museumfavecard" class="card museum-card" style="width:18em;float:left">
-    <div class="card-body">
-      <!-- <h5 class="card-title"><i>Museum Fave</i></h5> -->
-        <div>
-        <p><p>
-                <!-- ^^might have some type of colored strip indicating what type it is? -->
-                <!-- img could be inside or outside..if museum has color then -->
-                Name:<span class=fave_id_{{ museumfave.id }}> {{ museumfave.name }} </span>
-                {% if session["username"] == patron.uname %}
-                <!-- would logged in an items favorited show anything? -->
-                <p class="card-text">
-                    Location: {{ museumfave.city }}, {{ museumfave.state }}<br><br> 
-                    <a href="{{ museumfave.weburl }}">More info</a></p>
-                <button class="btn btn-outline-secondary btn-block mb-4">See museum</button> 
-                <!-- on click, it can go to  /museumdirectory/<id> via JS-->
-                {% endif %}
-        </p></p>
-        </div>
-    {% endfor %}<br><br>
-    </div>
+<div class="col">
+<h2>Favorites</h2><br>
 </div>
-<!-- end of museum faves -->
+</div>
 
 
 
-<div class="row">
-<div class="col-med-4">
-<!-- start of collection faves -->
-<h5>Collection Favorites</h5>
-<!-- using patron objects magic var -->
-    {% for collectionfave in patron.collection_fave %}
-    <div id="collectionfavecard" class="cc-card collection-card" style="width:18em;float:left">
-    <div class="card-body">
-      <!-- <h5 class="card-title"><i>Collection Fave</i></h5> -->
-        <div>
-        <p><p>
-                <!-- ^^might have some type of colored strip indicating what type it is? -->
-                <!-- img could be inside or outside..if museum has color then -->
-                Name:<span class=fave_id_{{ collectionfave.id }}> {{ collectionfave.name }} </span>
-                {% if session["username"] == patron.uname %}
-                <!-- would logged in an items favorited show anything? -->
-                <p class="card-text">
-                    Deets: {{ collectionfave.coll_category }} 
-                    <br>Curator: {{ collectionfave.curator }} 
-                    <br>Era: {{ collectionfave.era }}
+
+
+
+
+
+
+
+
+
+        <div class="row">
+        <div class="col">
+        <h3>Museum Faves</h3><br>
+        </div>
+        </div> 
+        <!-- start of museum faves -->
+        <div class="row">
+        <div class="col">
+
+        <!-- using patron objects magic var -->
+        {% for museumfave in patron.museum_fave %}
+        <div id="museumfavecard" class="card museum-card" style="width:18em;">
+            <div class="card-body h-100">
+            <div>
+            <p><p>
+                    <!-- ^^might have some type of colored strip indicating what type it is? -->
+                    <!-- img could be inside or outside..if museum has color then -->
+                    Name:<span class=fave_id_{{ museumfave.id }}> {{ museumfave.name }} </span>
+                    {% if session["username"] == patron.uname %}
+                    <!-- would logged in an items favorited show anything? -->
+                    <p class="card-text">
+                        Location: {{ museumfave.city }}, {{ museumfave.state }}<br><br> 
+                        <a href="{{ museumfave.weburl }}">More info</a></p>
+                    <button class="btn btn-outline-secondary btn-block mb-4">See museum</button> 
+                    <!-- on click, it can go to  /museumdirectory/<id> via JS-->
+                    {% endif %}
+            </p></p>
+            </div>
+                    {% endfor %}<br><br>
+            </div>
+        </div><br><br>
+        </div>
+        </div>
+        <!-- end of museum faves -->
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="row">
+        <div class="col">
+        <h3>Collection Faves</h3><br>
+        </div>
+        </div>
+        <!-- start of collection faves -->
+        <div class="row">
+        <div class="col">
+    
+        <!-- using patron objects magic var -->
+        {% for collectionfave in patron.collection_fave %}
+        <div id="collectionfavecard" class="card cc-card collection-card" style="width:18em;">
+        <div class="card-body h-100">
+            <div><p>
+                    <!-- ^^might have some type of colored strip indicating what type it is? -->
+                    <!-- img could be inside or outside..if museum has color then -->
+                    Name:<span class=fave_id_{{ collectionfave.id }}> {{ collectionfave.name }} </span>
+                    {% if session["username"] == patron.uname %}
+                    <!-- would logged in an items favorited show anything? -->
+                    <p class="card-text">
+                        Deets: {{ collectionfave.coll_category }} 
+                        <br>Curator: {{ collectionfave.curator }} 
+                        <br>Era: {{ collectionfave.era }}
+                        </p>
+                    <button class="btn btn-outline-secondary btn-block mb-4">See collection</button> 
+                    <!-- on click, it can go to  /collection/<id> via JS-->
+                    {% endif %}
                     </p>
-                <button class="btn btn-outline-secondary btn-block mb-4">See collection</button> 
-                <!-- on click, it can go to  /collection/<id> via JS-->
-                {% endif %}
-        </p></p>
-        </div>
-    </div>
-    </div>
-    {% endfor %}<br><br>
-    </div>
-</div>
+            </div>
+            </div>
+            </div>
+            {% endfor %}<br><br>
+            </div>
+            </div>
+
 <!-- end of collection faves -->
 
 
-
-
-<div class="row">
-    <div class="col-med-4">
-<!-- start of art faves -->
-<h5>Favorite Art Pieces</h5>
-<!-- yes, i passed patron object in from view function -->
+    <div class="row">
+        <div class="col">
+        <h3>Art Faves</h3><br>
+        </div>
+        </div>
+        <!-- start of art faves -->
+        <div class="row">
+        <div class="col">
+    <!-- start of art faves -->
+    <!-- yes, i passed patron object in from view function -->
     {% for artfave in patron.art_fave %}
-    <div id="artfavecard" class="card art-card" style="width:18em;float:left">
-    <div class="card-body">
-      <!-- <h5 class="card-title"><i>Favorite Art Piece</i></h5> -->
+    <div id="artfavecard" class="card art-card" style="width:18em;">
+    <div class="card-body h-100">
+      <!-- <h3 class="card-title"><i>Favorite Art Piece</i></h3> -->
         <div>
         <p><p>
                 <img class="card-img-top" src="{{ artfave.img_path }}" alt="Card image cap"><br>
@@ -111,55 +149,56 @@
                     <!-- <a href="{{ artfave.img_path }}">More info</a></p> -->
                 <button class="btn btn-outline-secondary btn-block mb-4">See art</button> 
                 <!-- on click, it can go to  /museumdirectory/<id> via JS-->
-                {% endif %}
-        </p></p>
+                        {% endif %}
+                </p></p>
+                </div>
+            </div>
+            </div>
+            {% endfor %}<br><br>
+            </div>
         </div>
-    </div>
-    </div>
-    {% endfor %}<br><br>
-    </div>
-</div>
-<!-- end of Art Object faves -->
+        <!-- end of Art Object faves -->
 
 
 
 
-<div class="row">
-    <div class="col-med-4">
-<!-- start of sound faves -->
-<h5>Favorite Audio</h5>
-<!-- yes, i passed patron object in from view function -->
-    {% for soundfave in patron. related_sound_fave %}
-    <div id="soundfavecard" class="card audio-card" style="width:18em;float:left">
-    <div class="card-body">
-      <!-- <h5 class="card-title"><i>Favorite Audio</i></h5> -->
-        <div>
-        <p><p>
-                <img class="card-img-top" src="..." alt="Card image cap"><br>
-                <!-- ^^might have some type of colored strip indicating what type it is? -->
-                <!-- img could be inside or outside..if museum has color then -->
-                Name:<span class=fave_id_{{ soundfave.id }}> {{ soundfave.sound_name }} </span>
-                {% if session["username"] == patron.uname %}
-                <!-- would logged in an items favorited show anything? -->
-                <p class="card-text">
-                    Medium: {{ soundfave.medium }} <br><br>
-                <button class="btn btn-outline-secondary btn-block mb-4">Listen</button> 
-                <!-- on click, it can go to  /museumdirectory/<id> via JS-->
-                {% endif %}
-        </p></p>
-        </div>
-    </div>
-    </div>
-    {% endfor %}<br><br>
-    </div>
-</div>
-<!-- end of sound faves -->
+    <div class="row">
+    <div class="col">
+    <h3>Favorite Related Audio</h3><br></div></div>
+
+        <div class="row">
+            <div class="col-med-4">
+        <!-- start of sound faves -->
+        
+        <!-- yes, i passed patron object in from view function -->
+            {% for soundfave in patron. related_sound_fave %}
+            <div id="soundfavecard" class="card audio-card" style="width:18em;">
+            <div class="card-body h-100">
+            <!-- <h3 class="card-title"><i>Favorite Audio</i></h3> -->
+                <div>
+                <p><p>
+                        <img class="card-img-top" src="..." alt="Card image cap"><br>
+                        <!-- ^^might have some type of colored strip indicating what type it is? -->
+                        <!-- img could be inside or outside..if museum has color then -->
+                        Name:<span class=fave_id_{{ soundfave.id }}> {{ soundfave.sound_name }} </span>
+                        {% if session["username"] == patron.uname %}
+                        <!-- would logged in an items favorited show anything? -->
+                        <p class="card-text">
+                            Medium: {{ soundfave.medium }} <br><br>
+                        <button class="btn btn-outline-secondary btn-block mb-4">Listen</button> 
+                        <!-- on click, it can go to  /museumdirectory/<id> via JS-->
+                        {% endif %}
+                </p></p>
+                </div>
+            </div>
+            </div>
+            {% endfor %}<br><br>
+            </div>
+            </div>
+            <!-- end of sound faves -->
 
 
 
-<!-- area for testing dell tabs!! -->
-
-<!-- testing!! -->
 
 
 {% endblock %}

@@ -3,6 +3,12 @@
 {% block title %} {{ collection.name }} - Details{% endblock %}
 
 {% block content %}
+<head> <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/collections">Collections</a></li>
+    <li class="breadcrumb-item"><a href="/collectiondetails">Collection Details</li>
+    <li class="breadcrumb-item active">Art Details</li>
+  </ul> </head>
 <h1>Collection's Art Object #1:</h1>
 <h2>{{ collection.name }}</h2>
 <p>

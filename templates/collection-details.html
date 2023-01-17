@@ -3,13 +3,20 @@
 {% block title %} {{ collection.name }} - Details{% endblock %}
 
 {% block content %}
-
+<head> <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/collections">Collections</a></li>
+    <li class="breadcrumb-item active">Collection Details</li>
+  </ul> </head>
     <!-- collection detail info -->
     <div class="row">
         <div class="col">
         <h1>{{ collection.name }}</h1>
                 <p>
-                    {{ collection.description }}
+                    {{ collection.description }} <strong>{{ collection.coll_category }}</strong></p>
+                    <p class="card-text"><strong>{{ collection.curator }}</strong></p>
+                    <p class="card-text"><strong>{{ collection.era }}</strong>
+                    </p>
                 </p>
                 <p>
                     {%if "patron_id" not in session %}
@@ -33,7 +40,8 @@
         <h5>Art in Collection</h5>
         <!-- yes, i passed collection object in from view function and using magic var -->
             {% for artincollection in collection.art_object %}
-            <div id="collectionfavecard" class="card art-card" style="width:25rem;float:justified">
+            <div class="row">
+                <div id="collectionfavecard" class="card art-card" style="width:25rem;float:justified">
             <div class="card-body">
               <h5 class="card-title"><i><span class=fave_id_{{ artincollection.id }}> {{ artincollection.title }} </span></i></h5>
                 <div>
@@ -59,9 +67,9 @@
                     {% endif %}
                 </p>
                 </div>
-            </div>
-            </div>
-            {% endfor %}
+            </div></div>
+            
+            {% endfor %}</div>
             </div>
         </div>
         </div>
