@@ -15,7 +15,7 @@
                 {% for collection in collections %}
                 <div class="list-group">
                 <a href="/collections/{{collection.id}}" class="list-group-item list-group-item-action ">
-                    {{ collection.name }}, {{ collection.coll_category }}, {{ collection.curator }}, {{ collection.era }}
+                    {{ loop.index }}. {{ collection.name }}, {{ collection.coll_category }}, {{ collection.curator }}, {{ collection.era }}
                 </a>
                 <br>
                 {% endfor %}

@@ -15,7 +15,22 @@ document.querySelector("#close").addEventListener("click", function(){
     document.querySelector(".popup").style.display = "none";
 });
 
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
 
+window.addEventListener("load", function(){
+    setTimeout(
+        function open(evt){
+            document.querySelector(".home-popup").style.display = "block";
+        },
+        5000
+    )
+});
+
+document.querySelector("#home-close").addEventListener("click", function(){
+    document.querySelector(".home-popup").style.display = "none";
+});
 
 
 

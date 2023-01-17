@@ -11,7 +11,7 @@
                 {% for sound in sounds %}
                 <div class="list-group">
                 <a href="/audio-guides/{{sound.id}}" class="list-group-item list-group-item-action ">
-                    Name: {{ sound.sound_name }} <br> Medium: {{ sound.medium }}
+                    {{ loop.index }}-Name: {{ sound.sound_name }} <br> Medium: {{ sound.medium }}
                 </a>
                 <br>
                 {% endfor %}

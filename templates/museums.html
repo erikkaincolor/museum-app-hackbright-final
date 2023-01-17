@@ -20,10 +20,11 @@
             {% endif %}
             <br></p>
                 {% if museums %}
+                
                 {% for museum in museums %}
                 <div class="list-group">
                 <a href="/museumdirectory/{{museum.id}}" class="list-group-item list-group-item-action px-3 border ripple">
-                    {{ museum.name }} | {{ museum.state }}
+                    {{ loop.index }}. {{ museum.name }} | {{ museum.state }} 
                 </a>
                 </div>
                 {% endfor %}
