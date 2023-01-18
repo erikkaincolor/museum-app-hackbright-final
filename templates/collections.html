@@ -5,33 +5,35 @@
 <div class="bg-image5">
    
     <div class="row">
-        <div class="col">
+        <div class="col col-med-6">
             <h1>The Collection</h1>
             <p>
             HabitualBe's digital collections reflect the rich diversity of the natural and cultural world, as well as the shared heritage of Black Americans and Africans in the diaspora.
-            <br><br>These resources can be used by academics and researchers from all around the nation to advance our understanding of Black streams of consciousness and life. 
-            </p>
+            </p></div>
+            <div class="col col-med-6"><p>These resources can be used by academics and researchers from all around the nation to advance our understanding of Black streams of consciousness and life. 
+            </p></div>
         </div>
-    </div>
-
+    
+    <div class="row">
    <!-- testing media objects -->
-   <div class="row pt-5">
-    <br><br>
+   <div class="col overflow-auto">
     {% if collections %}
     {% for collection in collections %}
-    <div class="col">
-   <div class="media position-relative collection-card">
-    <img src="/static/img/backgrounds/background-pattern-tan.png" class="mr-3 w-100" alt="...">
-    <div class="media-body">
-      <h5 class="mt-0">Media with stretched link</h5>            
+    
+   <div class="media position-relative art-card">
+    <img src="/static/img/footer.png" class="mr-3 w-100" alt="...">
+    <div class="media-body">         
       <a href="/collections/{{collection.id}}" class="stretched-link">{{ collection.name }}</a>
     </div>
     </div>
-    </div> 
+    
         {% endfor %}
         {% endif %} 
+    </div> 
         </div>
+       
 </div>
+
 
 
 

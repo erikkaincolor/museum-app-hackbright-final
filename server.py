@@ -436,6 +436,12 @@ def lone_collection(id): #it being the url also passes it to the function
     #sounds coming in via magic var
     return render_template('collection-details.html', collection=collection, art=art)
 
+#Individual Art Objects Page: 
+@app.route('/art/<int:id>') #/art_obj1
+def lone_art(id):
+    """the art"""
+    art= crud.get_art_by_id(id)
+    return render_template('art-object-details.html', art=art)
 
 
 

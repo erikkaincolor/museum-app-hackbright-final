@@ -94,8 +94,43 @@ a {
     transform-origin: bottom left;
   }
 
+.list-group-item{
+    background-color: #7E8C12;
+    opacity: .8;
+}
 
+#white-text{color:#E5E5E5}
 
+.titlebox {
+    padding: 10px;
+    border: 3px solid #E5E5E5 ;
+    border-radius: 6px;
+    width: 375px;
+    height:60px;
+    } 
+
+.titlebox h3{
+        justify-content: center;
+        align-items: center;}
+
+.titlebox2 {
+    padding: 10px;
+    border: 3px solid #252525 ;
+    border-radius: 6px;
+    width: 375px;
+    height:60px;
+    /* color: #7E8C12; */
+    } 
+
+.titlebox2 h3{
+        justify-content: center;
+        align-items: center;}
+        
+
+.dashboard {display:flex;
+    padding-left:450px;}
+
+.dashboard h3{font-size:3.8rem;}
 
 /* one-off page manip */
 
@@ -128,9 +163,14 @@ a {
     color:#E5E5E5 !important;
 }
 
+.btn{
+    border-radius: 33.3rem;
+}
 
 
-
+.card-img-top img{
+    border-radius: 40.3rem;
+}
 
 
 
@@ -160,7 +200,7 @@ font-weight: bold;
 
 .navbar-inner{
 background-color: #E5E5E5;
-padding-left: var(--bs-gutter-x,.75rem)
+padding-left: var(--bs-gutter-x,.75rem);
 }
 
 .navbar-text{
@@ -254,9 +294,41 @@ padding-left: var(--bs-gutter-x,.75rem)
     height: 100vh;
 }
 
+/* patron-profile */
 
+.bg-image8 {
+    background-image: url('/static/img/backgrounds/background-barkley_1.png'); 
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+}
 
+/* deets: collection, museum, audio guides, art-obj */
 
+.bg-image9 {
+    background-image: url('/static/img/backgrounds/background-brooklyn-red.png'); 
+}
+
+.bg-image10 {
+    background-image: url('/static/img/backgrounds/background-brooklyn-black.png'); 
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+}
+
+.bg-image11 {
+    background-image: url('/static/img/backgrounds/background-brooklyn-black.png'); 
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+}
+
+.bg-image12 {
+    background-image: url('/static/img/backgrounds/background-brooklyn-black.png'); 
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+}
 
 
 
@@ -271,16 +343,18 @@ padding-left: var(--bs-gutter-x,.75rem)
 
 /* collection repo page */
 .media {
-    position: relative;
+    position: absolute;
+    padding: 20px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     min-width: 0;
     word-wrap: break-word;
     background-clip: border-box;
-    border: 1px solid rgba(0,0,0,.125);
+    border: 2px solid rgba(0,0,0,.125);
     border-radius: .25rem;
     background-color: #E5E5E5;
     box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42);    
+
 }
 
 
@@ -319,7 +393,7 @@ padding-left: var(--bs-gutter-x,.75rem)
     position: absolute; /*fixed*/
     transform: translate(-50%,-50%);
     left: 84%;
-    top: 96%;
+    top: 69%;
     border-radius: 23px;
     font-family: 'Khula', sans-serif;
     display: none;
@@ -432,6 +506,11 @@ box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42);
     background-color:#584827;
     }
 
+.oneoff-card{
+    box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42);    
+    background-color:#4b4c4d;
+    }
+
 /* text only */
 .cc-card {
     color:white;
@@ -481,14 +560,14 @@ box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42);
 
 footer {
     padding:25px 0px;
-    background-color:#fff;
+    background-color: #E5E5E5;
     color:#4b4c4d;
-    position: static;
     font-family: 'Khula', sans-serif;
     bottom: 0;
     left: 0;
     right: 0;
     z-index: 150;
+   width: 100%;
   }
 /* 
   footer {font-family: 'Khula', sans-serif;
@@ -523,7 +602,7 @@ footer {
   
   footer ul a:hover {
     opacity:1;
-    color: #4b4c4d;
+    color: white;
   }
   
   

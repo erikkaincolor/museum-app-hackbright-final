@@ -188,6 +188,7 @@ def get_art_by_coll_id(collection_id): #collection_id is passed in via route
     """artobj via collectionid to show all for lone_collection func""" 
     return ArtObject.query.filter(ArtObject.collection_id==collection_id).first()
 
+
 ############################################################################################################
 
 # #wip-hardcoded fk's <----these are audio guides
@@ -284,8 +285,11 @@ def create_art_object(artist, title, medium, description, era, img_path, collect
 # be called artob.collection_id...
 
 
-
-
+#works-hardcoded fk's
+def get_art_by_id(id): #collection_id is passed in via route
+    """artobj via id to show deets""" 
+    return ArtObject.query.get(id)
+    
 
 
 

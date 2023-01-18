@@ -3,28 +3,54 @@
 {% block title %} {{ collection.name }} - Details{% endblock %}
 
 {% block content %}
+
+
+
+<div class="row">
+    <div class="col">
+
 <head> <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Home</a></li>
     <li class="breadcrumb-item"><a href="/collections">Collections</a></li>
     <li class="breadcrumb-item active">Collection Details</li>
   </ul> </head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- collection detail info -->
     <div class="row">
         <div class="col">
         <h1>{{ collection.name }}</h1>
                 <p>
-                    {{ collection.description }} <strong>{{ collection.coll_category }}</strong></p>
+                    {{ collection.description }} <br><strong>{{ collection.coll_category }}</strong></p>
                     <p class="card-text"><strong>{{ collection.curator }}</strong></p>
                     <p class="card-text"><strong>{{ collection.era }}</strong>
                     </p>
                 </p>
                 <p>
                     {%if "patron_id" not in session %}
-                    <button id="addfave" value="{{collection.id}}">Add to favorites </button>
+                    <button id="addfave" value="{{collection.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
                     
                     {% else %}
-                    <button id="addfave" value="{{collection.id}}">Add to favorites </button>
-                    <button id="removefave" value="{{collection.id}}">Remove as favorite </button>
+                    <button id="addfave" value="{{collection.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
+                    <button id="removefave" value="{{collection.id}}" class="btn btn-outline-primary btn-block mb-4">Remove as favorite </button>
                     {% endif %}
                     
                 </p>
@@ -32,38 +58,42 @@
     </div>
 
     <!-- art in collection detail info -->
-    <div class="container overflow-hidden text-center">
-
     <div class="row">
         <div class="col">
         <!-- start of art collection obj -->
-        <h5>Art in Collection</h5>
+        <div class="row">
+            <div class="col">
+                <br>
+                <div class="titlebox2" style="width:280px;"><h3>Art in Collection</h3></div><br>
+            </div>
+            </div>
         <!-- yes, i passed collection object in from view function and using magic var -->
-            {% for artincollection in collection.art_object %}
-            <div class="row">
+        <div class="row">  
+        {% for artincollection in collection.art_object %}
+            
                 <div id="collectionfavecard" class="card art-card" style="width:25rem;float:justified">
             <div class="card-body">
               <h5 class="card-title"><i><span class=fave_id_{{ artincollection.id }}> {{ artincollection.title }} </span></i></h5>
-                <div>
-                <p><p>
+                <div style="padding-top: 30px;">
+              
                         <img class="card-img-top" src="{{ artincollection.img_path}}" alt="Card image cap" style="width:25%;float:justified"><br>
-                        <!-- ^^might have some type of colored strip indicating what type it is? -->
-                        <!-- img could be inside or outside..if museum has color then -->
                             <p class="card-text">
                             Artist: {{ artincollection.artist }} 
                             <br>Medium: {{ artincollection.medium }} 
                             <!-- <br><br>Description: {{ artincollection.description }} -->
                             <br>Era: {{ artincollection.era }}
                             </p>
-                </p></p>
+                
                 <p>
+                    <a href="/art/{{artincollection.id}}" class="btn btn-outline-secondary btn-block mb-4" role="button">See Up Close</a>
+
                     {% if "patron_id" not in session %}
                     <!-- need this button info to be from route that passes in art object-->
-                    <button id="addartfave" value="{{art.id}}">Add to favorites </button>
+                    <button id="addartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
                     
                     {% else %}
-                    <button id="addartfave" value="{{art.id}}">Add to favorites </button>
-                    <button id="removeartfave" value="{{art.id}}">Remove as favorite </button>
+                    <button id="addartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
+                    <button id="removeartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-4">Remove as favorite </button>
                     {% endif %}
                 </p>
                 </div>
@@ -72,53 +102,43 @@
             {% endfor %}</div>
             </div>
         </div>
-        </div>
+     
         <!-- end of art in collection info -->
 
     <!-- sound in collection detail info -->
     <div class="row">
         <div class="col">
         <!-- start of sound in collection obj -->
-        <h5>Sounds in Collection</h5>
+        <div class="row">
+            <div class="col">
+                <br>
+                <div class="titlebox2" style="width:350px;"><h3>Sounds in Collection</h3></div><br>
+            </div>
+            </div>
         <!-- yes, i passed collection object in from view function and using magic var -->
             {% for sound in collection.related_sound %}
-            <div id="collectionfavecard" class="card audio-card" style="width:75%;float:justified">
+            <div id="collectionfavecard" class="card museum-card" style="width:40%;float:justified">
             <div class="card-body">
-              <h5 class="card-title"><i><span class=fave_id_{{ sound.id }}> {{ sound.sound_name }} </span></i></h5>
-                <div>
-                <p>
+              <h5 class="card-title"><i><span class=fave_id_{{ sound.id }}>{{ sound.sound_name }}</span></i></h5>
                         <!-- ^^might have some type of colored strip indicating what type it is? -->
-                            <p class="card-text">
-                                <br>Medium: {{ sound.medium }} 
+                        <img class="card-img-top" src="/static/img/audio-icon.png" alt="audio icon" style="width:80px;"><p class="card-text">
+                            Medium: {{ sound.medium }} 
                                 <br>Era: {{ sound.genre }}
-                                <!-- <br><br>Description: {{ sound.description }} -->
-                                <!-- audio track -->
-                                <figure>
-                                    <figcaption>Press Play</figcaption>
-                                    <audio
-                                        controls
-                                        src="{{ sound.sound_source}}">
-                                            <a href="{{ sound.sound_source}}">
-                                        
-                                            </a>
-                                    </audio>
-                                </figure>
                             </p>
-                </p>
                 <p>
-                    <a href="/audio-guides/{{sound.id}}" class="btn btn-info" role="button">Details</a>
-
+                    <a href="/audio-guides/{{sound.id}}" class="btn btn-outline-secondary btn-block mb-4" role="button">Listen</a>
+<br>
                     {% if "patron_id" not in session %}
                     <!-- need this button info to be from route that passes in art object-->
-                    <button id="addsoundfave" value="{{sound.id}}">Add to favorites </button>
+                    <button id="addsoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
 
                     {% else %}
-                    <button id="addsoundfave" value="{{sound.id}}">Add to favorites </button>
-                    <button id="removesoundfave" value="{{sound.id}}">Remove as favorite </button>
+                    <button id="addsoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
+                    <button id="removesoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-4">Remove as favorite </button>
                     
                     {% endif %}
                 </p>
-                </div>
+               
             </div>
             </div>
             {% endfor %}<br><br>
@@ -126,7 +146,7 @@
         </div>
         <!-- end of sound in collection info -->
    
-    <br><br>
+</div></div>
     {% endblock %}
 
     {% block script %}

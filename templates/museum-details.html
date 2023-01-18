@@ -69,7 +69,7 @@
                 <!-- need this button info to be from route that passes in art object-->
                 <button id="addsoundfave" value="{sound.id}}" class="btn btn-outline-dark btn-block mb-4">Add to favorites </button>
                 
-                { % else% }
+                {% else %}
                 <button id="addsoundfave" value="{{sound.id}}" class="btn btn-outline-dark btn-block mb-4">Add to favorites </button>
                 <button id="removesoundfave" value="{{sound.id}}" class="btn btn-outline-dark btn-block mb-4">Remove as favorite </button>
                 {% endif %}
