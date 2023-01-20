@@ -291,6 +291,10 @@ def get_art_by_id(id): #collection_id is passed in via route
     return ArtObject.query.get(id)
     
 
+def get_art():
+    """read all art obj data""" 
+    return ArtObject.query.all()
+    
 
 
 

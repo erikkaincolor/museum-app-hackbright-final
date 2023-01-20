@@ -1,39 +1,37 @@
 {% extends 'base.html' %}
 
-{% block title %} {{ art.title }} - Details{% endblock %}
+{% block title %} {{ art.title | title  }} - Details{% endblock %}
 
 {% block content %}
-<head> <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Home</a></li>
-    <li class="breadcrumb-item"><a href="/collections">Collections</a></li>
-    <li class="breadcrumb-item"><a href="/collectiondetails">Collection Details </li>
-    <li class="breadcrumb-item active"><a href="#"></a>Art Details</li>
-  </ul> </head>
+<head> 
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/collections">Collections</a></li>
+        <li class="breadcrumb-item active"><a href="#">Art Details</a></li>
+    </ul> 
+</head>
 
-
-
-
-
-
-<div class="row"><div class="col">
-  <h1>{{ art.title }}</h1>
-  <p>
-  <br>Medium: {{ art.medium }}<br><br>Description: {{ art.description }} <br>Genre: {{ art.artist }}</p>
-
-  <p>
-      {% if "patron_id" not in session %}
-      <button id="addartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
-
-      {% else %}
-      <button id="addartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
-      <button id="removeartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-4">Remove as favorite </button>
-      
-      {% endif %}
-  
-  <!-- art -->
-  <img src="{{ art.img_path}}" alt="Card image cap" style="width:25%;float:justified"><br>
-</p>
-</div></div>
+<div class="row">
+    <div class="col">
+        <h1>{{ art.title | title }}</h1>
+        <p><br>Medium: {{ art.medium }}<br><br>Description: {{ art.description }} <br>Genre: {{ art.artist }}
+        <br>Artist: {{ art.artist }} 
+                            <br>Medium: {{ art.medium | title  }} 
+                            <br>Era: {{ art.era | title  }}</p>
+                        
+        <p>
+            {% if "patron_id" not in session %}
+            <button id="addartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
+            {% else %}
+            <button id="addartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
+            <button id="removeartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-4">Remove as favorite </button>
+            {% endif %}
+            
+            {# art image #}
+            <img src="{{ art.img_path}}" alt="Card image cap" id="art-img"><br>
+        </p>
+    </div>
+</div>
 {% endblock %}
 
 
@@ -44,9 +42,3 @@
 {% block script %}
 <script src="/static/js/art_object_favorite.js"></script>  
 {% endblock %}
-
-<div class="row">
-  <div class="col">
-   
-  </div>
-  </div>

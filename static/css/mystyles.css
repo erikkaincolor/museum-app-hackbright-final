@@ -1,7 +1,4 @@
 
-/* des selector */
-/* overall background color to blend in with footer */
-
 /* Didnt work-Loading a Self-Hosted Font with @font-face */
 /* @font-face {
     font-family: "Bright";
@@ -13,14 +10,27 @@
   } */
 
 
+
+
+
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+/* whole elements */
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+
+
 div .container-fluid{
     padding-left: 50px;
     padding-right: 50px;
 }
 
-body{position:relative;}
-h1 
-{
+body{
+    position:relative;}
+
+h1 {
 padding-top:30px;
 font-family: 'Khula', sans-serif;
 }
@@ -34,19 +44,16 @@ font-family: 'Khula', sans-serif;
 h2 {
     font-family: 'Khula', sans-serif;
     /* font-family: "Bright"; */
-    }
+}
 
 p {
     font-family: 'Palanquin+Dark', sans-serif;
 
 }
-nav a {font-family: 'Khula', sans-serif;
-    font-weight: 999;
-    color: black;
-    font-size:larger;
-}
+
 
 label {font-family: 'Khula', sans-serif;
+    font-weight: bolder;
 }
 
 mark {
@@ -59,6 +66,21 @@ a {
     color: #7E8C12;
 }
 
+
+
+
+
+
+
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+/* one off classes */
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+
+/* for all pages breadbrumbs */
 .breadcrumb{
     padding: 15px 15px;
     opacity: .5;
@@ -66,78 +88,71 @@ a {
     font-size: smaller;
 }
 
-
-
-
-/* css animations for nav bar hover text underlining */
-.hover-underline-animation {
-    display: inline-block;
-    position: relative;
-    color: #252525;
-  }
-  
-.hover-underline-animation::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: #7E8C12;
-    transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
-  }
-  
-  .hover-underline-animation:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-  }
-
+/* for muesum list */
 .list-group-item{
     background-color: #7E8C12;
     opacity: .8;
 }
 
-#white-text{color:#E5E5E5}
-
-.titlebox {
-    padding: 10px;
-    border: 3px solid #E5E5E5 ;
-    border-radius: 6px;
-    width: 375px;
-    height:60px;
-    } 
-
-.titlebox h3{
-        justify-content: center;
-        align-items: center;}
-
-.titlebox2 {
-    padding: 10px;
-    border: 3px solid #252525 ;
-    border-radius: 6px;
-    width: 375px;
-    height:60px;
-    /* color: #7E8C12; */
-    } 
-
-.titlebox2 h3{
-        justify-content: center;
-        align-items: center;}
-        
-
+/* patron profile hero info */
 .dashboard {display:flex;
     padding-left:450px;}
 
 .dashboard h3{font-size:3.8rem;}
 
-/* one-off page manip */
+/* collection repo page */
+.media {
+    position: relative;
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+    min-width: 0;
+    word-wrap: break-word;
+    background-clip: border-box;
+    border: 2px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    background-color: #E5E5E5;
+    box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42);    
+    margin-bottom: .75rem;
+    margin-left: .75rem;
+    }
+
+
+.media:hover {
+    color:#E5E5E5;
+    border: 2px solid rgba(0,0,0,.125);
+    background-color: #252525;
+    box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42);    
+}
+
+.art-card a{
+    font-family: 'Kanit', sans-serif;
+    font-weight:bold;
+    font-style: normal;
+}
+
+.art-card div a{
+    padding-left:17px;
+}
 
 
 
+/* modidified BS css */
+.col, .col-med-4, .col-sm-4{padding-left: var(--bs-gutter-x,.75rem);}
 
+.stretched-link {color:#252525;}
 
+.stretched-link:hover{color:#7E8C12;}
+
+.card-img-top img{
+    border-radius: 40.3rem;
+}
+
+.alert-success{
+    background-color: #E5E5E5;
+    color: #252525;
+    border: 1px solid;
+}
 
 
 
@@ -167,9 +182,12 @@ a {
     border-radius: 33.3rem;
 }
 
+.btn:hover{
+    border: 2px solid #E5E5E5; 
+    color: #252525;
+    background-color: #E5E5E5;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
-.card-img-top img{
-    border-radius: 40.3rem;
 }
 
 
@@ -186,15 +204,207 @@ a {
 
 
 
-/* delete fieldset l8r...this is to see my sessions */
-fieldset {
-    margin-top: 1em;
-    margin-bottom: 1em
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+/* one-off id manip */
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+
+
+#art-img{
+    width:25%;
+    float:justified;
+}
+
+    
+#sound-img{
+        width:80px;
+    }
+    
+#white-text{color:#E5E5E5}
+
+
+#coll-img{
+   padding:.25rem;
+   height:100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+/* navbar mods */
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+
+
+
+#nav-img{
+    width:250px;}
+
+nav a {font-family: 'Khula', sans-serif;
+    font-weight: 999;
+    color: black;
+    font-size:larger;
+}
+
+nav .active {
+    background-color: #7E8C12;
+    border-radius: 10px;
   }
 
-fieldset label {
-font-weight: bold;
+
+.navbar-brand {
+    width:250px;
 }
+
+/* css animations for nav bar hover text underlining */
+
+.hover-underline-animation {
+    display: inline-block;
+    position: relative;
+    color: #252525;
+  }
+  
+.hover-underline-animation::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #7E8C12;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+  
+  .hover-underline-animation:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+/* rounded title boxes on patron profile, museum, collection and art deets */
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+
+
+
+.titlebox {
+    border: 3px solid #E5E5E5 ;
+    border-radius: 6px;
+    width: 375px;
+    height:60px;
+    } 
+
+.titlebox h3{
+        justify-content: center;
+        align-items: center;
+        padding-left:8px;}
+
+.titlebox2 {
+    padding: 10px;
+    border: 3px solid #252525 ;
+    border-radius: 6px;
+    width: 375px;
+    height:60px;
+    /* color: #7E8C12; */
+    } 
+
+.titlebox2 h3{
+        justify-content: center;
+        align-items: center;}
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+/* nav bar */
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+
+
 .navbar{padding-top: -14.5rem;
     padding-bottom: -25.5rem;}
 
@@ -207,10 +417,6 @@ padding-left: var(--bs-gutter-x,.75rem);
     color:#252525
 }
 
-.col, .col-med-4, .col-sm-4{padding-left: var(--bs-gutter-x,.75rem);}
-
-.stretched-link {color:#252525;}
-.stretched-link:hover{color:#7E8C12;}
 
 
 
@@ -221,6 +427,33 @@ padding-left: var(--bs-gutter-x,.75rem);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+/* various bg images */
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
 
 
 /* background images for homepage, login, logout and register */
@@ -297,7 +530,9 @@ padding-left: var(--bs-gutter-x,.75rem);
 /* patron-profile */
 
 .bg-image8 {
-    background-image: url('/static/img/backgrounds/background-barkley_1.png'); 
+    background-image: url('/static/img/j_2.jpg'); 
+    /* background-image: url('/static/img/backgrounds/background-barkley_1.png');  */
+
     background-size: cover;
     width: 100%;
     height: 100vh;
@@ -341,21 +576,6 @@ padding-left: var(--bs-gutter-x,.75rem);
 
 
 
-/* collection repo page */
-.media {
-    position: absolute;
-    padding: 20px;
-    display: flex;
-    flex-direction: row;
-    min-width: 0;
-    word-wrap: break-word;
-    background-clip: border-box;
-    border: 2px solid rgba(0,0,0,.125);
-    border-radius: .25rem;
-    background-color: #E5E5E5;
-    box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42);    
-
-}
 
 
 
@@ -375,7 +595,16 @@ padding-left: var(--bs-gutter-x,.75rem);
 
 
 
+
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
 /* popups */
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+
+
 
 *,
 *:before,
@@ -386,20 +615,20 @@ padding-left: var(--bs-gutter-x,.75rem);
 }
 
 .popup
-{background-color: #252525;
+{background-color: #E5E5E5;
     box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42); 
     width: 310px;
     padding: 5px 15px 5px;
     position: absolute; /*fixed*/
     transform: translate(-50%,-50%);
     left: 84%;
-    top: 69%;
+    top: 71%;
     border-radius: 23px;
-    font-family: 'Khula', sans-serif;
+    font-family: 'Kanit', sans-serif;
     display: none;
     text-align: center;}
 
-.home-popup{background-color: #252525;
+.home-popup{background-color: #E5E5E5;
     box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42); 
     width: 310px;
     padding: 5px 15px 5px;
@@ -408,7 +637,7 @@ padding-left: var(--bs-gutter-x,.75rem);
     left: 34%;
     top: 36%;
     border-radius: 23px;
-    font-family: 'Khula', sans-serif;
+    font-family: 'Kanit', sans-serif;
     display: none;
     text-align: center;}
 
@@ -417,8 +646,8 @@ padding-left: var(--bs-gutter-x,.75rem);
     padding: 0px 10px 0px;  
     margin-left: 225px;  
     background-color: transparent;
-    font-size: 22px;
-    color: #E5E5E5;
+    font-size: 27px;
+    color: #252525;
     border: none;
     outline: none;
     cursor: pointer;
@@ -429,7 +658,7 @@ padding-left: var(--bs-gutter-x,.75rem);
     padding: 0px 10px 0px;  
     margin-left: 225px;  
     background-color: transparent;
-    font-size: 22px;
+    font-size: 27px;
     color: #E5E5E5;
     border: none;
     outline: none;
@@ -437,14 +666,14 @@ padding-left: var(--bs-gutter-x,.75rem);
 }
 
 .popup p{
-    color: #E5E5E5;
+    color: #252525;
     font-size: 13px;
     text-align: justify;
     margin: 10px 0;
     line-height: 18px;
 }
 .home-popup p{
-    color: #E5E5E5;
+    color: #252525;
     font-size: 13px;
     text-align: justify;
     margin: 10px 0;
@@ -452,7 +681,7 @@ padding-left: var(--bs-gutter-x,.75rem);
 }
 
 .home-popup h3{
-    color: #E5E5E5;
+    color: #252525;
     font-size: 16px;
     text-align: justify;
     margin: 10px 0;
@@ -483,8 +712,38 @@ padding-left: var(--bs-gutter-x,.75rem);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+/* cards */
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+
+
  /* for museum, collections, audio guides an dpatron profile card displays  */
-.art-card {
+.card{ /*how i add horizontal space*/
+    margin-bottom: .75rem;
+    margin-left: .75rem;
+}
+
+ .art-card {
     /* background-color:#000000; */
     background-color: #E5E5E5;
     box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42);    
@@ -516,24 +775,44 @@ box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42);
     color:white;
     }
 
-.alert-success{
-    background-color: #7E8C12;
-    color: white;
-    border: 1px solid;
-    opacity: .8;
-
-}
 
 
 
-/* register page/login */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+/* register */
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
 
 #col1{
     width:500px;
     height:500px;
     padding-top: 150px;
 }
-
 
 #register-link {
     color: white;
@@ -556,6 +835,14 @@ box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42);
 
 
 
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+/* footer */
+/* ***************************************************** */
+/* ***************************************************** */
+/* ***************************************************** */
+
 
 
 footer {
@@ -569,6 +856,9 @@ footer {
     z-index: 150;
    width: 100%;
   }
+
+#footer-img{
+    width:80px;}
 /* 
   footer {font-family: 'Khula', sans-serif;
     padding-top: 15px;

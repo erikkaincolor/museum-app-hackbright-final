@@ -4,46 +4,43 @@
 {% block content %}
 <div class="bg-image5">
    
+    <div class="row overflow-scroll">
+        
+
     <div class="row">
         <div class="col col-med-6">
             <h1>The Collection</h1>
-            <p>
-            HabitualBe's digital collections reflect the rich diversity of the natural and cultural world, as well as the shared heritage of Black Americans and Africans in the diaspora.
-            </p></div>
-            <div class="col col-med-6"><p>These resources can be used by academics and researchers from all around the nation to advance our understanding of Black streams of consciousness and life. 
-            </p></div>
+            <p>HabitualBe's digital collections reflect the rich diversity of the natural and cultural world, as well as the shared heritage of Black Americans and Africans in the diaspora.
+            </p>
         </div>
-    
-    <div class="row">
-   <!-- testing media objects -->
-   <div class="col overflow-auto">
-    {% if collections %}
-    {% for collection in collections %}
-    
-   <div class="media position-relative art-card">
-    <img src="/static/img/footer.png" class="mr-3 w-100" alt="...">
-    <div class="media-body">         
-      <a href="/collections/{{collection.id}}" class="stretched-link">{{ collection.name }}</a>
-    </div>
+
+        <div class="col col-med-6 "><br><br><br>
+            <p>These resources can be used by academics and researchers from all around the nation to advance our understanding of Black streams of consciousness and life. 
+            </p>
+        </div>
     </div>
     
+
+    {# MEDIA OBJECTS #}
+
+        <div class="col px-3" style="max-height: 651px;">
+        {% if collections %}
+        {% for collection in collections %}
+        
+        <div class="media art-card">
+            <img src="/static/img/footer.png" id="coll-img" alt="footer HabitualBe logo">
+                <div class="media-body">         
+                <br><a href="/collections/{{collection.id}}" class="stretched-link">{{ collection.name | title  }}</a>
+                </div>
+        </div>
         {% endfor %}
         {% endif %} 
-    </div> 
-        </div>
-       
+        </div> 
+
+
+
+
+    </div>
+
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 {% endblock %}

@@ -2,34 +2,47 @@
 {% block title %}Museum List{% endblock %}
 
 {% block content %}
+
 <div class="bg-image6">
     <div class="row overflow-scroll">
-        <div class="col">
+        <div class="col align-self-start">
         <h1>Partner Museums</h1>
-        <p> Browse our list and locate a Black-American or African museum in the U.S.
-            <br><br>
-            Some partners offer <mark>free</mark> or <mark>handsomely discounted</mark>  entrance to HabitualBe members, while others do not and are not required to.
-            It is recommended to call the museum you intend to visit and ask the information desk.
-            <br><br>
-            Inaccurate details about a partner museum?
-            {% if "patron_id" not in session %}
-            Reach out to our <a href="erikkaincolor+hackbrightapp@gmail.com">team</a>.
-            {% else %}
-            <br>If you work for a partner museum, you can edit information in the museum organizer part of your <a href="/profile">Patron Profile</a>
-            .
-            {% endif %}
-            <br>
-        </p>
-                {% if museums %}
-                {% for museum in museums %}
-                <div class="list-group">
-                <a href="/museumdirectory/{{museum.id}}" class="list-group-item list-group-item-action px-3 border ripple">
-                    {{ loop.index }}. {{ museum.name }} | {{ museum.state }}</a>
-                </div>
-                {% endfor %}
-        </p>
+            <p> HabitualBe aims to provide museum access via the internet to everyone. To the professionals who protect, preserve and interpret African and Black art, history and culture and to the curious. <br><br>Browse our list and locate a Black-American or African museum in the U.S.<br><br>
+                Some partners offer <mark>free</mark> or <mark>handsomely discounted</mark>  entrance to <br>HabitualBe members, while others do not and are not required to.
+                    
+                <br><br>It is recommended to call the museum you intend to visit and ask the information desk.<br><br>
+                <em>Inaccurate details about a partner museum?<br>
+                
+                {% if "patron_id" not in session %}
+                <br>Reach out to our <a href="erikkaincolor+hackbrightapp@gmail.com">team</a>.</em>
+                {% else %}
+                <br>If you work for a partner museum, you can edit information in the museum organizer part of your 
+                <a href="/profile">Patron Profile</a>.</em>
+                {% endif %}<br>
+            </p>
         </div>
-    
-{% endif %}</div>
-</div>
+            
+        <div class="col align-self-end">
+                <img src="/static/img/museum-photo.png" alt="generic museum graphic" class="p-3" style="width:400px">
+        </div>
+
+        <div class="col align-self-center overflow-scroll me-5" style="max-height: 651px;">
+            <p> Click museum for more info <em>(71 items)</em>:
+            {% if museums %}
+            
+                {% for museum in museums %}
+                    <div class="list-group">
+                        <a href="/museumdirectory/{{museum.id}}" class="list-group-item list-group-item-action px-3 border ripple">
+                        {{ loop.index }}. {{ museum.name }} | {{ museum.state }}</a>
+                    </div>
+                {% endfor %}
+            </p>
+        </div>
+        {% endif %}
+   
+   
+
+
+
+</div> </div>
 {% endblock %}

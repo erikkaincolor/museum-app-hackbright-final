@@ -12,7 +12,7 @@ db = SQLAlchemy()
 #############################################
 
 class Patron(db.Model): #ONE
-    """Patrons. Museum frequenters. Art lovers. Curators. Students. Docents. Old People. Babies."""
+    """Patrons. Museum frequenters. Art lovers. Curators. Students. Docents. Older People. Babies."""
     __tablename__ = "patrons"
 
     p_id = db.Column(db.Integer, primary_key=True, autoincrement=True)

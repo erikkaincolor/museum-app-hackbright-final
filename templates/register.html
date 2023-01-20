@@ -3,13 +3,12 @@
 
 {% block content %}  
 
-    <div class="bg-image2">
+<div class="bg-image2">
 
-        <div id>
-        <p>
-            <form action="/register" method="POST">
-                <div class="row" >
-                    <div class="col form-outline">
+        <form action="/register" method="POST">
+            <p>
+            <div class="row">
+                <div class="col form-outline">
                     {# Username #}
                     <input type="text" name="uname" required="required" id="PatronID" class="form-control form-control-sm" />
                     <label class="form-label" for="PatronID">Patron ID</label>
@@ -17,9 +16,9 @@
                     {# Email #}
                     <input type="email" name="email" required="required" id="Email" class="form-control form-control-sm" />
                     <label class="form-label" for="Email">Email</label>
-                    </div>
+                </div>
 
-                    <div class="col form-outline">
+                <div class="col form-outline">
                     {# First Name #}
                     <input type="text" name="fname" required="required" id="Firstname" class="form-control form-control-sm" />
                     <label class="form-label" for="Firstname">First Name</label>
@@ -27,28 +26,30 @@
                     {# Last Name #}
                     <input type="text" name="lname" required="required" id="Lastname" class="form-control form-control-sm" />
                     <label class="form-label" for="Lastname">Last Name</label>
-                    </div>
-               
+                </div>
+            </div>
+            
 
-                <div class="row">
-                    <div class="col">
+            <div class="row">
+                <div class="col">
                     {# Password #}
                     <input type="password" name="pword" id="Password" class="form-control form-control-sm" />
                     <label class="form-label" for="Password">Password</label>
-                    </div>
                 </div>
+            </div>
 
-                <div class="row">
-                    <div class="col text-center">
+            <div class="row">
+                <div class="col text-center">
                     {# Submit button #}
-                    <input type="submit" class="btn btn-outline-primary btn-block mb-4" value="Complete Registration"> <p>Already a patron? <a id="register-link" href="/login">Log-in here</a></p>
-                    </div> 
-                </div>
-                </div>
-                
-            </form>
-        </p>
-    </div>
+                    <input type="submit" class="btn btn-outline-primary btn-block mb-4" value="Complete Registration"> 
+                    <p>Already a patron? 
+                        <a id="register-link" href="/login">Log-in here</a>
+                    </p>
+                </div> 
+            </div>
+
+            </p>
+        </form>
 </div>
 {% endblock %}
 

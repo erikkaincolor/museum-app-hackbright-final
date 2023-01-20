@@ -112,18 +112,14 @@ def logout():
 ################################################################################################################
 
 #works
-@app.route("/profile") 
+@app.route("/profile")
 def view_patron_page():
-    """shows name and info"""
+    """shows name and info, and links to collections, art, sounds and museums"""
     if not "patron_id" in session: #logged in or not depends on this session dict from login
         return redirect('/login') 
     p_id=session['patron_id'] #storing session data in a variable
     patron=crud.patron_id_lookup(p_id) #<---patron obj made via id lookup...i now can access patron attr
-    return render_template("patron-profile.html", patron=patron) 
-
-
-
-
+    return render_template("patron-profile.html", patron=patron)
 
 
 
@@ -473,19 +469,6 @@ def lone_audio_guide(id):
     """the audio tours...the playlists"""
     sound= crud.get_sound_by_id(id)
     return render_template('guide-details.html', sound=sound)
-
-
-# #refernce
-# @app.route('/collections/<id>')
-# def lone_collection(id): #it being the url also passes it to the function
-#     """Collection Details page"""
-#     collection= crud.get_collection_id(id)
-#     sound=crud.get_sound_by_coll_id(id)
-#     art=crud.get_art_by_coll_id(id)
-#     return render_template('collection-details.html', collection=collection, art=art, sound=sound)
-
-
-
 
 
 

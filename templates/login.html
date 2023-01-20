@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="bg-image1">
-    <p >
+    <p>
         <form class="form-inline" action="/login" method="POST">
             <br><br><br><br>
             <div class="row">
@@ -23,18 +23,19 @@
                     </div>
                 </div>
                 
-            </div>
-          <br>
-          <div class="text-center">
-            {# Submit button #}
-            <input type="submit" class="btn btn-outline-primary btn-block mb-4" value="Login">
-            
+            </div><br>
 
-            {# Register Link #}
-            
-              <p>Not a patron? <a href="/register">Register here. It's free!</a></p>
+            <div class="text-center"> 
+                {# Submit button #}
+                <input type="submit" class="btn btn-outline-primary btn-block mb-4" value="Login">
+
+                {# Register Link #}
+                <p>Not a patron? 
+                    <a href="/register">Register here. It's free!</a>
+                </p>
             </div>
-          </form>
+
+        </form>
     </p>
 </div>
 {% endblock %}

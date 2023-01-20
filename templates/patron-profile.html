@@ -1,24 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ patron.uname }}'s Profile{% endblock %}
+{% block title %}{{ patron.uname | title  }}'s Profile{% endblock %}
 
 {% block content %}
 
 <div class="bg-image8 overflow-auto">
-<div class="row" id="white-text">
-<div class="col col-med-6"><br><br>
-    <h2>What's happening<br>{{ patron.uname }}?</h2><br>
-    <h2>Patron info:</h2>
-    <p>
-        Artist name: {{ patron.uname }}<br>
-        First name: {{ patron.fname }}<br>
-        Last name: {{ patron.lname }}<br>
-        Email: {{ patron.email }}<br>
-        Password: **** **** ****<br>
-    </p><br><br><bR><br><br><br>
-</div>
-
-</div>
 
 
 
@@ -27,97 +13,71 @@
 
 
 
+    <div class="row" id="white-text">
+        <div class="col col-med-6"><br><br>
+            <h2><em>What's happening</em><br>{{ patron.uname }}?</h2><br>
+            <h2>Patron info:</h2>
+            <p>
+                Artist name: {{ patron.uname | title  }}<br>
+                First name: {{ patron.fname | title  }}<br>
+                Last name: {{ patron.lname | title  }}<br>
+                Email: {{ patron.email }}<br>
+                Password: **** **** ****<br>
+            </p><br><br><bR><br><br><br>
+        </div>
+    </div>
 
 
 
 
 
 
-        <div class="row">
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="row">
         <div class="col">
             <div class="titlebox" style="width:271px;">
-        <h3 id="white-text">Museum Faves</h3></div><br>
+                <h3 id="white-text"> Museum Faves</h3></div><br>
         </div>
+    </div> 
+
+    {# MUSEUM FAVES #}
+    <div class="row">
+        <div class="col"> 
+
+            <div class="row"> 
+                {# using patron objects sqlalchemy magic var #}
+                {% for museumfave in patron.museum_fave %} 
+                <div id="museumfavecard" class="card audio-card" style="width:18em;"> 
+                    <div class="card-body h-100"> 
+                        <div style="padding-top: 20px;">
+                            <p>
+                                <img class="card-img-top" src="/static/img/specific-pages/museum-card.jpg" alt="generic museum graphic"><br><br>
+                                Name:<span class=fave_id_{{ museumfave.id }}> {{ museumfave.name | title  }}</span><br>
+                                
+                                {% if session["username"] == patron.uname %}<br>
+                                <a href="/museumdirectory/{{museumfave.id}}"><button class="btn btn-outline-secondary btn-block mb-1">View Museum</button></a>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>  
+                {% endfor %} 
+            </div> 
         </div> 
-        <!-- start of museum faves -->
-        <div class="row">
-        <div class="col">
-
-        <div class="row">
-        
-
-        <!-- using patron objects magic var -->
-        {% for museumfave in patron.museum_fave %}
-        <div id="museumfavecard" class="card audio-card" style="width:18em;">
-            <div class="card-body h-100">
-            <div style="padding-top: 30px;">
-
-                <img class="card-img-top" src="/static/img/specific-pages/museum-card.jpg" alt="generic museum graphic"><p></p>
-                    Name:<span class=fave_id_{{ museumfave.id }}> {{ museumfave.name }} </span>
-                    {% if session["username"] == patron.uname %}
-                    <p><br>
-                    <button class="btn btn-outline-secondary btn-block mb-4">See museum</button> 
-                    {% endif %}<br><br>
-            </p>
-            </div>
-            </div>
-        </div>
-        {% endfor %}
-        
-        </div></div></div>
-        <!-- end of museum faves -->
-
-
-
-
-
-
-
-
-
-
-
-
-        <div class="row">
-        <div class="col">
-            <br>
-            <div class="titlebox" style="width:280px;"><h3 id="white-text">Collection Faves</h3></div><br>
-        </div>
-        </div>
-        <!-- start of collection faves -->
-        <div class="row">
-            <div class="col">
+    </div> 
     
-            <div class="row">
-       
-    
-        <!-- using patron objects magic var -->
-        {% for collectionfave in patron.collection_fave %}
-        <div id="collectionfavecard" class="card cc-card collection-card" style="width:18em;">
-        <div class="card-body h-100">
-            <div><p>
-                    Name:<span class=fave_id_{{ collectionfave.id }}> {{ collectionfave.name }} </span>
-                    {% if session["username"] == patron.uname %}
-                    <p class="card-text">
-                        Deets: {{ collectionfave.coll_category }} 
-                        <br>Curator: {{ collectionfave.curator }} 
-                        <br>Era: {{ collectionfave.era }}
-                        </p>
-                    <button class="btn btn-outline-secondary btn-block mb-4">See collection</button> 
-                    {% endif %}
-                    </p>
-            </div>
-            </div>
-            </div>
-            {% endfor %}
-       
-    </div></div></div>
-<!-- end of collection faves -->
-
-
-
-
-
 
 
 
@@ -131,38 +91,48 @@
 
 
     <div class="row">
-        <div class="col"><bR>
-            <div class="titlebox" style="width:180px;"><h3 id="white-text">Art Faves</h3></div><br>
+        <div class="col"><br>
+            <div class="titlebox" style="width:280px;">
+                <h3 id="white-text"> Collection Faves</h3>
+            </div><br>
         </div>
-        </div>
-        <!-- start of art faves -->
-        <div class="row">
-            <div class="col">
-    
-            <div class="row">
-    <!-- yes, i passed patron object in from view function -->
-    {% for artfave in patron.art_fave %}
-    <div id="artfavecard" class="card art-card" style="width:18em;">
-    <div class="card-body h-100">
-        <div>
-        <p>
-                <img class="card-img-top" src="{{ artfave.img_path }}" alt="Card image cap"><br>
-                Name:<span class=fave_id_{{ artfave.id }}> {{ artfave.title }} </span>
-                {% if session["username"] == patron.uname %}
-                <p class="card-text">
-                    Artist: {{ artfave.artist}}<br><br> 
-                    Medium: {{ artfave.medium }}<br><br> 
-                    <!-- <a href="{{ artfave.img_path }}">More info</a></p> -->
-                <button class="btn btn-outline-secondary btn-block mb-4">See art</button> 
-                        {% endif %}
-                </p>
-                </div>
-            </div>
-            </div>
-        {% endfor %}
     </div>
-</div></div>
-        <!-- end of Art Object faves -->
+
+
+
+    {# COLLECTION FAVES #}
+    <div class="row">
+        <div class="col">
+
+            <div class="row">
+                {# usinf patron objects magic var from sqlalchemy #}
+                {% for collectionfave in patron.collection_fave %}
+                <div id="collectionfavecard" class="card cc-card collection-card" style="width:18em;">
+                    <div class="card-body h-100">
+                        <div>
+                            <p>
+                                <img class="card-img-top mx-5" src="/static/img/specific-pages/coll-fave-card.png" alt="generic museum graphic" style="width:60%;"><br><br>
+                                "<span class=fave_id_{{ collectionfave.id }}> {{ collectionfave.name | title  }}</span>"
+                            {% if session["username"] == patron.uname %}
+                            <p class="card-text">
+                                <br>Era: {{ collectionfave.era | title  }}
+                            </p>
+                            <a href="/collections/{{collectionfave.id}}"><button class="btn btn-outline-secondary btn-block mb-1">View Collection</button></a>
+                            {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+    
+            </div>
+        </div>
+    </div>
+
+
+
+
+
 
 
 
@@ -176,36 +146,82 @@
 
 
     <div class="row">
-    <div class="col"><br>
-        <div class="titlebox"><h3 id="white-text">Favorite Related Audio</h3></div><br></div></div>
+        <div class="col"><br>
+            <div class="titlebox" style="width:180px;">
+                <h3 id="white-text"> Art Faves</h3>
+            </div><br>
+        </div>
+    </div>
+
+    {# ART FAVES #}    
+    <div class="row">
+        <div class="col">
+
+            <div class="row">
+            {# passed in patron object and now using its sqlalchemy magic vars #}
+            {% for artfave in patron.art_fave %}
+                <div id="artfavecard" class="card art-card" style="width:18em; padding-top: 10px;">
+                    <div class="card-body h-100">
+                        <p class="card-text">
+                                <img class="card-img-top" src="{{ artfave.img_path }}" alt="Card image cap"><br><br>
+                                Name:<span class=fave_id_{{ artfave.id }}> {{ artfave.title | title  }} </span>
+                                
+                                {% if session["username"] == patron.uname %}
+                                Artist: {{ artfave.artist}}<br><br> 
+                                Medium: {{ artfave.medium | title  }}<br><br> 
+                                <a href="/art/{{artfave .id}}"><button class="btn btn-outline-secondary btn-block mb-2">Look Closer</button></a>
+                                {% endif %}
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="row">
+        <div class="col"><br>
+            <div class="titlebox">
+                <h3 id="white-text"> Favorite Related Audio</h3>
+            </div><br>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col">
 
-        <div class="row">
-        <!-- start of sound faves -->
-        
-        <!-- yes, i passed patron object in from view function -->
+            <div class="row">
+            {# SOUND FAVES #}    
+            
+            {# used patron object from view func and used it ssqlalchemy magic vars #}    
+
             {% for soundfave in patron. related_sound_fave %}
-            <div id="soundfavecard" class="card oneoff-card" style="width:18em;">
-            <div class="card-body h-100">
-                <div>
-                <p>
-                        <img class="card-img-top" src="/static/img/audio-icon.png" alt="audio icon" style="width:80px;">
-                        Name:<span class=fave_id_{{ soundfave.id }}> {{ soundfave.sound_name }} </span>
-                        {% if session["username"] == patron.uname %}
-                        <p class="card-text">
-                            Medium: {{ soundfave.medium }} 
-                        <button class="btn btn-outline-secondary btn-block mb-4">Listen</button> 
-                        {% endif %}
-                </p>
+                <div id="soundfavecard" class="card oneoff-card" style="width:18em; padding-top: 10px;">
+                    <div class="card-body h-100">
+                        <p class="card-text" id="white-text">
+                            Name:<span class=fave_id_{{ soundfave.id }}> {{ soundfave.sound_name | title }} </span><br><br>
+                            {% if session["username"] == patron.uname %}
+                            <img class="card-img-top" src="/static/img/audio-icon.png" alt="audio icon" style="width:80px;">  Medium: {{ soundfave.medium | title  }}<br><br> 
+                            <a href="/audio-guides/{{soundfave .id}}"><button class="btn btn-outline-secondary btn-block mb-2">Listen</button></a>
+                            {% endif %}
+                        </p>
+                    </div>
                 </div>
-            </div>
-            </div>
             {% endfor %}
             </div>
-            </div></div>
-            <!-- end of sound faves -->
+        </div>
+    </div>
 
 
 

@@ -1,46 +1,49 @@
 {% extends 'base.html' %}
 
-{% block title %} {{ sound.sound_name }} - Details{% endblock %}
+{% block title %} {{ sound.sound_name | title  }} - Details{% endblock %}
 
 {% block content %}
-<head> <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Home</a></li>
-    <li class="breadcrumb-item"><a href="/audio-guides">Audio Guides</a></li>
-    <li class="breadcrumb-item active">Audio Guide Details</li>
-  </ul> </head>
 
-    <h1>{{ sound.sound_name }}</h1>
+<div class="container">
+<head> 
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/audio-guides">Audio Guides</a></li>
+        <li class="breadcrumb-item active">Audio Guide Details</li>
+    </ul> 
+</head>
+
+    <h1>{{ sound.sound_name | title  }}</h1>
+        <p>
+        Medium: {{ sound.medium | title  }}<br>Description: {{ sound.description | title  }} <br>Genre: {{ sound.genre | title }}
+        </p>
+
     <p>
-    <br>Medium: {{ sound.medium }}<br><br>Description: {{ sound.description }} <br>Genre: {{ sound.genre }}</p>
-    <p>                                         
-    </p>
-    <p>
+        {# AUDIO PLAYER #}
+        <figure>
+            <figcaption>Press Play</figcaption>
+            <audio controls
+                src="{{ sound.sound_source}}">
+                <a href="{{ sound.sound_source}}"></a>
+            </audio>
+        </figure>
+
         {% if "patron_id" not in session %}
         <button id="addsoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
-
         {% else %}
         <button id="addsoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
         <button id="removesoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-4">Remove as favorite </button>
-        
         {% endif %}
     
-    <!-- audio track -->
-    <figure>
-        <figcaption>Press Play</figcaption>
-        <audio controls
-            src="{{ sound.sound_source}}">
-            <a href="{{ sound.sound_source}}"></a>
-        </audio>
-    </figure>
-</p>
+       
+    </p>
+</div>
 {% endblock %}
+
+
+
+
 
 {% block script %}
 <script src="/static/js/sound_favorite.js"></script>  
 {% endblock %}
-
-<div class="row">
-    <div class="col">
-     
-    </div>
-    </div>

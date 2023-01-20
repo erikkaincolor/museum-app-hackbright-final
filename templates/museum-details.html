@@ -3,28 +3,34 @@
 {% block title %} {{ museum.name }} - Details{% endblock %}
 
 {% block content %}
-<head> <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Home</a></li>
-    <li class="breadcrumb-item"><a href="/museumdirectory">Museums</a></li>
-    <li class="breadcrumb-item active">Museum Details</li>
-  </ul> </head>
+
+<head> 
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/museumdirectory">Museums</a></li>
+        <li class="breadcrumb-item active">Museum Details</li>
+    </ul> 
+</head>
+
+
 <div class="row">
     <div class="col">
-    <h1>{{ museum.name }}</h1>
-    <p>Located: {{ museum.street }}
-        {{ museum.city }}, {{ museum.state }}, {{ museum.zipcode }}</p>
-    <p>
-        <a href="{{museum.weburl}}">Website</a>                                            
-    </p>
-    <p>
-        {% if "patron_id" not in session %}
-        <button id="addmusefave" value="{{museum.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
+        <h1>{{ museum.name }}</h1>
+        <p>Located: {{ museum.street }}
+            {{ museum.city }}, {{ museum.state }}, {{ museum.zipcode }}</p>
+        <p>
+            <a href="{{museum.weburl}}" class="btn btn-outline-secondary btn-block mb-2" role="button">Website</a>                                            
+        </p>
+        <p>
+            {% if "patron_id" not in session %}
+            <button id="addmusefave" value="{{museum.id}}" class="btn btn-outline-dark btn-block mb-2">Add to favorites </button>
 
-        {% else %}
-        <button id="addmusefave" value="{{museum.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
-        <button id="removemusefave" value="{{museum.id}}" class="btn btn-outline-primary btn-block mb-4">Remove as favorite </button>
-        {% endif %}
-    </p>
+            {% else %}
+            <button id="addmusefave" value="{{museum.id}}" class="btn btn-outline-dark btn-block mb-2">Add to favorites </button>
+            <button id="removemusefave" value="{{museum.id}}" class="btn btn-outline-dark btn-block mb-2
+            ">Remove as favorite </button>
+            {% endif %}
+        </p>
  </div>
 </div>
 
@@ -34,63 +40,79 @@
 
 
 
- <!-- sound in museum detail info -->
- <div class="row">
-    <div class="col">
     <!-- start of sound in museum obj -->
-    <h5>Sounds in Museum</h5>
-    <!-- yes, i passed museum object in from view function and using magic var -->
-        {% for sound in museum.related_sound %}
-        <div id="museumfavecard" class="card audio-card" style="width:75%;float:justified">
-        <div class="card-body">
-            <h5 class="card-title"><i><span class=fave_id_{{ sound.id }}> {{ sound.sound_name }} </span></i></h5>
-            <div>
-            <p>
-                    <!-- ^^might have some type of colored strip indicating what type it is? -->
-                        <p class="card-text">
-                            <br>Medium: {{ sound.medium }} 
-                            <br>Era: {{ sound.genre }}
-                            <!-- <br><br>Description: {{ sound.description }} -->
-                            <!-- audio track -->
-                            <figure>
-                                <figcaption>Press Play</figcaption>
-                                <audio
-                                    controls
-                                    src="/static/audio/test-door-sound.mp3">
-                                        <a href="/static/audio/test-door-sound.mp3">
-                                            Download audio????
-                                        </a>
-                                </audio>
-                            </figure>
-                        </p>
-            </p>
-            <p>
-                {% if "patron_id" not in session %}
-                <!-- need this button info to be from route that passes in art object-->
-                <button id="addsoundfave" value="{sound.id}}" class="btn btn-outline-dark btn-block mb-4">Add to favorites </button>
-                
-                {% else %}
-                <button id="addsoundfave" value="{{sound.id}}" class="btn btn-outline-dark btn-block mb-4">Add to favorites </button>
-                <button id="removesoundfave" value="{{sound.id}}" class="btn btn-outline-dark btn-block mb-4">Remove as favorite </button>
-                {% endif %}
-            </p>
-            </div>
-        </div>
-        </div>
-        {% endfor %}<br><br>
+    
+    <div class="row">
+        <div class="col">
+            <br>
+            <div class="titlebox2" style="width:335px;"><h3>Sounds in Museum</h3></div>
+            <br>
         </div>
     </div>
-    <!-- end of sound in museum info -->
+
+     <!-- sound in museum detail info -->
+    <div class="row">
+        <div class="col">
+    {# passed in museum object from view function and using its sqlalchemy magic var #}
+    <div class="row">  
+    {% for sound in museum.related_sound %}
+    <div id="museumfavecard" class="card audio-card" style="width:35%;float:justified">
+    <div class="card-body">
+        <h4 class="card-title"><i><span class=fave_id_{{ sound.id }}> "{{ sound.sound_name | title }}" </span></i></h4>
+
+            <p class="card-text">
+                Medium: {{ sound.medium }}
+
+                {# AUDIO TRACK #}
+                <figure>
+                    <figcaption>Press Play</figcaption>
+                    <audio
+                        controls
+                        src="/static/audio/test-door-sound.mp3">
+                            <a href="/static/audio/test-door-sound.mp3">
+                            </a>
+                    </audio>
+                </figure>
+            </p>
+
+            <p>
+                {% if "patron_id" not in session %}
+                <button id="addsoundfave" value="{sound.id}}" class="btn btn-outline-primary btn-block mb-2
+                ">Add to favorites </button>
+                {% else %}
+                <button id="addsoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-2
+                ">Add to favorites </button>
+                <button id="removesoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-2
+                ">Remove as favorite </button>
+                {% endif %}
+                {# link to audio guide by id page for more details #}
+                <br><a href="/audio-guides/{{sound.id}}" class="btn btn-outline-secondary btn-block mb-1" role="button">Go to Audio</a>
+         
+            </p>
+  </div>
+    </div></div>
+    
+    {% endfor %}<br><br>
+        </div>
+</div>
 
 
 
 
-    {% endblock %}
 
-    {% block script %}
-    <script src="/static/js/museum_favorite.js"></script>  
-    <script src="/static/js/sound_favorite.js"></script> 
-    {% endblock %}
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block script %}
+<script src="/static/js/museum_favorite.js"></script>  
+<script src="/static/js/sound_favorite.js"></script> 
+{% endblock %}
 
 
        

@@ -5,13 +5,20 @@
 {% block content %}
 <div class="bg-image3">
     <div class="home-popup">
-                <!-- hidden audio track on autoplay-->
-                <button id="home-close">&times;</button>
-                <figure><h3 id="home-popup">No cookies. Just vibes. This is Erikka's Project Demo!</h3><p>
-Background: Sometimes we dont know what we're looking at when we go to a museum. Sometimes we can't make it to the museum where an exhibit is making an appearance at. This app lets you "slow-look" at different art pieces and collections and look with your ears through art-related audio. Enjoy!</p><audio controls autoplay hidden
-                        src="/static/audio/can-i-kick-it-atcq.mp3">
-                            <a href="/static/audio/can-i-kick-it-atcq.mp3"></a>
-                        </audio>
-                </figure>
-                </div></div>
+        
+        <button id="home-close">&times;</button>
+
+        <figure>
+            <h3 id="home-popup">No cookies. Just vibes. This is Erikka's Project Demo!</h3>
+            <p>Background: Sometimes we dont know what we're looking at when we go to a museum. Sometimes we can't make it to the museum where an exhibit is making an appearance at. This app lets you "slow-look" at different art pieces and collections and look with your ears through art-related audio. Enjoy!
+            </p>
+
+            <!-- hidden audio track on autoplay-->
+            <audio controls autoplay hidden src="/static/audio/can-i-kick-it-atcq.mp3">
+                <a href="/static/audio/can-i-kick-it-atcq.mp3"></a>
+            </audio>
+        </figure>
+
+    </div>
+</div>
 {% endblock %}

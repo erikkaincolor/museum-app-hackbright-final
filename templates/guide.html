@@ -10,20 +10,14 @@
                 {% if sounds %}
                 {% for sound in sounds %}
                 <div class="list-group">
-                <a href="/audio-guides/{{sound.id}}" class="list-group-item list-group-item-action ">
-                    Audio Guide {{ loop.index }}: {{ sound.sound_name }}
-                </a>
-                <br>
+                <a href="/audio-guides/{{sound.id}}" class="list-group-item list-group-item-action px-3 border ripple">
+                    Audio Guide {{ loop.index }}: {{ sound.sound_name | title  }}
+                </a><br>
+                </div>
                 {% endfor %}
                 {% endif %}
             </p>
         </div>
-
-
-        </div>
-   
-
-   
-
-   </div>
+    </div>
+</div>
 {% endblock %}
