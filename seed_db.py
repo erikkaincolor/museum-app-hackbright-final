@@ -42,7 +42,6 @@ collections=[c1, c2, c3, c4]
 model.db.session.add_all(collections)
 model.db.session.commit()  
 
-
 ############################################################################################################
 #                                                                                                          #
 #   ART OBJECTS                                                                                            #

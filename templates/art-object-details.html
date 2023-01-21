@@ -13,23 +13,35 @@
 
 <div class="row">
     <div class="col">
+        {# art image #}
+            <img src="{{ art.img_path}}" alt="Art by {{ art.artist }}" class="center"><br>
+                <br>
+          
         <h1>{{ art.title | title }}</h1>
-        <p><br>Medium: {{ art.medium }}<br><br>Description: {{ art.description }} <br>Genre: {{ art.artist }}
+        <p>Medium: {{ art.medium }}<br><br>Description: {{ art.description }} <br>Genre: {{ art.artist }}
         <br>Artist: {{ art.artist }} 
                             <br>Medium: {{ art.medium | title  }} 
                             <br>Era: {{ art.era | title  }}</p>
-                        
+                     
         <p>
-            {% if "patron_id" not in session %}
-            <button id="addartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
+              {% if "patron_id" not in session %}
+                <button id="addartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
             {% else %}
             <button id="addartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
             <button id="removeartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-4">Remove as favorite </button>
             {% endif %}
             
-            {# art image #}
-            <img src="{{ art.img_path}}" alt="Card image cap" id="art-img"><br>
-        </p>
+              </p>
+    </div>
+</div>
+
+
+{# "peep more" art#}
+<div class="row">
+    <div class="col">
+        {# art image #}
+        <h1>Peep More Art</h1>
+        <div></div>
     </div>
 </div>
 {% endblock %}
@@ -40,5 +52,4 @@
 
 
 {% block script %}
-<script src="/static/js/art_object_favorite.js"></script>  
-{% endblock %}
+<script src="/static/js/artobject_favorite.js"></script>  {% endblock %}

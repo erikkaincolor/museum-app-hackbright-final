@@ -125,11 +125,7 @@ a {
     box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42);    
 }
 
-.art-card a{
-    font-family: 'Kanit', sans-serif;
-    font-weight:bold;
-    font-style: normal;
-}
+
 
 .art-card div a{
     padding-left:17px;
@@ -137,7 +133,7 @@ a {
 
 
 
-/* modidified BS css */
+/* modified BS css */
 .col, .col-med-4, .col-sm-4{padding-left: var(--bs-gutter-x,.75rem);}
 
 .stretched-link {color:#252525;}
@@ -191,7 +187,13 @@ a {
 }
 
 
-
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    float:justified;
+  }
 
 
 

@@ -8,13 +8,13 @@
 
 
 
-
+<!-- if time, add circular bordered picture via API-->
 
 
 
 
     <div class="row" id="white-text">
-        <div class="col col-med-6"><br><br>
+        <div class="col col-med-6 pb-5"><br><br>
             <h2><em>What's happening</em><br>{{ patron.uname }}?</h2><br>
             <h2>Patron info:</h2>
             <p>
@@ -23,7 +23,7 @@
                 Last name: {{ patron.lname | title  }}<br>
                 Email: {{ patron.email }}<br>
                 Password: **** **** ****<br>
-            </p><br><br><bR><br><br><br>
+            </p>
         </div>
     </div>
 
@@ -46,7 +46,7 @@
 
 
     <div class="row">
-        <div class="col">
+        <div class="col pt-2">
             <div class="titlebox" style="width:271px;">
                 <h3 id="white-text"> Museum Faves</h3></div><br>
         </div>
@@ -111,13 +111,13 @@
                     <div class="card-body h-100">
                         <div>
                             <p>
-                                <img class="card-img-top mx-5" src="/static/img/specific-pages/coll-fave-card.png" alt="generic museum graphic" style="width:60%;"><br><br>
-                                "<span class=fave_id_{{ collectionfave.id }}> {{ collectionfave.name | title  }}</span>"
+                                <img class="card-img-top mx-5" src="/static/img/specific-pages/coll-fave-card.png" alt="generic museum graphic" style="width:50%;"><br>
+                                <span class=fave_id_{{ collectionfave.id }}>"{{ collectionfave.name | title  }}</span>"
                             {% if session["username"] == patron.uname %}
                             <p class="card-text">
-                                <br>Era: {{ collectionfave.era | title  }}
+                                Era: {{ collectionfave.era | title  }}
                             </p>
-                            <a href="/collections/{{collectionfave.id}}"><button class="btn btn-outline-secondary btn-block mb-1">View Collection</button></a>
+                            <a href="/collections/{{collectionfave.id}}"><button class="btn btn-outline-secondary btn-block">View Collection</button></a>
                             {% endif %}
                             </p>
                         </div>
@@ -168,8 +168,7 @@
                                 
                                 {% if session["username"] == patron.uname %}
                                 Artist: {{ artfave.artist}}<br><br> 
-                                Medium: {{ artfave.medium | title  }}<br><br> 
-                                <a href="/art/{{artfave .id}}"><button class="btn btn-outline-secondary btn-block mb-2">Look Closer</button></a>
+                                Medium: {{ artfave.medium | title  }}<br><br><a href="/art/{{artfave .id}}"><button class="btn btn-outline-secondary btn-block mb-1">Look Closer</button></a>
                                 {% endif %}
                         </p>
                     </div>
@@ -213,7 +212,7 @@
                             Name:<span class=fave_id_{{ soundfave.id }}> {{ soundfave.sound_name | title }} </span><br><br>
                             {% if session["username"] == patron.uname %}
                             <img class="card-img-top" src="/static/img/audio-icon.png" alt="audio icon" style="width:80px;">  Medium: {{ soundfave.medium | title  }}<br><br> 
-                            <a href="/audio-guides/{{soundfave .id}}"><button class="btn btn-outline-secondary btn-block mb-2">Listen</button></a>
+                            <a href="/audio-guides/{{soundfave .id}}"><button class="btn btn-outline-secondary btn-block mb-1">Listen</button></a>
                             {% endif %}
                         </p>
                     </div>

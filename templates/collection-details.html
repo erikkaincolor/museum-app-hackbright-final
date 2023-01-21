@@ -43,11 +43,11 @@
             </p>
             <p>
                 {%if "patron_id" not in session %}
-                <button id="addfave" value="{{collection.id}}" class="btn btn-outline-primary btn-block mb-1">Add to favorites </button>
+                <button id="addfave" value="{{collection.id}}" class="btn btn-outline-dark btn-block mb-1">Add to favorites </button>
                 
                 {% else %}
-                <button id="addfave" value="{{collection.id}}" class="btn btn-outline-primary btn-block mb-1">Add to favorites </button>
-                <button id="removefave" value="{{collection.id}}" class="btn btn-outline-primary btn-block mb-1">Remove as favorite </button>
+                <button id="addfave" value="{{collection.id}}" class="btn btn-outline-dark btn-block mb-1">Add to favorites </button>
+                <button id="removefave" value="{{collection.id}}" class="btn btn-outline-dark btn-block mb-1">Remove as favorite </button>
                 {% endif %}
             </p>
         </div>
@@ -90,13 +90,14 @@
                         <p>
                             {% if "patron_id" not in session %}
                             {# need this button info to be from route that passes in art object #}
-                            <button id="addartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
+                                <button id="addartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
                             {% else %}
-                            <button id="addartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-1">Add to favorites </button>
-                            <button id="removeartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-2">Remove as favorite </button>
+                                <button id="addartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-1">Add to favorites </button>
+                                
+                                <button id="removeartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-2">Remove as favorite </button>
                             {% endif %}
 <br>
-                            <a href="/art/{{artincollection.id}}" class="btn btn-outline-secondary btn-block" role="button">See Up Close</a>
+                            <a href="/art/{{artincollection.id}}" class="btn btn-outline-secondary btn-block mt-1" role="button">See Up Close</a>
                         </p>
                     
                 </div>
@@ -143,23 +144,25 @@
         <div id="collectionfavecard" class="card museum-card" style="width:18em;float:justified">
             <div class="card-body h-100">
                 <h4 class="card-title"><i><span class=fave_id_{{ sound.id }}>"{{ sound.sound_name | title  }}"</span></i></h4>
-                <img class="card-img-top" src="/static/img/audio-icon.png" alt="audio icon" style="width:80px;">
-                <p class="card-text">
-                    Medium: {{ sound.medium | title  }}<br>Era: {{ sound.genre | title  }}
-                </p>
                 
-                <p>
-                    {% if "patron_id" not in session %}
-                    <!-- need this button info to be from route that passes in sound object-->
-                    <button id="addsoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
-                    {% else %}
-                    <button id="addsoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
-                    <button id="removesoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-1">Remove as favorite </button>
-                    {% endif %}
+                <img class="card-img-top" src="/static/img/audio-icon.png" alt="audio icon" style="width:80px;">
+                    <p class="card-text">
+                        Medium: {{ sound.medium | title  }}<br>Era: {{ sound.genre | title  }}
+                    </p>
+                
+                    <p>
+                        {% if "patron_id" not in session %}
+                        <!-- need this button info to be from route that passes in sound object-->
+                            <button id="addsoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
+                        {% else %}
+                            <button id="addsoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-1">Add to favorites </button>
+                        
+                            <button id="removesoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-2">Remove as favorite </button>
+                        {% endif %}
 
-                    {# link to audio guide by id page for more details #}
-                    <a href="/audio-guides/{{sound.id}}" class="btn btn-outline-secondary btn-block mb-1" role="button">Go to Audio</a>
-                </p>
+                        {# link to audio guide by id page for more details #}
+                            <a href="/audio-guides/{{sound.id}}" class="btn btn-outline-secondary btn-block mt-1" role="button">Go to Audio</a>
+                    </p>
             </div>
         </div>
         {% endfor %}<br><br>

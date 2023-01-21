@@ -77,8 +77,7 @@
 
             <p>
                 {% if "patron_id" not in session %}
-                <button id="addsoundfave" value="{sound.id}}" class="btn btn-outline-primary btn-block mb-2
-                ">Add to favorites </button>
+                <button id="addsoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
                 {% else %}
                 <button id="addsoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-2
                 ">Add to favorites </button>
