@@ -13,26 +13,45 @@
 </head>
 
 
-<div class="row">
-    <div class="col">
-        <h1>{{ museum.name }}</h1>
-        <p>Located: {{ museum.street }}
-            {{ museum.city }}, {{ museum.state }}, {{ museum.zipcode }}</p>
-        <p>
-            <a href="{{museum.weburl}}" class="btn btn-outline-secondary btn-block mb-2" role="button">Website</a>                                            
-        </p>
-        <p>
-            {% if "patron_id" not in session %}
-            <button id="addmusefave" value="{{museum.id}}" class="btn btn-outline-dark btn-block mb-2">Add to favorites </button>
+<div class="row" style="padding-left:15px;">
+        <h1 style="width:75%;">{{ museum.name }}</h1>
+        {# art image #}
+        <img src="/static/img/specific-pages/museum-card.jpg" style="width:480px;" alt="generic museum graphic"><br>
+   
+    <div class="col mt-1">
+        <div class="row">
+            <div class="col">
+                <div class="titlebox2" style="width:255px;"><h3>Related Audio</h3></div>
+                <br>
+            </div>
+        </div>
+        {% for sound in museum.related_sound %}
+    <div id="museumfavecard" class="card audio-card" style="width:50%;float:justified">
+    <div class="card-body">
+        <h4 class="card-title mt-1"><i><span class=fave_id_{{ sound.id }}>"{{ sound.sound_name | title }}" </span></i></h4>
 
-            {% else %}
-            <button id="addmusefave" value="{{museum.id}}" class="btn btn-outline-dark btn-block mb-2">Add to favorites </button>
-            <button id="removemusefave" value="{{museum.id}}" class="btn btn-outline-dark btn-block mb-2
-            ">Remove as favorite </button>
-            {% endif %}
-        </p>
+            <p class="card-text">
+                Medium: {{ sound.medium }}
+
+                {# AUDIO TRACK #}
+                    <audio
+                        controls
+                        src="/static/audio/test-door-sound.mp3">
+                            <a href="/static/audio/test-door-sound.mp3">
+                            </a>
+                    </audio>
+           
+                {# link to audio guide by id page for more details #}
+                <br><a href="/audio-guides/{{sound.id}}" class="btn btn-outline-secondary btn-block" role="button">Details</a>
+         
+            </p>
+  </div>
+    </div></div>
+    
+    {% endfor %}
+       
  </div>
-</div>
+
 
 
 
@@ -42,58 +61,33 @@
 
     <!-- start of sound in museum obj -->
     
-    <div class="row">
-        <div class="col">
-            <br>
-            <div class="titlebox2" style="width:335px;"><h3>Sounds in Museum</h3></div>
-            <br>
-        </div>
-    </div>
+    
 
      <!-- sound in museum detail info -->
     <div class="row">
         <div class="col">
     {# passed in museum object from view function and using its sqlalchemy magic var #}
     <div class="row">  
-    {% for sound in museum.related_sound %}
-    <div id="museumfavecard" class="card audio-card" style="width:35%;float:justified">
-    <div class="card-body">
-        <h4 class="card-title"><i><span class=fave_id_{{ sound.id }}> "{{ sound.sound_name | title }}" </span></i></h4>
+        <p><br>Located: {{ museum.street }}
+            {{ museum.city }}, {{ museum.state }}, {{ museum.zipcode }}</p>
+        <p>
+            <a href="{{museum.weburl}}" class="btn btn-outline-secondary btn-block mb-2" role="button">Website</a>                                            
+      
+            {% if "patron_id" not in session %}
+            <button id="addmusefave" value="{{museum.id}}" class="btn btn-outline-dark btn-block mb-2">Add to favorites </button>
 
-            <p class="card-text">
-                Medium: {{ sound.medium }}
-
-                {# AUDIO TRACK #}
-                <figure>
-                    <figcaption>Press Play</figcaption>
-                    <audio
-                        controls
-                        src="/static/audio/test-door-sound.mp3">
-                            <a href="/static/audio/test-door-sound.mp3">
-                            </a>
-                    </audio>
-                </figure>
-            </p>
-
-            <p>
-                {% if "patron_id" not in session %}
-                <button id="addsoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
-                {% else %}
-                <button id="addsoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-2
-                ">Add to favorites </button>
-                <button id="removesoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-2
-                ">Remove as favorite </button>
-                {% endif %}
-                {# link to audio guide by id page for more details #}
-                <br><a href="/audio-guides/{{sound.id}}" class="btn btn-outline-secondary btn-block mb-1" role="button">Go to Audio</a>
-         
-            </p>
-  </div>
-    </div></div>
-    
-    {% endfor %}<br><br>
+            {% else %}
+            <button id="addmusefave" value="{{museum.id}}" class="btn btn-outline-dark btn-block mb-2 mx-2">Add to favorites </button>
+            <button id="removemusefave" value="{{museum.id}}" class="btn btn-outline-dark btn-block mb-2
+            ">Remove as favorite </button>
+            {% endif %}
+        </p>
+    <br>
         </div>
-</div>
+</div></div>
+
+
+
 
 
 

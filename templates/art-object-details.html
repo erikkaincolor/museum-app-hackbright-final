@@ -12,23 +12,46 @@
 </head>
 
 <div class="row">
+    <div class="col mx-5">
+        
+        {# allows for the upload o fimages, pdf's and audio as art-objects #}
+
+        {% if '.pdf' in art.img_path %} 
+        <iframe src="{{art.img_path}}#toolbar=0" width="100%" height="650px">
+        </iframe>
+        {% elif '.mp3' in art.img_path %}
+    
+        <audio controls
+                    src="{{ art.img_path}}">
+                    <a href="{{ art.img_path}}"></a>
+                </audio>
+    
+        {% elif '.png' in art.img_path %}
+        <img src=“{{art.img_path}}” alt="Art by {{ art.artist }}" class="center">
+        {% elif '.jpeg' in art.img_path %}
+        <img src=“{{art.img_path}}” alt="Art by {{ art.artist }}" class="center">
+        {% else %}
+            <img src=“{{art.img_path}}” alt="Art by {{ art.artist }}" class="center">
+            {% endif %}
+
+    </div>
+       
+<div class="row mx-5"> 
     <div class="col">
-        {# art image #}
-            <img src="{{ art.img_path}}" alt="Art by {{ art.artist }}" class="center"><br>
-                <br>
-          
-        <h1>{{ art.title | title }}</h1>
-        <p>Medium: {{ art.medium }}<br><br>Description: {{ art.description }} <br>Genre: {{ art.artist }}
-        <br>Artist: {{ art.artist }} 
-                            <br>Medium: {{ art.medium | title  }} 
-                            <br>Era: {{ art.era | title  }}</p>
-                     
+        <div class="row">
+        <h1>{{ art.title | title }}</h1></div>
+        <strong>Description:</strong><p style="width: 95%">{{ art.description }}</p></div>
+    <div class="col pt-5">
+        <p>
+           <strong>Artist:</strong> {{ art.artist }} 
+                            <br><br><strong>Medium:</strong> {{ art.medium | title  }} 
+                            <br><br><strong>Era:</strong> {{ art.era | title  }}</p>     
         <p>
               {% if "patron_id" not in session %}
-                <button id="addartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
+                <button id="addartfave" value="{{art.id}}" class="btn btn-outline-dark btn-block mb-4">Add to favorites </button>
             {% else %}
-            <button id="addartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
-            <button id="removeartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-4">Remove as favorite </button>
+            <button id="addartfave" value="{{art.id}}" class="btn btn-outline-dark btn-block mb-4">Add to favorites </button>
+            <button id="removeartfave" value="{{art.id}}" class="btn btn-outline-dark btn-block mb-4">Remove as favorite </button>
             {% endif %}
             
               </p>
@@ -36,14 +59,9 @@
 </div>
 
 
-{# "peep more" art#}
-<div class="row">
-    <div class="col">
-        {# art image #}
-        <h1>Peep More Art</h1>
-        <div></div>
-    </div>
 </div>
+
+
 {% endblock %}
 
 

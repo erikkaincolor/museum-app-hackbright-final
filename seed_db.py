@@ -34,7 +34,7 @@ model.db.create_all()
 ############################################################################################################
 
 #create empty collections, these are created by hand 
-c1 = crud.create_collection("women","Awesome Black Radical Women, 1965–85","Women of color found themselves collaborating with and occasionally opposing the predominantly white, middle-class women who were primarily in charge of setting the tone, goals, and strategies for the battle for gender parity in the US during the second wave of feminism in the 1970s.","E. Polk", "Spiral, Black Arts Movement")
+c1 = crud.create_collection("mixed","From (?) Philly w/ Love, 2021-22","A Texas native and now a Philly transplant, Tafari has constantly enamored audiences, college campuses, libraries and local communities with his colorful stream of consciousness and ability to create new worlds and frameworks in Black spaces and time warps. There’s audio, there’s culturally investigative zines, there’s even a Hotep Registration Form for self identification and literacy testing. Tafari Diop Robertson is our head curator's close friend and digitally loaned these pieces for your viewing. ","E. Polk", "Contemporary")
 c2 = crud.create_collection("photography","Darkroom: Black and White Photos See the Light of Day","Photos of Black people from all over the diaspora, up close and in black and white.","E. Polk", "Contemporary")
 c3 = crud.create_collection("mixed media","Contemporaries in Color","This collection displays African-Americna Art in the form of paint, mixed media and depicts people in natural state.","E. Polk", "THE BLACK ARTS MOVEMENT")
 c4 = crud.create_collection("screenprint","Dip, Roll, and Print: Cleveland Bellow, American, 1946-2009","Cleveland Bellow portrayed Black musicians and activists in his graphic prints, as well as regular people like the young child in Untitled who is holding his hands behind his head. This piece subsequently became a billboard in Oakland, California as part of the national trend of public Black art.", "E. Polk", "Black Arts Movement")
@@ -53,9 +53,9 @@ model.db.session.commit()
 #update images so copyrighted ones arent used! about 4/12 of em
 #collection is hardcoded via FK at end
 
-a1=crud.create_art_object("Barbara Jones-Hogu", "Nation Time", "print", "Barbara Jones-Hogu (American, 1938-2017). Nation Time, ca. 1970. Color screenprint, sheet: 22 1/2 x 30 in. (57.2 x 76.2 cm). Brooklyn Museum, Gift of R.M. Atwater, Anna Wolfrom Dove, Alice Fiebiger, Joseph Fiebiger, Belle Campbell Harriss, and Emma L. Hyde, by exchange, Designated Purchase Fund, Mary Smith Dorward Fund, Dick S. Ramsay Fund, and Carll H. de Silver Fund, 2012.80.25. artist or artist's estate (Photo: Brooklyn Museum, 2012.80.25_PS4.jpg) ","Black Arts Movement", "/static/img/c1-Nation-Time-Barbara-Jones-Hogu.jpg", 1) #add c3, c2
-a2=crud.create_art_object("Dindga McCannon", "Empress Akweke", "paint", " Dindga McCannon (American, born 1947). Empress Akweke, 1975. Acrylic on canvas, 35 7/8 × 31 15/16 × 13/16 in. (91.1 × 81.1 × 2.1 cm). Brooklyn Museum, Gift of R.M. Atwater, Anna Wolfrom Dove, Alice Fiebiger, Joseph Fiebiger, Belle Campbell Harriss, and Emma L. Hyde, by exchange, Designated Purchase Fund, Mary Smith Dorward Fund, Dick S. Ramsay Fund, and Carll H. de Silver Fund, 2012.80.31. artist or artist's estate (Photo: Brooklyn Museum, 2012.80.31_PS9.jpg) ","Black Arts Movement", "/static/img/c1-Nation-Time-Barbara-Jones-Hogu.jpg",1) #add c3, c2
-a3=crud.create_art_object("Betye Saar", "Liberation of Aunt Jemima: Cocktail", "glass, paper, textile, metal", "Betye Saar (American, born 1926). Liberation of Aunt Jemima: Cocktail, 1973. Glass, paper, textile, metal, Overall: 12 1/2 × 5 3/4 in. (31.8 × 14.6 cm). Brooklyn Museum, Purchased with funds given by Elizabeth A. Sackler, gift of the Contemporary Art Committee, and William K. Jacobs, Jr. Fund, 2017.17. © artist or artist's estate (Photo: , 2017.17_front_PS11.jpg) ","Black Arts Movement", "/static/img/c1-Nation-Time-Barbara-Jones-Hogu.jpg",1) #add c3, c2
+a1=crud.create_art_object("Tafari Robertson", "The Fresh Prince of The Black 90s (2022)", "Zine", "An illustrated cultural investigation of popular sitcom, The Fresh Prince of Bel-Air, and its effects on the collective black experience in the throes of capitalism and upward mobility. American, (b.1996)","Contemporary", "/static/img/the-collection/c2/t_1.pdf", 1) #add c3, c2
+a2=crud.create_art_object("Tafari Robertson", "Book Space Archive: Community Book Center, New Orleans, Louisiana (2022)", "Audio Collage, 13.59", "An audio collage created from a conversation inside the Community Book Center in New Orleans. This piece is part of a series documenting the unique experience and ambience held within Black literary space by the people who create and keep them going., American, (b.1996)","Contemporary", "/static/img/the-collection/c2/t_2.mp3",1) #add c3, c2
+a3=crud.create_art_object("Tafari Robertson", "Hotep Registration Form + Literacy Test (2022)", "Administrative Forms", "A project for the self identification and collection of information on the Hotep Community across the U.S speculating the purpose and presentation of forms and their implications on information. These forms are created from imagining the minute details of a new world stemming from care and black experience first, exercising the potential mundanities of drafting, designing, and implementing the need for understanding our own communities. American, (b.1996)","Contemporary", "/static/img/the-collection/c2/t_3.pdf",1) #add c3, c2
 
 a4=crud.create_art_object("Tony Gleaton", "Black Girl, White Flower, Belize, Central America", "photograph", " Tony Gleaton (American, 1948-2015). Black Girl, White Flower, Belize, Central America, 1992. Gelatin silver photograph, image: 15 3/4 x 14 3/4 in. (40 x 37.5 cm). Brooklyn Museum, Gift of Helen Griffith in memory of Seymour Griffith, 1997.134. © artist or artist's estate (Photo: Brooklyn Museum, 1997.134_transp5713.jpg) ","Contemporary Art Movement", "/static/img/c2-Glenn-Ligon-Crowd.jpg", 2) #add c3, c2
 a5=crud.create_art_object("Tony Gleaton", "Un Hija de Jesus, Guatemala, Latin America, (Daughter of Jesus)", "photograph", " Tony Gleaton (American, 1948-2015). Un Hija de Jesus, Guatemala, Latin America, (Daughter of Jesus), 1992. Gelatin silver photograph, image: 15 3/4 x 14 3/4 in. (40.0 x 37.5 cm). Brooklyn Museum, Purchased with funds given by Karen B. Cohen and Jan Staller, 1997.50. artist or artist's estate (Photo: Brooklyn Museum, 1997.50_bw.jpg)", "Contemporary Art Movement","/static/img/c2-Glenn-Ligon-Crowd.jpg", 2) #add c3, c2
@@ -127,14 +127,20 @@ model.db.session.commit()
 
 #no need to seed too many...server will request form data patrons during restrigationa nd login on client side and theyll be saved to the db
 p1=crud.create_patron("erikkaincolor", "Erikka", "Polk", "erikkaincolor@gmail.com", "1234")
-p2=crud.create_patron("artistsmus3", "Glenn", "Ligon", "glennlig0n@gmail.com", "4321")
-p3=crud.create_patron("solangel", "Solange", "Knowles", "solange@gmail.com", "abcd")
+p2=crud.create_patron("artistsmus3", "Solange", "Knowles", "solangel@blackplanet.com", "1234")
 
-patrons=[p1, p2, p3]
+patrons=[p1, p2]
 model.db.session.add_all(patrons)
 model.db.session.commit()  
 
-
+# #hardcode test user faves for patron profile viewing
+# model.p2.collection_fave.append(c2) 
+# model.p2.collection_fave.append(c3) 
+# model.p2.art_fave.append(a2)
+# model.p2.related_sound_fave.append(sound1) 
+# model.p2.museum_fave.append(67)
+# model.p2.museum_fave.append(66)
+# model.p2.museum_fave.append(65)
 
 #at the end for order purposes
 # add multiple rs onto 1 collection via magic var

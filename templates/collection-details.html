@@ -36,8 +36,9 @@
     <div class="row">
         <div class="col">
             <h1>{{ collection.name | title  }}</h1>
-            <p>
+            <p style="width:60%;float:justified">
                 {{ collection.description }} <br><br> Tags: <strong>{{ collection.coll_category | title  }}</strong></p>
+
                 <p class="card-text">Curator: <strong>{{ collection.curator | title }}</strong></p>
                 <p class="card-text">Era: <strong>{{ collection.era | title  }}</strong></p>
             </p>
@@ -80,26 +81,62 @@
         {% for artincollection in collection.art_object %}
             <div id="collectionfavecard" class="card art-card" style="width:21rem;float:justified">
                 <div class="card-body">
-                    
-                        <img class="card-img-top" src="{{ artincollection.img_path}}" alt="Card image cap" style="width:100%;float:justified"><br>
                         
+
+
+
+
+
+                        {% if '.pdf' in artincollection.img_path %} 
+                        <iframe class="card-img-top" src="{{artincollection.img_path}}#toolbar=0" style="width:100%;float:justified">
+                        </iframe>
                         <p class="card-text">
                             <br>Artist: {{ artincollection.artist }} 
                         </p>
                         
                         <p>
-                            {% if "patron_id" not in session %}
-                            {# need this button info to be from route that passes in art object #}
-                                <button id="addartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
-                            {% else %}
-                                <button id="addartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-1">Add to favorites </button>
-                                
-                                <button id="removeartfave" value="{{art.id}}" class="btn btn-outline-primary btn-block mb-2">Remove as favorite </button>
-                            {% endif %}
-<br>
+                            <a href="/art/{{artincollection.id}}" class="btn btn-outline-secondary btn-block mt-1" role="button">Flip Through</a>
+                        </p>
+
+
+                        {% elif '.mp3' in artincollection.img_path %}
+                        <img class="card-img-top" src="/static/img/audio-icon.png" alt="audio icon" style="width:40%;">
+                        <p class="card-text">
+                            <br>Artist: {{ artincollection.artist }} 
+                        </p>
+                        <a href="{{artincollection.img_path}}" class="btn btn-outline-secondary btn-block" role="button"> Listen Fully</a>
+                       
+                        
+                    
+                        {% elif '.png' in artincollection.img_path %}
+                        <img class="card-img-top" src=“{{artincollection.img_path}}” alt="Art by {{ artincollection.artist }}" style="width:100%;float:justified">
+                        <p class="card-text">
+                            <br>Artist: {{ artincollection.artist }} 
+                        </p>
+                        <p>
+                            <br><a href="/art/{{artincollection.id}}" class="btn btn-outline-secondary btn-block mt-1" role="button">See Up Close</a>
+                        </p>
+                        
+                        {% elif '.jpeg' in artincollection.img_path %}
+                        <img class="card-img-top" src=“{{artincollection.img_path}}” alt="Art by {{ artincollection.artist }}" style="width:100%;float:justified">
+                        <p class="card-text">
+                            <br>Artist: {{ artincollection.artist }} 
+                        </p>
+                        
+                        <p>
                             <a href="/art/{{artincollection.id}}" class="btn btn-outline-secondary btn-block mt-1" role="button">See Up Close</a>
                         </p>
-                    
+                        
+                        {% else %}
+                        <img class="card-img-top" src="{{ artincollection.img_path}}" alt="Card image cap" style="width:100%;float:justified"><br>
+                        <p class="card-text">
+                            <br>Artist: {{ artincollection.artist }} 
+                        </p>
+                        
+                        <p>
+                            <a href="/art/{{artincollection.id}}" class="btn btn-outline-secondary btn-block mt-1" role="button">See Up Close</a>
+                        </p>
+                        {%endif%}
                 </div>
             </div>
             {% endfor %}
@@ -151,15 +188,6 @@
                     </p>
                 
                     <p>
-                        {% if "patron_id" not in session %}
-                        <!-- need this button info to be from route that passes in sound object-->
-                            <button id="addsoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-4">Add to favorites </button>
-                        {% else %}
-                            <button id="addsoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-1">Add to favorites </button>
-                        
-                            <button id="removesoundfave" value="{{sound.id}}" class="btn btn-outline-primary btn-block mb-2">Remove as favorite </button>
-                        {% endif %}
-
                         {# link to audio guide by id page for more details #}
                             <a href="/audio-guides/{{sound.id}}" class="btn btn-outline-secondary btn-block mt-1" role="button">Go to Audio</a>
                     </p>
