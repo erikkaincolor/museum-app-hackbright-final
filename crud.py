@@ -44,7 +44,7 @@ def get_m_fave_by_pid(p_id):
     """get patrons museum fave id to show up on patrons profile"""
     return MuseumFave.query.get(patron_id_lookup(p_id)) 
 
-#wip; CHAINING
+## works; CHAINING
 def get_m_fave_delete(patron_id, museum_id):
     """get collectionfave by patron id and collection id via CHAINING"""
     return MuseumFave.query.filter(MuseumFave.patron_id==patron_id).filter(MuseumFave.museum_id==museum_id).first()
@@ -190,21 +190,10 @@ def get_art_by_coll_id(collection_id): #collection_id is passed in via route
 
 ############################################################################################################
 
-# #wip-hardcoded fk's <----these are audio guides
+#works-hardcoded fk's <----these are audio guides
 def get_sound_by_museum_id(museum_id):
     """as a patron i want to view more info about a indiviual Collection's 4-5 related sounds"""
     return RelatedSound.query.filter(RelatedSound.museum_id==museum_id).first()
-
-# #should be replaced by CollectionSound table
-# def get_sound_by_coll_id(museum_id):
-#     """as a patron i want to view more info about a indiviual Collection's 4-5 related sounds"""
-#     return CollectionSound.get()
-
-#this should get sounds for musem?
-#check for other magic vars in crud
-#Museum.query.filter(Museum.related_sound==sound_id).first()
-
-#have yet to query or .get the CollectionSound table fpr get_coll_sound(collection_id, related_sound_id)
 
 
 
@@ -275,9 +264,9 @@ def create_art_object(artist, title, medium, description, era, img_path, collect
 #w/o api-pre-loading
 #artobj via collectionid <----hardcode server
 
+#2.0:
 #brooklyn_api:show images on front-end 
-
-#w/ api-NOT DOING THIS 
+#w/ api-
 # api would get new info thats not in dd, capture that data through 
 # hidden form{in hidden form, allow patron to select}, send to db, create new row in art 
 # object table....that would save coll id in there as an FK, and it would 

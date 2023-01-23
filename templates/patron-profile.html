@@ -168,7 +168,7 @@
                         </iframe>
 
                         {% elif '.mp3' in artfave.img_path %}
-                        <img class="card-img-top" src="/static/img/audio-icon.png" alt="audio icon" style="width:40%;">
+                        <img class="card-img-top" src="/static/img/specific-pages/audio-icon.png" alt="audio icon" style="width:40%;">
                        
                         <a href="{{artfave.img_path}}" class="btn btn-outline-secondary btn-block" role="button">Listen Again</a>
                        
@@ -228,7 +228,7 @@
                         <p class="card-text" id="white-text" style="margin-left: 25%;">             
                             "<span class="fave_id_{{ soundfave.id }}">{{ soundfave.sound_name | title }}</span>"<br><br>
                             {% if session["username"] == patron.uname %}
-                            <img class="card-img-top" src="/static/img/audio-icon.png" alt="audio icon" style="width:80px;"><br><br> 
+                            <img class="card-img-top" src="/static/img/specific-pages/audio-icon.png" alt="audio icon" style="width:80px;"><br><br> 
                             <a href="/audio-guides/{{soundfave .id}}"><button class="btn btn-outline-secondary btn-block mb-1">Listen</button></a>
                             {% endif %}
                         </p>

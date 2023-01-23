@@ -100,7 +100,7 @@
 
 
                         {% elif '.mp3' in artincollection.img_path %}
-                        <img class="card-img-top" src="/static/img/audio-icon.png" alt="audio icon" style="width:40%;">
+                        <img class="card-img-top" src="/static/img/specific-pages/audio-icon.png" alt="audio icon" style="width:40%;">
                         <p class="card-text">
                             <br>Artist: {{ artincollection.artist }} 
                         </p>
@@ -182,7 +182,7 @@
             <div class="card-body h-100">
                 <h4 class="card-title"><i><span class=fave_id_{{ sound.id }}>"{{ sound.sound_name | title  }}"</span></i></h4>
                 
-                <img class="card-img-top" src="/static/img/audio-icon.png" alt="audio icon" style="width:80px;">
+                <img class="card-img-top" src="/static/img/specific-pages/audio-icon.png" alt="audio icon" style="width:80px;">
                     <p class="card-text">
                         Medium: {{ sound.medium | title  }}<br>Era: {{ sound.genre | title  }}
                     </p>

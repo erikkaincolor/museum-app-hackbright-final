@@ -53,9 +53,6 @@ def index():
     """Displays content of the week and maybe embedded news or the like app page directory"""
     return render_template('index.html')
 
-#get navbar dropdown link working asap
-
-
 
 
 
@@ -93,10 +90,7 @@ def login_prompt():
         return redirect("/profile")
 
     else:
-        # flash("Wrong username or password, try again or create an account.")
-        #figure out how ot do in js w/o returning json? if possible
         return redirect('/login')
-        #might have to connect alert to button in form
 
 #works
 @app.route('/logout')
@@ -272,7 +266,7 @@ def del_m_fave(museum_id):
 
 #######################################################
 
-#works and instructor approved
+#works
 @app.route("/collections/<int:collection_id>/collectionfavorites", methods = ["POST"]) 
 def add_c_fave(collection_id):
     """create collection fave on collection deets page, posts button event 'answer' to db"""
@@ -287,7 +281,7 @@ def add_c_fave(collection_id):
         db.session.commit()
     return response
 
-#works and instructor approved
+#works
 @app.route("/collections/<int:collection_id>/removecollectionfavorites", methods = ["POST"]) 
 def del_c_fave(collection_id):
     """delete collection fave on collection deets page, posts button event 'answer' to db"""
@@ -423,15 +417,17 @@ def view_collections():
     collections = crud.get_collections()
     return render_template('collections.html', collections =collections)
 
-# works! 
+# works
 @app.route('/collections/<id>')
 def lone_collection(id): #it being the url also passes it to the function
     """Collection Details page"""
     collection= crud.get_collection_id(id)
-    art=crud.get_art_by_coll_id(id) #may not even need bc theres a magic var for it
+    # art=crud.get_art_by_coll_id(id) 
     #sounds coming in via magic var
-    return render_template('collection-details.html', collection=collection, art=art)
+    # return render_template('collection-details.html', collection=collection, art=art)
+    return render_template('collection-details.html', collection=collection)
 
+# works
 #Individual Art Objects Page: 
 @app.route('/art/<int:id>') #/art_obj1
 def lone_art(id):
@@ -457,12 +453,14 @@ def lone_art(id):
 #                                   /audio-guide/1                                                         #
 ############################################################################################################
 
+# works
 @app.route('/audio-guides')
 def view_audio_guides():
     """MOBILE IN PERSON XP: view audio guides list"""
     sounds = crud.get_sounds()
     return render_template('guide.html', sounds=sounds)
 
+# works
 #Individual Audio Guide Page: 
 @app.route('/audio-guides/<int:id>') #/sound1
 def lone_audio_guide(id):
