@@ -126,7 +126,13 @@
                         <p>
                             <a href="/art/{{artincollection.id}}" class="btn btn-outline-secondary btn-block mt-1" role="button">See Up Close</a>
                         </p>
-                        
+           
+                       
+                        {% elif '.gif' in artincollection.img_path %}
+        <img src=“{{artincollection.img_path}}” alt="Art by {{ artincollection.artist }}" style="width:100%;float:justified">
+        <p>
+            <a href="/art/{{artincollection.id}}" class="btn btn-outline-secondary btn-block mt-1" role="button">See Up Close</a>
+        </p>
                         {% else %}
                         <img class="card-img-top" src="{{ artincollection.img_path}}" alt="Card image cap" style="width:100%;float:justified"><br>
                         <p class="card-text">

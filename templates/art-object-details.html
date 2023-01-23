@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} {{ art.title | title  }} - Details{% endblock %}
+{% block title %} {{ arts.title | title  }} - Details{% endblock %}
 
 {% block content %}
 <head> 
@@ -11,47 +11,53 @@
     </ul> 
 </head>
 
+
 <div class="row">
     <div class="col mx-5">
-        
-        {# allows for the upload o fimages, pdf's and audio as art-objects #}
-
-        {% if '.pdf' in art.img_path %} 
-        <iframe src="{{art.img_path}}#toolbar=0" width="100%" height="650px">
+        <div class="container" style="padding: 1%; display: flex;
+        justify-content: center;
+        align-items: center;">
+        {# allows for the upload of images, pdf's and audio as art-objects #}
+        <img src="{{ arts.img_path}}" alt="Card image cap" style="width:25%;float:justified"><br>
+        {% if '.pdf' in arts.img_path %} 
+        <iframe src="{{arts.img_path}}#toolbar=0" width="100%" height="650px">
         </iframe>
-        {% elif '.mp3' in art.img_path %}
-    
-        <audio controls
-                    src="{{ art.img_path}}">
-                    <a href="{{ art.img_path}}"></a>
-                </audio>
-    
-        {% elif '.png' in art.img_path %}
-        <img src=“{{art.img_path}}” alt="Art by {{ art.artist }}" class="center">
-        {% elif '.jpeg' in art.img_path %}
-        <img src=“{{art.img_path}}” alt="Art by {{ art.artist }}" class="center">
-        {% else %}
-            <img src=“{{art.img_path}}” alt="Art by {{ art.artist }}" class="center">
-            {% endif %}
 
-    </div>
+        {% elif '.mp3' in arts.img_path %}
+        <audio controls
+                    src="{{arts.img_path}}">
+                    <a href="{{arts.img_path}}"></a>
+        </audio>
+    
+        {% elif '.png' in arts.img_path %}
+        <img src=“{{arts.img_path}}” alt="Art by {{ arts.artist }}" style="width:25%;float:justified">
+        {% elif '.jpeg' in arts.img_path %}
+        <img src=“{{arts.img_path}}” alt="Art by {{ arts.artist }}" style="width:25%;float:justified">
        
-<div class="row mx-5"> 
+        {% elif '.gif' in arts.img_path %}
+        <img src=“{{arts.img_path}}” alt="Art by {{ arts.artist }}" style="width:25%;float:justified">
+       
+        
+        {% endif %}
+
+    </div></div>
+       
+<div class="row" style="padding-left:15%"> 
     <div class="col">
         <div class="row">
-        <h1>{{ art.title | title }}</h1></div>
-        <strong>Description:</strong><p style="width: 95%">{{ art.description }}</p></div>
+        <h1>{{ arts.title | title }}</h1></div>
+        <strong>Description:</strong><p style="width: 100%">{{ arts.description }}</p></div>
     <div class="col pt-5">
         <p>
-           <strong>Artist:</strong> {{ art.artist }} 
-                            <br><br><strong>Medium:</strong> {{ art.medium | title  }} 
-                            <br><br><strong>Era:</strong> {{ art.era | title  }}</p>     
+           <strong>Artist:</strong> {{ arts.artist }} 
+                            <br><br><strong>Medium:</strong> {{ arts.medium | title  }} 
+                            <br><br><strong>Era:</strong> {{ arts.era | title  }}</p>     
         <p>
               {% if "patron_id" not in session %}
-                <button id="addartfave" value="{{art.id}}" class="btn btn-outline-dark btn-block mb-4">Add to favorites </button>
+                <button id="addartfave" value="{{arts.id}}" class="btn btn-outline-dark btn-block mb-4">Add to favorites </button>
             {% else %}
-            <button id="addartfave" value="{{art.id}}" class="btn btn-outline-dark btn-block mb-4">Add to favorites </button>
-            <button id="removeartfave" value="{{art.id}}" class="btn btn-outline-dark btn-block mb-4">Remove as favorite </button>
+            <button id="addartfave" value="{{arts.id}}" class="btn btn-outline-dark btn-block mb-4">Add to favorites </button>
+            <button id="removeartfave" value="{{arts.id}}" class="btn btn-outline-dark btn-block mb-4">Remove as favorite </button>
             {% endif %}
             
               </p>

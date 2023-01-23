@@ -422,18 +422,16 @@ def view_collections():
 def lone_collection(id): #it being the url also passes it to the function
     """Collection Details page"""
     collection= crud.get_collection_id(id)
-    # art=crud.get_art_by_coll_id(id) 
-    #sounds coming in via magic var
-    # return render_template('collection-details.html', collection=collection, art=art)
-    return render_template('collection-details.html', collection=collection)
+    art=crud.get_art_by_coll_id(id) 
+    return render_template('collection-details.html', collection=collection, art=art)
 
 # works
 #Individual Art Objects Page: 
 @app.route('/art/<int:id>') #/art_obj1
 def lone_art(id):
     """the art"""
-    art= crud.get_art_by_id(id)
-    return render_template('art-object-details.html', art=art)
+    arts= crud.get_art_by_id(id)
+    return render_template('art-object-details.html', arts=arts)
 
 
 
