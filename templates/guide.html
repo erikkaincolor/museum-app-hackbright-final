@@ -3,12 +3,18 @@
 
 {% block content %}
 <div class="bg-image7">
+    <div class="audio-popup" role="button" id="audio-close">
+        <strong>Take an Audio Guide Tour!</strong>
+        <p>Background: Sometimes we dont know what we're looking at when we go to a museum. Hear from collection curators, Ted Talk's, the artist themselves, friends, family, the community, and Master's degree Art students and peer deeper with art-related audio. Enjoy! <br><em id="pink-text">(click to exit popup)</em>
+            </p>
+</div>     
     <div class="row">
         <div class="col">
-        <h1>Mobile First Audio Guide</h1>            
-            <p>
-                <img src=“/static/img/specific-pages/audio-guide-photo.jpg” alt="headphone graphic" style="width:100%;float:justified">
-               
+        <h1>Mobile First Audio Guide</h1>    
+        
+       
+
+        <p>               
                 {% if sounds %}
                 {% for sound in sounds %}
                 <div class="list-group">
@@ -22,4 +28,8 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block script %} 
+<script src="/static/js/audio-popup.js"></script>
 {% endblock %}

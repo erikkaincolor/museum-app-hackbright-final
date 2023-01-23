@@ -108,10 +108,10 @@ model.db.session.commit()
 
 #related sounds-2.0 version: audio museum gives me or spotify embed, fake data to show proof of concept
 #has musuem id hardcoded via fk
-sound1=crud.create_related_sound("podcast", "7th chapel",  "gold foil walls", "lively", "/static/audio/test-door-sound.mp3", 1) #add museums ids by hand
-sound2=crud.create_related_sound("song", "Luka Doncic speaks on...",  "yellow tinted scene", "jittery",  "/static/audio/test-door-sound.mp3", 2) 
-sound3=crud.create_related_sound("playlist", "Words from the curator",  "Spaghetti", "novel",  "/static/audio/test-door-sound.mp3", 3)
-sound4=crud.create_related_sound("commentary", "At Last",  "baloons", "n/a",  "/static/audio/test-door-sound.mp3",4) 
+sound1=crud.create_related_sound("commentary", "Curator's Introduction",  "E. Polk explains four current collections in HB's collection", "Talk", "/static/audio/test-door-sound.mp3", 1) #add museums ids by hand
+sound2=crud.create_related_sound("song", "-I Want You- by Marvin Gaye",  "This song's album cover became Ernie Barnes' shining moment. It also graced 70's sitcome show, Good Times, ending credits. It recently sold for $15.3 million dollars to a Black entreprenuer. It is currently leased to and on view at the Museum of Fine Arts Houston.", "r&b",  "/static/audio/ernie-barnes-marvin-gaye-art.mp3", 4) 
+sound3=crud.create_related_sound("found sound", "Words from the Director",  "Identifies as she/her", "Talk",  "/static/audio/test-door-sound.mp3", 2)
+sound4=crud.create_related_sound("commentary", "Community Art Salon: Your Work Belongs Here Too",  "Opening up the possibility to see more Black art in big and small museums and biennials and spaces and not just on social media", "n/a",  "/static/audio/test-door-sound.mp3",2) 
 
 sounds_in_db=[sound1, sound2, sound3, sound4]
 model.db.session.add_all(sounds_in_db)

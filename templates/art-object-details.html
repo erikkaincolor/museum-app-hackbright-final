@@ -18,7 +18,6 @@
         justify-content: center;
         align-items: center;">
         {# allows for the upload of images, pdf's and audio as art-objects #}
-        <img src="{{ arts.img_path}}" alt="Card image cap" style="width:25%;float:justified"><br>
         {% if '.pdf' in arts.img_path %} 
         <iframe src="{{arts.img_path}}#toolbar=0" width="100%" height="650px">
         </iframe>
@@ -30,14 +29,16 @@
         </audio>
     
         {% elif '.png' in arts.img_path %}
-        <img src=“{{arts.img_path}}” alt="Art by {{ arts.artist }}" style="width:25%;float:justified">
+        <img src=“{{arts.img_path}}” alt="Image coming soon | Art by {{ arts.artist }}" style="width:25%;float:justified">
         {% elif '.jpeg' in arts.img_path %}
-        <img src=“{{arts.img_path}}” alt="Art by {{ arts.artist }}" style="width:25%;float:justified">
+        <img src=“{{arts.img_path}}” alt="Image coming soon | Art by {{ arts.artist }}" style="width:25%;float:justified">
        
         {% elif '.gif' in arts.img_path %}
-        <img src=“{{arts.img_path}}” alt="Art by {{ arts.artist }}" style="width:25%;float:justified">
-       
-        
+        <img src=“{{arts.img_path}}” alt="Image coming soon | Art by {{ arts.artist }}" style="width:25%;float:justified">
+        {% else %}
+
+        <img src="{{ arts.img_path}}" style="width:25%;float:justified"><br>
+
         {% endif %}
 
     </div></div>

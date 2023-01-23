@@ -569,20 +569,6 @@ padding-left: var(--bs-gutter-x,.75rem);
     box-sizing: border-box;
 }
 
-.popup
-{background-color: #E5E5E5;
-    box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42); 
-    width: 310px;
-    padding: 5px 15px 5px;
-    position: absolute; /*fixed*/
-    transform: translate(-50%,-50%);
-    left: 84%;
-    top: 71%;
-    border-radius: 23px;
-    font-family: 'Kanit', sans-serif;
-    display: none;
-    text-align: center;}
-
 .home-popup{background-color: #E5E5E5;
 box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42);
 width: 518px;
@@ -596,36 +582,49 @@ font-family: 'Kanit', sans-serif;
 display: none;
 text-align: center;}
 
-.popup i{
-    display: block;
-    padding: 0px 10px 0px;  
-    margin-left: 225px;  
-    background-color: transparent;
-    font-size: 27px;
-    color: #252525;
-    border: none;
-    outline: none;
-    cursor: pointer;
-}
+.audio-popup{background-color: #584827;
+    box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42);
+    width: 218px;
+    padding: 8px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 18%;
+    top: 59%;
+    border-radius: 9px;
+    font-family: 'Kanit', sans-serif;
+    display: none;
+    text-align: center;}
+
 
 .home-popup i{
     margin-left: 882px;
     background-color: transparent;
-    font-size: 29px;
+    font-size: 31px;
     color: black;
     border: none;
     outline: black;
     cursor: pointer;
 }
 
-.popup p{
+.audio-popup i{
+    margin-left: 882px;
+    background-color: transparent;
+    font-size: 29px;
+    color: white;
+    border: none;
+    outline: white;
+    cursor: pointer;
+}
+
+.home-popup p{
     color: #252525;
     font-size: 13px;
     text-align: justify;
-    line-height: 22px;
+    margin: 10px 0;
+    line-height: 18px;
 }
-.home-popup p{
-    color: #252525;
+.audio-popup p{
+    color: #E5E5E5;
     font-size: 13px;
     text-align: justify;
     margin: 10px 0;
@@ -641,7 +640,13 @@ text-align: center;}
 }
 
 
-
+.audio-popup strong{
+    color: #E5E5E5;
+    font-size: 16px;
+    text-align: justify;
+    margin: 10px 0;
+    line-height: 18px;
+}
 
 
 
