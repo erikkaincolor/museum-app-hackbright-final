@@ -12,9 +12,6 @@ os.system(f'createdb muse')
 model.connect_to_db(server.app)
 model.db.create_all()
 
-
-
-
 # 1/5/23:
         # SEED DB!
 # check that sounds saved successfully   -  WORKS                                 
@@ -127,7 +124,7 @@ model.db.session.commit()
 
 #no need to seed too many...server will request form data patrons during restrigationa nd login on client side and theyll be saved to the db
 p1=crud.create_patron("erikkaincolor", "Erikka", "Polk", "erikkaincolor@gmail.com", "1234")
-p2=crud.create_patron("artistsmus3", "Solange", "Knowles", "solangel@blackplanet.com", "1234")
+p2=crud.create_patron("testpatron", "Solange", "Knowles", "artistsmus3@blackplanet.com", "1234")
 
 patrons=[p1, p2]
 model.db.session.add_all(patrons)

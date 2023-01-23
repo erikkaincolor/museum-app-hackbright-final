@@ -7,7 +7,7 @@ window.addEventListener("load", function(){
         function open(evt){
             document.querySelector(".popup").style.display = "block";
         },
-        5000
+        4000
     )
 });
 
@@ -18,21 +18,6 @@ document.querySelector("#close").addEventListener("click", function(){
 ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////
-
-window.addEventListener("load", function(){
-    setTimeout(
-        function open(evt){
-            document.querySelector(".home-popup").style.display = "block";
-        },
-        5000
-    )
-});
-
-document.querySelector("#home-close").addEventListener("click", function(){
-    document.querySelector(".home-popup").style.display = "none";
-});
-
-
 
 
 

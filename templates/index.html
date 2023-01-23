@@ -4,21 +4,21 @@
 
 {% block content %}
 <div class="bg-image3">
-    <div class="home-popup">
-        
-        <button id="home-close">&times;</button>
-
-        <figure>
-            <h3 id="home-popup">No cookies. Just vibes. This is Erikka's Project Demo!</h3>
-            <p>Background: Sometimes we dont know what we're looking at when we go to a museum. Sometimes we can't make it to the museum where an exhibit is making an appearance at. This app lets you "slow-look" at different art pieces and collections and look with your ears through art-related audio. Enjoy!
-            </p>
+    <div class="home-popup" role="button" id="home-close">
+            <strong>No cookies. Just vibes. This is Erikka's Project Demo!</strong>
+            <p>Background: Sometimes we dont know what we're looking at when we go to a museum. Sometimes we can't make it to the museum where an exhibit is making an appearance at. This app lets you "slow-look" at different art pieces and collections and peer deeper with art-related audio. Enjoy! <br><em id="pink-text">(click to exit popup)</em>
+                </p>
 
             <!-- hidden audio track on autoplay-->
             <audio controls autoplay hidden src="/static/img/the-collection/c2/t_2.mp3">
                 <a href="/static/audio/can-i-kick-it-atcq.mp3"></a>
             </audio>
-        </figure>
+      
 
     </div>
 </div>
+{% endblock %}
+
+{% block script %} 
+<script src="/static/js/home-alerts.js"></script>
 {% endblock %}

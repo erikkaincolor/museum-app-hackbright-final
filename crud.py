@@ -24,7 +24,6 @@ from data.model import Patron, CollectionFave, ArtFave, RelatedSoundFave, Museum
 def create_patron(uname, fname, lname, email, pword): #DONE
     """create patron object 1x so seed can repeatedly"""
     return Patron(uname=uname, fname=fname, lname=lname, email=email, pword=pword)
-    #patron=model.Patron(uname='e', fname='ee', lname='p', email='test@test.com', pword='1234')
 
 
 ############################################################################################################

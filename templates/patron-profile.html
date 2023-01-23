@@ -115,7 +115,7 @@
                                 <span class=fave_id_{{ collectionfave.id }}>"{{ collectionfave.name | title  }}</span>"
                             {% if session["username"] == patron.uname %}
                             <p class="card-text">
-                                Era: {{ collectionfave.era | title  }}
+                                {{ collectionfave.era | title  }}
                             </p>
                             <a href="/collections/{{collectionfave.id}}"><button class="btn btn-outline-secondary btn-block">View Collection</button></a>
                             {% endif %}
@@ -163,12 +163,29 @@
                 <div id="artfavecard" class="card art-card" style="width:18em; padding-top: 10px;">
                     <div class="card-body h-100">
                         <p class="card-text">
-                                <img class="card-img-top" src="{{ artfave.img_path }}" alt="Card image cap"><br><br>
-                                Name:<span class=fave_id_{{ artfave.id }}> {{ artfave.title | title  }} </span>
-                                
+                            {% if '.pdf' in artfave.img_path %} 
+                        <iframe class="card-img-top" src="{{artfave.img_path}}#toolbar=0" style="width:100%;float:justified">
+                        </iframe>
+
+                        {% elif '.mp3' in artfave.img_path %}
+                        <img class="card-img-top" src="/static/img/audio-icon.png" alt="audio icon" style="width:40%;">
+                       
+                        <a href="{{artfave.img_path}}" class="btn btn-outline-secondary btn-block" role="button">Listen Again</a>
+                       
+                        {% elif '.png' in artfave.img_path %}
+                        <img class="card-img-top" src=“{{artfave.img_path}}” alt="Art by {{ artfave.artist }}" style="width:100%;float:justified">
+                        
+                        {% elif '.jpeg' in artfave.img_path %}
+                        <img class="card-img-top" src=“{{artfave.img_path}}” alt="Art by {{ artfave.artist }}" style="width:100%;float:justified">
+                       
+                        {% else %}
+                        <img class="card-img-top" src="{{ artfave.img_path}}" alt="Card image cap" style="width:100%;float:justified"><br>
+                        
+                        {%endif%}
+
+                                <span class="fave_id_{{ artfave.id }}">{{ artfave.title | title  }}</span><br><br>
                                 {% if session["username"] == patron.uname %}
-                                Artist: {{ artfave.artist}}<br><br> 
-                                Medium: {{ artfave.medium | title  }}<br><br><a href="/art/{{artfave .id}}"><button class="btn btn-outline-secondary btn-block mb-1">Look Closer</button></a>
+                                <a href="/art/{{artfave.id}}" class="btn btn-outline-secondary btn-block mb-1" role="button">Second Look</a>
                                 {% endif %}
                         </p>
                     </div>
@@ -206,12 +223,12 @@
             {# used patron object from view func and used it ssqlalchemy magic vars #}    
 
             {% for soundfave in patron. related_sound_fave %}
-                <div id="soundfavecard" class="card oneoff-card" style="width:18em; padding-top: 10px;">
+                <div id="soundfavecard" class="card oneoff-card" style="width:20%; padding-top: 10px;">
                     <div class="card-body h-100">
-                        <p class="card-text" id="white-text">
-                            Name:<span class=fave_id_{{ soundfave.id }}> {{ soundfave.sound_name | title }} </span><br><br>
+                        <p class="card-text" id="white-text" style="margin-left: 25%;">             
+                            "<span class="fave_id_{{ soundfave.id }}">{{ soundfave.sound_name | title }}</span>"<br><br>
                             {% if session["username"] == patron.uname %}
-                            <img class="card-img-top" src="/static/img/audio-icon.png" alt="audio icon" style="width:80px;">  Medium: {{ soundfave.medium | title  }}<br><br> 
+                            <img class="card-img-top" src="/static/img/audio-icon.png" alt="audio icon" style="width:80px;"><br><br> 
                             <a href="/audio-guides/{{soundfave .id}}"><button class="btn btn-outline-secondary btn-block mb-1">Listen</button></a>
                             {% endif %}
                         </p>

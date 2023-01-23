@@ -6,7 +6,6 @@
     src: url('/static/css/bright-font.eot') format('embedded-opentype');
     font-weight: normal;
     font-style: normal;
-    
   } */
 
 
@@ -43,12 +42,10 @@ font-family: 'Khula', sans-serif;
 
 h2 {
     font-family: 'Khula', sans-serif;
-    /* font-family: "Bright"; */
 }
 
 p {
     font-family: 'Palanquin+Dark', sans-serif;
-
 }
 
 
@@ -60,7 +57,7 @@ mark {
     color: black;
     opacity: .7; 
     text-decoration-color: #7E8C12;
-  }
+}
 
 a {
     color: #7E8C12;
@@ -185,11 +182,10 @@ a {
 .btn:hover{
     border: 2px solid #E5E5E5; 
     color: #252525;
-    background-color: #E5E5E5;
+    background-color: #C09B6F;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }
-
 
 .center {
     display: block;
@@ -198,10 +194,6 @@ a {
     width: 50%;
     float:justified;
   }
-
-
-
-
 
 
 
@@ -224,12 +216,13 @@ a {
     float:justified;
 }
 
-    
 #sound-img{
         width:80px;
-    }
+}
     
 #white-text{color:#E5E5E5}
+
+#pink-text{color:palevioletred;}
 
 
 #coll-img{
@@ -271,7 +264,7 @@ a {
 #nav-img{
     width:250px;}
 
-nav a {font-family: 'Khula', sans-serif;
+nav a{font-family: 'Khula', sans-serif;
     font-weight: 999;
     color: black;
     font-size:larger;
@@ -280,20 +273,18 @@ nav a {font-family: 'Khula', sans-serif;
 nav .active {
     background-color: #7E8C12;
     border-radius: 10px;
-  }
-
+}
 
 .navbar-brand {
     width:250px;
 }
 
 /* css animations for nav bar hover text underlining */
-
 .hover-underline-animation {
     display: inline-block;
     position: relative;
     color: #252525;
-  }
+ }
   
 .hover-underline-animation::after {
     content: '';
@@ -306,12 +297,12 @@ nav .active {
     background-color: #7E8C12;
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
-  }
+ }
   
-  .hover-underline-animation:hover::after {
+.hover-underline-animation:hover::after {
     transform: scaleX(1);
     transform-origin: bottom left;
-  }
+}
 
 
 
@@ -330,7 +321,8 @@ nav .active {
 /* ***************************************************** */
 /* ***************************************************** */
 /* ***************************************************** */
-/* rounded title boxes on patron profile, museum, collection and art deets */
+/* rounded title boxes on patron profile, museum, 
+collection and art deets */
 /* ***************************************************** */
 /* ***************************************************** */
 /* ***************************************************** */
@@ -355,7 +347,6 @@ nav .active {
     border-radius: 6px;
     width: 375px;
     height:60px;
-    /* color: #7E8C12; */
     } 
 
 .titlebox2 h3{
@@ -464,7 +455,6 @@ padding-left: var(--bs-gutter-x,.75rem);
 
 
 /* background images for homepage, login, logout and register */
-
 .bg-image1 {
     display: flex;
     justify-content: center; /* center horizontally */
@@ -506,20 +496,11 @@ padding-left: var(--bs-gutter-x,.75rem);
 }
 
 /* collection, museum, audio guides */
-
 .bg-image5 {
     display: flex;
     background-image: url('/static/img/backgrounds/background-pattern-green.png'); 
     background-size: cover;
     /* background-attachment: scroll;  */
-    width: 100%;
-    height: 100vh;
-}
-
-.bg-image6 {
-    display: flex;
-    background-image: url('/static/img/backgrounds/background-pattern-med-brown.png'); 
-    background-size: cover;
     width: 100%;
     height: 100vh;
 }
@@ -535,46 +516,13 @@ padding-left: var(--bs-gutter-x,.75rem);
 }
 
 /* patron-profile */
-
 .bg-image8 {
-    background-image: url('/static/img/j_2.jpg'); 
-    /* background-image: url('/static/img/backgrounds/background-barkley_1.png');  */
+    background-image: url('/static/img/backgrounds/patron-profile.jpg'); 
 
     background-size: cover;
     width: 100%;
     height: 100vh;
 }
-
-/* deets: collection, museum, audio guides, art-obj */
-
-.bg-image9 {
-    background-image: url('/static/img/backgrounds/background-brooklyn-red.png'); 
-}
-
-.bg-image10 {
-    background-image: url('/static/img/backgrounds/background-brooklyn-black.png'); 
-    background-size: cover;
-    width: 100%;
-    height: 100vh;
-}
-
-.bg-image11 {
-    background-image: url('/static/img/backgrounds/background-brooklyn-black.png'); 
-    background-size: cover;
-    width: 100%;
-    height: 100vh;
-}
-
-.bg-image12 {
-    background-image: url('/static/img/backgrounds/background-brooklyn-black.png'); 
-    background-size: cover;
-    width: 100%;
-    height: 100vh;
-}
-
-
-
-
 
 
 
@@ -636,19 +584,19 @@ padding-left: var(--bs-gutter-x,.75rem);
     text-align: center;}
 
 .home-popup{background-color: #E5E5E5;
-    box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42); 
-    width: 310px;
-    padding: 5px 15px 5px;
-    position: absolute; /*fixed*/
-    transform: translate(-50%,-50%);
-    left: 34%;
-    top: 36%;
-    border-radius: 23px;
-    font-family: 'Kanit', sans-serif;
-    display: none;
-    text-align: center;}
+box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42);
+width: 518px;
+padding: 8px;
+position: absolute;
+transform: translate(-50%,-50%);
+left: 28%;
+top: 75%;
+border-radius: 9px;
+font-family: 'Kanit', sans-serif;
+display: none;
+text-align: center;}
 
-.popup button{
+.popup i{
     display: block;
     padding: 0px 10px 0px;  
     margin-left: 225px;  
@@ -660,15 +608,13 @@ padding-left: var(--bs-gutter-x,.75rem);
     cursor: pointer;
 }
 
-.home-popup button{
-    display: block;
-    padding: 0px 10px 0px;  
-    margin-left: 225px;  
+.home-popup i{
+    margin-left: 882px;
     background-color: transparent;
-    font-size: 27px;
-    color: #E5E5E5;
+    font-size: 29px;
+    color: black;
     border: none;
-    outline: none;
+    outline: black;
     cursor: pointer;
 }
 
@@ -676,8 +622,7 @@ padding-left: var(--bs-gutter-x,.75rem);
     color: #252525;
     font-size: 13px;
     text-align: justify;
-    margin: 10px 0;
-    line-height: 18px;
+    line-height: 22px;
 }
 .home-popup p{
     color: #252525;
@@ -695,21 +640,7 @@ padding-left: var(--bs-gutter-x,.75rem);
     line-height: 18px;
 }
 
-.popup audio {
-    width: 35px;
-}
 
-.home-popup audio {
-    width: 35px;
-}
-
-.popup figure {
-    margin: 0 0 1rem;
-  }
-
-.home-popup figure {
-    margin: 0 0 1rem;
-  }
 
 
 
@@ -775,6 +706,8 @@ box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42);
 .oneoff-card{
     box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42);    
     background-color:#4b4c4d;
+    border-radius: 50%;
+ 
     }
 
 /* text only */
@@ -831,6 +764,9 @@ box-shadow: 10px 10px 15px -5px rgba(37, 37, 37 ,0.42);
 }
 
 
+#footer-text{
+    font-size:14px;
+    width:300px;}
 
 
 
