@@ -1,9 +1,6 @@
 "This file manipulates the data in the db, saves to it, and reads/queries it via execution functions"
 
 from data.model import Patron, CollectionFave, ArtFave, RelatedSoundFave, MuseumFave, Collection, RelatedSound, CollectionSound, ArtObject, Museum, connect_to_db, db
-#either say .first or .all to get either one or all <----collection 
-#.get would get it by key <---refer to cats demo lecture
-#patron= Patron.query.get(patron_id) <---looking up by PK only bc its special, doesnt really translate to unames unique constraint
 
 # # Manipulating an object/instance with sqlalchemy via python3 
 # # creating new data, 
@@ -38,8 +35,7 @@ def create_museum_fave(patron_id, museum_id): #fk's to museum faves
     """create a museum favorite"""
     return MuseumFave(patron_id=patron_id, museum_id=museum_id)
 
-
-# works and showing up on profile
+# works
 def get_m_fave_by_pid(p_id):
     """get patrons museum fave id to show up on patrons profile"""
     return MuseumFave.query.get(patron_id_lookup(p_id)) 
@@ -112,7 +108,7 @@ def get_s_fave_delete(patron_id, related_sound_id):
 ############################################################################################################
 
 #works
-def patron_id_lookup(p_id): #DONE #in order to call,  id have to know id
+def patron_id_lookup(p_id): #DONE #in order to call, id have to know id
     """get patron by id"""
     return Patron.query.get(p_id)
 
@@ -123,7 +119,7 @@ def patron_uname_lookup(uname): #DONE #in order to call,  id have to know uname
 
 #works
 def patron_email_lookup(email): #DONE #in order to call,  id have to know uname
-    """get patron by uname"""
+    """get patron by uemail"""
     return Patron.query.filter(Patron.email == email).first()
 
 #works
@@ -176,8 +172,8 @@ def get_collections():
     return Collection.query.all()
 
 #works
-def get_collection_id(id): #DONE
-    """read all collection data..collections that ill for loop through in jinja once i pass it into view func""" 
+def get_collection_id(id): 
+    """get collection by id""" 
     return Collection.query.get(id)
 
 ############################################################################################################
@@ -206,12 +202,12 @@ def get_sound_by_museum_id(museum_id):
 
 
 
+
 ##########CRUD FOR SEEDING
 # works
 def create_museum(name, street, city, state, zipcode, weburl):
     """create museum object 1x so seed can repeatedly"""
-    return Museum(name=name, street=street, city=city, state=state, zipcode=zipcode, weburl=weburl) #removed 'collection=c1'
-    #m1=model.Museum(name='Houston Museum of African American Culture', city='Houston', state='TX', country='USA') #removed 'collection=c1'
+    return Museum(name=name, street=street, city=city, state=state, zipcode=zipcode, weburl=weburl) 
 
 ############################################################################################################
 #                                                                                                          #
@@ -221,12 +217,12 @@ def create_museum(name, street, city, state, zipcode, weburl):
 
 #works
 def get_museums():
-    """read all museum data..collections that ill for loop through in jinja once i pass it into view func""" 
+    """read all museum data""" 
     return Museum.query.all()
     
 #works
 def get_museum_by_id(id):
-    """read all museum data..collections that ill for loop through in jinja once i pass it into view func""" 
+    """read all museum data..by id""" 
     return Museum.query.get(id)
     
 
@@ -319,7 +315,7 @@ def get_sounds():
     
 #works
 def get_sound_by_id(id):
-    """read all sound data""" 
+    """read all sound data by id""" 
     return RelatedSound.query.get(id)
     
 
