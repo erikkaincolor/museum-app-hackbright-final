@@ -1,9 +1,9 @@
 
-<p align="center">## ***HabitualBe*** is an audio and art-centric web app. ##</div>
-<p align="center">
-![Man observing art intently](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/md1.png "Title is optional")             
-_[Man observing art intently, *Marvel Studios*]_
-</p>
+## ***HabitualBe*** is an audio and art-centric web app. ##
+
+![](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/home-gif.gif)           
+_[Landing page of HabitualBe]_
+
 
 Contents  | Title
 ------------- | -------------
@@ -38,8 +38,6 @@ I am an artist, museum-frequenter, member at *Museum of Fine Arts, Houston* and 
 
 
 ## App Flow
-![](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/home-gif.gif)           
-_[Landing page of HabitualBe]_
 
 ![](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/login-gif.gif)           
 _[Login]_
@@ -73,7 +71,10 @@ _[View museum's address and web URL and related sounds, audio guides and more]_
 
 
 ## How to deploy at home
+*Coming soon!*
 
+![Man observing art intently](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/md1.png "Title is optional")            
+_[Man observing art intently, *Marvel Studios*]_
 
 
 ## Hosting
