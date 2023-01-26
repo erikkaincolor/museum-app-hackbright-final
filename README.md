@@ -16,6 +16,7 @@ Contents  | Title
 7  | [Hosting](#hosting)
 8  | [HabitualBe v2](#habitualbe-v2) 
 
+Check my 2-min demo video! [`HabitualBe 2-min Demo`](https://www.youtube.com/watch?v=DQJ86Dg0IM8 "HabitualBe 2-min Demo")
 
 ## About Project and about Erikka
 *Habitual be*, also called *invariant be*, is the use of an uninflected "be" in Black and Caribbean English to mark habitual or extended actions in place of the Standard English "is" and "are". 
@@ -68,17 +69,17 @@ To me, getting data rendered in the browser via jinja templating, queried from t
 
 ### Challenge 2 ### 
 *...relating all this data:*
-I used ORM(object–relational mapping) to link them to each other via their special SQLAlchemy relationship  variables. After querying data, I looped through a good chunk of their content in order to display it client-side…relating 5 main entities reinforced my need for multiple join and associative tables in my model, and revealed the true complexity and breadth of my ambitious 10-table database. 
+I used ORM(object–relational mapping) to link them to each other via their special SQLAlchemy relationship  variables. After querying data, I looped through a good chunk of their content in order to display it client-side. Relating 5 main entities reinforced my need for multiple join and association tables in my model, and revealed the true complexity and breadth of my ambitious 10-table database! 
 
-Complexity reveal:
-SCREENSHOT -> rel. data model…schema for table
 Using postgresql for my relational db made sense because my patron table is the single pillar in my web app that touches everything.
 
 
 
 
 ## Tech Stack
+`Flask` for my server, `SqlAlchemy` to use SQL with Python, `Python` language to power my server, `Jinja` templating for Python-esque syntax to render my HTML docs, `PostgreSQL` open source relational database so that all my data can be interconnected , `Git` for local repo, `Github` for remote repo, `Psycopg2` as a PostgreSQL database adapter for Python 
 
+Creative: `HTML` for my page templates, `Vanilla Javascript` to power DOM manipulation and browser interactivity, `CSS` for styling, `Bootstrap5` framework
 
 
 ## How to deploy at home
@@ -94,10 +95,15 @@ _[Man observing art intently, *Marvel Studios*]_
 
 ## HabitualBe v2
 -ARIA for `accessibility`
+
 -populate audio guides based on `geo fencing` using users location
+
 -Implement tests (unit tests, integration tests) for `possible API usage and full-site usability for mobile`
+
 -leverage `more open source museum and related audio info` from the web and centralize it for broader art discovery 
+
 -`peppering salting and hashing passwords` in the case of hackers, db leaks, sql injections and angry museum admin employees 
+
 -I want access to an `audio guide standardization proposal and mockup` 
 
 
