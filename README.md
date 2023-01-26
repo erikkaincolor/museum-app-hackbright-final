@@ -90,7 +90,7 @@ _[Man observing art intently, *Marvel Studios*]_
 
 
 ## Hosting
-*Coming soon!*
+*Coming soon!* I’m hosting my Flask app on AWS cloud server and I picked up some handy UNIX shell commands along the way!
 
 
 ## HabitualBe v2
