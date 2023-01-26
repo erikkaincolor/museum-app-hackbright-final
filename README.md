@@ -30,12 +30,11 @@ I am an artist, museum-frequenter, member at *Museum of Fine Arts, Houston* and 
 ## Features
 - `As a museum-frequenter`, I want access to a repo of museum locations, museum-specific audio guides, and curated related sounds so that my solo visits are fully immersive and more impactful.
 
-- `As an art observer`, I'd value favoriting art ,the collections, related sounds, and museums I see on the app.
+- `As an art observer`, I'd value having my own account, favoriting art, collections, related sounds, and museums and seeing them all in one place for later reference.
 
-- `As an art curator`, I want access to an audio guide standardization proposal and mockup so that I can have a starting place for research into my museum’s audio guide initiative and possibly a chance to curate virtual exhibits.
+- `As an art curator`, I want to view a list of Black museums nation-wide, collections in these museums, and related content.
 
 - `As an artist`, I want all these app features!
-
 
 ## App Flow
 
@@ -63,6 +62,18 @@ _[View museum's address and web URL and related sounds, audio guides and more]_
 
 ## Challenges
 :space_invader:.......:space_invader:.......:space_invader:
+### Challenge 1 ### 
+*...the favoriting feature:*
+To me, getting data rendered in the browser via jinja templating, queried from the database via my flask server functions, and even transmitted from the backend to the frontend and back again…took immense trial by fire. In the end, it allowed my users to create, delete, and update their favorite museum, collection, audio and art and see it displayed on their patron profile.
+
+### Challenge 2 ### 
+*...relating all this data:*
+I used ORM(object–relational mapping) to link them to each other via their special SQLAlchemy relationship  variables. After querying data, I looped through a good chunk of their content in order to display it client-side…relating 5 main entities reinforced my need for multiple join and associative tables in my model, and revealed the true complexity and breadth of my ambitious 10-table database. 
+
+Complexity reveal:
+SCREENSHOT -> rel. data model…schema for table
+Using postgresql for my relational db made sense because my patron table is the single pillar in my web app that touches everything.
+
 
 
 
@@ -78,10 +89,16 @@ _[Man observing art intently, *Marvel Studios*]_
 
 
 ## Hosting
-
+*Coming soon!*
 
 
 ## HabitualBe v2
+-ARIA for `accessibility`
+-populate audio guides based on `geo fencing` using users location
+-Implement tests (unit tests, integration tests) for `possible API usage and full-site usability for mobile`
+-leverage `more open source museum and related audio info` from the web and centralize it for broader art discovery 
+-`peppering salting and hashing passwords` in the case of hackers, db leaks, sql injections and angry museum admin employees 
+-I want access to an `audio guide standardization proposal and mockup` 
 
 
 
