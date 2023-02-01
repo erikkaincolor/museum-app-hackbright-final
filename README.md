@@ -22,10 +22,8 @@ Check my 2-min demo video! [`HabitualBe 2-min Demo`](https://www.youtube.com/wat
 ## About Project and about Erikka
 *Habitual be*, also called *invariant be*, is the use of an uninflected "be" in Black and Caribbean English to mark habitual or extended actions in place of the Standard English "is" and "are". 
 
-A generic version of my discovery app is [`Google Arts & Culture`](https://artsandculture.google.com/partner "Google Arts & Culture"), which doesn't provide museum audio or give ethnic art, *no matter the region*, the distinct voice each deserves. I solved this with my app!
-
 It is my hope that other ethnic groups create repositories that are similar...for [`ethnographic research`](https://anthropology.princeton.edu/undergraduate/what-ethnography
- "Princeton definiton") and for accurate and unique "from the horse's mouth" portrayal. 
+ "Princeton definiton") and for accurate and unique "from the horse's mouth" portrayal. A less-personable version of my discovery app is [`Google Arts & Culture`](https://artsandculture.google.com/partner "Google Arts & Culture").
 
 I am an artist, museum-frequenter, member at *Museum of Fine Arts, Houston* and MFAH's 5A (African American Art Advisory Association) chapter. I have my B.S. in Digital Media Innovation, minor in Industrial Design and *now* am a Software Engineer interested in learning more about system architecture, product management, and the backend.
 
