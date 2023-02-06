@@ -1,7 +1,8 @@
 
 ## ***HabitualBe*** is an audio and art-centric web app. ##
 
-![](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/home-gif.gif)           
+![](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/home-gif.gif)     
+
 _[Landing page of HabitualBe]_
 
 
@@ -21,12 +22,10 @@ Check my 2-min demo video! [`HabitualBe 2-min Demo`](https://www.youtube.com/wat
 ## About Project and about Erikka
 *Habitual be*, also called *invariant be*, is the use of an uninflected "be" in Black and Caribbean English to mark habitual or extended actions in place of the Standard English "is" and "are". 
 
-A generic version of my discovery app is [`Google Arts & Culture`](https://artsandculture.google.com/partner "Google Arts & Culture"), which doesn't provide museum audio or give ethnic art, *no matter the region*, the distinct voice each deserves. I solved this with my app!
+My web app, HabitualBe, enables users to discover Black art both visually and via audio guided tours, and favorite them and the museums and collections they come from. 
 
 It is my hope that other ethnic groups create repositories that are similar...for [`ethnographic research`](https://anthropology.princeton.edu/undergraduate/what-ethnography
- "Princeton definiton") and for accurate and unique "from the horse's mouth" portrayal. 
-
-I am an artist, museum-frequenter, member at *Museum of Fine Arts, Houston* and MFAH's 5A (African American Art Advisory Association) chapter. I hsve my B.S. in Digital Media Innovation, minor in Industrial Design and *now* am a Software Engineer interested in learning more about system architecture, product management, and the backend.
+ "Princeton definiton") and for accurate and unique "from the horse's mouth" portrayal. A less-personable version of my discovery app is [`Google Arts & Culture`](https://artsandculture.google.com/partner "Google Arts & Culture").
 
 ## Features
 - `As a museum-frequenter`, I want access to a repo of museum locations, museum-specific audio guides, and curated related sounds so that my solo visits are fully immersive and more impactful.
@@ -77,7 +76,7 @@ Using postgresql for my relational db made sense because my patron table is the 
 
 
 ## Tech Stack
-`Flask` for my server, `SqlAlchemy` to use SQL with Python, `Python` language to power my server, `Jinja` templating for Python-esque syntax to render my HTML docs, `PostgreSQL` open source relational database so that all my data can be interconnected , `Git` for local repo, `Github` for remote repo, `Psycopg2` as a PostgreSQL database adapter for Python 
+`Flask` framework for my server, `SqlAlchemy` to use SQL with Python, `Python` language to power my server, `Jinja` templating for Python-esque syntax to render my HTML docs, `PostgreSQL` open source relational database so that all my data can be interconnected , `Git` for local repo, `Github` for remote repo, `Psycopg2` as a PostgreSQL database adapter for Python 
 
 Creative: `HTML` for my page templates, `Vanilla Javascript` to power DOM manipulation and browser interactivity, `CSS` for styling, `Bootstrap5` framework
 
