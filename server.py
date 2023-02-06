@@ -4,11 +4,12 @@ from flask import (Flask, render_template, request, session, redirect, url_for)
 import crud
 from jinja2 import StrictUndefined 
 from data.model import connect_to_db, db 
+import os
 
 app = Flask(__name__)
 app.jinja_env.undefined=StrictUndefined
-app.secret_key = 'RANDOM SECRET KEY'
-
+app.secret_key=os.environ['APP_SECRET']
+# app.config['SECRET_KEY'] = 'GDtfDCFYjD'
 #site map
 ################################################################################################
 #   -num- -done?-   -route-                
@@ -41,6 +42,7 @@ app.secret_key = 'RANDOM SECRET KEY'
 @app.route('/')
 def index():
     """Home"""
+
     return render_template('index.html')
 
 
