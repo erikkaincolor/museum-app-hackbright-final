@@ -61,7 +61,7 @@ _[View museum's address and web URL and related sounds, audio guides and more]_
 
 
 ## Challenges
-![]([https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/museum-deets-gif.gif](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/raven.gif)
+![](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/raven.gif)
 
 :space_invader:.......:space_invader:.......:space_invader:
 ### Challenge 1 ### 
