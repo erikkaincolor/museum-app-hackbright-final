@@ -61,6 +61,8 @@ _[View museum's address and web URL and related sounds, audio guides and more]_
 
 
 ## Challenges
+![](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/raven.gif)
+
 :space_invader:.......:space_invader:.......:space_invader:
 ### Challenge 1 ### 
 *...the favoriting feature:*
@@ -83,7 +85,7 @@ Creative: `HTML` for my page templates, `Vanilla Javascript` to power DOM manipu
 
 ## How to deploy at home
 If you wish to use my web app as a template for your own ethnographic museum directory for a accurate and unique "from the horse's mouth" portrayal, feel free to do so! I just ask that you tag/credit my github in your repo!
-
+<!--
 ### Clone the repository
 ```sh
    git clone https://github.com/erikkaincolor/museum-app-hackbright-final.git
@@ -102,7 +104,7 @@ I recommend installing yarn to make your life a whole lot easier.
   ```
 
 ### Installation
-<!--
+
 1. Install the dependencies with ```yarn install```
 2. Run the development server with ```yarn dev```
 3. Open `http://localhost:5000` to start playing around! -->
