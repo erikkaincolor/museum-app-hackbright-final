@@ -61,9 +61,7 @@ _[View museum's address and web URL and related sounds, audio guides and more]_
 
 
 ## Challenges
-![](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/raven.gif)
 
-:space_invader:.......:space_invader:.......:space_invader:
 ### Challenge 1 ### 
 *...the favoriting feature:*
 To me, getting data rendered in the browser via jinja templating, queried from the database via my flask server functions, and even transmitted from the backend to the frontend and back again…took immense trial by fire. In the end, it allowed my users to create, delete, and update their favorite museum, collection, audio and art and see it displayed on their patron profile.
@@ -74,8 +72,7 @@ I used ORM(object–relational mapping) to link them to each other via their spe
 
 Using postgresql for my relational db made sense because my patron table is the single pillar in my web app that touches everything.
 
-
-
+![](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/raven.gif)
 
 ## Tech Stack
 `Flask` framework for my server, `SqlAlchemy` to use SQL with Python, `Python` language to power my server, `Jinja` templating for Python-esque syntax to render my HTML docs, `PostgreSQL` open source relational database so that all my data can be interconnected , `Git` for local repo, `Github` for remote repo, `Psycopg2` as a PostgreSQL database adapter for Python 
@@ -86,11 +83,11 @@ Creative: `HTML` for my page templates, `Vanilla Javascript` to power DOM manipu
 ## How to deploy at home
 If you wish to use my web app as a template for your own ethnographic museum directory for a accurate and unique "from the horse's mouth" portrayal, feel free to do so! I just ask that you tag/credit my github in your repo!
 
-### Clone the repository
+#Clone the repository
 ```sh
    git clone https://github.com/erikkaincolor/museum-app-hackbright-final.git
 ```
-### Prerequisites 
+#Prerequisites 
 
 I recommend installing yarn to make your life a whole lot easier.
 
@@ -98,14 +95,13 @@ I recommend installing yarn to make your life a whole lot easier.
   ```sh
   npm install npm@latest -g
   ```
+
+Install the dependencies with ```yarn install```
+
 * yarn
   ```sh
   npm install --global yarn
   ```
-
-### Installation
-
-clone this repo
 
 ```virtualenv venv```
 
@@ -113,19 +109,15 @@ clone this repo
 
 ```pip install -r requirements.txt```
 
-Install the dependencies with ```yarn install```
-
 Run the development server with ```yarn dev```
 
-Open `http://localhost:5000` to start playing around! 
-
-![Man observing art intently](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/md1.png "Title is optional")            
-_[Man observing art intently, *Marvel Studios*]_
-
+Open `http://localhost:5005` to start playing around! 
 
 ## Hosting
 *Coming soon!* I’m hosting my Flask app on AWS cloud server and I picked up some handy UNIX shell commands along the way!
 
+![Man observing art intently](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/md1.png "Title is optional")            
+_[Man observing art intently, *Marvel Studios*]_
 
 ## HabitualBe v2
 -ARIA for `accessibility`
