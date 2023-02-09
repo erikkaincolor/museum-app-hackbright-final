@@ -462,4 +462,6 @@ def lone_audio_guide(id):
 if __name__ == "__main__":
     # from model import connect_to_db
     connect_to_db(app)
-    app.run(debug=True, host="0.0.0.0", port=5005) #change when deploying FIX ME
+    app.run(host="0.0.0.0", port=5005) #change when deploying FIX ME
+    # i don’t want the Flask app in debug mode..its a big security hole
+    # Changing app.run(debug=True) to app.run()
