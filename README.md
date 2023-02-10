@@ -82,7 +82,7 @@ Creative: `HTML` for my page templates, `Vanilla Javascript` to power DOM manipu
 
 ## How to deploy at home
 If you wish to use my web app as a template for your own ethnographic museum directory for a accurate and unique "from the horse's mouth" portrayal, feel free to do so! I just ask that you tag/credit my github in your repo!
-
+<!--
 #Clone the repository
 ```sh
    git clone https://github.com/erikkaincolor/museum-app-hackbright-final.git
@@ -112,7 +112,7 @@ Install the dependencies with ```yarn install```
 Run the development server with ```yarn dev```
 
 Open `http://localhost:5005` to start playing around! 
-
+-->
 ## Hosting
 *Coming soon!* I’m hosting my Flask app on AWS cloud server and I picked up some handy UNIX shell commands along the way!
 
