@@ -63,17 +63,17 @@ _[View museum's address and web URL and related sounds, audio guides and more]_
 
 ## Challenges
 
-### Challenge 1 ### 
+### Challenge 1️⃣ ### 
 *...the favoriting feature:*
 To me, getting data rendered in the browser via jinja templating, queried from the database via my flask server functions, and even transmitted from the backend to the frontend and back again…took immense trial by fire. In the end, it allowed my users to create, delete, and update their favorite museum, collection, audio and art and see it displayed on their patron profile.
 
-### Challenge 2 ### 
+![](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/raven.gif)
+
+### Challenge 2️⃣ ### 
 *...relating all this data:*
 I used ORM(object–relational mapping) to link them to each other via their special SQLAlchemy relationship  variables. After querying data, I looped through a good chunk of their content in order to display it client-side. Relating 5 main entities reinforced my need for multiple join and association tables in my model, and revealed the true complexity and breadth of my ambitious 10-table database! 
 
 Using postgresql for my relational db made sense because my patron table is the single pillar in my web app that touches everything.
-
-![](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/raven.gif)
 
 ## Tech Stack
 `Flask` framework for my server, `SqlAlchemy` to use SQL with Python, `Python` language to power my server, `Jinja` templating for Python-esque syntax to render my HTML docs, `PostgreSQL` open source relational database so that all my data can be interconnected , `Git` for local repo, `Github` for remote repo, `Psycopg2` as a PostgreSQL database adapter for Python 
