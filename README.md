@@ -138,4 +138,4 @@ _[Man observing art intently, *Marvel Studios*]_
 
 ## Acknowledgments
 
-`A thousand thank yous to my instructors Katrina Huber-Juma, Adam Moss and our TA Katarzyna! Also to my cohortmates for checking in during project time and listening to me practice my video demo and making sure my app walkthrough was natural and user-centered. Also to the many former Hackbright women engineers, product managers who responded to my dm's, let me hold info interviews with them on Zoom and checked in with me thoughout the months ! Namely L. Quesada, V. Lorya, K. Wilks, M. Phaunef, G. Lazareva, and S. Gomez!`
+`A thousand thank yous to my instructors Katrina Huber-Juma, Adam Moss and our TA Katarzyna! Also to my cohortmates for checking in during project time and listening to me practice my video demo and making sure my app walkthrough was natural and user-centered. Also to the many product managers and former Hackbright women engineers who responded to my dm's, let me hold info interviews with them on Zoom and checked in with me thoughout the months ! Namely L. Quesada, V. Lorya, K. Wilks, M. Phaunef, G. Lazareva, and S. Gomez!`
