@@ -16,6 +16,7 @@ Contents  | Title
 6  | [Cloning](#cloning)
 7  | [Hosting](#hosting)
 8  | [HabitualBe v2](#habitualbe-v2) 
+9  | [Thank You's](#thank-yous)
 
 Check my 2-min demo video! [`HabitualBe 2-min Demo`](https://www.youtube.com/watch?v=DQJ86Dg0IM8 "HabitualBe 2-min Demo")
 
@@ -135,4 +136,6 @@ _[Man observing art intently, *Marvel Studios*]_
 
 
 
+## Acknowledgments
 
+`A thousand thank yous to my instructors Katrina Huber-Juma, Adam Moss and our TA Katarzyna! Also to my cohortmates for checking in during project time and listening to me practice my video demo and making sure my app walkthrough was natural and user-centered. Also to the many former Hackbright women engineers, product managers who responded to my dm's, let me hold info interviews with them on Zoom and checked in with me thoughout the months ! Namely L. Quesada, V. Lorya, K. Wilks, M. Phaunef, G. Lazareva, and S. Gomez!`
