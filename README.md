@@ -88,6 +88,30 @@ If you wish to use my web app as a template for your own ethnographic museum dir
 ```sh
    git clone https://github.com/erikkaincolor/museum-app-hackbright-final.git
 ```
+
+### Virtual Environment
+Create a virtual environment to install requirements 
+
+```sh
+$ virtualenv
+$ source env/bin/activate
+```
+
+
+### Prerequisites
+All the prerequisites are in the requirements.txt file 
+
+```sh
+pip3 install -r requirements.txt
+```
+
+### Run Server 
+```sh
+python3 server.py
+```
+
+Open `http://localhost:5005` to start playing around! 
+
 <!--
 #Prerequisites 
 
@@ -113,7 +137,6 @@ Install the dependencies with ```yarn install```
 
 Run the development server with ```yarn dev```
 
-Open `http://localhost:5005` to start playing around! 
 -->
 ## Hosting
 *Coming soon!* I’m hosting my Flask app on AWS cloud server and I picked up some handy UNIX shell commands along the way!
