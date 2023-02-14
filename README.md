@@ -13,7 +13,7 @@ Contents  | Title
 3  | [App Flow](#app-flow)
 4  | [Challenges](#challenges)
 5  | [Tech Stack](#tech-stack)
-6  | [Cloning](#cloning)
+6  | [Use At Home](#deploy-at-home)
 7  | [Hosting](#hosting)
 8  | [HabitualBe v2](#habitualbe-v2) 
 9  | [Thank You's](#thank-yous)
@@ -81,10 +81,10 @@ Using postgresql for my relational db made sense because my patron table is the 
 Creative: `HTML` for my page templates, `Vanilla Javascript` to power DOM manipulation and browser interactivity, `CSS` for styling, `Bootstrap5` framework
 
 
-## Cloning
+## Use At Home
 If you wish to use my web app as a template for your own ethnographic museum directory for a accurate and unique "from the horse's mouth" portrayal, feel free to do so! I just ask that you tag/credit my github in your repo!
 
-#Clone the repository
+### Clone the repository
 ```sh
    git clone https://github.com/erikkaincolor/museum-app-hackbright-final.git
 ```
@@ -97,9 +97,8 @@ $ virtualenv
 $ source env/bin/activate
 ```
 
-
 ### Prerequisites
-All the prerequisites are in the requirements.txt file 
+Install dependencies in the requirements.txt file 
 
 ```sh
 pip3 install -r requirements.txt
