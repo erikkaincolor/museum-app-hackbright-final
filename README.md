@@ -13,9 +13,10 @@ Contents  | Title
 3  | [App Flow](#app-flow)
 4  | [Challenges](#challenges)
 5  | [Tech Stack](#tech-stack)
-6  | [How to deploy at home](#how-to-deploy-at-home)
+6  | [Use At Home](#deploy-at-home)
 7  | [Hosting](#hosting)
 8  | [HabitualBe v2](#habitualbe-v2) 
+9  | [Thank You's](#thank-yous)
 
 Check my 2-min demo video! [`HabitualBe 2-min Demo`](https://www.youtube.com/watch?v=DQJ86Dg0IM8 "HabitualBe 2-min Demo")
 
@@ -61,21 +62,18 @@ _[View museum's address and web URL and related sounds, audio guides and more]_
 
 
 ## Challenges
-![](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/raven.gif)
 
-:space_invader:.......:space_invader:.......:space_invader:
-### Challenge 1 ### 
+### Challenge 1️⃣ ### 
 *...the favoriting feature:*
 To me, getting data rendered in the browser via jinja templating, queried from the database via my flask server functions, and even transmitted from the backend to the frontend and back again…took immense trial by fire. In the end, it allowed my users to create, delete, and update their favorite museum, collection, audio and art and see it displayed on their patron profile.
 
-### Challenge 2 ### 
+![](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/raven.gif)
+
+### Challenge 2️⃣ ### 
 *...relating all this data:*
 I used ORM(object–relational mapping) to link them to each other via their special SQLAlchemy relationship  variables. After querying data, I looped through a good chunk of their content in order to display it client-side. Relating 5 main entities reinforced my need for multiple join and association tables in my model, and revealed the true complexity and breadth of my ambitious 10-table database! 
 
 Using postgresql for my relational db made sense because my patron table is the single pillar in my web app that touches everything.
-
-
-
 
 ## Tech Stack
 `Flask` framework for my server, `SqlAlchemy` to use SQL with Python, `Python` language to power my server, `Jinja` templating for Python-esque syntax to render my HTML docs, `PostgreSQL` open source relational database so that all my data can be interconnected , `Git` for local repo, `Github` for remote repo, `Psycopg2` as a PostgreSQL database adapter for Python 
@@ -83,14 +81,38 @@ Using postgresql for my relational db made sense because my patron table is the 
 Creative: `HTML` for my page templates, `Vanilla Javascript` to power DOM manipulation and browser interactivity, `CSS` for styling, `Bootstrap5` framework
 
 
-## How to deploy at home
+## Use At Home
 If you wish to use my web app as a template for your own ethnographic museum directory for a accurate and unique "from the horse's mouth" portrayal, feel free to do so! I just ask that you tag/credit my github in your repo!
-<!--
+
 ### Clone the repository
 ```sh
    git clone https://github.com/erikkaincolor/museum-app-hackbright-final.git
 ```
-### Prerequisites 
+
+### Virtual Environment
+Create a virtual environment to install requirements 
+
+```sh
+$ virtualenv
+$ source env/bin/activate
+```
+
+### Prerequisites
+Install dependencies in the requirements.txt file 
+
+```sh
+pip3 install -r requirements.txt
+```
+
+### Run Server 
+```sh
+python3 server.py
+```
+
+Open `http://localhost:5005` to start playing around! 
+
+<!--
+#Prerequisites 
 
 I recommend installing yarn to make your life a whole lot easier.
 
@@ -98,24 +120,28 @@ I recommend installing yarn to make your life a whole lot easier.
   ```sh
   npm install npm@latest -g
   ```
+
+Install the dependencies with ```yarn install```
+
 * yarn
   ```sh
   npm install --global yarn
   ```
 
-### Installation
+```virtualenv venv```
 
-1. Install the dependencies with ```yarn install```
-2. Run the development server with ```yarn dev```
-3. Open `http://localhost:5000` to start playing around! -->
+```source venv/bin/activate```
 
-![Man observing art intently](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/md1.png "Title is optional")            
-_[Man observing art intently, *Marvel Studios*]_
+```pip install -r requirements.txt```
 
+Run the development server with ```yarn dev```
 
+-->
 ## Hosting
 *Coming soon!* I’m hosting my Flask app on AWS cloud server and I picked up some handy UNIX shell commands along the way!
 
+![Man observing art intently](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/md1.png "Title is optional")            
+_[Man observing art intently, *Marvel Studios*]_
 
 ## HabitualBe v2
 -ARIA for `accessibility`
@@ -132,4 +158,6 @@ _[Man observing art intently, *Marvel Studios*]_
 
 
 
+## Acknowledgments
 
+`A thousand thank yous to my instructors Katrina Huber-Juma, Adam Moss and our TA Katarzyna! Also to my cohortmates for checking in during project time and listening to me practice my video demo and making sure my app walkthrough was natural and user-centered. Also to the many product managers and former Hackbright women engineers who responded to my dm's, let me hold info interviews with them on Zoom and checked in with me thoughout the months ! Namely L. Quesada, V. Lorya, K. Wilks, M. Phaunef, G. Lazareva, and S. Gomez!`
