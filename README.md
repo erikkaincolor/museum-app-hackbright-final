@@ -18,7 +18,7 @@ Contents  | Title
 8  | [HabitualBe v2](#habitualbe-v2) 
 9  | [Thank You's](#thank-yous)
 
-VISIT HERE: (http://habiutalbedemo.com)
+VISIT HERE: (http://habitualbedemo.com)
 Check my 2-min demo video! [`HabitualBe 2-min Demo`](https://www.youtube.com/watch?v=DQJ86Dg0IM8 "HabitualBe 2-min Demo")
 
 ## About Project and about Erikka
