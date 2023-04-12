@@ -66,15 +66,23 @@ _[View museum's address and web URL and related sounds, audio guides and more]_
 
 ### Challenge 1️⃣ ### 
 *...the favoriting feature:*
-To me, getting data rendered in the browser via jinja templating, queried from the database via my flask server functions, and even transmitted from the backend to the frontend and back again…took immense trial by fire. In the end, it allowed my users to create, delete, and update their favorite museum, collection, audio and art and see it displayed on their patron profile.
+One of the major blockers I was able to overcome happened in the refinement stage. My users were unable to create, delete, or update their favorite museum, collection, audio, and art on the app.
+
+In my code, I used the JavaScript language to send "requests" (think of these as little favors the browser wants the web app to complete successfully upon mouse-click) to my server-side code (aka the "backend" because it happens in the database part of my app that only I see).
+
+It involves setting up an API endpoint (this is like a special door that the favors can go through to get to the backend part of the app) on the server (my server file that I wrote in Python that is) that your client-side code (the "frontend" in-browser activity) can send requests to, using a protocol such as HTTP.
+
+Upon investigation and consulting with others, I discovered that the JavaScript API setup was not correctly committing the favoriting action to the database for logged-in users. However, with persistence, I was able to properly configure the button and persist the in-browser favoriting action to the backend using AJAX requests. This allowed the web page to update asynchronously without the need for refreshing, which improved the user experience.
 
 ![](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/raven.gif)
 
 ### Challenge 2️⃣ ### 
 *...relating all this data:*
-I used ORM(object–relational mapping) to link them to each other via their special SQLAlchemy relationship  variables. After querying data, I looped through a good chunk of their content in order to display it client-side. Relating 5 main entities reinforced my need for multiple join and association tables in my model, and revealed the true complexity and breadth of my ambitious 10-table database! 
+I faced a challenge related to data retrieval and linking the different resources in my 10-table (data tables that hold user info, art info, collection info etc!) full-stack web app. To overcome this issue, I used object-relational mapping provided by SQLAlchemy to create relationships between the data using their special SQLAlchemy relationship variables.
 
-Using postgresql for my relational db made sense because my patron table is the single pillar in my web app that touches everything.
+After querying the data, I had to loop through a significant amount of content to display it on the client-side. While relating five main entities, I realized the complexity and breadth of my ambitious 10-table database. This reinforced my need for multiple join and associative tables in my model.
+
+Overall, I used PostgreSQL, SQLAlchemy, and Python with Flask to create a complex database schema and a full-stack web application. Using ORM simplified the data retrieval and linking process for me.
 
 ## Tech Stack
 `Flask` framework for my server, `SqlAlchemy` to use SQL with Python, `Python` language to power my server, `Jinja` templating for Python-esque syntax to render my HTML docs, `PostgreSQL` open source relational database so that all my data can be interconnected , `Git` for local repo, `Github` for remote repo, `Psycopg2` as a PostgreSQL database adapter for Python 
