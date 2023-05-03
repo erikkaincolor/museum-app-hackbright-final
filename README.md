@@ -1,6 +1,5 @@
 
 ## ***HabitualBe*** is an audio and art-centric web app. ##
-![](https://komarev.com/ghpvc/?username=erikkaincolor&color=orange)
 
 ![](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/home-gif.gif)     
 
