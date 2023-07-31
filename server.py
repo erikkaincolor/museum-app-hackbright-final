@@ -363,7 +363,7 @@ def del_a_fave(art_id):
 #                                                                                                          #
 ############################################################################################################
 
-# works
+# works!
 @app.route('/museumdirectory')
 def view_museums():
     """view museum table list"""

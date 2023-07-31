@@ -7,7 +7,7 @@ db = SQLAlchemy()
 
 #############################################
 #                                           #                                                           
-# PATRON table + FAVES (4) assoc. tables    #                                                  
+# PATRON table + FAVES (4) assoc. tables!   #                                                  
 #                                           #                                                           
 #############################################
 

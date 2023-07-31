@@ -77,7 +77,7 @@ model.db.session.commit()
 #                                                                                                          #
 ############################################################################################################
 
-#create museum from json file
+#create museum from json file!
 with open('data/aa_museums.json') as f: #Now, museums will be a list of dictionaries
     aa_museum_data = json.loads(f.read())
 
