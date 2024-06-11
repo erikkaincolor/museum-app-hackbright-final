@@ -1,106 +1,226 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
-        <title>{% block title %}TITLE GOES HERE{% endblock %}</title>
-        <!--Favicons-->
-        <link rel="apple-touch-icon" sizes="180x180" href="/static/img/hb_favicon/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/static/img/hb_favicon/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/static/img/hb_favicon/favicon-16x16.png">
-        <link rel="manifest" href="/static/img/hb_favicon/site.webmanifest">
-        
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-        
-        <!-- Google Font API -->
-        <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,200&family=Khula:wght@300&family=Palanquin+Dark:wght@700&display=swap" rel="stylesheet">
-            <style>
-            @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,200&family=Khula:wght@300&family=Palanquin+Dark:wght@700&display=swap&effect=font-effect-outline');
-            </style> 
-        
-        <!-- Your custom styles -->
-        <link rel="stylesheet" href="/static/css/mystyles.css">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{% block title %}TITLE GOES HERE{% endblock %}</title>
+    <!--Favicons-->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/static/img/hb_favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/static/img/hb_favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/static/img/hb_favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/static/img/hb_favicon/site.webmanifest" />
 
-        <!-- Navbar - cant get dropdown to work quite yet-->
-        <nav class="navbar sticky-top navbar-expand-lg navbar-light navbar-inner">
+    <!-- Bootstrap CSS in case CDN is down-->
+    <!-- <link rel="stylesheet" href="/static/css/bootstrap.min.css"> -->
 
-            <a class="navbar-brand" href="/"><img src="/static/img/specific-pages/hb-navbar-text2.png" alt="HabitualBe Logo!" id="nav-img"></a>
+    <!-- Bootstrap CSS CDN-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+    <!-- Your custom styles -->
+    <link rel="stylesheet" href="/static/css/mystyles.css" />
+
+    <!-- Google Font API -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,200&family=Khula:wght@300&family=Palanquin+Dark:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,200&family=Khula:wght@300&family=Palanquin+Dark:wght@700&display=swap&effect=font-effect-outline");
+    </style>
+
+    <!-- Navbar --->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light navbar-inner">
+      <a class="navbar-brand" href="/"
+        ><img
+          src="/static/img/specific-pages/hb-navbar-text2.png"
+          alt="HabitualBe Logo!"
+          id="nav-img"
+      /></a>
+
+      <!-- hidden hamburger menu -->
+      <ul class="navbar-nav navbar-toggler">
+          <li class="nav-item dropdown">
+            <button
+              class="btn btn-light dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+            <span class="navbar-toggler-icon"></span>
             </button>
+            <ul class="dropdown-menu dropdown-menu-light">
+              <li><a class="nav-item nav-link hover-underline-animation" href="/"
+                >Home
+              </a></li>
 
-            <div class="collapse navbar-collapse navbar-nav" id="navbarNav">
-                <a class="nav-item nav-link hover-underline-animation" href="/">Home </a>
-                <a class="nav-item nav-link hover-underline-animation" href="/collections">The Collection</a>
-                <a class="nav-item nav-link hover-underline-animation" href="/museumdirectory">Museums</a>
-                <a class="nav-item nav-link hover-underline-animation" href="/audio-guides">Virtual Audio Guides</a>
-                {% if "patron_id" in session %}
-                <a id="leave-museum" class="nav-item nav-link hover-underline-animation" href="{{ url_for('logout') }}" action="/logout">Logout</a>
-                <a class="nav-item nav-link hover-underline-animation" href="/profile">Profile</a>
-                {% elif "patron_id" not in session %}
-                <a class="nav-item nav-link hover-underline-animation" href="/login">Login</a>
-                <a class="nav-item nav-link hover-underline-animation" href="/register">Register</a>
-                {% endif %}
-                <a class="nav-item nav-link disabled" href="#">Coming Soon!</a>
-            </div>
-        </nav>
-    </head>
-    <body>
+              <li><a
+          class="nav-item nav-link hover-underline-animation"
+          href="/collections"
+          >The Collection</a
+        ></li>
 
+              <li><a
+          class="nav-item nav-link hover-underline-animation"
+          href="/museumdirectory"
+          >Museums</a
+        ></li>
+
+        <li>
+            <a
+          class="nav-item nav-link hover-underline-animation"
+          href="/audio-guides"
+          >Virtual Audio Guides</a
+        >
+        </li>
+        {% if "patron_id" in session %}
+        <li>
+            
+            <a
+              id="leave-museum"
+              class="nav-item nav-link hover-underline-animation"
+              href="{{ url_for('logout') }}"
+              action="/logout"
+              >Logout</a
+            >
+
+        </li>
+
+        <li>
+            <a class="nav-item nav-link hover-underline-animation" href="/profile"
+            >Profile</a
+          >
+
+        </li>
+        {% elif "patron_id" not in session %}
+        <li>
+            <a class="nav-item nav-link hover-underline-animation" href="/login"
+            >Login</a
+          >
+<li>
+    <a class="nav-item nav-link hover-underline-animation" href="/register"
+    >Register</a
+  >
+  {% endif %}
+
+</li>
+        </li>
+            </ul>
+          </li>
+        </ul>
+
+
+
+     
+
+      <div class="collapse navbar-collapse navbar-nav" id="navbarNav">
+        <a class="nav-item nav-link hover-underline-animation" href="/"
+          >Home
+        </a>
+        <a
+          class="nav-item nav-link hover-underline-animation"
+          href="/collections"
+          >The Collection</a
+        >
+        <a
+          class="nav-item nav-link hover-underline-animation"
+          href="/museumdirectory"
+          >Museums</a
+        >
+        <a
+          class="nav-item nav-link hover-underline-animation"
+          href="/audio-guides"
+          >Virtual Audio Guides</a
+        >
+        {% if "patron_id" in session %}
+        <a
+          id="leave-museum"
+          class="nav-item nav-link hover-underline-animation"
+          href="{{ url_for('logout') }}"
+          action="/logout"
+          >Logout</a
+        >
+        <a class="nav-item nav-link hover-underline-animation" href="/profile"
+          >Profile</a
+        >
+        {% elif "patron_id" not in session %}
+        <a class="nav-item nav-link hover-underline-animation" href="/login"
+          >Login</a
+        >
+        <a class="nav-item nav-link hover-underline-animation" href="/register"
+          >Register</a
+        >
+        {% endif %}
+        <a class="nav-item nav-link disabled" href="#">Coming Soon!</a>
+      </div>
+    </nav>
+  </head>
+  <body><main>
     {% block content %}{% endblock %}
-
+</main>
     <footer>
-
-
-        
-        <div class="row">
-            <div class="col-sm-3 item">
-            <p class="mx-3 me-4" id="footer-text"><i>Habitual be</i>, also called invariant be, is the use of an uninflected "be" in Black and Caribbean English to mark habitual or extended actions in place of the Standard English "is" and "are".</p>
-</div>
-            <div class="col-sm-2 item">
-                <h3>Repositories</h3>
-                <ul>
-                    <li><a href="/museumdirectory">Museums</a></li>
-                    <li><a href="/collections">The Collection</a></li>
-                    <li><a href="/audio-guides">Audio Guides</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-2 item">
-                <img src="/static/img/hb_favicon/apple-touch-icon.png" alt="HabitualBe Logo" id="footer-img" style="width:90px;">
-
-            </div>
-            <div class="col-sm-2 item">
-                <h3>More Site Links</h3>
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/register">Register</a></li>
-                </ul>
-            </div>
-
-            <div class="col-sm-3 item mt-1">
-                <p>Erikka Polk's Hackbright Engineering <br>Final Project! © 2022</p>
-            </div>
-
-            <div class="col-sm-3 item">
-                <ul>
-                    <li>
-                        <li></li>
-
-                    </li>
-                </ul>
-            </div>
+      <div class="flex-grid-thirds">
+        <div class="col item">
+          <div class="box">
+            <h3>Repositories</h3>
+            <ul>
+              <li><a href="/museumdirectory">Museums</a></li>
+              <li><a href="/collections">The Collection</a></li>
+              <li><a href="/audio-guides">Audio Guides</a></li>
+            </ul>
+          </div>
         </div>
-
+        <div class="col item">
+          <div class="box">
+            <img
+              src="/static/img/hb_favicon/apple-touch-icon.png"
+              alt="HabitualBe Logo"
+              id="footer-img"
+              style="width: 90px"
+            />
+          </div>
+        </div>
+        <div class="col item">
+          <div class="box">
+            <h3>More Site Links</h3>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/login">Login</a></li>
+              <li><a href="/register">Register</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </footer>
 
-    {% block script %} 
+    {% block script %}
     <!-- Bootstrap JavaScript Bundle with Popper (a Bootstrap dependency for popovers) -->
-    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- <script src="/static/js/bootstrap.bundle.min.js"></script> -->
     {% endblock %}
-
-</body>
+  </body>
 </html>
-
