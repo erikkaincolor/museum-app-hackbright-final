@@ -60,7 +60,7 @@
                 {# using patron objects sqlalchemy magic var #}
                 {% for museumfave in patron.museum_fave %} 
                 <div id="museumfavecard" class="card audio-card" style="width:18em;"> 
-                    <div class="card-body h-100"> 
+                    <div class="card-body select-few-cards"> 
                         <div style="padding-top: 20px;">
                             <p>
                                 <img class="card-img-top" src="/static/img/specific-pages/museum-card.jpg" alt="generic museum graphic"><br><br>
@@ -108,7 +108,7 @@
                 {# usinf patron objects magic var from sqlalchemy #}
                 {% for collectionfave in patron.collection_fave %}
                 <div id="collectionfavecard" class="card cc-card collection-card" style="width:18em;">
-                    <div class="card-body h-100">
+                    <div class="card-body select-few-cards">
                         <div>
                             <p>
                                 <img class="card-img-top mx-5" src="/static/img/specific-pages/coll-fave-card.png" alt="generic museum graphic" style="width:50%;"><br>
@@ -161,7 +161,7 @@
             {# passed in patron object and now using its sqlalchemy magic vars #}
             {% for artfave in patron.art_fave %}
                 <div id="artfavecard" class="card art-card" style="width:18em; padding-top: 10px;">
-                    <div class="card-body h-100">
+                    <div class="card-body select-few-cards">
                         <p class="card-text">
                             {% if '.pdf' in artfave.img_path %} 
                         <iframe class="card-img-top" src="{{artfave.img_path}}#toolbar=0" style="width:100%;float:justified">
@@ -223,9 +223,9 @@
             {# used patron object from view func and used it ssqlalchemy magic vars #}    
 
             {% for soundfave in patron. related_sound_fave %}
-                <div id="soundfavecard" class="card oneoff-card" style="width:20%; padding-top: 10px;">
-                    <div class="card-body h-100">
-                        <p class="card-text" id="white-text" style="margin-left: 25%;">             
+                <div id="soundfavecard" class="card oneoff-card">
+                    <div class="card-body select-few-cards">
+                        <p class="card-text card-text-oneoff" id="white-text">             
                             "<span class="fave_id_{{ soundfave.id }}">{{ soundfave.sound_name | title }}</span>"<br><br>
                             {% if session["username"] == patron.uname %}
                             <img class="card-img-top" src="/static/img/specific-pages/audio-icon.png" alt="audio icon" style="width:80px;"><br><br> 

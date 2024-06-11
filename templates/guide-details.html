@@ -13,6 +13,9 @@
     </ul> 
 </head>
 
+
+
+<div class="col">
     <h1>{{ sound.sound_name | title  }}</h1>
         <p>
         <strong>Medium:</strong> {{ sound.medium | title  }}<br><strong>Description:</strong> {{ sound.description }} <br><strong>Genre:</strong> {{ sound.genre | title }}
@@ -21,7 +24,7 @@
     <p>
         {# AUDIO PLAYER #}
 
-            <audio controls
+            <audio class="audio-mobile" controls
                 src="{{ sound.sound_source}}">
                 <a href="{{ sound.sound_source}}"></a>
             </audio>
@@ -35,14 +38,13 @@
         {% endif %}
     
        
-    </p>
-</div>
+    </p></div>
 {% endblock %}
-
-
-
-
 
 {% block script %}
 <script src="/static/js/sound_favorite.js"></script>  
 {% endblock %}
+
+
+
+

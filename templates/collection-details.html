@@ -185,7 +185,7 @@
         <div class="row">  
         {% for sound in collection.related_sound %}
         <div id="collectionfavecard" class="card museum-card" style="width:18em;float:justified">
-            <div class="card-body h-100">
+            <div class="card-body select-few-cards">
                 <h4 class="card-title"><i><span class=fave_id_{{ sound.id }}>"{{ sound.sound_name | title  }}"</span></i></h4>
                 
                 <img class="card-img-top" src="/static/img/specific-pages/audio-icon.png" alt="audio icon" style="width:80px;">
