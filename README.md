@@ -74,8 +74,6 @@ It involves setting up an API endpoint (this is like a special door that the fav
 
 Upon investigation and consulting with others, I discovered that the JavaScript API setup was not correctly committing the favoriting action to the database for logged-in users. However, with persistence, I was able to properly configure the button and persist the in-browser favoriting action to the backend using AJAX requests. This allowed the web page to update asynchronously without the need for refreshing, which improved the user experience.
 
-![](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/raven.gif)
-
 ### Challenge 2️⃣ ### 
 *...relating all this data:*
 I faced a challenge related to data retrieval and linking the different resources in my 10-table (data tables that hold user info, art info, collection info etc!) full-stack web app. To overcome this issue, I used object-relational mapping provided by SQLAlchemy to create relationships between the data using their special SQLAlchemy relationship variables.
