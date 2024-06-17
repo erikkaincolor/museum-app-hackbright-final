@@ -22,9 +22,9 @@ VISIT HERE: (http://habitualbedemo.com)
 Check my 2-min demo video! [`HabitualBe 2-min Demo`](https://www.youtube.com/watch?v=DQJ86Dg0IM8 "HabitualBe 2-min Demo")
 
 ## About Project and about Erikka
-*Habitual be*, also called *invariant be*, is the use of an uninflected "be" in Black and Caribbean English to mark habitual or extended actions in place of the Standard English "is" and "are". 
+*Habitual be*, also called *invariant be*, is the use of an uninflected "be" in English to mark habitual or extended actions in place of the Standard English "is" and "are". 
 
-My web app, HabitualBe, enables users to discover Black art both visually and via audio guided tours, and favorite them and the museums and collections they come from. 
+My web app, HabitualBe, enables users to discover art both visually and via audio guided tours, and favorite them and the museums and collections they come from. 
 
 It is my hope that other ethnic groups create repositories that are similar...for [`ethnographic research`](https://anthropology.princeton.edu/undergraduate/what-ethnography
  "Princeton definiton") and for accurate and unique "from the horse's mouth" portrayal. A less-personable version of my discovery app is [`Google Arts & Culture`](https://artsandculture.google.com/partner "Google Arts & Culture").
@@ -34,7 +34,7 @@ It is my hope that other ethnic groups create repositories that are similar...fo
 
 - `As an art observer`, I'd value having my own account, favoriting art, collections, related sounds, and museums and seeing them all in one place for later reference.
 
-- `As an art curator`, I want to view a list of Black museums nation-wide, collections in these museums, and related content.
+- `As an art curator`, I want to view a list of museums nation-wide, collections in these museums, and related content.
 
 - `As an artist`, I want all these app features!
 
@@ -56,7 +56,7 @@ _[View indivivual collection details]_
 _[You can't even get close to the Mona Lisa. Here, you can view individual art objects up close and personal]_
 
 ![](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/museums-gif.gif)           
-_[List of about 70 or so Black and African museums in U.S. who have web addresses; sourced from data dump [here](https://www.imls.gov/research-evaluation/data-collection/museum-data-files] "Institute of Museum and Library Services")_ that I filtered and cleaned]
+_[List of about 70 or so museums in U.S. who have web addresses; sourced from data dump [here](https://www.imls.gov/research-evaluation/data-collection/museum-data-files] "Institute of Museum and Library Services")_ that I filtered and cleaned]
 
 ![](https://github.com/erikkaincolor/museum-app-hackbright-final/blob/main/readme-data/museum-deets-gif.gif)           
 _[View museum's address and web URL and related sounds, audio guides and more]_
